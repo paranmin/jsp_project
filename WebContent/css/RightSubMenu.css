@@ -9,7 +9,7 @@
 	padding:0;
 }
 
-#RightSubMenu{
+#right_sub_menu{
 		margin:0;
 		width: 201px;
 		height: 1050px;
@@ -27,29 +27,29 @@
     right: 169px;	
 }
 
-#MyAccount{
+.my_account{
 	margin-top:40px;
 }
 
-#MyAccount h2,#Board h2{
+.my_account h2,.board_menu h2{
 	font-size: 15px;
 	margin-left: 18px;
 }
 
-.accountMenu{
+.account_menu{
 	list-style: none;
 	padding-left:18px;
 }
-.accountMenu li{
+.account_menu li{
 	padding-top: 5px;
 }
-.accountMenu li a{
+.account_menu li a{
 	text-decoration: none;
 	color:black;
 	font-size: 13px;
 }
 
-#Board{
+.board_menu{
 	margin-top: 50px;
 }
 .insta{

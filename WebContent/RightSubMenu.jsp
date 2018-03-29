@@ -8,12 +8,12 @@
 <link rel="stylesheet" type="text/css" href="css/RightSubMenu.css">
 </head>
 <body>
-	<div id="RightSubMenu">
+	<div id="right_sub_menu">
 		<img src="images/btn_close.gif" alt="x" class="btn_close_right">
 		
-		<div id="MyAccount">
+		<div class="my_account">
 			<h2>MY ACCOUNT</h2>
-			<ul class="accountMenu">
+			<ul class="account_menu">
 				<li><a href="#">LOG IN</a></li>
 				<li><a href="#">CART (0)</a></li>
 				<li><a href="#">WICHLIST</a></li>
@@ -22,9 +22,9 @@
 			</ul>
 		</div>
 		
-		<div id="Board">
+		<div class="board_menu">
 			<h2>BOARD</h2>
-			<ul class="accountMenu">
+			<ul class="account_menu">
 				<li><a href="#">Q&A</a></li>
 				<li><a href="#">REVIEW</a></li>
 				<li><a href="#">NOTICE</a></li>
