@@ -1,0 +1,11 @@
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display" rel="stylesheet">
+폰트입니다.
+font-family: 'Playfair Display', serif;
+font-family: 'Nanum Myeongjo', serif;
+font-family: 'IBM Plex Serif', serif;
+
+title은 Playfair  그외에 영어는 IBM Plex 한글은 Nanum 쓰면 되요
+한글-영어 같이 잇는 경우는 Nanum
+HeaderTitle은 Playfair Display
+카테고리 는 <h2> 에 font-size: 15px 메뉴는 font size=13px;
+
