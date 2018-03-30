@@ -1,1 +1,137 @@
 @charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+header {
+	width: 100%;
+	background-color: #1b1b1b;
+	color: #fff;
+}
+
+header div.main_header {
+	width: 1300px;
+	min-width: 1240px;
+	margin: 0 auto;
+	position: relative;
+}
+
+header div.main_header h1 {
+	text-align: center;
+}
+
+header div.main_header .btn_search {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+
+header div.main_header .btn_search>input {
+	height: 25px;
+	padding: 0 10px;
+	margin-right: 5px;
+}
+
+header div.main_header .btn_search>i {
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+nav {
+	height: 40px;
+	position: relative;
+}
+
+nav a {
+	color: #fff;
+}
+
+nav div.main_nav {
+	width: 900px;
+	margin: 0 auto;
+}
+
+nav div.main_nav ul.nav {
+	overflow: hidden;
+	width: 350px;
+	font-family: 'Nanum Myeongjo', serif;
+	font-size: 0.8em;
+}
+
+nav div.main_nav ul.category_nav {
+	float: left;
+}
+
+nav div.main_nav ul.user_nav {
+	float: right;
+}
+
+nav div.main_nav ul.nav > li {
+	float: left;
+	height: 40px;
+	line-height: 40px;
+}
+
+nav div.main_nav ul.category_nav > li ul.sub_nav {
+	position: absolute;
+	background-color: #fff;
+	overflow: hidden;
+	padding: 10px;
+}
+
+nav div.main_nav ul.category_nav > li ul.sub_nav li {
+	height: 20px;
+	line-height: 20px;
+	margin: 10px;
+}
+
+nav div.main_nav ul.category_nav > li ul.sub_nav li a {
+	color: #000;
+}
+nav div.main_nav ul.category_nav > li {
+	width:  33%;
+	text-align: right;
+}
+nav div.main_nav ul.user_nav > li {
+	width: 20%;
+}
+nav .btn_menu {
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 10px;
+}
+
+nav .btn_left_menu {
+	left: 3px;
+}
+
+nav .btn_right_menu {
+	right: 3px;
+}
+
+nav .btn_left_menu>i, nav .btn_right_menu>i {
+	font-size: 20px;
+}
+
+header .header_back_img_area {
+	width: 100%;
+	min-width: 1240px;
+	height: 700px;
+	background: url('../images/HEADER_BACK.gif') no-repeat center 0;
+}
+/*
+font-family: 'Playfair Display', serif;
+font-family: 'Nanum Myeongjo', serif;
+font-family: 'IBM Plex Serif', serif;
+*/
