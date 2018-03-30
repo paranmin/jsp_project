@@ -16,11 +16,11 @@
 		<c:import url="modules/header.jsp" />
 		<c:import url="modules/leftSide.jsp" />
 		<c:import url="modules/rightSide.jsp" />
-		<c:import url="modules/footer.jsp" />
 		<section id="mainContent">
 			<div class="header_back_img_area"></div>
 			메인 본문
 		</section>
+		<c:import url="modules/footer.jsp" />
 	</div>
 </body>
 </html>
