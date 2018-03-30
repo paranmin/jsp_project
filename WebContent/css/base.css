@@ -17,6 +17,7 @@ a {
 	position: relative;
 }
 
+/* 헤더에서 메인 네비게이션까지 */
 header {
 	width: 100%;
 	background-color: #1b1b1b;
@@ -138,7 +139,9 @@ header .header_back_img_area {
 	height: 700px;
 	background: url('../images/MainBackGroundImg.jpg') no-repeat center 0;
 }
+/* 헤더에서 메인 네비게이션까지 */
 
+/* 왼쪽 사이드 메뉴 */
 div#left_side {
 	width: 241px;
 	height: 100%;
@@ -185,7 +188,9 @@ div#left_side img.close_left {
 	top: 13px;
 	left: 207px;
 }
+/* 왼쪽 사이드 메뉴 */
 
+/* 오른쪽 사이드 메뉴 */
 div#right_sub_menu {
 	margin: 0;
 	width: 201px;
@@ -237,3 +242,4 @@ div#right_sub_menu .insta {
 	padding-left: 18px;
 	margin-top: 10px;
 }
+/* 오른쪽 사이드 메뉴 */
