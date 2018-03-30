@@ -49,53 +49,75 @@ header div.main_header .btn_search>i {
 
 nav {
 	height: 40px;
+	position: relative;
 }
 
 nav a {
 	color: #fff;
 }
 
-nav ul.main_nav {
+nav div.main_nav {
+	width: 900px;
+	margin: 0 auto;
+}
+
+nav div.main_nav ul.nav {
+	overflow: hidden;
+	width: 350px;
+	font-family: 'Nanum Myeongjo', serif;
+	font-size: 0.8em;
+}
+
+nav div.main_nav ul.category_nav {
 	float: left;
 }
 
-nav ul.main_nav>li {
+nav div.main_nav ul.user_nav {
+	float: right;
+}
+
+nav div.main_nav ul.nav > li {
 	float: left;
 	height: 40px;
 	line-height: 40px;
 }
 
-nav ul.main_nav>li ul.sub_nav {
+nav div.main_nav ul.category_nav > li ul.sub_nav {
 	position: absolute;
 	background-color: #fff;
 	overflow: hidden;
 	padding: 10px;
 }
 
-nav ul.main_nav>li ul.sub_nav li {
+nav div.main_nav ul.category_nav > li ul.sub_nav li {
 	height: 20px;
 	line-height: 20px;
 	margin: 10px;
 }
 
-nav ul.main_nav>li ul.sub_nav li a {
-	font-family: 'Nanum Myeongjo', serif;
+nav div.main_nav ul.category_nav > li ul.sub_nav li a {
 	color: #000;
-	font-size: 0.8em;
 }
-
+nav div.main_nav ul.category_nav > li {
+	width:  33%;
+	text-align: right;
+}
+nav div.main_nav ul.user_nav > li {
+	width: 20%;
+}
 nav .btn_menu {
 	width: 24px;
 	height: 24px;
-	margin-top: 8px;
+	position: absolute;
+	top: 10px;
 }
 
 nav .btn_left_menu {
-	float: left;
+	left: 3px;
 }
 
 nav .btn_right_menu {
-	float: left;
+	right: 3px;
 }
 
 nav .btn_left_menu>i, nav .btn_right_menu>i {
