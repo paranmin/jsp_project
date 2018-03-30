@@ -91,6 +91,7 @@ nav div.main_nav ul.category_nav>li ul.sub_nav {
 	background-color: #fff;
 	overflow: hidden;
 	padding: 10px;
+	display: none;
 }
 
 nav div.main_nav ul.category_nav>li ul.sub_nav li {
@@ -149,6 +150,7 @@ div#left_side {
 	padding-left: 18px;
 	font-family: 'IBM Plex Serif', serif;
 	border-right: 1px solid black;
+	display: none;
 }
 
 div#left_side ul {
@@ -194,6 +196,7 @@ div#left_side img.close_left {
 	top: 0;
 	right: 0;
 	font-family: 'IBM Plex Serif', serif;
+	display: none;
 }
 
 .btn_close_right {
