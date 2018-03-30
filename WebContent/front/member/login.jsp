@@ -16,6 +16,7 @@
 		<c:import url="../../modules/header.jsp" />
 		<c:import url="../../modules/leftSide.jsp" />
 		<c:import url="../../modules/rightSide.jsp" />
+		<c:import url="../../modules/footer.jsp" />
 		<section id="mainContent">
 			본문
 		</section>

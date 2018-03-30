@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display" rel="stylesheet">
+
+
+
+
+
+div#orderContent{
+	width: 1410px;
+	min-width: 1240px;
+	
+	margin: 150px auto;
+	
+}
+div#orderContent h2{
+	font-size: 18px;
+	text-align: center;
+	display: block;
+}
