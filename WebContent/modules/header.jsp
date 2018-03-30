@@ -3,7 +3,7 @@
 
 <header id="header">
 	<div class="main_header">
-		<h1>PINKROCKET</h1>
+		<h1>SJ JEWELRY</h1>
 		<div class="btn_search"><input type="text" name="main_search" /> <i class="fa fa-search"></i></div>
 		<nav>
 			<div class="main_nav">
