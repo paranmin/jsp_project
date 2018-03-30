@@ -36,6 +36,7 @@ header div.main_header {
 }
 
 header div.main_header h1 {
+	font-family: 'Playfair Display', serif;
 	text-align: center;
 }
 
@@ -254,6 +255,7 @@ div#right_sub_menu .insta {
 
 section {
 	margin-top: 83px;
+	overflow: hidden;
 }
 .footer_in {
 	margin: 0 150px;
