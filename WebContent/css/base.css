@@ -13,6 +13,10 @@ a {
 	text-decoration: none;
 }
 
+#container {
+	position: relative;
+}
+
 header {
 	width: 100%;
 	background-color: #1b1b1b;
@@ -76,35 +80,38 @@ nav div.main_nav ul.user_nav {
 	float: right;
 }
 
-nav div.main_nav ul.nav > li {
+nav div.main_nav ul.nav>li {
 	float: left;
 	height: 40px;
 	line-height: 40px;
 }
 
-nav div.main_nav ul.category_nav > li ul.sub_nav {
+nav div.main_nav ul.category_nav>li ul.sub_nav {
 	position: absolute;
 	background-color: #fff;
 	overflow: hidden;
 	padding: 10px;
 }
 
-nav div.main_nav ul.category_nav > li ul.sub_nav li {
+nav div.main_nav ul.category_nav>li ul.sub_nav li {
 	height: 20px;
 	line-height: 20px;
 	margin: 10px;
 }
 
-nav div.main_nav ul.category_nav > li ul.sub_nav li a {
+nav div.main_nav ul.category_nav>li ul.sub_nav li a {
 	color: #000;
 }
-nav div.main_nav ul.category_nav > li {
-	width:  33%;
+
+nav div.main_nav ul.category_nav>li {
+	width: 33%;
 	text-align: right;
 }
-nav div.main_nav ul.user_nav > li {
+
+nav div.main_nav ul.user_nav>li {
 	width: 20%;
 }
+
 nav .btn_menu {
 	width: 24px;
 	height: 24px;
@@ -130,8 +137,100 @@ header .header_back_img_area {
 	height: 700px;
 	background: url('../images/HEADER_BACK.gif') no-repeat center 0;
 }
-/*
-font-family: 'Playfair Display', serif;
-font-family: 'Nanum Myeongjo', serif;
-font-family: 'IBM Plex Serif', serif;
-*/
+
+div#left_side {
+	width: 241px;
+	height: 100%;
+	background-color: rgb(255, 255, 255);
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding-top: 40px;
+	padding-left: 18px;
+	font-family: 'IBM Plex Serif', serif;
+	border-right: 1px solid black;
+}
+
+div#left_side ul {
+	padding-left: 30px;
+	padding-top: 3px;
+}
+
+div#left_side li {
+	list-style: none;
+	font-family: 'Nanum Myeongjo', serif;
+	font-size: 13px;
+	padding-top: 5px;
+}
+
+div#left_side a {
+	text-decoration: none;
+	color: black;
+}
+
+div#left_side h1 {
+	margin-left: 18px;
+}
+
+div#left_side h2 {
+	font-size: 15px;
+	padding-top: 20px;
+	margin-left: 18px;
+}
+
+div#left_side img.close_left {
+	position: fixed;
+	top: 13px;
+	left: 207px;
+}
+
+#right_sub_menu {
+	margin: 0;
+	width: 201px;
+	height: 1050px;
+	border-left: 1px solid black;
+	background-color: white;
+	position: fixed;
+	top: 0;
+	right: 0;
+	font-family: 'IBM Plex Serif', serif;
+}
+
+.btn_close_right {
+	position: fixed;
+	top: 13px;
+	right: 169px;
+}
+
+.my_account {
+	margin-top: 40px;
+}
+
+.my_account h2, .board_menu h2 {
+	font-size: 15px;
+	margin-left: 18px;
+}
+
+.account_menu {
+	list-style: none;
+	padding-left: 18px;
+}
+
+.account_menu li {
+	padding-top: 5px;
+}
+
+.account_menu li a {
+	text-decoration: none;
+	color: black;
+	font-size: 13px;
+}
+
+.board_menu {
+	margin-top: 50px;
+}
+
+.insta {
+	padding-left: 18px;
+	margin-top: 10px;
+}

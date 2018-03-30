@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../css/base.css" media="all" />
+
 <header id="header">
 	<div class="main_header">
 		<h1>PINKROCKET</h1>
@@ -33,7 +31,7 @@
 					<li><a href="#">JOIN</a></li>
 					<li><a href="#">MYPAGE</a></li>
 					<li><a href="#">BOARD</a></li>
-					<li><a href="#">CART(0)</a></li>
+					<li><a href="#"><i class="fa fa-cart-plus"></i>(0)</a></li>
 				</ul>
 			</div>
 			<div class="btn_menu btn_left_menu"><i class="fa fa-bars"></i></div>
