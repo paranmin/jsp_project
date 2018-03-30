@@ -9,3 +9,12 @@ title은 Playfair  그외에 영어는 IBM Plex 한글은 Nanum 쓰면 되요
 HeaderTitle은 Playfair Display
 카테고리 는 <h2> 에 font-size: 15px 메뉴는 font size=13px;
 
+
+awesome icon 경로
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+
+아이콘들 확인은 아래 주소
+https://fontawesome.com/icons?d=gallery  
+
+사용법은 아래와 같음
+<i class="fal fa-address-book"></i>
