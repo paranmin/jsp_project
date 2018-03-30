@@ -133,12 +133,6 @@ nav .btn_left_menu>i, nav .btn_right_menu>i {
 	font-size: 20px;
 }
 
-header .header_back_img_area {
-	width: 100%;
-	min-width: 1240px;
-	height: 700px;
-	background: url('../images/MainBackGroundImg.jpg') no-repeat center 0;
-}
 /* 헤더에서 메인 네비게이션까지 */
 
 /* 왼쪽 사이드 메뉴 */

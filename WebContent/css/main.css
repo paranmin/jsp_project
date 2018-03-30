@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+#mainContent {
+	width: 100%;
+	min-height: 2700px;
+	overflow: hidden;
+}
+#mainContent .header_back_img_area {
+	width: 100%;
+	min-height: 623px;
+	background: url('../images/MainBackGroundImg.jpg') no-repeat center 100% fixed;
+	background-size: cover;
+}

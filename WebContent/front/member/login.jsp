@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="../../css/base.css" media="all" />
+<link rel="stylesheet" href="../../css/login.css" media="all" />
 </head>
 <body>
 	<div id="container">
