@@ -38,5 +38,4 @@
 			<div class="btn_menu btn_right_menu"><i class="fa fa-user"></i></div>
 		</nav>
 	</div>
-	<div class="header_back_img_area"></div>
 </header>

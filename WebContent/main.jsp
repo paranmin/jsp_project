@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="css/base.css" media="all" />
+<link rel="stylesheet" href="css/main.css" media="all" />
 </head>
 <body>
 	<div id="container">
@@ -16,8 +17,10 @@
 		<c:import url="modules/leftSide.jsp" />
 		<c:import url="modules/rightSide.jsp" />
 		<section id="mainContent">
-			본문
+			<div class="header_back_img_area"></div>
+			메인 본문
 		</section>
+		<c:import url="modules/footer.jsp" />
 	</div>
 </body>
 </html>
