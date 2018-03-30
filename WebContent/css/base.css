@@ -184,7 +184,7 @@ div#left_side img.close_left {
 	left: 207px;
 }
 
-#right_sub_menu {
+div#right_sub_menu {
 	margin: 0;
 	width: 201px;
 	height: 1050px;
@@ -196,41 +196,41 @@ div#left_side img.close_left {
 	font-family: 'IBM Plex Serif', serif;
 }
 
-.btn_close_right {
+div#right_sub_menu .btn_close_right {
 	position: fixed;
 	top: 13px;
 	right: 169px;
 }
 
-.my_account {
+div#right_sub_menu div.my_account {
 	margin-top: 40px;
 }
 
-.my_account h2, .board_menu h2 {
+div.my_account h2, div.board_menu h2 {
 	font-size: 15px;
 	margin-left: 18px;
 }
 
-.account_menu {
+div#right_sub_menu ul.account_menu {
 	list-style: none;
 	padding-left: 18px;
 }
 
-.account_menu li {
+ul.account_menu li {
 	padding-top: 5px;
 }
 
-.account_menu li a {
+ul.account_menu li a {
 	text-decoration: none;
 	color: black;
 	font-size: 13px;
 }
 
-.board_menu {
+div.board_menu {
 	margin-top: 50px;
 }
 
-.insta {
+div#right_sub_menu .insta {
 	padding-left: 18px;
 	margin-top: 10px;
 }
