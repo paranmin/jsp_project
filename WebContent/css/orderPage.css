@@ -36,16 +36,15 @@ div#orderContent .orderList .orderTitle span{
 	padding-left: 10px;
 }
 div#orderContent .orderList .orderTable{
-	border:1px solid black;/* 나중에 지울것 */
 	margin:10px;
 	text-align: center;
+	font-size: 13px;
+	border-top:1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
 }
-div#orderContent .orderList .orderTable tr,td{/* 나중에 지울것 */
-	border: 1px solid black;
-	border-collapse: collapse; 
-}
+
 div#orderContent .orderList .orderTable .thColor{
-	background-color: #EAEAEA;
+	background-color: #EAEAEA; /* tr의 색깔..다시 확인 */
 }
 div#orderContent .orderList .orderTable th{
 	height: 32px;
@@ -60,4 +59,30 @@ div#orderContent .orderList .orderTable .proName{
 }
 div#orderContent .orderList .orderTable .count{
 	width: 141px;
+}
+div.orderTable tr.proContent{
+	height: 213px;
+	text-align: center;
+	border-bottom: 1px solid #EAEAEA;5
+}
+div.orderTable .proImg{
+	padding:5px;
+	text-align: center;
+	width: 150px;
+	height: 187px;
+	line-height: 213px;
+}
+
+tr.proNameTable p.proNamehr{
+	border-top: 1px solid #EAEAEA;
+	width: 400px;
+}
+div.orderTable tr.allProPrice td{
+	height: 73px;
+	
+}
+div.orderTable tr.allProPrice td p{
+	text-align: right;
+	font-size: 13px;
+	line-height: 73px;
 }

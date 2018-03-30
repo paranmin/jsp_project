@@ -33,6 +33,31 @@
 							<th class="count">적립</th>
 							<th class="count">가격</th>
 						</tr>
+						<tr class="proContent">
+							<td><img src="../../images/J1.jpg" class="proImg"></td>
+							<td class="proNameTable">
+								<table>
+									<tr>
+										<td><p>베이직 실리콘 귀걸이</p></td>
+									</tr>
+									<tr>
+										<td class="proNamehr"><p>옵션:[EX---]</p></td>
+									</tr>
+								</table>
+							</td>
+							<td>
+								<p>1개</p>
+							</td>
+							<td>
+								<p>40원</p>
+							</td>
+							<td>
+								<p>1500원</p>
+							</td>
+						</tr>
+						<tr class="allProPrice">
+							<td colspan="5"><p>총 결제 금액:</p></td>
+						</tr>	
 					</table>
 				</div>
 			</div>
