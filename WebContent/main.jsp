@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="css/base.css" media="all" />
 <link rel="stylesheet" href="css/main.css" media="all" />
-</head>
+</head>   
 <body>
-	<div id="container">
+	<div id="container">  
 		<c:import url="modules/header.jsp" />
 		<c:import url="modules/leftSide.jsp" />
 		<c:import url="modules/rightSide.jsp" />
