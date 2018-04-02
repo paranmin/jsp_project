@@ -1,19 +1,88 @@
 @CHARSET "UTF-8";
-<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display" rel="stylesheet">
-
-
 
 
 
 div#orderContent{
 	width: 1410px;
 	min-width: 1240px;
-	
 	margin: 150px auto;
-	
+	overflow: hidden;
 }
 div#orderContent h2{
 	font-size: 18px;
 	text-align: center;
 	display: block;
+	font-family: 'IBM Plex Serif', serif;
+}
+div#orderContent p{
+	text-align: right;
+}
+div#orderContent p a{
+	color:#ccc;
+	text-decoration: none;
+	font-family: 'IBM Plex Serif', serif;
+}
+
+div#orderContent .orderList .orderTitle{
+	text-align:left;
+	font-size: 13px;
+	margin-top: 10px;
+}
+div#orderContent .orderList .orderTitle p{
+	font-weight: bold;
+}
+div#orderContent .orderList .orderTitle span{
+	font-weight: normal;
+	padding-left: 10px;
+}
+div#orderContent .orderList .orderTable{
+	margin:10px;
+	text-align: center;
+	font-size: 13px;
+	border-top:1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+}
+
+div#orderContent .orderList .orderTable .thColor{
+	background-color: #EAEAEA; /* tr의 색깔..다시 확인 */
+}
+div#orderContent .orderList .orderTable th{
+	height: 32px;
+	line-height: 32px;
+}
+
+div#orderContent .orderList .orderTable .pic{
+	width: 212px;
+}
+div#orderContent .orderList .orderTable .proName{
+	width: 775px;
+}
+div#orderContent .orderList .orderTable .count{
+	width: 141px;
+}
+div.orderTable tr.proContent{
+	height: 213px;
+	text-align: center;
+	border-bottom: 1px solid #EAEAEA;5
+}
+div.orderTable .proImg{
+	padding:5px;
+	text-align: center;
+	width: 150px;
+	height: 187px;
+	line-height: 213px;
+}
+
+tr.proNameTable p.proNamehr{
+	border-top: 1px solid #EAEAEA;
+	width: 400px;
+}
+div.orderTable tr.allProPrice td{
+	height: 73px;
+	
+}
+div.orderTable tr.allProPrice td p{
+	text-align: right;
+	font-size: 13px;
+	line-height: 73px;
 }
