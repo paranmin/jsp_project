@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="css/base.css" media="all" />
 <link rel="stylesheet" href="css/main.css" media="all" />
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/base.js"></script>
 </head>
 <body>
 	<div id="container">
