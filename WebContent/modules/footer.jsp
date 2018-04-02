@@ -51,7 +51,7 @@
 		</div>
 		<!--위로 이동-->
 		<div class="pageTop">
-			<a href="#"><img src="images/btnTop.png" alt="" border="0"></a>
+			<a href="#"><img src="../../images/btnTop.png" alt="" border="0"></a>
 		</div>
 	</div>
 

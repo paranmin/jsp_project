@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <div id="right_sub_menu">
-	<img src="images/btn_close.gif" alt="x" class="btn_close_right">
+	<img src="../../images/btn_close.gif" alt="x" class="btn_close_right">
 
 	<div class="my_account">
 		<h2>MY ACCOUNT</h2>
@@ -25,6 +25,6 @@
 	</div>
 
 	<a href="https://www.instagram.com/pinkrocket_shop/"><img
-		src="images/insta.png" alt="insta" class="insta"></a>
+		src="../../images/insta.png" alt="insta" class="insta"></a>
 
 </div>
