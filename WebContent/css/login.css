@@ -3,21 +3,89 @@
 #loginContent {
 	width: 1410px;
 	margin: 83px auto 150px;
-	min-height: 700px;
+	min-height: 580px;
+	font-size: 12px;
 }
 
 #loginContent h2 {
 	margin-top: 50px;
 	font-family: 'IBM Plex Serif', serif;
-	font-size: 1.3em;
+	font-size: 1.5em;
 	letter-spacing: 3px;
 	text-align: center;
 }
 
 #loginContent .memberArea {
 	margin-top: 30px;
-	width: 100%;
-	height: 500px;
+	width: 1408px;
+	height: 432px;
 	border: 1px solid #EAEAEA;
-	
+	overflow: hidden;
+}
+
+#loginContent .loginArea, #loginContent .joinArea {
+	width: 380px;
+	margin: 60px;
+	float: left;
+}
+
+#loginContent fieldset {
+	border: none;
+}
+
+#loginContent legend {
+	color: #888;
+	margin-bottom: 10px;
+	font-size: 1.2em;
+}
+
+#loginContent .loginArea label {
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+#loginContent .loginArea input {
+	width: 360px;
+	height: 20px;
+	padding: 10px;
+	background-color: #eee;
+	border: none;
+	outline: none;
+}
+
+#loginContent .loginArea input[type="submit"] { 
+	background-color: #000;
+	margin-top: 30px;
+	color: #fff;
+	width: 380px;
+	height: 40px;
+}
+
+#loginContent .loginArea p {
+	margin-top: 30px;
+}
+#loginContent .loginArea p a {
+	color: #888;
+}
+
+#loginContent .joinArea {
+	margin-left: 100px;
+}
+
+#loginContent .joinArea p {
+	margin-top: 5px;
+}
+#loginContent .joinArea input[type="button"] {
+	background-color: #000;
+	margin-top: 30px;
+	color: #fff;
+	width: 380px;
+	height: 40px;
+	border: none;
+	outline: none;
+}
+
+#loginContent .loginArea input[type="submit"], #loginContent .joinArea input[type="button"] {
+	cursor: pointer;
 }
