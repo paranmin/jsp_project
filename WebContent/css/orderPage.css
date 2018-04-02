@@ -242,20 +242,21 @@ button.btnCoupon{
 div.couponinfo p{
 	margin-top: 10px;
 }
-div.submitOrder{
-	margin-top: 20px;
+div.OrderReac{
+	margin-top: 40px;
 	overflow: hidden;
 	text-align: center;
 }
-div.submitOrder input#orderNow{
+div.OrderReac .orderNow{
 	width: 100px;
 	height: 30px;
 	line-height: 30px;
 	background-color:  #1b1b1b;
+	border-color:#1b1b1b;
 	color:white;
 	margin-left: 5px;
 }
-div.submitOrder #orderReset{
+div.OrderReac .orderReset{
 	width: 100px;
 	height: 30px;
 	line-height: 30px;

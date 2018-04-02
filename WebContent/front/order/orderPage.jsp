@@ -141,13 +141,12 @@
 					<button class="btnCoupon">쿠폰선택</button><p>보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.</p>
 				</div>
 			</div>
-			
-		</div>
-			<div class="submitOrder">
-				<p>aaaa</p>
-				<input type="submit" value="주문하기" id="orderNow">
-				<input type="reset" value="주문취소" id="orderReset">
+			<div class="OrderReac">
+				<input type="submit" value="주문하기" class="orderNow">
+				<input type="reset" value="주문취소" class="orderReset">
 			</div>
+		</div>
+			
 		</div>
 		
 	</section>	
