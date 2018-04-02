@@ -6,11 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>SJ JEWELRY</title>
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="../css/base.css" media="all" />
+<link rel="stylesheet" href="../css/main.css" media="all" />
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script src="../js/base.js"></script>
 <style>
 section#product_list {
 	text-align: center;
@@ -43,7 +44,7 @@ div.item {
 	position: relative;
 }
 
-img {
+div.item img {
 	width: 356px;
 	position: absolute;
 	left: 0;
@@ -106,6 +107,8 @@ a{
 <body>
 	<div id="container">
 		<c:import url="../modules/header.jsp" />
+		<c:import url="../modules/leftSide.jsp" />
+		<c:import url="../modules/rightSide.jsp" />
 		<section id="product_list">
 			<p class="list_title">(JEWERLY) BEST</p>
 			<div class="category_best">
