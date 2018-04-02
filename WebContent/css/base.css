@@ -30,6 +30,7 @@ header {
 	top: 0;
 	left: 0;
 	overflow: hidden;
+	z-index: 100;
 }
 
 header div.main_header {
@@ -128,8 +129,8 @@ nav .btn_menu {
 	height: 24px;
 	position: absolute;
 	top: 10px;
-}
-
+	cursor: pointer;
+} 
 nav .btn_left_menu {
 	left: 3px;
 }
@@ -157,6 +158,7 @@ div#left_side {
 	font-family: 'IBM Plex Serif', serif;
 	border-right: 1px solid black;
 	display: none;
+	z-index: 110;
 }
 
 div#left_side ul {
@@ -190,6 +192,7 @@ div#left_side img.close_left {
 	position: fixed;
 	top: 13px;
 	left: 207px;
+	cursor: pointer;
 }
 /* 왼쪽 사이드 메뉴 */
 
@@ -205,12 +208,14 @@ div#right_sub_menu {
 	right: 0;
 	font-family: 'IBM Plex Serif', serif;
 	display: none;
+	z-index: 110;
 }
 
 div#right_sub_menu .btn_close_right {
 	position: fixed;
 	top: 13px;
 	right: 169px;
+	cursor: pointer;
 }
 
 div#right_sub_menu div.my_account {
