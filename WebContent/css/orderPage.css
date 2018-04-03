@@ -223,7 +223,6 @@ div.couponinfo{
 	border-top: 1px solid #EAEAEA;
 	border-bottom: 1px solid #EAEAEA;
 	padding:10px 10px 10px 13px;
-	overflow: hidden;
 }
 input.inputCoupon{
 	height: 30px;
@@ -234,17 +233,20 @@ button.btnCoupon{
 	color:black;
 	background-color: #EAEAEA;
 	font-size: 13px;
-	border:none;
+	border-color:#EAEAEA;
 	width: 80px;
 	height: 25px;
 	padding:5px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
 }
 div.couponinfo p{
 	margin-top: 10px;
 }
 div.OrderReac{
 	margin-top: 40px;
-	overflow: hidden;
 	text-align: center;
 }
 div.OrderReac .orderNow{
