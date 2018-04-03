@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+#joinContent {
+	width: 1410px;
+	margin: 83px auto 150px;
+	min-height: 580px;
+	font-size: 12px;
+	min-height: 700px;
+}
+
+#joinContent .formArea {
+	width: 600px;
+	margin: 80px auto;
+	min-height: 500px;
+}
+
+#joinContent .formArea h2 {
+	border-bottom: 3px solid #333;
+	padding-bottom: 3px;
+}
+
+#joinContent .formArea ul {
+	width: 510px;
+	margin: 30px auto;
+}
+
+#joinContent .formArea ul li.input {
+	border-top: 1px solid #EAEAEA;
+	border-right: 1px solid #EAEAEA;
+	border-left: 1px solid #EAEAEA;
+	height: 50px;
+	line-height: 50px;
+}
+
+#joinContent .formArea ul li.input.last {
+	border-bottom: 1px solid #EAEAEA;
+}
+
+#joinContent .formArea ul li.input input {
+	margin-left: 30px;
+	height: 30px;
+	vertical-align: middle;
+	width: 250px;
+	border: none;
+	outline: none;
+	font-weight: bold;
+	font-family: 'Nanum Myeongjo', serif;
+	font-size: 1.2em;
+}
+
+#joinContent .formArea ul li.chk {
+	margin-top: 15px;
+	font-weight: bold;
+	font-family: 'Nanum Myeongjo', serif;
+	font-size: 1.2em;
+	color: #0549bb;
+}
+
+#joinContent .formArea ul li.msg {
+	margin-top: 5px;
+	color: #888;
+}
+
+#joinContent .formArea p {
+	margin-top: 50px;
+	text-align: center;
+}
+
+#joinContent .formArea p input {
+	border: 3px solid #eaeaea;
+	border-radius: 10px;
+	background-color: #333;
+	color: #fff;
+	width: 200px;
+	height: 60px;
+	font-size: 2em;
+}

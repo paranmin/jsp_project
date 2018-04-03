@@ -24,7 +24,6 @@
 		</ul>
 	</div>
 
-	<a href="https://www.instagram.com/pinkrocket_shop/"><img
-		src="/jsp_project/images/insta.png" alt="insta" class="insta"></a>
+	<a href="https://www.instagram.com/pinkrocket_shop/"><img src="/jsp_project/images/insta.png" alt="insta" class="insta"></a>
 
 </div>
