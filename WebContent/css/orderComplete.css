@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+div.orderCom{
+	width: 1410px;
+	min-width: 1240px;
+	margin: 150px auto;
+}
+div.orderCom h2{
+	font-size: 18px;
+	text-align: center;
+	display: block;
+	font-family: 'IBM Plex Serif', serif;
+	
+}
+div.orderComTitle{
+	margin-top:40px;
+}
+div.orderComTitle p{
+	font-weight: bold;
+	font-size: 13px;
+	padding-left: 13px;
+	margin-bottom: 10px;
+}
+div.orderComTitle table{
+	width: 1410px;
+}
+div.orderComTitle table tr.firstline{
+	border-collapse: collapse;
+}
+div.orderComTitle table th{
+	font-size: 13px;
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	border-collapse: collapse;
+	height: 30px;
+	line-height: 30px;
+}
+div.orderComTitle #purchaseName{
+	width:900px;
+}
+div.orderComTitle .purchaseSub{
+	width: 90px;
+}
