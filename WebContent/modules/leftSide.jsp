@@ -3,7 +3,7 @@
 
 <div id="left_side">
 	<div class="left_menu">
-		<img src="images/btn_close.gif" class="close_left">
+		<img src="/jsp_project/images/btn_close.gif" class="close_left">
 		<h1>CATEGORY</h1>
 		<h2>JEWELRY</h2>
 		<ul>

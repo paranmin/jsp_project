@@ -27,8 +27,8 @@
 					<li><a href="#">SALE</a></li>
 				</ul>
 				<ul class="nav user_nav">
-					<li><a href="#">LOGIN</a></li>
-					<li><a href="#">JOIN</a></li>
+					<li><a href="/jsp_project/front/member/login.jsp">LOGIN</a></li>
+					<li><a href="/jsp_project/front/member/join.jsp">JOIN</a></li>
 					<li><a href="#">MYPAGE</a></li>
 					<li><a href="#">BOARD</a></li>
 					<li><a href="#"><i class="fa fa-cart-plus"></i>(0)</a></li>
