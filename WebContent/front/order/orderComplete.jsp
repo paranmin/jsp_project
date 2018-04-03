@@ -24,11 +24,15 @@
 					<p>주문 상품</p>
 					<table>
 						<tr class="firstline">
+							<th class="purchaseSub"> </th>
 							<th id="purchaseName">구입상품명</th>
 							<th class="purchaseSub">수량</th>
 							<th class="purchaseSub">가격</th>
 							<th class="purchaseSub">적립</th>
 						</tr>
+						<tr>
+							<td>
+								
 					</table>
 				</div>
 			</div>

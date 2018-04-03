@@ -36,8 +36,8 @@ div.orderComTitle table th{
 	line-height: 30px;
 }
 div.orderComTitle #purchaseName{
-	width: 75%;
+	width:900px;
 }
 div.orderComTitle .purchaseSub{
-	width: 10%;
+	width: 90px;
 }
