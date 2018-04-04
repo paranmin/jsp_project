@@ -101,4 +101,63 @@
 	border: 1px solid #EAEAEA;
 	overflow: hidden;
 }
+
+#loginContent .findArea > form > div {
+	width: 1300px;
+	margin: 40px auto;
+}
+
+#loginContent .findArea > form > div p.msg {
+	color: #888;
+	font-size: 1.2em;
+}
+
+#loginContent .findArea > form > div ul {
+	margin-top: 20px;
+	width: 300px;
+	overflow: hidden;
+}
+#loginContent .findArea > form > div ul li {
+	float: left;
+	margin-right: 40px;
+	color: #888;
+}
+#loginContent .findArea > form > div table.findMember {
+	border-collapse: collapse;
+	width: 1298px;
+	margin-top: 10px;
+}
+#loginContent .findArea > form > div table.findMember th, #loginContent .findArea > form > div table.findMember td {
+	border-top: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+	padding: 12px;
+}
+#loginContent .findArea > form > div table.findMember th {
+	width: 10%;
+	background-color: #f5f5f5;
+}
+#loginContent .findArea > form > div table.findMember td {
+	
+}
+#loginContent .findArea > form > div table.findMember tr.findPhone {
+	display: none;
+}
+#loginContent .findArea > form > div p.btn {
+	margin-top: 20px;
+	text-align: center;
+}
+#loginContent .findArea > form > div p.btn a {
+	display: inline-block;
+	background-color: #eaeaea;
+	padding: 7px 14px;
+}
+#loginContent .findArea > form > div p.btn a.find {
+	background-color: #eaeaea;
+	color: #333;
+}
+
+#loginContent .findArea > form > div p.btn a.login {
+	background-color: #333;
+	color: #fff;
+}
 /* 아이디 / 비번 찾기 */
