@@ -14,7 +14,7 @@
 <script src="js/base.js"></script>
 </head>
 <body>
-	<div id="container">
+	<div id="container">  
 		<c:import url="modules/header.jsp" />
 		<c:import url="modules/leftSide.jsp" />
 		<c:import url="modules/rightSide.jsp" />
