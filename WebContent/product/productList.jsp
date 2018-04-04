@@ -6,11 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>SJ JEWELRY</title>
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="../css/base.css" media="all" />
+<link rel="stylesheet" href="../css/main.css" media="all" />
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script src="../js/base.js"></script>
 <style>
 section#product_list {
 	text-align: center;
@@ -43,7 +44,7 @@ div.item {
 	position: relative;
 }
 
-img {
+div.item img {
 	width: 356px;
 	position: absolute;
 	left: 0;
@@ -70,20 +71,34 @@ hr {
 }
 p.item_num{
 	text-align: justify;
+	line-height: 40px;
 }
 div.item_sort{
 	font-family: 'IBM Plex Serif', serif;
 	overflow: hidden;
+	margin-left:250px;
 }
 div.item_sort ul{
 	float: right;
-	width:600px;
+	width: 400px;
+	margin-right:240px;
+	margin-bottom: 5px;
 }
 div.item_sort li{
 	list-style: none;
 	float:left;
-	width:20%;
+	width:19%;
+	height:40px;
 }
+div.item_sort li:nth-child(1), div.item_sort li:nth-child(2), div.item_sort li:nth-child(5){
+	line-height:40px;
+}
+
+div.item_sort li:nth-child(1),div.item_sort li:nth-child(2),
+div.item_sort li:nth-child(3),div.item_sort li:nth-child(4){
+	border-right:1px solid #ccc;
+}
+
 a{
 	color:black;
 }
@@ -92,8 +107,10 @@ a{
 <body>
 	<div id="container">
 		<c:import url="../modules/header.jsp" />
+		<c:import url="../modules/leftSide.jsp" />
+		<c:import url="../modules/rightSide.jsp" />
 		<section id="product_list">
-			<p class="list_title">JEWERLY BEST</p>
+			<p class="list_title">(JEWERLY) BEST</p>
 			<div class="category_best">
 				<a href="#">
 					<div class="item">
@@ -135,22 +152,22 @@ a{
 				</div>
 			</div>
 			<hr>
-			<p class="list_title">JEWERLY ITEM</p>
-			<p class="item_num">total 100items</p>
+			<p class="list_title">(JEWERLY) ITEM</p>
 			<div class="item_sort">
 				<ul>
 					<li><a href="#">NEW</a></li>
 					<li><a href="#">NAME</a></li>
 					<li><a href="#">LOW PRICE</a></li>
 					<li><a href="#">HIGH PRICE</a></li>
-					<li><a href="#">RANKING</a></li>
+					<li><a href="#">RANK</a></li>
 				</ul>
-			</div>
+				<p class="item_num">total 100items</p>
+			</div>   
 			<div class="category_item">
 				<div class="item">
 					<img src="../images/J1.jpg">
 					<div class="item_white"></div>
-				</div>
+				</div>     
 				<div class="item">
 					<img src="../images/J1.jpg">
 					<div class="item_white"></div>
