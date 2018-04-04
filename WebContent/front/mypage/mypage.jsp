@@ -24,6 +24,9 @@
 				<li><a href="#" class="engText">My info</a></li>
 				<li><a href="#" class="engText">Board List</a></li>
 			</ul>
+			<div>
+			
+			</div>
 		</section>
 
 		<c:import url="../../modules/footer.jsp" />
