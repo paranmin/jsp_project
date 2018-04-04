@@ -1,0 +1,152 @@
+@CHARSET "UTF-8";
+
+
+
+div#cartContent{
+	width: 1410px;
+	min-width: 1240px;
+	margin: 150px auto;
+	overflow: hidden;
+}
+div#cartContent h2{
+	font-size: 18px;
+	text-align: center;
+	display: block;
+	font-family: 'IBM Plex Serif', serif;
+}
+div#cartContent p{
+	text-align: right;
+}
+div#cartContent p a{
+	color:#ccc;
+	text-decoration: none;
+	font-family: 'IBM Plex Serif', serif;
+}
+
+div#cartContent .cartList .cartTitle{
+	text-align:left;
+	font-size: 13px;
+	margin-top: 10px;
+}
+div#cartContent .cartList .cartTitle p{
+	font-weight: bold;
+}
+div#cartContent .cartList .cartTable{
+	margin:10px;
+	text-align: center;
+	font-size: 13px;
+	border-bottom: 1px solid #EAEAEA;
+}
+div#cartContent .cartList .cartTable tr:last-child td{
+	border-top: 1px solid #EAEAEA;
+}
+div#cartContent .cartList .cartTable .thColor{
+	background-color: #EAEAEA; /* tr의 색깔..다시 확인 */
+}
+div#cartContent .cartList .cartTable th{
+	height: 32px;
+	line-height: 32px;
+}
+div#cartContent .cartList .cartTable .checkbok{
+	width: 30px;
+}
+div#cartContent .cartList .cartTable .pic{
+	width: 212px;
+}
+div#cartContent .cartList .cartTable .proName{
+	width: 775px;
+}
+div#cartContent .cartList .cartTable .count{
+	width: 141px;
+}
+div#cartContent .cartList .cartTable .cancel{
+	width: 141px;
+}
+div.cartTable tr.proContent{
+	height: 213px;
+	text-align: center;
+	border-bottom: 1px solid #EAEAEA;
+}
+div.cartTable .proImg{
+	margin:5px;
+	text-align: center;
+	width: 150px;
+	height: 187px;
+	line-height: 213px;
+}
+
+tr.proNameTable p.proNamehr{
+	border-top: 1px solid #EAEAEA;
+	width: 400px;
+}
+div.cartTable tr.allProPrice td{
+	height: 73px;
+	
+}
+div.cartTable tr.allProPrice td p{
+	text-align: right;
+	font-size: 13px;
+	line-height: 73px;
+}
+input.cartnum{
+	width:20px;
+	text-align: center;
+	height:20px;
+}
+div.cartTable table td{
+	text-align: center;	
+}
+td.numcount button{
+	width:20px;
+	height:20px;	
+	background: white;
+	border:none;
+}
+td.numcount button.numupdate{
+	width:40px;
+	height:20px;	
+	background: #1b1b1b;
+	border:none;
+	color:white;
+}
+tr.proContent button.delete{
+	background: #EAEAEA;
+	border: none;
+	width: 80px;
+}
+
+div#buttons{
+    height: 60px;
+    line-height: 60px;
+}
+button#clean_cart, button#select_del{
+	background: white;
+	height:30px;
+	float: left;
+	width:120px;
+	margin:5px;
+	border:1px solid #ccc;
+}
+button#go_shop, button#go_order{
+	height: 50px;
+	float: right;
+	margin:5px;
+	width:250px;    
+}
+
+button#go_shop{
+	background: #EAEAEA;
+	border:none;
+}
+button#go_order{
+	background: #1b1b1b;
+	color:white;
+	border:none;
+}
+div.notice{
+	height:40px;
+	line-height:30px;
+	text-align: left;
+	font-size:12px;
+	margin-left:5px;
+}
