@@ -18,33 +18,12 @@
 		<c:import url="../../modules/rightSide.jsp" />
 
 		<section id="loginContent">
-			<h2>Login or Create an Account</h2>
-			<div class="memberArea">
-				<div class="loginArea">
-					<fieldset>
-						<legend>Member Login</legend>
-						<form action="">
-							<label for="">ID</label>
-							<input type="text" name="loginId" />
-							<label for="">Password</label>
-							<input type="text" name="loginPwd" />
-							<input type="submit" value="Login" />
-						</form>
-						<p>
-							<a href="findMember.jsp">Find Id / Find Password</a>
-						</p>
-					</fieldset>
-
-				</div>
-				<div class="joinArea">
-					<fieldset>
-						<legend>Member Join</legend>
-						<p>회원가입을 하시면 다양하고 특별한 혜택이 준비되어 있습니다.</p>
-						<p>
-							<input type="button" value="Register" />
-						</p>
-					</fieldset>
-				</div>
+			<h2>Find ID/PW</h2>
+			<div class="findArea">
+				
+			</div>
+			<div class="findArea">
+				
 			</div>
 		</section>
 

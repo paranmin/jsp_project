@@ -18,7 +18,7 @@
 #loginContent .memberArea {
 	margin-top: 30px;
 	width: 1408px;
-	height: 432px;
+	min-height: 432px;
 	border: 1px solid #EAEAEA;
 	overflow: hidden;
 }
@@ -92,3 +92,13 @@
 	{
 	cursor: pointer;
 }
+
+/* 아이디 / 비번 찾기 */
+#loginContent .findArea {
+	margin-top: 30px;
+	width: 1408px;
+	min-height: 250px;
+	border: 1px solid #EAEAEA;
+	overflow: hidden;
+}
+/* 아이디 / 비번 찾기 */
