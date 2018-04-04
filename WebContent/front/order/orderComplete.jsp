@@ -88,7 +88,7 @@
 				<div class="shipping">
 					<p>배송지 정보</p>
 					<div class="address-info">
-						<table>
+						<table class="addresstable">
 							<tr>
 								<th>이름</th>
 								<td>이소정</td>
@@ -109,7 +109,26 @@
 						</table>
 					</div>
 				</div>
+				<p class="order-footer">
+					<label id="ordername2">이소정</label>님의 주문이 완료되었습니다.
+					<br>
+					<br>
+					귀하의 주문확인 번호는 <span class="spanStyle">20180404171157</span>입니다.
+					<br>
+					귀하의 제품 구입에 따른 적립금 <span class="spanStyle">40</span>원은 배송과 함께 바로 적립이 됩니다.
+					<br>
+					입금방법이 무통장 입금의 경우 계좌번호를 메모하세요.
+					<br>
+					입금 확인 후 상품을 준비하여 배송해 드리겠습니다.
+					<br>
+					<br>
+				</p>
+				<div class="order-btns">
+				<p class="btn_dark_box"><a href="#" class="btn_dark_color">주문 확인</a></p> <!-- 메인으로 가기 -->
+				<p class="btn_gray_box"><a href="#" class="btn_gray_color">프린트 하기</a></p>
 			</div>
+			</div>
+			
 		</section>
 	</div>
 </body>

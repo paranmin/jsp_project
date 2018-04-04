@@ -91,6 +91,9 @@ div.payway div.payway-order-info{
 div.payway div.payway-order-info #bank{
 	color:#004080;
 }
+div.shipping{
+	margin-bottom: 50px;
+}
 div.shipping > p{
 	font-weight: bold;
 	font-size: 13px;
@@ -99,11 +102,72 @@ div.shipping > p{
 }
 div.address-info{
 	font-size: 13px;
+	border-top: 1px solid #EAEAEA;
+	
 }
-div.address-info table th{
+div.address-info > table.addresstable{
+	width: 1410px;
+}
+
+
+div.address-info > table.addresstable th{
 	width: 80px;
 	text-align: center;
+	border-right: 1px solid #EAEAEA;
+	border-collapse: collapse;
+	border-bottom: 1px solid #EAEAEA;
 }
-div.address-info table td{
-	width: 140px;
+
+div.address-info > table.addresstable td{
+	height: 30px;
+	line-height: 30px;
+	padding-left: 13px;
+	border-bottom: 1px solid #EAEAEA;
+	border-collapse: collapse;
+}
+p.order-footer{
+	text-align: center;
+	font-size: 13px;
+	margin-bottom: 40px;
+}
+p.order-footer span.spanStyle{
+	font-weight:bold;
+	color:#004080;
+}
+div.order-btns{
+	text-align: center;
+}
+p.btn_dark_box{
+	width: 100px;
+	height: 40px;
+	
+	line-height: 40px;
+	background-color: #1b1b1b;
+	color:white;
+	font-weight: bold;
+	font-size: 15px;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+p.btn_gray_box{
+	width: 100px;
+	height: 40px;
+	
+	line-height: 40px;
+	background-color: #EAEAEA;
+	color:#1b1b1b;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: center;
+	display: inline-block;
+	
+}
+a.btn_dark_color{
+	color:white;
+	
+}
+a.btn_gray_color{
+	color:#1b1b1b;
+	
 }
