@@ -19,7 +19,7 @@
 		
 		<section>
 			<div id="orderContent">
-			<h2>ORDER</h2> <p><a href="#">go back ← </a></p> <!-- 장바구니로 돌아가기 -->
+			<h2>ORDER</h2> <p class="rightback"><a href="#">go back ← </a></p> <!-- 장바구니로 돌아가기 -->
 			<div class="orderList">
 				<div class="orderTitle">
 					<p>주문 상품 <span>주문정보를 작성하신 후 주문하기를 눌러주세요</span></p>
@@ -61,8 +61,94 @@
 					</table>
 				</div>
 			</div>
+			<div class="orderInfo">
+				<p class="customerInfo">주문자 정보</p>
+				<div class="custable">
+					<table>
+						<tr>
+							<td class="grayBox">이름</td>
+							<td class="paddingInput"><input type="text" name="name" readonly="readonly"></td>
+							<td class="grayBox">연락처</td>
+							<td class="paddingInput">
+								<input type="text" name="gongIlgong" readonly="readonly" value="010">
+								-
+								<input type="tel" name="middleNum">
+								-
+								<input type="tel" name="lastNum">
+							</td>
+						</tr>
+						<tr>
+							<td class="grayBox">E-mail</td>
+							<td colspan="3" class="paddingInput"><input type="email" name="email"> @ 
+								<select>
+									<option>naver.com</option>
+									<option>gmail.com</option>
+									<option>hanmail.com</option>
+								</select>
+							</td>
+						</tr>	
+					</table>
+				</div>
+			<div class="addressInfo">
+				<p class="adrInfo">배송지 정보</p><input type="checkbox" name="checksamecus">주문자 정보 입력
+				<div class="adrtable">
+					<table>
+						<tr>
+							<td class="grayBox">이름</td>
+							<td class="paddingInput"><input type="text" name="name" readonly="readonly" class="inputheight"></td>
+							<td class="grayBox">연락처1</td>
+							<td class="paddingInput">
+								<input type="text" name="gongIlgong" readonly="readonly" value="010" class="sizeInput" >
+								-
+								<input type="tel" name="middleNum" class="sizeInput">
+								-
+								<input type="tel" name="lastNum" class="sizeInput">
+							</td>
+							<td class="grayBox">연락처2</td>
+							<td class="paddingInput">
+								<input type="text" name="gongIlgong" readonly="readonly" value="010" class="sizeInput">
+								-
+								<input type="tel" name="middleNum" class="sizeInput">
+								-
+								<input type="tel" name="lastNum" class="sizeInput">
+							</td>
+						</tr>
+						<tr>
+							<td class="grayBox">주소</td>
+							<td colspan="5" class="paddingInput">
+								<p><input type="radio" name="seladdress" value="homeadr" class="radiosize"> 자택
+								<input type="radio" name="seladdress" value="recentadr" class="radiosize"> 최근 배송지 <button class="adrlist">배송지 목록</button>
+								<input type="radio" name="seladdress" value="newadr" class="radiosize"> 신규 배송지</p>
+								<p><input type="text" name="post1" class="post1"> - <input type="text" name="post2" class="post1"> <button class="postlist">우편번호</button></p>
+								<p><input type="text" name="basicadr" class="inputheight" id="inputheight2"> [기본주소]</p>
+								<p><input type="text" name="detail" class="inputheight"  id="inputheight1"> [나머지주소]</p>
+							</td>
+						</tr>
+						<tr>
+							<td class="grayBox">주문메세지(100자 내외)</td>
+							<td colspan="5" class="paddingInput">
+								<textarea rows="4" cols="100"></textarea>
+								<p class="sizeContent">0/70 bytes (* 영문/숫자 기준 70자, 한글 기준 35자까지 입력 가능합니다.)</p>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="couponUse">
+				<p class="couponP">쿠폰사용</p>
+				<div class="couponinfo">
+					<input type="text" name="coupon" class="inputCoupon" readonly="readonly">
+					<button class="btnCoupon">쿠폰선택</button><p>보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.</p>
+				</div>
+			</div>
+			<div class="OrderReac">
+				<input type="submit" value="주문하기" class="orderNow">
+				<input type="reset" value="주문취소" class="orderReset">
+			</div>
+		</div>
 			
 		</div>
+		
 	</section>	
 	</div>
 	

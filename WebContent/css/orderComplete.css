@@ -1,0 +1,173 @@
+@CHARSET "UTF-8";
+
+div.orderCom{
+	width: 1410px;
+	min-width: 1240px;
+	margin: 150px auto;
+}
+div.orderCom h2{
+	font-size: 18px;
+	text-align: center;
+	display: block;
+	font-family: 'IBM Plex Serif', serif;
+	
+}
+div.orderComTitle{
+	margin-top:40px;
+	margin-bottom: 20px;
+}
+div.orderComTitle p{
+	font-weight: bold;
+	font-size: 13px;
+	padding-left: 13px;
+	margin-bottom: 10px;
+}
+div.orderComTitle table{
+	width: 1410px;
+	font-size: 13px;
+}
+div.orderComTitle table tr.firstline{
+	border-collapse: collapse;
+}
+div.orderComTitle table th{
+	font-size: 13px;
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	border-collapse: collapse;
+	height: 30px;
+	line-height: 30px;
+}
+div.orderComTitle #purchaseName{
+	width:1000px;
+}
+div.orderComTitle .purchaseSub{
+	width: 90px;
+}
+div.tb-centerContent p{
+	font-weight: normal;
+	padding:18px 0px;
+	margin-bottom: 0px;
+}
+div.tb-centerContent p a{
+	color:black;
+	text-decoration: none;
+}
+div.tb-centerContent p a:HOVER{
+	color:#808080;
+}
+div.tb-centerContentDetail p{
+	font-weight: normal;
+	font-size: 11px;
+	padding:10px 0px;
+}
+div.tb-textalign p{
+	font-weight:normal;
+	text-align: center;
+	padding-left: 0px;
+}
+div.tb-productPrice p{
+	text-align: right;
+}
+div.orderComTitle tfoot{
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+}
+div.payway{
+	margin-bottom: 20px;
+}
+div.payway>p {
+	font-weight: bold;
+	font-size: 13px;
+	padding-left: 13px;
+	margin-bottom: 10px;
+}
+div.payway div.payway-order-info{
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	padding:10px;
+	font-size: 13px;
+	line-height: 32px;
+}
+div.payway div.payway-order-info #bank{
+	color:#004080;
+}
+div.shipping{
+	margin-bottom: 50px;
+}
+div.shipping > p{
+	font-weight: bold;
+	font-size: 13px;
+	padding-left: 13px;
+	margin-bottom: 10px;
+}
+div.address-info{
+	font-size: 13px;
+	border-top: 1px solid #EAEAEA;
+	
+}
+div.address-info > table.addresstable{
+	width: 1410px;
+}
+
+
+div.address-info > table.addresstable th{
+	width: 80px;
+	text-align: center;
+	border-right: 1px solid #EAEAEA;
+	border-collapse: collapse;
+	border-bottom: 1px solid #EAEAEA;
+}
+
+div.address-info > table.addresstable td{
+	height: 30px;
+	line-height: 30px;
+	padding-left: 13px;
+	border-bottom: 1px solid #EAEAEA;
+	border-collapse: collapse;
+}
+p.order-footer{
+	text-align: center;
+	font-size: 13px;
+	margin-bottom: 40px;
+}
+p.order-footer span.spanStyle{
+	font-weight:bold;
+	color:#004080;
+}
+div.order-btns{
+	text-align: center;
+}
+p.btn_dark_box{
+	width: 100px;
+	height: 40px;
+	
+	line-height: 40px;
+	background-color: #1b1b1b;
+	color:white;
+	font-weight: bold;
+	font-size: 15px;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+p.btn_gray_box{
+	width: 100px;
+	height: 40px;
+	
+	line-height: 40px;
+	background-color: #EAEAEA;
+	color:#1b1b1b;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: center;
+	display: inline-block;
+	
+}
+a.btn_dark_color{
+	color:white;
+	
+}
+a.btn_gray_color{
+	color:#1b1b1b;
+	
+}

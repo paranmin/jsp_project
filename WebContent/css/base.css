@@ -321,3 +321,7 @@ section {
 .bold {
 	font-weight: bold;
 }
+
+.engText {
+	font-family: 'IBM Plex Serif', serif;
+}
