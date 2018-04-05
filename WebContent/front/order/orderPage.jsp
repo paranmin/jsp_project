@@ -134,6 +134,16 @@
 					</table>
 				</div>
 			</div>
+			<div class="orderpayway">
+				<p class="orderway">결제방법</p>
+				<div class="orderchoice">
+					<select name="selorderway">
+						<option value="신용카드">신용카드</option>
+						<option value="계좌이체">계좌이체</option>
+						<option value="무통장입금">무통장입금</option>
+					</select>
+				</div>
+			</div>
 			<div class="couponUse">
 				<p class="couponP">쿠폰사용</p>
 				<div class="couponinfo">
@@ -141,6 +151,7 @@
 					<button class="btnCoupon">쿠폰선택</button><p>보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.</p>
 				</div>
 			</div>
+			
 			<div class="OrderReac">
 				<input type="submit" value="주문하기" class="orderNow">
 				<input type="reset" value="주문취소" class="orderReset">
