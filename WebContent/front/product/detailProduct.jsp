@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="../css/base.css" media="all" />
-<link rel="stylesheet" href="../css/main.css" media="all" />
+<link rel="stylesheet" href="/jsp_project/css/base.css" media="all" />
+<link rel="stylesheet" href="/jsp_project/css/main.css" media="all" />
 <script src="../js/jquery-1.12.4.min.js"></script>
 <script src="../js/base.js"></script>
 <title>SJ JEWELRY</title>
@@ -120,9 +120,9 @@ p.cartgo{
 </head>
 <body>
 	<div id="container">
-		<c:import url="../modules/header.jsp" />
-		<c:import url="../modules/leftSide.jsp" />
-		<c:import url="../modules/rightSide.jsp" />
+		<c:import url="../../modules/header.jsp" />
+		<c:import url="../../modules/leftSide.jsp" />
+		<c:import url="../../modules/rightSide.jsp" />
 		<section id="detail_product">
 			<div class="detail_left">
 				<h2 class="catename">JEWELRY... (반지)</h2>
