@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>템플릿 페이지</title>
+<title>관리자 - SJ JEWELRY</title>
 <link rel="stylesheet" href="/jsp_project/css/manager.css" media="all" />
 </head>
 <body>

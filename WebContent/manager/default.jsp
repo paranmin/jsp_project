@@ -9,7 +9,7 @@
 	pageContext.setAttribute("sub_menu", sub_menu);
 %>
 <jsp:forward page="template.jsp">
-	<jsp:param value="member/memberList.jsp" name="contentPage" />
-	<jsp:param value="member" name="menu" />
+	<jsp:param value="default/defaultList.jsp" name="contentPage" />
+	<jsp:param value="default" name="menu" />
 	<jsp:param value="${sub_menu}" name="sub_menu" />
 </jsp:forward>
