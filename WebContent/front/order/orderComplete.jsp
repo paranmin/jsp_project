@@ -124,8 +124,7 @@
 					<br>
 				</p>
 				<div class="order-btns">
-				<p class="btn_dark_box"><a href="#" class="btn_dark_color">주문 확인</a></p> <!-- 메인으로 가기 -->
-				<p class="btn_gray_box"><a href="#" class="btn_gray_color">프린트 하기</a></p>
+				<p class="btn_dark_box"><a href="#" class="btn_dark_color">주문 확인</a></p> <!-- 메인으로 가기 or 마이페이지로 가기 -->
 			</div>
 			</div>
 			

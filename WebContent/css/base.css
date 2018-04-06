@@ -4,14 +4,14 @@
 	margin: 0;
 	padding: 0;
 }
-body{
+
+body {
 	font-family: 'Nanum Myeongjo', serif;
 }
 
 ul {
 	list-style: none;
 }
-
 
 a {
 	text-decoration: none;
@@ -130,7 +130,8 @@ nav .btn_menu {
 	position: absolute;
 	top: 10px;
 	cursor: pointer;
-} 
+}
+
 nav .btn_left_menu {
 	left: 3px;
 }
@@ -266,6 +267,7 @@ section {
 	margin-top: 83px;
 	overflow: hidden;
 }
+
 .footer_in {
 	margin: 0 150px;
 	padding: 90px 20px;
@@ -294,13 +296,11 @@ section {
 	float: left;
 }
 
-
 .footer ul li {
 	display: block;
 	height: 26px;
 	list-style: none;
 }
-
 
 .footerInfo {
 	clear: both;
@@ -310,7 +310,6 @@ section {
 	font-size: 11px;
 	color: #646464;
 }
-
 
 .pageTop {
 	position: fixed;
