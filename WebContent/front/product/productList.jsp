@@ -8,10 +8,10 @@
 <title>SJ JEWELRY</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="../css/base.css" media="all" />
-<link rel="stylesheet" href="../css/main.css" media="all" />
-<script src="../js/jquery-1.12.4.min.js"></script>
-<script src="../js/base.js"></script>
+<link rel="stylesheet" href="/jsp_project/css/base.css" media="all" />
+<link rel="stylesheet" href="/jsp_project/css/main.css" media="all" />
+<script src="/jsp_project/js/jquery-1.12.4.min.js"></script>
+<script src="/jsp_project/js/base.js"></script>
 <style>
 section#product_list {
 	text-align: center;
@@ -106,15 +106,15 @@ a{
 </head>
 <body>
 	<div id="container">
-		<c:import url="../modules/header.jsp" />
-		<c:import url="../modules/leftSide.jsp" />
-		<c:import url="../modules/rightSide.jsp" />
+		<c:import url="../../modules/header.jsp" />
+		<c:import url="../../modules/leftSide.jsp" />
+		<c:import url="../../modules/rightSide.jsp" />
 		<section id="product_list">
 			<p class="list_title">(JEWERLY) BEST</p>
 			<div class="category_best">
 				<a href="#">
 					<div class="item">
-						<img src="../images/J1.jpg">
+						<img src="../../images/J1.jpg">
 						<div class="category_best_white">
 							<p>
 								상품명<br> 가격
@@ -123,19 +123,15 @@ a{
 					</div>
 				</a>
 				<div class="item">
-					<img src="../images/J1.jpg">
+					<img src="../../images/J1.jpg">
 					<div class="category_best_white"></div>
 				</div>
 				<div class="item">
-					<img src="../images/J1.jpg">
+					<img src="../../images/J1.jpg">
 					<div class="category_best_white"></div>
 				</div>
 				<div class="item">
-					<img src="../images/J1.jpg">
-					<div class="category_best_white"></div>
-				</div>
-				<div class="item">
-					<img src="../images/J2.jpg">
+					<img src="../../images/J1.jpg">
 					<div class="category_best_white"></div>
 				</div>
 				<div class="item">
@@ -143,11 +139,15 @@ a{
 					<div class="category_best_white"></div>
 				</div>
 				<div class="item">
-					<img src="../images/J2.jpg">
+					<img src="../../images/J2.jpg">
 					<div class="category_best_white"></div>
 				</div>
 				<div class="item">
-					<img src="../images/J2.jpg">
+					<img src="../../images/J2.jpg">
+					<div class="category_best_white"></div>
+				</div>
+				<div class="item">
+					<img src="../../images/J2.jpg">
 					<div class="category_best_white"></div>
 				</div>
 			</div>
@@ -165,35 +165,35 @@ a{
 			</div>   
 			<div class="category_item">
 				<div class="item">
-					<img src="../images/J1.jpg">
+					<img src="../../images/J1.jpg">
 					<div class="item_white"></div>
 				</div>     
 				<div class="item">
-					<img src="../images/J1.jpg">
+					<img src="../../images/J1.jpg">
 					<div class="item_white"></div>
 				</div>
 				<div class="item">
-					<img src="../images/J1.jpg">
+					<img src="../../images/J1.jpg">
 					<div class="item_white"></div>
 				</div>
 				<div class="item">
-					<img src="../images/J1.jpg">
+					<img src="../../images/J1.jpg">
 					<div class="item_white"></div>
 				</div>
 				<div class="item">
-					<img src="../images/J2.jpg">
+					<img src="../../images/J2.jpg">
 					<div class="category_best_white"></div>
 				</div>
 				<div class="item">
-					<img src="../images/J2.jpg">
+					<img src="../../images/J2.jpg">
 					<div class="category_best_white"></div>
 				</div>
 				<div class="item">
-					<img src="../images/J2.jpg">
+					<img src="../../images/J2.jpg">
 					<div class="category_best_white"></div>
 				</div>
 				<div class="item">
-					<img src="../images/J2.jpg">
+					<img src="../../images/J2.jpg">
 					<div class="category_best_white"></div>
 				</div>
 			</div>
