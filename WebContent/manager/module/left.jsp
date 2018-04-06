@@ -12,8 +12,8 @@
 <c:choose>
 	<c:when test="${menu == 'product'}">
 		<ul>
-			<li><a href="#">상품등록</a></li>
-			<li><a href="#">상품목록</a></li>
+			<li><a href="product.jsp?sub_menu=add">상품등록</a></li>
+			<li><a href="product.jsp?sub_menu=list">상품목록</a></li>
 		</ul>
 	</c:when>
 	<c:when test="${menu == 'order'}">
