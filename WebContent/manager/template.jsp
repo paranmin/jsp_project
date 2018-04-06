@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
-	String contentPage = request.getParameter("contentPage");
-	pageContext.setAttribute("contentPage", contentPage);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +16,7 @@
 			<jsp:include page="module/left.jsp" flush="false" />
 		</aside>
 		<section id="content">
-			<jsp:include page="${contentPage}" flush="false" />
+			<jsp:include page="${param.contentPage}" flush="false" />
 		</section>
 	</div>
 	<footer id="footer">
