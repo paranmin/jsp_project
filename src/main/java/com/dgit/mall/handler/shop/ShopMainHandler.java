@@ -1,16 +1,14 @@
-package com.dgit.mall.handler.front;
+package com.dgit.mall.handler.shop;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dgit.mall.controller.CommandHandler;
-
-public class MainFrontHandler implements CommandHandler {
+public class ShopMainHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		return "/WEB-INF/front/main.jsp";
+		return VIEW_FRONT_PATH + "main.jsp";
 	}
 
 }

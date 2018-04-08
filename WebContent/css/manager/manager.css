@@ -34,6 +34,10 @@ a {
 	line-height: 40px;
 }
 
+#main_gnb ul li.gnb_over {
+	background-color: #C72D2D;
+}
+
 #main_gnb ul li:hover {
 	background-color: #C72D2D;
 }
@@ -70,6 +74,7 @@ a {
 #footer {
 	background-color: #333;
 }
+
 #footer p {
 	height: 200px;
 	line-height: 200px;

@@ -27,11 +27,11 @@
 					<li><a href="#">SALE</a></li>
 				</ul>
 				<ul class="nav user_nav">
-					<li><a href="/jsp_project/front/member/login.jsp">LOGIN</a></li>
-					<li><a href="/jsp_project/front/member/join.jsp">JOIN</a></li>
-					<li><a href="/jsp_project/front/mypage/mypage.jsp">MYPAGE</a></li>
-					<li><a href="#">BOARD</a></li>
-					<li><a href="#"><i class="fa fa-cart-plus"></i>(0)</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/login.do">LOGIN</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/join.do">JOIN</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/mypage/mypage.do">MYPAGE</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/board/board.do">BOARD</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/cart/cart.do"><i class="fa fa-cart-plus"></i>(0)</a></li>
 				</ul>
 			</div>
 			<div class="btn_menu btn_left_menu"><i class="fa fa-bars"></i></div>

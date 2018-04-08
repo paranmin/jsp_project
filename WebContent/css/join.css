@@ -195,12 +195,12 @@
 /* 회원 가입 페이지 */
 
 /* 회원 완료 */
-#joinContent > div {
+#joinContent > div.joinComplate {
 	width: 500px;
 	margin: 30px auto;
 }
 
-#joinContent > div h3 {
+#joinContent > div.joinComplate h3 {
 	border-bottom: 2px solid #333;
 	padding-bottom: 5px;
 	margin-bottom: 20px;

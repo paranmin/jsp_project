@@ -1,4 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<jsp:forward page="shop/main.do"></jsp:forward>
+<jsp:forward page="/manager/base/list.do"></jsp:forward>
