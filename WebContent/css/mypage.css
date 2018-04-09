@@ -187,3 +187,62 @@
 	background-color: #e5e5e5;
 	color: #555;
 }
+
+#mypageContent .board table.modify td {
+	text-align: left;
+	padding-left: 20px;
+}
+
+#mypageContent .board table.modify td input, #mypageContent .board table.modify td select {
+	outline: none;
+	border: 1px solid #eaeaea;
+	vertical-align: middle;
+}
+
+#mypageContent .board table.modify td input {
+	height: 25px;
+	padding-left:  10px;
+	padding-right: 10px;
+}
+
+#mypageContent .board table.modify td select {
+	height: 27px;
+}
+
+#mypageContent .board table.modify td .form_addr {
+	width: 400px;
+}
+
+#mypageContent .board table.modify td .btn {
+	display: inline-block;
+	background-color: #e5e5e5;
+	color: #555;
+	width: 70px;
+	height: 25px;
+	line-height: 25px;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #e0e0e0;
+}
+
+#mypageContent .board p.btn {
+	margin-top: 40px;
+	text-align: center;
+}
+
+#mypageContent .board p.btn a {
+	display: inline-block;
+	width: 150px;
+	height: 40px;
+	line-height: 40px;
+}
+
+#mypageContent .board p.btn a.ok {
+	background-color: #333;
+	color: #fff;
+}
+
+#mypageContent .board p.btn a.cancel {
+	background-color: #e8e8e8;
+	color: #333;
+}

@@ -22,25 +22,29 @@
 			<h2 class="engText">Modify</h2>
 			<div class="board">
 				<form action="myinfo.do" method="post">
-					<table>
+					<table class="modify">
+						<colgroup>
+							<col width="10%" />
+							<col />
+						</colgroup>
 						<tr>
-							<td>이름</td>
+							<td><span class="required">*</span> 이름</td>
 							<td><input type="text" name="name" value="" readonly /></td>
 						</tr>
 						<tr>
-							<td>아이디</td>
+							<td><span class="required">*</span> 아이디</td>
 							<td>adfafafadfa</td>
 						</tr>
 						<tr>
-							<td>비밀번호</td>
+							<td><span class="required">*</span> 비밀번호</td>
 							<td><input type="password" name="password" id="password" /></td>
 						</tr>
 						<tr>
-							<td>비밀번호 확인</td>
+							<td><span class="required">*</span> 비밀번호 확인</td>
 							<td><input type="password" name="checkPwd" id="checkPwd" /></td>
 						</tr>
 						<tr>
-							<td>생일/성별</td>
+							<td><span class="required">*</span> 생일/성별</td>
 							<td>
 								<select name="year">
 									<option value=""></option>
@@ -57,19 +61,19 @@
 							</td>
 						</tr>
 						<tr>
-							<td>우편번호</td>
-							<td><input type="text" name="zipcode" /> <a href="#">우편번호</a></td>
+							<td><span class="required">*</span> 우편번호</td>
+							<td><input type="text" name="zipcode" maxlength="6" size="6" readonly /> <a href="#" class="btn">우편번호</a></td>
 						</tr>
 						<tr>
-							<td>집주소</td>
-							<td><input type="text" name="addr1" /></td>
+							<td><span class="required">*</span> 집주소</td>
+							<td><input type="text" name="addr1" class="form_addr" readonly /></td>
 						</tr>
 						<tr>
-							<td>상세주소</td>
-							<td><input type="text" name="addr2" /></td>
+							<td><span class="required">*</span> 상세주소</td>
+							<td><input type="text" name="addr2" class="form_addr" /></td>
 						</tr>
 						<tr>
-							<td>연락처</td>
+							<td>&nbsp;&nbsp;&nbsp;연락처</td>
 							<td>
 								<select name="tel1">
 									<option value="">선택</option>
@@ -103,13 +107,12 @@
 									<option value="0507">온세텔레콤(0507)</option>
 									<option value="070">인터넷전화 (070)</option>
 									<option value="080">착신 과금 서비스 (080)</option>
-								</select>
-								</select> - <input type="text" name="tel2" /> - 
-								<input type="text" name="tel3" />
+								</select> - <input type="text" name="tel2" maxlength="4" size="4" /> - 
+								<input type="text" name="tel3" maxlength="4" size="4" />
 							</td>
 						</tr>
 						<tr>
-							<td>휴대폰</td>
+							<td><span class="required">*</span> 휴대폰</td>
 							<td>
 								<select name="phone1">
 									<option value="">선택</option>
@@ -143,12 +146,12 @@
 									<option value="0507">온세텔레콤(0507)</option>
 									<option value="070">인터넷전화 (070)</option>
 									<option value="080">착신 과금 서비스 (080)</option>
-								</select> - <input type="text" name="phone2" /> - 
-								<input type="text" name="phone3" />
+								</select> - <input type="text" name="phone2" maxlength="4" size="4" /> - 
+								<input type="text" name="phone3" maxlength="4" size="4" />
 							</td>
 						</tr>
 						<tr>
-							<td>이메일</td>
+							<td><span class="required">*</span> 이메일</td>
 							<td><input type="text" name="email1" /> @ 
 								<select name="email2">
 									<option value="">선택</option>
@@ -169,24 +172,24 @@
 									<option value="hanmir.com">hanmir.com</option>
 									<option value="sayclub.com">sayclub.com</option>
 									<option value="direct">직접입력</option>
-								</select> <a href="#">중복확인</a></td>
+								</select> <a href="#" class="btn">중복확인</a></td>
 						</tr>
 						<tr>
-							<td>뉴스메일</td>
+							<td>&nbsp;&nbsp;&nbsp;뉴스메일</td>
 							<td>
 								<input type="radio" name="newsmail" id="newsok" /> <label for="newsok">받습니다.</label>
 								<input type="radio" name="newsmail" id="nonews" /> <label for="nonews">받지 않습니다.</label>
 							</td>
 						</tr>
 						<tr>
-							<td>SMS안내</td>
+							<td>&nbsp;&nbsp;&nbsp;SMS안내</td>
 							<td>
 								<input type="radio" name="sms" id="smsok" /> <label for="smsok">받습니다.</label>
 								<input type="radio" name="sms" id="nosms" /> <label for="nosms">받지 않습니다.</label>
 							</td>
 						</tr>
 						<tr>
-							<td>앱Push알림</td>
+							<td>&nbsp;&nbsp;&nbsp;앱Push알림</td>
 							<td>
 								<input type="radio" name="push" id="pushok" /> <label for="pushok">받습니다.</label>
 								<input type="radio" name="push" id="nopush" /> <label for="nopush">받지 않습니다.</label>
@@ -195,8 +198,8 @@
 					</table>
 					
 					<p class="btn">
-						<a href="#">정보수정</a>
-						<a href="#">회원탈퇴</a>
+						<a href="#" class="ok">정보수정</a>
+						<a href="#" class="cancel">회원탈퇴</a>
 					</p>
 				</form>
 			</div>
