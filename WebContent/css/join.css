@@ -89,6 +89,8 @@
 	color: #fff;
 	width: 250px;
 	font-weight: bold;
+	outline: none;
+	cursor: pointer;
 }
 
 #joinContent .termsArea {
@@ -140,6 +142,16 @@
 	width: 510px;
 	margin: 30px auto;
 }
+#joinContent .formArea ul li {
+	position: relative;
+}
+#joinContent .formArea ul li > label {
+	position: absolute;
+	left: 30px;
+	font-weight: bold;
+	font-family: 'Nanum Myeongjo', serif;
+	font-size: 1.2em;
+}
 
 #joinContent .formArea ul li.input {
 	border-top: 1px solid #EAEAEA;
@@ -168,8 +180,6 @@
 #joinContent .formArea ul li.chk {
 	margin-top: 15px;
 	font-weight: bold;
-	font-family: 'Nanum Myeongjo', serif;
-	font-size: 1.2em;
 	color: #0549bb;
 }
 
@@ -183,7 +193,7 @@
 	text-align: center;
 }
 
-#joinContent .formArea p input {
+#joinContent .formArea p input[type="submit"] {
 	border: 3px solid #eaeaea;
 	border-radius: 10px;
 	background-color: #333;
@@ -191,6 +201,8 @@
 	width: 200px;
 	height: 60px;
 	font-size: 2em;
+	cursor: pointer;
+	outline: none;
 }
 /* 회원 가입 페이지 */
 
