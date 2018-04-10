@@ -44,9 +44,6 @@ div#orderContent .orderList .orderTable{
 	font-size: 13px;
 }
 
-div#orderContent .orderList .orderTable .thColor{
-	background-color: #EAEAEA; /* tr의 색깔..다시 확인 */
-}
 div#orderContent .orderList .orderTable th{
 	height: 32px;
 	line-height: 32px;
@@ -56,10 +53,10 @@ div#orderContent .orderList .orderTable .pic{
 	width: 212px;
 }
 div#orderContent .orderList .orderTable .proName{
-	width: 775px;
+	width: 777px;
 }
 div#orderContent .orderList .orderTable .count{
-	width: 141px;
+	width: 195px;
 }
 
 tr.proContent td{
@@ -128,6 +125,7 @@ div.custable input{
 	border:1px solid #EAEAEA;
 	height: 30px;
 	width: 120px;
+	text-align: center;
 }
 div.adrtable .grayBox{
 	background-color: #EAEAEA;
@@ -165,11 +163,15 @@ div.adrtable .paddingInput{
 }
 div.adrtable input{
 	border:1px solid #EAEAEA;
+	text-align: center;
 }
 div.adrtable input.sizeInput{
 	width: 50px;
 }
-
+td.paddingInput select{
+	height: 30px;
+	
+}
 td.paddingInput .post1,.post2{
 	width: 50px;
 }
@@ -215,7 +217,6 @@ div.couponUse{
 	margin-top: 40px;
 	font-size: 13px;
 	overflow: hidden;
-	padding-left: 13px;
 }
 div.couponUse p.couponP{
 	font-weight: bold;
@@ -244,8 +245,12 @@ button.btnCoupon{
     border-bottom-width: 1px;
     border-right-width: 1px;
 }
-div.couponinfo p{
+div.couponinfo > p.introCoupon{
 	margin-top: 10px;
+}
+div.couponinfo > p.final{
+	font-size: 15px;
+	font-weight: bold;
 }
 div.orderpayway{
 	

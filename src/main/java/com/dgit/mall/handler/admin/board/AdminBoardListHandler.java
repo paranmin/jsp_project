@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dgit.mall.handler.admin.AdminCommandHandler;
 
+
 public class AdminBoardListHandler extends AdminCommandHandler {
 
 	@Override

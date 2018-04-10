@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,16 +7,94 @@
 <head>
 <meta charset=UTF-8>
 <title>Insert title here</title>
+<style>
+	tr.allProPrice td{
+		
+    border-top: 1px solid #EAEAEA;
+		
+	}
+	div.orderpayway{
+	
+    margin-top:  40px;
+    padding-left:  13px;
+    border-top: 1px solid #EAEAEA;
+    border-bottom: 1px solid #EAEAEA;
+    padding: 10px 10px 13px;
+    font-size:  13px;
+    font-weight:  bold;
+	
+	}
+	p.orderway{
+	 margin-bottom:  20px;
+		
+	}
+	div.orderpayway select{
+	
+    height: 30px;
+    line-height:  30px;
+	
+	}
+	div.couponinfo p{
+	
+    margin-top: 5px;
+    font-size: 11px;
+	
+	}
+	button.btnCoupon{
+	
+    border: none;
+    width: 70px;
+    height: 26px;
+    margin-left: 10px;
+	
+	}
+	div.OrderReac{
+	
+    margin-top:  40px;
+    text-align:  center;
+	
+	}
+	input.orderNow{
+	
+    border: none;
+    width: 200px;
+    height: 40px;
+    background-color:  black;
+    color: white;
+	}
+	
+	input.orderReset{
+	
+    width:  200px;
+    height:  40px;
+    border: none;
+	
+	}
+	p.final{
+    font-size:  15px;
+    font-weight:  bold;
+    text-align:  right;
+	
+	}
+	
+</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="../../css/base.css" media="all" />
 <link rel="stylesheet" href="../../css/orderPage.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+})
+</script>
 </head>
 <body>
 	<div id="container">
-		<c:import url="../../modules/header.jsp" />
-		<c:import url="../../modules/leftSide.jsp" />
-		<c:import url="../../modules/rightSide.jsp" />
+		<c:import url="../modules/header.jsp" />
+		<c:import url="../modules/leftSide.jsp" />
+		<c:import url="../modules/rightSide.jsp" />
 		
 		<section>
 			<div id="orderContent">
@@ -30,7 +109,6 @@
 							<th class="pic">사진</th>
 							<th class="proName">제품명</th>
 							<th class="count">수량</th>
-							<th class="count">적립</th>
 							<th class="count">가격</th>
 						</tr>
 						<tr class="proContent">
@@ -48,15 +126,13 @@
 							<td>
 								<p>1개</p>
 							</td>
-							<td>
-								<p>40원</p>
-							</td>
+							
 							<td>
 								<p>1500원</p>
 							</td>
 						</tr>
 						<tr class="allProPrice">
-							<td colspan="5"><p>총 결제 금액:</p></td>
+							<td colspan="5"><p>결제 금액:</p></td>
 						</tr>	
 					</table>
 				</div>
@@ -148,7 +224,8 @@
 				<p class="couponP">쿠폰사용</p>
 				<div class="couponinfo">
 					<input type="text" name="coupon" class="inputCoupon" readonly="readonly">
-					<button class="btnCoupon">쿠폰선택</button><p>보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.</p>
+					<button class="btnCoupon" onclick="window.open('coupon.jsp', '쿠폰 적용', 'width=450, height=550')">쿠폰선택</button><p class="introCoupon">보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.</p>
+					<p class="final">총 결제금액 : <span class="finalPrice"></span></p>
 				</div>
 			</div>
 			
