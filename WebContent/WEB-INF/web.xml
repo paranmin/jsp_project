@@ -30,19 +30,16 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginCheckFilter</filter-name>
-		<url-pattern>/read.board</url-pattern>
-		<url-pattern>/write.board</url-pattern>
-		<url-pattern>/modify.board</url-pattern>
-		<url-pattern>/delete.board</url-pattern>
+		<url-pattern>/shop/mypage/*</url-pattern>
 	</filter-mapping>
-	<!-- filter>
+	<filter>
 		<filter-name>ReCheckPasswordFilter</filter-name>
 		<filter-class>com.dgit.mall.util.ReCheckPasswordFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>ReCheckPasswordFilter</filter-name>
 		<url-pattern>/shop/mypage/myinfo.do</url-pattern>
-	</filter-mapping -->
+	</filter-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

@@ -31,7 +31,7 @@ public class ShopLoginHandler extends ShopCommandHandler {
 				return null;
 			}
 			
-			session.setAttribute("member", loginMember);
+			session.setAttribute("auth", loginMember);
 			response.sendRedirect(request.getContextPath()+"/shop/main.do");
 		}
 		return null;
