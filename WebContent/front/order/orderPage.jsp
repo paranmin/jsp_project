@@ -224,7 +224,7 @@ $(function(){
 				<p class="couponP">쿠폰사용</p>
 				<div class="couponinfo">
 					<input type="text" name="coupon" class="inputCoupon" readonly="readonly">
-					<button class="btnCoupon" onclick="window.open('coupon.jsp', '쿠폰 적용', 'width=450, height=550')">쿠폰선택</button><p class="introCoupon">보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.</p>
+					<button class="btnCoupon" onclick="window.open('coupon.jsp', '쿠폰 적용', 'width=650, height=550')">쿠폰선택</button><p class="introCoupon">보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.</p>
 					<p class="final">총 결제금액 : <span class="finalPrice"></span></p>
 				</div>
 			</div>
