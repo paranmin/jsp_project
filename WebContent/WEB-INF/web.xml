@@ -35,6 +35,14 @@
 		<url-pattern>/modify.board</url-pattern>
 		<url-pattern>/delete.board</url-pattern>
 	</filter-mapping>
+	<!-- filter>
+		<filter-name>ReCheckPasswordFilter</filter-name>
+		<filter-class>com.dgit.mall.util.ReCheckPasswordFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ReCheckPasswordFilter</filter-name>
+		<url-pattern>/shop/mypage/myinfo.do</url-pattern>
+	</filter-mapping -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

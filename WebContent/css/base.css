@@ -324,3 +324,7 @@ section {
 .engText {
 	font-family: 'IBM Plex Serif', serif;
 }
+
+.required {
+	color: red;
+}

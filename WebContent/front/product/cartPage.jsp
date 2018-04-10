@@ -13,9 +13,9 @@
 </head>
 <body>
 	<div id="container">
-		<c:import url="../../modules/header.jsp" />
-		<c:import url="../../modules/leftSide.jsp" />
-		<c:import url="../../modules/rightSide.jsp" />
+		<c:import url="../modules/header.jsp" />
+		<c:import url="../modules/leftSide.jsp" />
+		<c:import url="../modules/rightSide.jsp" />
 		
 		<section>
 			<div id="cartContent">
@@ -28,7 +28,6 @@
 							<th class="pic">사진</th>
 							<th class="proName">제품명</th>
 							<th class="count">수량</th>
-							<th class="count">적립</th>
 							<th class="count">가격</th>
 							<th class="cancel">취소</th>
 						</tr>
@@ -50,9 +49,6 @@
 								<input type="text" class="cartnum" value="1">
 								<button class="minus">-</button>
 								<button class="numupdate">수정</button>
-							</td>
-							<td>
-								40원
 							</td>
 							<td>
 								1500원
