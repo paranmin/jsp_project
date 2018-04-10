@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dgit.mall.dao.MemberDao">
+	<resultMap type="Member" id="memberResult">
+		<id property="no" column="m_no" />
+		<result property="id" column="m_id" />
+		<result property="name" column="m_name" />
+		<result property="pwd" column="m_pass" />
+		<result property="email" column="m_email" />
+		<result property="phone" column="m_phone" />
+		<result property="regdate" column="m_regdate" />
+	</resultMap>
+
+	<select id="selectByLogin" parameterType="Member" resultMap="memberResult">
+		select * from member where m_id = #{id} and m_pass = password(#{pwd})
+	</select>
 </mapper>

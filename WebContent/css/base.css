@@ -29,7 +29,6 @@ header {
 	position: fixed;
 	top: 0;
 	left: 0;
-	overflow: hidden;
 	z-index: 100;
 }
 
@@ -43,6 +42,10 @@ header div.main_header {
 header div.main_header h1 {
 	font-family: 'Playfair Display', serif;
 	text-align: center;
+}
+
+header div.main_header h1 a {
+	color: #fff;
 }
 
 header div.main_header .btn_search {
@@ -77,7 +80,6 @@ nav div.main_nav {
 }
 
 nav div.main_nav ul.nav {
-	overflow: hidden;
 	width: 350px;
 	font-family: 'Nanum Myeongjo', serif;
 	font-size: 0.8em;
@@ -97,22 +99,26 @@ nav div.main_nav ul.nav>li {
 	line-height: 40px;
 }
 
-nav div.main_nav ul.category_nav>li ul.sub_nav {
+nav div.main_nav ul.nav li ul.sub_nav {
 	position: absolute;
-	background-color: #fff;
+	background-color: #eaeaea;
 	overflow: hidden;
 	padding: 10px;
 	display: none;
 }
 
-nav div.main_nav ul.category_nav>li ul.sub_nav li {
+nav div.main_nav ul.nav li:hover ul.sub_nav {
+	display: block;
+}
+
+nav div.main_nav ul.nav li ul.sub_nav li {
 	height: 20px;
 	line-height: 20px;
 	margin: 10px;
 }
 
-nav div.main_nav ul.category_nav>li ul.sub_nav li a {
-	color: #000;
+nav div.main_nav ul.nav li ul.sub_nav li a {
+	color: #888;
 }
 
 nav div.main_nav ul.category_nav>li {
