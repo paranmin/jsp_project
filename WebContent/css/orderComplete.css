@@ -20,7 +20,6 @@ div.orderComTitle p{
 	font-weight: bold;
 	font-size: 13px;
 	padding-left: 13px;
-	margin-bottom: 10px;
 }
 div.orderComTitle table{
 	width: 1410px;
@@ -90,6 +89,7 @@ div.payway div.payway-order-info{
 }
 div.payway div.payway-order-info #bank{
 	color:#004080;
+	font-weight: bold;
 }
 div.shipping{
 	margin-bottom: 50px;

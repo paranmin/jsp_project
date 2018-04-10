@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header id="header">
 	<div class="main_header">
-		<h1 class="title">SJ JEWELRY</h1>
+		<h1 class="title"><a href="${pageContext.request.contextPath}/shop/main.do">SJ JEWELRY</a></h1>
 		<div class="btn_search"><input type="text" name="main_search" /> <i class="fa fa-search"></i></div>
 		<nav>
 			<div class="main_nav">
@@ -27,10 +27,28 @@
 					<li><a href="#">SALE</a></li>
 				</ul>
 				<ul class="nav user_nav">
-					<li><a href="${pageContext.request.contextPath}/shop/login.do">LOGIN</a></li>
+				<c:choose>
+					<c:when test="${auth != null}">
+						<li><a href="${pageContext.request.contextPath}/shop/logout.do">LOGOUT</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="${pageContext.request.contextPath}/shop/login.do">LOGIN</a></li>
+					</c:otherwise>
+				</c:choose>
 					<li><a href="${pageContext.request.contextPath}/shop/join.do">JOIN</a></li>
-					<li><a href="${pageContext.request.contextPath}/shop/mypage/mypage.do">MYPAGE</a></li>
-					<li><a href="${pageContext.request.contextPath}/shop/board/board.do">BOARD</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/mypage/mypage.do">MYPAGE</a>
+						<ul class="sub_nav">
+							<li><a href="${pageContext.request.contextPath}/shop/mypage/mypage.do">마이페이지 - MY PAGE</a></li>
+							<li><a href="${pageContext.request.contextPath}/shop/mypage/order.do">주문내역 - ORDER</a></li>
+						</ul>
+					</li>
+					<li><a href="${pageContext.request.contextPath}/shop/board/board.do">BOARD</a>
+						<ul class="sub_nav">
+							<li><a href="#">후기 - Review</a></li>
+							<li><a href="#">질문 - Q&A</a></li>
+							<li><a href="#">공지사항 - Notice</a></li>
+						</ul>
+					</li>
 					<li><a href="${pageContext.request.contextPath}/shop/cart/cart.do"><i class="fa fa-cart-plus"></i>(0)</a></li>
 				</ul>
 			</div>

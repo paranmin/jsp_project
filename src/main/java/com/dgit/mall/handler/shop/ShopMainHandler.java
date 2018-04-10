@@ -7,7 +7,6 @@ public class ShopMainHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		return VIEW_FRONT_PATH + "main.jsp";
 	}
 

@@ -21,4 +21,5 @@ $(function(){
 	$("div#right_sub_menu .btn_close_right").on("click", function() {
 		$("#right_sub_menu").hide();
 	});
+
 });

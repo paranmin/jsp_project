@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css" media="all" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" media="all" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/base.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -23,11 +25,11 @@
 				<div class="loginArea">
 					<fieldset>
 						<legend>Member Login</legend>
-						<form action="">
+						<form action="login.do" method="post">
 							<label for="">ID</label>
-							<input type="text" name="loginId" />
+							<input type="text" name="loginId" title="회원 ID" />
 							<label for="">Password</label>
-							<input type="text" name="loginPwd" />
+							<input type="password" name="loginPwd" title="회원 비밀번호" />
 							<input type="submit" value="Login" />
 						</form>
 						<p>
@@ -40,7 +42,7 @@
 					<fieldset>
 						<legend>Member Join</legend>
 						<p>회원가입을 하시면 다양하고 특별한 혜택이 준비되어 있습니다.</p>
-						<a href="join.jsp"><input type="button" value="Register" /></a>
+						<a href="join.do"><input type="button" value="Register" /></a>
 					</fieldset>
 				</div>
 			</div>
@@ -48,5 +50,33 @@
 
 		<c:import url="../modules/footer.jsp" />
 	</div>
+	<c:if test="${error_msg != null && error_msg != ''}">
+		<script type="text/javascript">
+			alert("${error_msg}");
+		</script>
+		<%
+			session.removeAttribute("error_msg");
+		%>
+	</c:if>
+<script>
+$(function() {
+	$("form").on("submit", function() {
+		var ok = false;
+		$(this).find("input[name]").each(function(i, obj) {
+			ok = true;
+			if ($(obj).val().trim() == "") {
+				alert(obj.title + "를 입력해주세요.");
+				obj.focus();
+				ok = false;
+				return false;
+			}
+		});
+		if (ok) {
+			return true;
+		}
+		return true;
+	});
+});
+</script>
 </body>
 </html>

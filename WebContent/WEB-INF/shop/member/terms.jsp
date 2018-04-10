@@ -28,7 +28,7 @@
 						<li><label for="service" class="bold"><input type="checkbox" name="service" id="service" /> 이용약관</label> <a href="#service_terms">내용보기</a></li>
 						<li><label for="privacy" class="bold"><input type="checkbox" name="privacy" id="privacy" /> 개인정보 수집 및 이용 안내</label> <a href="#privacy_terms">내용보기</a></li>
 					</ul>
-					<div class="adArea">
+					<div class="marketingArea">
 						<p>
 							<label for="adall" class="bold"><input type="checkbox" name="adall" id="adall" /> 마케팅 수신동의</label>
 							(<label for="ademail" class="bold"><input type="checkbox" name="ademail" id="ademail" /> 이메일</label>&nbsp;&nbsp;&nbsp;
