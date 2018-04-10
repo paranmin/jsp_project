@@ -46,6 +46,9 @@ CREATE TABLE `mall`.`product` (
   PRIMARY KEY (`prd_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='상품';
 
+alter table product add (use_discount char(1) DEFAULT NULL);
+alter table product add (prd_main_img text NOT NULL);
+
 CREATE TABLE `mall`.`product_option` (
   `po_no` int(11) NOT NULL COMMENT '옵션번호',
   `po_name` varchar(50) NOT NULL COMMENT '옵션명',
@@ -143,4 +146,3 @@ CREATE TABLE `mall`.`order_product` (
   CONSTRAINT `FK_order_TO_order_product` FOREIGN KEY (`ord_no`) REFERENCES `order` (`ord_no`),
   CONSTRAINT `FK_product_TO_order_product` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='주문상품';
-
