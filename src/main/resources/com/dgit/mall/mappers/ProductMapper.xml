@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dgit.mall.dao.ProductDao"></mapper>
+<mapper namespace="com.dgit.mall.dao.ProductDao">
+	<insert id="insertProduct" parameterType="product">
+		insert into 
+		product(prd_category,prd_name, prd_sub_desc, prd_cost, prd_selling_price, prd_discount_per, prd_content, prd_use_option, prd_stock, prd_main_img) 
+		values(#{prd_category}, #{prd_name}, #{prd_sub_desc}, #{prd_cost}, #{prd_selling_price}, #{prd_discount_per},#{prd_content}, #{prd_use_option}, #{prd_stock}, #{prd_main_img})
+	</insert>
+</mapper>
