@@ -1,3 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dgit.mall.dao.OrderDao"></mapper>
+<mapper namespace="com.dgit.mall.dao.OrderDao">
+	<resultMap type="Order" id="orderResult">
+		<id property="ordNo" column="ord_no"/> <!-- 주문번호 -->
+		<result property="ordPrice" column="ord_price"/> <!-- 주문가격 -->
+		<result property="ordCouponPrice" column="ord_coupon_price"/> <!-- 쿠폰사용가격 -->
+		<result property="ordOption" column="ord_use_prd_option"/> <!-- 주문상품 옵션유무 -->
+		<result property="deliveryFee" column="ord_delivery_fee"/> <!-- 배송비 -->
+		<result property="ordMessage" column="order_text"/> <!-- 주문메세지 -->
+		<result property="type" column="ord_pay_type"/><!-- 결제타입 -->
+		<result property="memberNo" column="m_no"/><!-- 회원번호  -->
+	</resultMap>
+	<resultMap type="Member" id="memberResult" extends="orderResult">
+		<result property="no" column="m_no" />
+		<result property="id" column="m_id" />
+		<result property="name" column="m_name" />
+		<result property="pwd" column="m_pass" />
+		<result property="email" column="m_email" />
+		<result property="phone" column="m_phone" />
+		<result property="regdate" column="m_regdate" />
+	</resultMap>
+
+</mapper>
