@@ -32,7 +32,7 @@ p.submit input[type='submit']{
 </style>
 </head>
 <body>
-	<form action="" method="post">
+	<form action="add.do" method="post">
 		<fieldset>
 			<legend>상품 등록</legend>
 			<p>
