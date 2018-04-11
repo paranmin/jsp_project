@@ -32,8 +32,7 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 			int stock = Integer.parseInt(request.getParameter("stock"));
 			String main = request.getParameter("mainimg");
 			String files = request.getParameter("files");
-			String option = request.getParameter("option");
-			
+			String option = request.getParameter("use_option");
 			try{
 				sqlsession = MySqlSessionFactory.openSession();
 				ProductDao dao = sqlsession.getMapper(ProductDao.class);
@@ -48,6 +47,8 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 				pro.setPrd_main_img(main);
 				pro.setPrd_content(files);
 				pro.setPrd_use_option(option);
+				
+				System.out.println(pro.toString());
 				
 				dao.insertProduct(pro);
 				sqlsession.commit();

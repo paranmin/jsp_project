@@ -34,10 +34,11 @@ public class ProductTest {
 			pro.setPrd_selling_price(5000);
 			pro.setPrd_discount_per("0");
 			pro.setPrd_content("목걸이 상세설명");
-			pro.setPrd_use_option("1");
+			pro.setPrd_use_option("0");
 			pro.setPrd_stock(10);
 			pro.setPrd_main_img("목걸이 메인이미지");
 			
+			System.out.println(pro.toString());
 			dao.insertProduct(pro);
 			session.commit(); //insert, update, delete
 		}catch(Exception e){ 
