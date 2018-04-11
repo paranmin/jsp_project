@@ -1,5 +1,9 @@
 package com.dgit.mall.dao;
 
-public interface ProductDao {
+import java.sql.SQLException;
 
+import com.dgit.mall.dto.Product;
+
+public interface ProductDao {
+	public int insertProduct(Product pro) throws SQLException;
 }

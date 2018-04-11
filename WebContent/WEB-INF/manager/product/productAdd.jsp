@@ -32,7 +32,7 @@ p.submit input[type='submit']{
 </style>
 </head>
 <body>
-	<form>
+	<form action="add.do" method="post">
 		<fieldset>
 			<legend>상품 등록</legend>
 			<p>
@@ -53,19 +53,23 @@ p.submit input[type='submit']{
 			</p>
 			<p>
 				<label>상품 이름</label>
-				<input type="text" name="title">
+				<input type="text" name="name">
 				<!-- <p class="error">제목을 입력하세요.</p> -->
 			</p>
 			<p>
-				<label>할인 여부</label>
-				<select name="sale">
-					<option>없음</option>
-					<option>있음</option>
-				</select>
+				<label>상품 부가설명</label>
+				<input type="text" name="sub_desc">
+				<!-- <p class="error">제목을 입력하세요.</p> -->
 			</p>
 			<p>
-				<label>할인 퍼센트</label>
-				<select name="saleper">
+				<label>원가(원)</label>
+				<input type="text" name="cost">
+				<!-- <p class="error">제목을 입력하세요.</p> -->
+			</p>
+			<p>
+				<label>할인</label>
+				<select name="discount">
+					<option>0%</option>
 					<option>7%</option>
 					<option>10%</option>
 					<option>20%</option>
@@ -74,9 +78,13 @@ p.submit input[type='submit']{
 				</select>
 			</p>
 			<p>
-				<label>상품 가격(원)</label>
+				<label>판매가(원)</label>
 				<input type="text" name="price">
 				<!-- <p class="error">제목을 입력하세요.</p> -->
+			</p>
+			<p>
+				<label>재고</label>
+				<input type="text" name="stock">
 			</p>
 			<p>
 				<label>상품 메인 이미지</label>
@@ -88,6 +96,12 @@ p.submit input[type='submit']{
 				<input type="file" name="files" value="이미지 불러오기">
 				<button class="img_plus">추가</button>
 			</p>
+
+			<p>
+				<label>옵션 유무</label>
+				<input type="radio" id="option" name="use_option" value="1">사용 <input type="radio" id="option" name="use_option" value="0">사용안함
+			</p>
+					
 			<p class="submit">
 				<input type="submit" value="등록">
 				<input type="reset" value="취소">

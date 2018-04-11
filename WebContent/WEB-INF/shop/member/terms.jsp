@@ -20,28 +20,30 @@
 		<section id="joinContent">
 			<h2>Create an Account</h2>
 			<div class="agreeArea">
-				<div class="allAgree">
-					<label for="all_agree"><input type="checkbox" name="all_agree" id="all_agree" /> 전체동의</label>
-				</div>
-				<div class="unitAgree">
-					<ul>
-						<li><label for="service" class="bold"><input type="checkbox" name="service" id="service" /> 이용약관</label> <a href="#service_terms">내용보기</a></li>
-						<li><label for="privacy" class="bold"><input type="checkbox" name="privacy" id="privacy" /> 개인정보 수집 및 이용 안내</label> <a href="#privacy_terms">내용보기</a></li>
-					</ul>
-					<div class="marketingArea">
-						<p>
-							<label for="adall" class="bold"><input type="checkbox" name="adall" id="adall" /> 마케팅 수신동의</label>
-							(<label for="ademail" class="bold"><input type="checkbox" name="ademail" id="ademail" /> 이메일</label>&nbsp;&nbsp;&nbsp;
-							<label for="adsms" class="bold"><input type="checkbox" name="adsms" id="adsms" /> SMS</label>&nbsp;&nbsp;&nbsp;
-							<label for="adpush" class="bold"><input type="checkbox" name="adpush" id="adpush" /> 앱Push알림</label>)
-						</p>
-						<p>쇼핑몰에서 제공하는 신상품 소식 / 할인쿠폰을 무상으로 보내드립니다.<br>
-						단, 상품 구매 정보는 수신동의 여부 관계없이 발송됩니다.<br>
-						<span class="bold">제공동의를 하지 않으셔도 서비스 이용에는 문제가 없습니다.</span>
-						</p>
+				<form action="join.do" method="post">
+					<div class="allAgree">
+						<label for="all_agree"><input type="checkbox" name="all_agree" id="all_agree" value="Y" /> 전체동의</label>
 					</div>
-				</div>
-				<p class="btn"><input type="submit" value="동의하고 가입하기" /></p>
+					<div class="unitAgree">
+						<ul>
+							<li><label for="serviceAgree" class="bold"><input type="checkbox" name="serviceAgree" id="serviceAgree" value="Y" /> 이용약관</label> <a href="#service_terms">내용보기</a></li>
+							<li><label for="privacyAgree" class="bold"><input type="checkbox" name="privacyAgree" id="privacyAgree" value="Y" /> 개인정보 수집 및 이용 안내</label> <a href="#privacy_terms">내용보기</a></li>
+						</ul>
+						<div class="marketingArea">
+							<p>
+								<label for="adall" class="bold"><input type="checkbox" name="adall" id="adall" value="Y" /> 마케팅 수신동의</label>
+								(<label for="ademail" class="bold"><input type="checkbox" name="ademail" id="ademail" value="Y" /> 이메일</label>&nbsp;&nbsp;&nbsp;
+								<label for="adsms" class="bold"><input type="checkbox" name="adsms" id="adsms" value="Y" /> SMS</label>&nbsp;&nbsp;&nbsp;
+								<label for="adpush" class="bold"><input type="checkbox" name="adpush" id="adpush" value="Y" /> 앱Push알림</label>)
+							</p>
+							<p>쇼핑몰에서 제공하는 신상품 소식 / 할인쿠폰을 무상으로 보내드립니다.<br>
+							단, 상품 구매 정보는 수신동의 여부 관계없이 발송됩니다.<br>
+							<span class="bold">제공동의를 하지 않으셔도 서비스 이용에는 문제가 없습니다.</span>
+							</p>
+						</div>
+					</div>
+					<p class="btn"><input type="submit" value="동의하고 가입하기" /></p>
+				</form>
 			</div>
 			<div class="termsArea">
 				<h3 id="service_terms">이용약관</h3>

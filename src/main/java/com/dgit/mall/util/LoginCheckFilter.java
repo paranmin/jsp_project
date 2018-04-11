@@ -27,7 +27,7 @@ public class LoginCheckFilter implements Filter {
 
 		if (session == null || session.getAttribute("auth") == null) {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
-			httpResponse.sendRedirect("login.board");
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/shop/login.do");
 		} else {
 			chain.doFilter(httpRequest, response);
 		}
