@@ -6,8 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.ProductDao;
-import com.dgit.mall.dao.service.ProductService;
+import com.dgit.mall.dto.Option;
 import com.dgit.mall.dto.Product;
+import com.dgit.mall.dto.Proimg;
 import com.dgit.mall.handler.admin.AdminCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
 
@@ -32,7 +33,7 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 			int price = Integer.parseInt(request.getParameter("price"));
 			int stock = Integer.parseInt(request.getParameter("stock"));
 			String main = request.getParameter("mainimg");
-			String files = request.getParameter("files");
+			String[] files = request.getParameterValues("files");
 			String option = request.getParameter("use_option");
 			try {
 				sqlsession = MySqlSessionFactory.openSession();
@@ -46,18 +47,41 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 				pro.setSellingPrice(price);
 				pro.setStock(stock);
 				pro.setMainImg(main);
-				pro.setContent(files);
 				pro.setUseOption(option);
-
-				System.out.println(pro.toString());
-
 				dao.insertProduct(pro);
+				
+				int prdno = dao.selectLastInsert();
+				
+				Proimg img = new Proimg();
+				for(int i=0; i<files.length; i++){
+					img.setPrdNo(prdno);
+					System.out.println(prdno);
+					img.setImg(files[i]);
+					dao.insertProImg(img);
+				}
+				
+				if(option.equals("1")){
+					Option opt = new Option();
+					
+					
+					
+					dao.insertOption(opt);
+				}
+				
+				
+				
+				
+				
+				
 				sqlsession.commit();
 				request.setAttribute("contentPage", "product/productList.jsp");
 				request.setAttribute("sub_menu", "list");
 				request.setAttribute("menu", "product");
 				request.setAttribute("css", "product.css");
 				return TEMPLATE_PAGE;
+			}catch (Exception e) {
+				e.printStackTrace();
+				sqlsession.rollback();
 			} finally {
 				sqlsession.close();
 			}

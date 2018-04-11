@@ -6,16 +6,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-fieldset{
-	width:30%;
+fieldset.productAdd{
+	width:60%;
 	margin:50px auto;
+	padding:10px;
 }
-label{
+fieldset.productAdd label{
 	width:150px;
 	float:left;
 }
-input[type='text']{
+fieldset.productAdd input[type='text']{
 	width:400px;
+}
+fieldset.productAdd input#price{
+	width:100px;
+}
+fieldset.productAdd input#cost{
+	width:100px;
 }
 p.submit{
 	text-align:center;
@@ -29,11 +36,146 @@ p.submit input{
 p.submit input[type='submit']{
 	background: wheat;
 }
-</style>
+fieldset.productAdd p{
+	margin:20px;
+}
+fieldset.productAdd button{
+	width:50px;
+	border:none;
+}
+div.img_main_plus{
+	margin-left:170px;
+}
+div.img_plus{
+	margin-left:170px;
+}
+table#proOption th{
+	height: 40px;
+	background: gainsboro;
+}
+table#proOption td{
+	padding:10px;
+}
+table#proOption input{
+	text-align: center;
+}
+table#proOption input.op_name{
+	width:200px;
+}
+table#proOption input.op_cost{
+	width:150px;
+}
+table#proOption tr:first-child td{
+	text-align: left;
+	border:none;
+}
+table#proOption button#op_nameadd{
+	width:100px;  
+	height: 25px;  
+}
+table#proOption{
+	width:100%;
+	text-align: center;
+	display:none;
+}
+table#proOption th#opname{
+	width:20%;
+}
+table#proOption th#opvalue{
+	width:40%;    
+}
+table#proOption th#opprice{
+	width:20%;    
+}
+table#proOption td{
+	border-bottom:1px solid gainsboro;      
+}
+</style>    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+$(function(){
+    $("table#proOption").css("display","none");    
+	$("button.img_main_plus").click(function(){
+		var $input = $("<input type='file' name='mainimg'>");
+		$("div.img_main_plus").append($("<br>"));
+		$("div.img_main_plus").append($input);
+		return false;
+	});
+	$("button.img_plus").click(function(){
+		var $input = $("<input type='file' name='files'>");
+		$("div.img_plus").append($("<br>"));
+		$("div.img_plus").append($input);
+		return false;
+	});
+ 	
+ 	$("input#option").change(function(){
+ 		if($("input#option:checked").val()==1){
+ 			$("table#proOption").css("display","block"); 
+ 		}else{
+ 			$("table#proOption").css("display","none");
+ 		}
+ 	});       
+	
+ 	$("button#op_nameadd").click(function(){
+		var $tr = $("<tr class='parent'>");
+		var td1 = $("<td>");
+		var td1in = $("<input type='text' name='op_name' class='op_name'>");
+		var td2 = $("<td>");
+		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
+		var td3 = $("<td>");
+		var td3in = $("<input type='text' name='op_cost' class='op_cost'>");
+		var td4 = $("<td>");
+		var td4in = $("<button id='op_add'>");
+		$(td4in).text("+추가");
+		$(td1).append(td1in);
+		$(td2).append(td2in);
+		$(td3).append(td3in);
+		$(td4).append(td4in);
+		$($tr).append(td1);
+		$($tr).append(td2);
+		$($tr).append(td3);
+		$($tr).append(td4);
+		$("table#proOption").append($tr);     
+		return false;
+	});
+ 	
+ 	$(document).on("click","button#op_add", function(){
+ 		var $tr = $("<tr>");
+		var td2 = $("<td>");
+		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
+		var td3 = $("<td>");
+		var td3in = $("<input type='text' name='op_cost' class='op_cost'>");
+		var td4 = $("<td>");
+		var td4in = $("<button type='button' class='op_del'>");
+		$(td4in).text("-삭제");
+		$(td2).append(td2in);
+		$(td3).append(td3in);
+		$(td4).append(td4in);
+		$($tr).append(td2);
+		$($tr).append(td3);
+		$($tr).append(td4);
+		$($tr).insertAfter($(this).parent().parent());
+ 		var rowspan = $(this).parent().siblings().eq(0).prop("rowspan");
+ 		$(this).parent().siblings().eq(0).prop("rowspan",++rowspan);          
+ 		return false;        
+ 	});
+ 	$(document).on("click","button.op_del", function(){
+ 		var removeTarget = $(this).parents("tr"); 		
+ 		var rowTdObj = removeTarget.prevAll(".parent").eq(0).find("td").eq(0);
+ 		
+		var rowspan = rowTdObj.attr("rowspan");
+		if(rowspan > 1){
+			rowTdObj.attr("rowspan",--rowspan);
+		}
+ 		removeTarget.remove();
+ 		return false;
+ 	});
+});
+</script>
 </head>
 <body>
 	<form action="add.do" method="post">
-		<fieldset>
+		<fieldset class="productAdd">
 			<legend>상품 등록</legend>
 			<p>
 				<label>상품 카테고리</label>
@@ -62,9 +204,8 @@ p.submit input[type='submit']{
 				<!-- <p class="error">제목을 입력하세요.</p> -->
 			</p>
 			<p>
-				<label>원가(원)</label>
-				<input type="text" name="cost">
-				<!-- <p class="error">제목을 입력하세요.</p> -->
+				<label>원가</label>
+				<input type="text" name="cost" id="cost">원
 			</p>
 			<p>
 				<label>할인</label>
@@ -78,9 +219,8 @@ p.submit input[type='submit']{
 				</select>
 			</p>
 			<p>
-				<label>판매가(원)</label>
-				<input type="text" name="price">
-				<!-- <p class="error">제목을 입력하세요.</p> -->
+				<label>판매가</label>
+				<input type="text" name="price" id="price">원
 			</p>
 			<p>
 				<label>재고</label>
@@ -88,20 +228,49 @@ p.submit input[type='submit']{
 			</p>
 			<p>
 				<label>상품 메인 이미지</label>
-				<input type="file" name="mainimg" value="이미지 불러오기">
-				<button class="img_plus">추가</button>
+				<div class="img_main_plus">
+					<input type="file" name="mainimg" value="이미지 불러오기">
+					<!-- <button class="img_main_plus">추가</button> -->
+				</div>
 			</p>
 			<p>
-				<label>상품 이미지</label>
+				<label>상품 상세 이미지</label>
+				<div class="img_plus">
 				<input type="file" name="files" value="이미지 불러오기">
 				<button class="img_plus">추가</button>
+				</div>
 			</p>
 
 			<p>
 				<label>옵션 유무</label>
-				<input type="radio" id="option" name="use_option" value="1">사용 <input type="radio" id="option" name="use_option" value="0">사용안함
+				<input type="radio" id="option" name="use_option" value="1">사용 
+				<input type="radio" id="option" name="use_option" value="0" checked="checked">사용안함
 			</p>
-					
+			<table id="proOption">
+				<tr>
+					<td><button id="op_nameadd">+옵션명추가</button></td>
+				</tr>
+				<tr>
+					<th id="opname">옵션명</th>
+					<th id="opvalue">옵션값</th>
+					<th id="opprice">옵션가</th>
+					<th id="empty"></th>
+				</tr>
+				<tr class="parent" id="first">
+					<td rowspan="1">
+						<input type="text" name="op_name" class="op_name">
+					</td>
+					<td>
+						<input type="text" name="op_desc" class="op_desc">
+					</td>
+					<td>
+						<input type="text" name="op_cost" class="op_cost">
+					</td>
+					<td>
+						<button id="op_add">+추가</button>    
+					</td>
+				</tr>
+			</table>		
 			<p class="submit">
 				<input type="submit" value="등록">
 				<input type="reset" value="취소">
