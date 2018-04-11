@@ -172,8 +172,8 @@ td.paddingInput select{
 	height: 30px;
 	
 }
-td.paddingInput .post1,.post2{
-	width: 50px;
+td.paddingInput .post1{
+	width: 100px;
 }
 td.paddingInput textarea{
 	margin-top:8px;
