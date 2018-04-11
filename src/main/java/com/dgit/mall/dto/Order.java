@@ -1,5 +1,7 @@
 package com.dgit.mall.dto;
 
+import com.dgit.mall.dto.type.PayType;
+
 public class Order {
 	private String ordNo;
 	private int ordPrice;
