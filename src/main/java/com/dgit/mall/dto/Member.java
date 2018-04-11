@@ -11,12 +11,10 @@ public class Member {
 	private String phone;
 	private char serviceAgree;
 	private char privacyAgree;
-	private char ademail;
-	private char adsms;
-	private char adpush;
-	private String zipcode;
-	private String addr1;
-	private String addr2;
+	private char pushEmail;
+	private char pushSMS;
+	private char pushApp;
+	private Address addr;
 	private Date regdate;
 
 	public Member() {
@@ -34,6 +32,23 @@ public class Member {
 		this.pwd = pwd;
 		this.email = email;
 		this.phone = phone;
+		this.regdate = regdate;
+	}
+
+	public Member(int no, String id, String name, String pwd, String email, String phone, char serviceAgree,
+			char privacyAgree, char pushEmail, char pushSMS, char pushApp, Address addr, Date regdate) {
+		this.no = no;
+		this.id = id;
+		this.name = name;
+		this.pwd = pwd;
+		this.email = email;
+		this.phone = phone;
+		this.serviceAgree = serviceAgree;
+		this.privacyAgree = privacyAgree;
+		this.pushEmail = pushEmail;
+		this.pushSMS = pushSMS;
+		this.pushApp = pushApp;
+		this.addr = addr;
 		this.regdate = regdate;
 	}
 
@@ -85,6 +100,54 @@ public class Member {
 		this.phone = phone;
 	}
 
+	public char getServiceAgree() {
+		return serviceAgree;
+	}
+
+	public void setServiceAgree(char serviceAgree) {
+		this.serviceAgree = serviceAgree;
+	}
+
+	public char getPrivacyAgree() {
+		return privacyAgree;
+	}
+
+	public void setPrivacyAgree(char privacyAgree) {
+		this.privacyAgree = privacyAgree;
+	}
+
+	public char getPushEmail() {
+		return pushEmail;
+	}
+
+	public void setPushEmail(char pushEmail) {
+		this.pushEmail = pushEmail;
+	}
+
+	public char getPushSMS() {
+		return pushSMS;
+	}
+
+	public void setPushSMS(char pushSMS) {
+		this.pushSMS = pushSMS;
+	}
+
+	public char getPushApp() {
+		return pushApp;
+	}
+
+	public void setPushApp(char pushApp) {
+		this.pushApp = pushApp;
+	}
+
+	public Address getAddr() {
+		return addr;
+	}
+
+	public void setAddr(Address addr) {
+		this.addr = addr;
+	}
+
 	public Date getRegdate() {
 		return regdate;
 	}
@@ -95,8 +158,10 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return String.format("Member [no=%s, id=%s, name=%s, pwd=%s, email=%s, phone=%s, regdate=%s]", no, id, name,
-				pwd, email, phone, regdate);
+		return String.format(
+				"Member [no=%s, id=%s, name=%s, pwd=%s, email=%s, phone=%s, serviceAgree=%s, privacyAgree=%s, pushEmail=%s, pushSMS=%s, pushApp=%s, addr=%s, regdate=%s]",
+				no, id, name, pwd, email, phone, serviceAgree, privacyAgree, pushEmail, pushSMS, pushApp, addr,
+				regdate);
 	}
 
 }

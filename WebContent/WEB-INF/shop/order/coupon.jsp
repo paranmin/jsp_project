@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,6 +85,29 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".couponSub").click(function(){
+			var result = confirm("쿠폰을 적용하시겠습니까?");
+			if(result){
+				window.close();
+			}
+		})
+		
+		var price1 = parseInt($(".oriPrice").text());
+		console.log(price1);
+		
+		$(".itemNo").click(function(){
+			var value = $(this).parent().next().next().next().text();
+			console.log(value);
+			$(".couponPrice").text(value);
+			var price2 =parseInt($("couponPrice").text());
+			console.log(price2);
+			$(".finallyPrice").text(price1-price2);
+		})
+	})
+</script>
 </head>
 <body>
 	<form action="coupon.do" method="post">
@@ -100,7 +124,7 @@
 				<th>할인금액</th>
 				<th>사용기간</th>
 			</tr>
-			<c:if test="${list.size()==0 }">
+				<c:if test="${list.size()==0 }">
 				<tr>
 					<td colspan="5">적용 가능한 쿠폰이 없습니다.</td>
 				</tr>
@@ -108,23 +132,23 @@
 			<c:if test="${list.size()>0 }">
 				<c:forEach var="items" items="${list }">
 					<tr>
-						<td>${items.cNo }</td>
+						<td><a class="itemNo">${items.cNo }</a></td>
 						<td>${items.cName }</td>
 						<td>${items.cuseMorePrice }</td>
-						<td>${items.csalePrice }</td>
-						<td>${items.climitDate }</td>
+						<td class="findValue">${items.csalePrice }</td>
+						<td><fmt:formatDate value="${items.climitDate }" pattern="yyyy-MM-dd"/></td>
 					</tr>
 				</c:forEach>
 			</c:if>
 			
 			<tr>
-				<td colspan="5" class="lastPrice">상품 총 가격<span class="oriPrice"></span>원
-				 - 쿠폰 적용 금액 <span class="couponPrice">${list.csalePrice }</span>원 = <span class="redfinallyPrice">총 상품 결제 예정금액 : <span class="finallyPrice"></span>원</span>
+				<td colspan="5" class="lastPrice">상품 총 가격<span class="oriPrice">${price }</span>원
+				 - 쿠폰 적용 금액 <span class="couponPrice"></span>원 = <span class="redfinallyPrice">총 상품 결제 예정금액 : <span class="finallyPrice"></span>원</span>
 				</td>
 			</tr>
 		</table>
 		<div class="CouponBtns">
-			<input type="submit" value="확인"><input type="reset" value="취소">
+			<input type="submit" value="확인" class="couponSub"><input type="reset" value="취소" class="couponCan">
 		</div>
 	</section>
 	</form>

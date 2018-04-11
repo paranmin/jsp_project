@@ -6,6 +6,15 @@
 <head>
 <meta charset=UTF-8>
 <title>Insert title here</title>
+<style>
+	tfoot td{
+	
+    border-top: 1Px solid #EAEAEA;
+    border-bottom:  1px solid #EAEAEA;
+    padding: 20px;
+	
+	}
+</style>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="../../css/base.css" media="all" />
@@ -32,7 +41,7 @@
 						</tr>
 						<tbody>
 						<tr>
-							<td>
+							<td rowspan="2">
 								<div class="tb-centerImg">
 									
 								</div>
@@ -42,25 +51,25 @@
 									<p><a href="#">베이직 스틸 큐빅 귀걸이</a></p>
 								</div>
 							</td>
-							<td>
+							<td rowspan="2">
 								<div class="tb-textalign">
 								<p>1개</p>
 								</div>
 							</td>
-							<td>
+							<td rowspan="2">
 								<div class="tb-textalign">
 								<p>5,000원</p>
 								</div>
 							</td>
-							<td>
+							<td rowspan="2">
 								<div class="tb-textalign">
 								<p>50</p>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td>&nbsp;</td>
-							<td colspan="4">
+							
+							<td>
 								<div class="tb-centerContentDetail">
 									<p>색상어쩌구 저쩌구</p>
 								</div>

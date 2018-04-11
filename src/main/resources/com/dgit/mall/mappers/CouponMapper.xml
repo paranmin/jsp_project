@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mall.dao.CouponDao">
+	<resultMap type="Coupon" id="couponResult">
+		<id property="cNo" column="c_no"/> <!-- 쿠폰번호 -->
+		<result property="cName" column="c_name"/> <!-- 쿠폰이름 -->
+		<result property="cuseMorePrice" column="c_use_more_price"/> <!-- 쿠폰사용한도 -->
+		<result property="csalePrice" column="c_sale_price"/> <!-- 쿠폰할인금액 -->
+		<result property="climitDate" column="c_limit_date"/> <!-- 쿠폰사용기한 -->
+	</resultMap>
+	
+	<select id="selectByAll" resultMap="couponResult">
+		select*from coupon order by c_no desc
+	</select>
+	<select id="selectByNo" resultMap="couponResult">
+		select*from coupon where cNo=#{c_no}
+	</select>
+
+</mapper>
