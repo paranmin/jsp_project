@@ -2,16 +2,16 @@ package com.dgit.mall.dto;
 
 import java.util.Date;
 
-public class Cuopon {
-	private String cNo;
+public class Coupon {
+	private int cNo;
 	private String cName;
 	private int cuseMorePrice;
 	private int csalePrice;
 	private Date climitDate;
-	public String getcNo() {
+	public int getcNo() {
 		return cNo;
 	}
-	public void setcNo(String cNo) {
+	public void setcNo(int cNo) {
 		this.cNo = cNo;
 	}
 	public String getcName() {
@@ -38,7 +38,7 @@ public class Cuopon {
 	public void setClimitDate(Date climitDate) {
 		this.climitDate = climitDate;
 	}
-	public Cuopon(String cNo, String cName, int cuseMorePrice, int csalePrice, Date climitDate) {
+	public Coupon(int cNo, String cName, int cuseMorePrice, int csalePrice, Date climitDate) {
 		super();
 		this.cNo = cNo;
 		this.cName = cName;
@@ -46,14 +46,13 @@ public class Cuopon {
 		this.csalePrice = csalePrice;
 		this.climitDate = climitDate;
 	}
-	public Cuopon() {
+	public Coupon() {
 	}
 	@Override
 	public String toString() {
-		return "Cuopon [cNo=" + cNo + ", cName=" + cName + ", cuseMorePrice=" + cuseMorePrice + ", csalePrice="
+		return "Coupon [cNo=" + cNo + ", cName=" + cName + ", cuseMorePrice=" + cuseMorePrice + ", csalePrice="
 				+ csalePrice + ", climitDate=" + climitDate + "]";
 	}
-	
 	
 	
 }
