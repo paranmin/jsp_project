@@ -9,6 +9,14 @@ public class Member {
 	private String pwd;
 	private String email;
 	private String phone;
+	private char serviceAgree;
+	private char privacyAgree;
+	private char ademail;
+	private char adsms;
+	private char adpush;
+	private String zipcode;
+	private String addr1;
+	private String addr2;
 	private Date regdate;
 
 	public Member() {

@@ -27,16 +27,16 @@ public class ProductTest {
 			session = MySqlSessionFactory.openSession();
 			ProductDao dao = session.getMapper(ProductDao.class); 
 			Product pro = new Product();
-			pro.setPrd_category("목걸이");
-			pro.setPrd_name("목걸이");
-			pro.setPrd_sub_desc("목걸이 부가설명");
-			pro.setPrd_cost(1000);
-			pro.setPrd_selling_price(5000);
-			pro.setPrd_discount_per("0");
-			pro.setPrd_content("목걸이 상세설명");
-			pro.setPrd_use_option("0");
-			pro.setPrd_stock(10);
-			pro.setPrd_main_img("목걸이 메인이미지");
+			pro.setCategory("목걸이");
+			pro.setName("목걸이");
+			pro.setSubDesc("목걸이 부가설명");
+			pro.setCost(1000);
+			pro.setSellingPrice(5000);
+			pro.setDiscountPer("0");
+			pro.setContent("목걸이 상세설명");
+			pro.setSubDesc("0");
+			pro.setStock(10);
+			pro.setMainImg("목걸이 메인이미지");
 			
 			System.out.println(pro.toString());
 			dao.insertProduct(pro);

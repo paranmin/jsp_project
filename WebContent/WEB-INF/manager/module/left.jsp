@@ -5,8 +5,8 @@
 <c:choose>
 	<c:when test="${menu == 'product'}">
 		<ul>
-			<li><a href="list.do">상품등록</a></li>
-			<li><a href="#">상품목록</a></li>
+			<li><a href="add.do">상품등록</a></li>
+			<li><a href="list.do">상품목록</a></li>
 		</ul>
 	</c:when>
 	<c:when test="${menu == 'order'}">
