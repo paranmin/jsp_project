@@ -28,4 +28,28 @@ public class MemberService {
 		}
 		return null;
 	}
+	
+	public int registerMember(Member member) {
+		int res = 0;
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			MemberDao dao = sqlSession.getMapper(MemberDao.class);
+
+			res =  dao.registerMember(member);
+			sqlSession.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public Member selectByFindMember(Member member) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			MemberDao dao = sqlSession.getMapper(MemberDao.class);
+
+			return dao.selectByFindMember(member);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

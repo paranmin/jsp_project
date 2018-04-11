@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css" media="all" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css" media="all" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/base.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -20,7 +22,7 @@
 		<section id="joinContent">
 			<h2>Create an Account</h2>
 			<div class="agreeArea">
-				<form action="join.do" method="post">
+				<form action="terms.do" method="post">
 					<div class="allAgree">
 						<label for="all_agree"><input type="checkbox" name="all_agree" id="all_agree" value="Y" /> 전체동의</label>
 					</div>
@@ -76,5 +78,26 @@
 
 		<c:import url="../modules/footer.jsp" />
 	</div>
+<script>
+$(function() {
+	$("form").on("submit", function() {
+		if (!$("#serviceAgree").is(":checked")) {
+			alert("이용약관을 읽고 동의해주셔야 합니다.");
+			return false;
+		}
+		if (!$("#privacyAgree").is(":checked")) {
+			alert("개인정보 수집 및 이용에 동의하셔야 됩니다.");
+			return false;
+		}
+
+		return true;
+	});
+});
+</script>
+<c:if test="${error_msg != null && error_msg != ''}">
+	<script>
+		alert("${error_msg}");
+	</script>
+</c:if>
 </body>
 </html>

@@ -58,7 +58,7 @@
 
 		<c:import url="../modules/footer.jsp" />
 	</div>
-	<script>
+<script>
 $(function() {
 	$("form input.required_form").on("focus", function() {
 		var value = $(this).val().trim(),
@@ -100,5 +100,10 @@ $(function() {
 	});
 });
 </script>
+<c:if test="${error_msg != null && error_msg != ''}">
+	<script>
+		alert("${error_msg}");
+	</script>
+</c:if>
 </body>
 </html>

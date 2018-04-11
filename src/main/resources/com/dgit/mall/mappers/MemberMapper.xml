@@ -9,9 +9,46 @@
 		<result property="email" column="m_email" />
 		<result property="phone" column="m_phone" />
 		<result property="regdate" column="m_regdate" />
+		<result property="serviceAgree" column="m_service_terms" />
+		<result property="privacyAgree" column="m_privacy_terms" />
+		<result property="pushEmail" column="m_push_email" />
+		<result property="pushSMS" column="m_push_sms" />
+		<result property="pushApp" column="m_push_app" />
 	</resultMap>
 
-	<select id="selectByLogin" parameterType="Member" resultMap="memberResult">
-		select * from member where m_id = #{id} and m_pass = password(#{pwd})
+	<resultMap type="Address" id="memberWithAddrResult">
+		<result property="zipcode" column="mb_zipcode" />
+		<result property="addr1" column="mb_addr1" />
+		<result property="addr2" column="mb_addr2" />
+	</resultMap>
+
+	<select id="selectByLogin" parameterType="Member"
+		resultMap="memberResult">
+		select m_no, m_id, m_name, m_email, m_phone from member
+		where m_id = #{id} and m_pass =
+		password(#{pwd})
 	</select>
+	
+	<select id="selectByFindMember" parameterType="Member" resultMap="memberResult">
+		select * from member
+		<where>
+			m_name = #{name}
+			<if test="email != null and email != ''">
+				and m_email = #{email}
+			</if>
+			<if test="phone != null and phone != ''">
+				and m_phone = #{phone}
+			</if>
+		</where>
+	</select>
+
+	<insert id="registerMember" parameterType="Member">
+		insert into
+		member(m_id, m_name, m_pass, m_email, m_phone, m_regdate,
+		m_service_terms, m_privacy_terms, m_push_email, m_push_sms,
+		m_push_app)
+		values (#{id}, #{name}, password(#{pwd}), #{email}, #{phone},
+		#{regdate}, #{serviceAgree}, #{privacyAgree}, #{pushEmail},
+		#{pushSMS}, #{pushApp})
+	</insert>
 </mapper>

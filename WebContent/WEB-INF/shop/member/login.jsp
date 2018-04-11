@@ -33,7 +33,7 @@
 							<input type="submit" value="Login" />
 						</form>
 						<p>
-							<a href="findMember.jsp">Find Id / Find Password</a>
+							<a href="findmember.do">Find Id / Find Password</a>
 						</p>
 					</fieldset>
 
