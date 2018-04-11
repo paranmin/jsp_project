@@ -76,7 +76,16 @@
     text-align:  right;
 	
 	}
-	
+	div.orderTable table{
+		width: 100%;
+	}
+	th.count{
+	width: 195px;
+	}
+	span.toalpriceorder{
+		font-weight: bold;
+		font-size: 15px;
+	}
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
@@ -127,6 +136,40 @@
 	    }
 
 </script>
+<script type="text/javascript">
+$(function(){
+	$(".checksameus").click(function(){
+		var flag = $(".checksameus:checked").val();
+		
+		if($(this).val()==flag){
+			var name = $(".username").val();
+			var middleNum = $(".middleNum").val();
+			var lastNum = $(".lastNum").val();
+			
+			$("#orderusername").val(name);
+			$("#phoneNum1").val(middleNum);
+			$("#phoneNum2").val(lastNum);
+		}else{
+			$("#orderusername").val("");
+			$("#phoneNum1").val("");
+			$("#phoneNum2").val("");
+		}
+		
+	});
+	
+	var value1 = parseInt($(".orderChargePrice").text());
+	var value2 =  parseInt($(".delfee").text());
+	
+	var price = $(".toalpriceorder").text(value1+value2);
+	
+	$(".btnCoupon").click(function(){
+		var price = $(".toalpriceorder").text();
+		 window.open('coupon.do?price='+price, '쿠폰 적용', 'width=650, height=550');
+		 return false;
+	})
+	
+})
+</script>
 </head>
 <body>
 	<div id="container">
@@ -135,8 +178,9 @@
 		<c:import url="../modules/rightSide.jsp" />
 		
 		<section>
+		<form action="order.do" method="post">
 			<div id="orderContent">
-			<h2>ORDER</h2> <p class="rightback"><a href="#">go back ← </a></p> <!-- 장바구니로 돌아가기 -->
+			<h2>ORDER</h2> <p class="rightback"><a href="/jsp_project/shop/cart/cart.do">go back ← </a></p> <!-- 장바구니로 돌아가기 -->
 			<div class="orderList">
 				<div class="orderTitle">
 					<p>주문 상품 <span>주문정보를 작성하신 후 주문하기를 눌러주세요</span></p>
@@ -170,7 +214,10 @@
 							</td>
 						</tr>
 						<tr class="allProPrice">
-							<td colspan="5"><p>결제 금액:</p></td>
+							<td colspan="5"><p>결제 금액 : <span class="orderChargePrice">25000</span>원+배송료 <span class="delfee">2500</span>원
+								= <span class="toalpriceorder" name="toalpriceorder"></span>원
+							</p>
+							</td>
 						</tr>	
 					</table>
 				</div>
@@ -181,14 +228,14 @@
 					<table>
 						<tr>
 							<td class="grayBox">이름</td>
-							<td class="paddingInput"><input type="text" name="name" readonly="readonly"></td>
+							<td class="paddingInput"><input type="text" name="name" readonly="readonly" value="이소정" class="username"></td>
 							<td class="grayBox">연락처</td>
 							<td class="paddingInput">
 								<input type="text" name="gongIlgong" readonly="readonly" value="010">
 								-
-								<input type="tel" name="middleNum">
+								<input type="tel" name="middleNum" class="middleNum" value="2222">
 								-
-								<input type="tel" name="lastNum">
+								<input type="tel" name="lastNum" class="lastNum" value="2222">
 							</td>
 						</tr>
 						<tr>
@@ -204,12 +251,12 @@
 					</table>
 				</div>
 			<div class="addressInfo">
-				<p class="adrInfo">배송지 정보</p><input type="checkbox" name="checksamecus">주문자 정보 입력
+				<p class="adrInfo">배송지 정보</p><input type="checkbox" name="checksamecus" class="checksameus">주문자 정보 입력
 				<div class="adrtable">
 					<table>
 						<tr>
 							<td class="grayBox">이름</td>
-							<td class="paddingInput"><input type="text" name="name" readonly="readonly" class="inputheight"></td>
+							<td class="paddingInput"><input type="text" name="name" readonly="readonly" class="inputheight" id="orderusername"></td>
 							<td class="grayBox">연락처1</td>
 							<td class="paddingInput">
 								<input type="text" name="gongIlgong" readonly="readonly" value="010" class="sizeInput" >
@@ -222,18 +269,18 @@
 							<td class="paddingInput">
 								<input type="text" name="gongIlgong" readonly="readonly" value="010" class="sizeInput">
 								-
-								<input type="tel" name="middleNum" class="sizeInput">
+								<input type="tel" name="middleNum" class="sizeInput" id="phoneNum1">
 								-
-								<input type="tel" name="lastNum" class="sizeInput">
+								<input type="tel" name="lastNum" class="sizeInput" id="phoneNum2">
 							</td>
 						</tr>
 						<tr>
 							<td class="grayBox">주소</td>
 							<td colspan="5" class="paddingInput">
 								<p><input type="radio" name="seladdress" value="homeadr" class="radiosize"> 자택
-								<input type="radio" name="seladdress" value="recentadr" class="radiosize"> 최근 배송지 <button class="adrlist">배송지 목록</button>
+								<input type="radio" name="seladdress" value="recentadr" class="radiosize"> 최근 배송지 <button class="adrlist" onclick="window.open('shipping.do', '배송지 목록', 'width=500, height=400');return false">배송지 목록</button>
 								<input type="radio" name="seladdress" value="newadr" class="radiosize"> 신규 배송지</p>
-								<p><input type="text" name="post1" class="post1"> <button class="postlist" onclick="sample4_execDaumPostcode()">우편번호</button></p>
+								<p><input type="text" name="post1" class="post1"> <button class="postlist" onclick="sample4_execDaumPostcode() ; return false">우편번호</button></p>
 								<p><input type="text" name="basicadr" class="inputheight" id="inputheight2"> [기본주소]</p>
 								<p><input type="text" name="detail" class="inputheight"  id="inputheight1"> [나머지주소]</p>
 							</td>
@@ -261,8 +308,8 @@
 			<div class="couponUse">
 				<p class="couponP">쿠폰사용</p>
 				<div class="couponinfo">
-					<input type="text" name="coupon" class="inputCoupon" readonly="readonly">
-					<button class="btnCoupon" onclick="window.open('coupon.do', '쿠폰 적용', 'width=650, height=550')">쿠폰선택</button><p class="introCoupon">보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.</p>
+					<input type="text" name="coupon" class="inputCoupon" readonly="readonly" value="${cNo }">
+					<button class="btnCoupon">쿠폰선택</button><p class="introCoupon">보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.</p>
 					<p class="final">총 결제금액 : <span class="finalPrice"></span></p>
 				</div>
 			</div>
@@ -274,7 +321,7 @@
 		</div>
 			
 		</div>
-		
+		</form>
 	</section>	
 	</div>
 	

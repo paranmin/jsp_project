@@ -1,6 +1,7 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,16 +100,26 @@
 				<th>할인금액</th>
 				<th>사용기간</th>
 			</tr>
-			<tr>
-				<td>10192224</td>
-				<td>회원가입 2500원 쿠폰</td>
-				<td>10,000원 이상</td>
-				<td>2,500원</td>
-				<td>2018.05.10까지</td>
-			</tr>
+			<c:if test="${list.size()==0 }">
+				<tr>
+					<td colspan="5">적용 가능한 쿠폰이 없습니다.</td>
+				</tr>
+			</c:if>
+			<c:if test="${list.size()>0 }">
+				<c:forEach var="items" items="${list }">
+					<tr>
+						<td>${items.cNo }</td>
+						<td>${items.cName }</td>
+						<td>${items.cuseMorePrice }</td>
+						<td>${items.csalePrice }</td>
+						<td>${items.climitDate }</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			
 			<tr>
 				<td colspan="5" class="lastPrice">상품 총 가격<span class="oriPrice"></span>원
-				 - 쿠폰 적용 금액 <span class="couponPrice"></span>원 = <span class="redfinallyPrice">총 상품 결제 예정금액 : <span class="finallyPrice"></span>원</span>
+				 - 쿠폰 적용 금액 <span class="couponPrice">${list.csalePrice }</span>원 = <span class="redfinallyPrice">총 상품 결제 예정금액 : <span class="finallyPrice"></span>원</span>
 				</td>
 			</tr>
 		</table>

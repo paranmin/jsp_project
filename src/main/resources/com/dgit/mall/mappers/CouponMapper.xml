@@ -9,8 +9,11 @@
 		<result property="climitDate" column="c_limit_date"/> <!-- 쿠폰사용기한 -->
 	</resultMap>
 	
-	<select id="selectByAll">
-		selct*from coupon order by c_no desc
+	<select id="selectByAll" resultMap="couponResult">
+		select*from coupon order by c_no desc
+	</select>
+	<select id="selectByNo" resultMap="couponResult">
+		select*from coupon where cNo=#{c_no}
 	</select>
 
 </mapper>
