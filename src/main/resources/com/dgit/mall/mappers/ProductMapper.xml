@@ -17,7 +17,16 @@
 	
 	<insert id="insertProduct" parameterType="product">
 		insert into 
-		product(prd_no, prd_category, prd_name, prd_sub_desc, prd_cost, prd_selling_price, prd_discount_per, prd_content, prd_use_option, prd_stock, prd_main_img) 
-		values(#{prdNo}, #{category}, #{name}, #{subDesc}, #{cost}, #{sellingPrice}, #{discountPer},#{content}, #{useOption}, #{stock}, #{mainImg})
+		product(prd_category, prd_name, prd_sub_desc, prd_cost, prd_selling_price, prd_discount_per, prd_use_option, prd_stock, prd_main_img) 
+		values(#{category}, #{name}, #{subDesc}, #{cost}, #{sellingPrice}, #{discountPer}, #{useOption}, #{stock}, #{mainImg})
 	</insert>
+	<insert id="insertProImg" parameterType="proimg">
+		insert into
+		proimg(img, prd_no)
+		values(#{img}, #{prdNo});
+	</insert>
+	<select id="selectLastInsert" resultType="int">
+		SELECT LAST_INSERT_ID() from product GROUP BY LAST_INSERT_ID()
+	</select>
+	
 </mapper>
