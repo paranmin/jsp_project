@@ -21,8 +21,16 @@
 
 		<section id="loginContent">
 			<h2>Find ID/PW</h2>
-			<div class="findArea">
-				${result_msg}
+			<div class="findPopArea">
+				<div>찾으시는 비밀번호는 가입시 등록하신 이메일로 보내드립니다.</div>
+				<div class="msgArea">
+				<p>
+					찾으시는 회원의 아이디는 [<span class="bold">ㅁㅁㅁ</span>]입니다.
+				</p>
+				<p>
+					<a href="#" class="btn">확인</a>
+				</p>
+				</div>
 			</div>
 		</section>
 
