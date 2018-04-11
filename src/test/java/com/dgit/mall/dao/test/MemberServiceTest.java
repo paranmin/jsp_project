@@ -1,24 +1,27 @@
 package com.dgit.mall.dao.test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Member;
 
-class MemberServiceTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class MemberServiceTest {
 	private static MemberService service;
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 		service = MemberService.getInstance();
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
 		service = null;
 	}
 

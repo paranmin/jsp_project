@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dgit.mall.dao.ProductDao">
+	<resultMap type="Product" id="productResult">
+		<id property="prdNo" column="prd_no" />
+		<result property="category" column="prd_category" />
+		<result property="name" column="prd_name" />
+		<result property="subDesc" column="prd_sub_desc" />
+		<result property="cost" column="prd_cost" />
+		<result property="sellingPrice" column="prd_selling_price" />
+		<result property="discountPer" column="prd_discount_per" />
+		<result property="content" column="prd_content" />
+		<result property="useOption" column="prd_use_option" />
+		<result property="stock" column="stock" />
+		<result property="mainImg" column="mainImg" />
+	</resultMap>
+	
 	<insert id="insertProduct" parameterType="product">
 		insert into 
-		product(prd_category,prd_name, prd_sub_desc, prd_cost, prd_selling_price, prd_discount_per, prd_content, prd_use_option, prd_stock, prd_main_img) 
-		values(#{prd_category}, #{prd_name}, #{prd_sub_desc}, #{prd_cost}, #{prd_selling_price}, #{prd_discount_per},#{prd_content}, #{prd_use_option}, #{prd_stock}, #{prd_main_img})
+		product(prd_no, prd_category, prd_name, prd_sub_desc, prd_cost, prd_selling_price, prd_discount_per, prd_content, prd_use_option, prd_stock, prd_main_img) 
+		values(#{prdNo}, #{category}, #{name}, #{subDesc}, #{cost}, #{sellingPrice}, #{discountPer},#{content}, #{useOption}, #{stock}, #{mainImg})
 	</insert>
 </mapper>
