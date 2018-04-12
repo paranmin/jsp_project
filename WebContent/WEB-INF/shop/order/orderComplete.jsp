@@ -22,11 +22,12 @@
 </head>
 <body>
 	<div id="container">
-		<c:import url="../../modules/header.jsp" />
-		<c:import url="../../modules/leftSide.jsp" />
-		<c:import url="../../modules/rightSide.jsp" />
+		<c:import url="../modules/header.jsp" />
+		<c:import url="../modules/leftSide.jsp" />
+		<c:import url="../modules/rightSide.jsp" />
 		
 		<section>
+		<form action="orderComplete.do" method="post">
 			<div class="orderCom">
 				<h2>ORDER</h2>
 				<div class="orderComTitle">
@@ -37,7 +38,6 @@
 							<th id="purchaseName">구입상품명</th>
 							<th class="purchaseSub">수량</th>
 							<th class="purchaseSub">가격</th>
-							<th class="purchaseSub">적립</th>
 						</tr>
 						<tbody>
 						<tr>
@@ -59,11 +59,6 @@
 							<td rowspan="2">
 								<div class="tb-textalign">
 								<p>5,000원</p>
-								</div>
-							</td>
-							<td rowspan="2">
-								<div class="tb-textalign">
-								<p>50</p>
 								</div>
 							</td>
 						</tr>
@@ -124,8 +119,6 @@
 					<br>
 					귀하의 주문확인 번호는 <span class="spanStyle">20180404171157</span>입니다.
 					<br>
-					귀하의 제품 구입에 따른 적립금 <span class="spanStyle">40</span>원은 배송과 함께 바로 적립이 됩니다.
-					<br>
 					입금방법이 무통장 입금의 경우 계좌번호를 메모하세요.
 					<br>
 					입금 확인 후 상품을 준비하여 배송해 드리겠습니다.
@@ -136,7 +129,7 @@
 				<p class="btn_dark_box"><a href="#" class="btn_dark_color">주문 확인</a></p> <!-- 메인으로 가기 or 마이페이지로 가기 -->
 			</div>
 			</div>
-			
+			</form>
 		</section>
 	</div>
 </body>
