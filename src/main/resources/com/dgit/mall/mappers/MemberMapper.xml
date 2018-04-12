@@ -8,6 +8,9 @@
 		<result property="pwd" column="m_pass" />
 		<result property="email" column="m_email" />
 		<result property="phone" column="m_phone" />
+		<result property="tel" column="m_tel" />
+		<result property="gender" column="m_gender" />
+		<result property="birth" column="m_birth" />
 		<result property="regdate" column="m_regdate" />
 		<result property="serviceAgree" column="m_service_terms" />
 		<result property="privacyAgree" column="m_privacy_terms" />
@@ -16,20 +19,15 @@
 		<result property="pushApp" column="m_push_app" />
 	</resultMap>
 
-	<resultMap type="Address" id="memberWithAddrResult">
-		<result property="zipcode" column="mb_zipcode" />
-		<result property="addr1" column="mb_addr1" />
-		<result property="addr2" column="mb_addr2" />
-	</resultMap>
-
 	<select id="selectByLogin" parameterType="Member"
 		resultMap="memberResult">
 		select m_no, m_id, m_name, m_email, m_phone from member
 		where m_id = #{id} and m_pass =
 		password(#{pwd})
 	</select>
-	
-	<select id="selectByFindMember" parameterType="Member" resultMap="memberResult">
+
+	<select id="selectByFindMember" parameterType="Member"
+		resultMap="memberResult">
 		select * from member
 		<where>
 			m_name = #{name}
@@ -42,13 +40,23 @@
 		</where>
 	</select>
 
+	<select id="selectByMemberNo" resultMap="memberResult">
+		select m_no, m_id, m_name, m_pass, m_email, m_phone, m_tel, m_gender, m_birth, m_regdate,
+		m_service_terms, m_privacy_terms, m_push_email, m_push_sms, m_push_app 
+		from member where m_no = #{no}
+	</select>
+
 	<insert id="registerMember" parameterType="Member">
 		insert into
 		member(m_id, m_name, m_pass, m_email, m_phone, m_regdate,
 		m_service_terms, m_privacy_terms, m_push_email, m_push_sms,
 		m_push_app)
-		values (#{id}, #{name}, password(#{pwd}), #{email}, #{phone},
-		#{regdate}, #{serviceAgree}, #{privacyAgree}, #{pushEmail},
-		#{pushSMS}, #{pushApp})
+		values (#{id}, #{name}, password(#{pwd}), #{email}, #{phone}, #{regdate}, 
+		#{serviceAgree}, #{privacyAgree}, #{pushEmail}, #{pushSMS}, #{pushApp})
 	</insert>
+
+	<update id="updatePassword" parameterType="Member">
+		update member set
+		m_pass = password(#{pwd}) where m_no = #{no}
+	</update>
 </mapper>

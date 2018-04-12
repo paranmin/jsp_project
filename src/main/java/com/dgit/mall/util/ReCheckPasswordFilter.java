@@ -24,11 +24,12 @@ public class ReCheckPasswordFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) sRequest;
 		HttpSession session = httpRequest.getSession(false);
 
-		if (session == null || session.getAttribute("reCheckPwd") == null) {
+		String reCheckPwd = (String) session.getAttribute("reCheckPwd");
+		if (reCheckPwd == null || !reCheckPwd.equalsIgnoreCase("success")) {
 			HttpServletResponse httpResponse = (HttpServletResponse) sResponse;
-			httpResponse.sendRedirect("myinfo.do");
+			httpResponse.sendRedirect("checkpw.do");
 		} else {
-			chain.doFilter(httpRequest, sResponse);
+			chain.doFilter(sRequest, sResponse);
 		}
 	}
 

@@ -105,9 +105,16 @@ CREATE TABLE `mall`.`board_attachment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='게시판 첨부파일';
 
 CREATE TABLE `mall`.`cart` (
-  `m_no` int(11) DEFAULT NULL COMMENT '회원번호',
+  `ct_no` int(11) NOT NULL COMMENT '장바구니번호',
+  `ct_prd_quantity` int(11) NOT NULL COMMENT '상품수량',
+  `ct_prd_op_name` varchar(100) DEFAULT NULL COMMENT '상품옵션명',
+  `m_no` int(11) NOT NULL COMMENT '회원번호',
+  `prd_no` int(11) NOT NULL COMMENT '상품번호',
+  PRIMARY KEY (`ct_no`),
   KEY `FK_member_TO_cart` (`m_no`),
-  CONSTRAINT `FK_member_TO_cart` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`)
+  KEY `FK_product_TO_cart` (`prd_no`),
+  CONSTRAINT `FK_member_TO_cart` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`),
+  CONSTRAINT `FK_product_TO_cart` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='장바구니';
 
 CREATE TABLE `mall`.`coupon` (
@@ -131,7 +138,7 @@ CREATE TABLE `mall`.`user_coupon` (
   CONSTRAINT `FK_member_TO_user_coupon` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원 쿠폰';
 
-CREATE TABLE `order` (
+CREATE TABLE `mall`.`order` (
   `ord_no` varchar(20) NOT NULL COMMENT '주문번호',
   `ord_price` int(11) NOT NULL COMMENT '주문가격',
   `ord_coupon_price` int(11) NOT NULL COMMENT '쿠폰사용가격',

@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css" media="all" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/base.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -28,10 +30,10 @@
 			</ul>
 			<div class="infoArea">
 				<div class="memberInfo">
-					<p>아무개[ㅁㄴㄹㅇㅁㄻ]님 <a href="#">수정</a></p>
-					<p>전&nbsp;&nbsp;&nbsp;화 : 010-1122-3344</p>
-					<p>이메일 : aaa@gggg.com</p>
-					<p>주&nbsp;&nbsp;&nbsp;소 : 대구시 남구 어쩌구 저쩌구로</p>
+					<p>${loginMember.name}[${loginMember.id}]님 <a href="#">수정</a></p>
+					<p>전&nbsp;&nbsp;&nbsp;화 : ${loginMember.phone}</p>
+					<p>이메일 : ${loginMember.email }</p>
+					<p>주&nbsp;&nbsp;&nbsp;소 : ${loginMember.addr}</p>
 				</div>
 				<div class="orderInfo">
 					총 주문금액 : 10,010 원

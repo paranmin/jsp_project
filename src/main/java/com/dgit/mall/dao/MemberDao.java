@@ -6,6 +6,12 @@ import com.dgit.mall.dto.Member;
 
 public interface MemberDao {
 	Member selectByLogin(Member member) throws SQLException;
-	int registerMember(Member member) throws SQLException;
+
 	Member selectByFindMember(Member member) throws SQLException;
+	
+	Member selectByMemberNo(int no) throws SQLException;
+
+	int registerMember(Member member) throws SQLException;
+	
+	int updatePassword(Member member) throws SQLException;
 }

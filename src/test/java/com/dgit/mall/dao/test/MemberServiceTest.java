@@ -38,7 +38,7 @@ public class MemberServiceTest {
 		assertNotNull(member);
 		System.out.println(member);
 	}
-	
+	/*
 	@Test
 	public void test2RegisterMember() {
 		Member member = new Member();
@@ -56,6 +56,6 @@ public class MemberServiceTest {
 		
 		int res = service.registerMember(member);
 		assertEquals(1, res);
-	}
+	}*/
 
 }

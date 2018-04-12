@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mall.dao.AddressDao">
+	<resultMap type="Address" id="addressResult">
+		<id property="addrNo" column="ma_no" />
+		<result property="memNo" column="m_no" />
+		<result property="zipcode" column="ma_zipcode" />
+		<result property="addr1" column="ma_addr1" />
+		<result property="addr2" column="ma_addr2" />
+		<result property="addrType" column="ma_addr_type" />
+		<result property="regdate" column="ma_regdate" />
+	</resultMap>
+	
+	<select id="selectByMemberNo" parameterType="Member" resultMap="addressResult">
+		select ma_no, m_no, ma_zipcode, ma_addr1, ma_addr2, ma_addr_type, ma_regdate
+		from member_address
+		where m_no = #{no}
+	</select>
+	
+	<select id="selectHomeByMemberNo" parameterType="Member" resultMap="addressResult">
+		select ma_no, m_no, ma_zipcode, ma_addr1, ma_addr2, ma_addr_type, ma_regdate
+		from member_address
+		where m_no = #{no} and ma_addr_type = 'HOME'
+	</select>
+</mapper>
