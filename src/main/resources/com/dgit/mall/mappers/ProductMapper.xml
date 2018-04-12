@@ -45,4 +45,10 @@
 	<select id="selectCateProduct" resultMap="productResult">
 		select * from product where prd_category=#{category};
 	</select>
+	<select id="selectNameProduct" resultMap="productResult">
+		select * from product where prd_name like %#{name}%;
+	</select>
+	<select id="selectNCProduct" resultMap="productResult">
+		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%")
+	</select>
 </mapper>

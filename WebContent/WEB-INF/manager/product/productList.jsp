@@ -43,7 +43,7 @@ table td:nth-child(6){
 table th{
 	background: gainsboro;
 }
-button#selectBtn{
+button.selectBtn{
 	border: none;
 	width: 50px;
     height: 20px;
@@ -53,34 +53,29 @@ a{
 	text-decoration: none;
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script>
-$(function(){
-	$("button#selectBtn").click(function(){
-		$.post("list.do", $("#form").serialize());
-	});
-});
-</script>
 </head>
 <body>
 	<h1>상품 리스트 보기</h1>
 	<form action="list.do" method="post" id="cate">
 		상품 카테고리
 		<select name="cate">
-			<option>All</option>
-			<option>귀걸이</option>
-			<option>이어커프</option>
-			<option>목걸이</option>
-			<option>팔찌</option>
-			<option>발찌</option>
-			<option>반지</option>
-			<option>발가락지/토링</option>
-			<option>헤어 CSS</option>
-			<option>시계</option>
-			<option>폰 ACC</option>
-			<option>기타</option>
+			<option value="All">All</option>
+			<option value="귀걸이">귀걸이</option>
+			<option value="이어커프">이어커프</option>
+			<option value="목걸이">목걸이</option>
+			<option value="팔찌">팔찌</option>
+			<option value="발찌">발찌</option>
+			<option value="반지">반지</option>
+			<option value="발가락지/토링">발가락지/토링</option>
+			<option value="헤어 ACC">헤어 ACC</option>
+			<option value="시계">시계</option>
+			<option value="폰 ACC">폰 ACC</option>
+			<option value="기타">기타</option>
 		</select>
-		<button id="selectBtn">검색</button>
+		<button class="selectBtn">검색</button>
+		상품명
+		<input type="text" name="selectName">
+		<button class="selectBtn">검색</button>
 	</form>
 	<table>
 		<tr>	

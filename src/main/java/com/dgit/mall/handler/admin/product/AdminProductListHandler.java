@@ -14,6 +14,7 @@ import com.dgit.mall.util.MySqlSessionFactory;
 
 public class AdminProductListHandler extends AdminCommandHandler {
 
+	@SuppressWarnings("unused")
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		SqlSession sqlsession = null;
@@ -30,18 +31,29 @@ public class AdminProductListHandler extends AdminCommandHandler {
 			return TEMPLATE_PAGE;
 		}else if(request.getMethod().equalsIgnoreCase("post")){
 			String cate = request.getParameter("cate");
+			String name = request.getParameter("selectName");
+			System.out.println(cate);
+			System.out.println(name);
 			try{
 				sqlsession=MySqlSessionFactory.openSession();
 				ProductDao dao = sqlsession.getMapper(ProductDao.class);
-				List<Product> listPro;
+				List<Product> listPro = null;
+				Product pro = new Product();
 				
-				if(cate.equals("All")){
+				if(cate.equals("All")&&name==null){
 					listPro = dao.selectAllProduct();
-				}else{
-					Product pro = new Product();
+				}else if(!(cate.equals("All"))&&name==null){
 					pro.setCategory(cate);
 					listPro = dao.selectCateProduct(pro);
+				}else if((cate==null)&&(name!=null)){
+					pro.setName(name);
+					listPro = dao.selectNameProduct(pro);
+				}else if(!(cate.equals("All"))&&name!=null){
+					pro.setCategory(cate);
+					pro.setName(name);
+					listPro = dao.selectNCProduct(pro);
 				}
+				
 				request.setAttribute("list", listPro);
 			}finally{
 				sqlsession.close();
