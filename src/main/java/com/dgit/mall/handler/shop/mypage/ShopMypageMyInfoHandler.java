@@ -21,6 +21,7 @@ public class ShopMypageMyInfoHandler extends ShopCommandHandler {
 			Member modifyMember = MemberService.getInstance().selectByMemberNo(auth.getNo());
 			Address memberAddr = AddressService.getInstance().selectHomeByMemberNo(modifyMember);
 			modifyMember.setAddr(memberAddr);
+
 			request.setAttribute("modifyMember", modifyMember);
 			return VIEW_FRONT_PATH + "mypage/myInfo.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
