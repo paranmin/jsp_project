@@ -14,7 +14,7 @@ div#cartContent h2{
 	display: block;
 	font-family: 'IBM Plex Serif', serif;
 }
-div#cartContent p{
+div#cartContent p.goback{
 	text-align: right;
 }
 div#cartContent p a{

@@ -86,6 +86,10 @@
 		font-weight: bold;
 		font-size: 15px;
 	}
+	span.finalPrice{
+	    font-size:  18px;
+	    color: red;
+	}
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
@@ -169,6 +173,13 @@ $(function(){
 	})
 	
 })
+	function getReturnValue(returnValue) {
+	 	var p = $.parseJSON(returnValue);
+	 	console.log(p.key1);
+	 	$(".inputCoupon").val(p.key1);
+	 	$(".finalPrice").text(p.key2);
+	 	
+	}
 </script>
 </head>
 <body>
@@ -176,153 +187,180 @@ $(function(){
 		<c:import url="../modules/header.jsp" />
 		<c:import url="../modules/leftSide.jsp" />
 		<c:import url="../modules/rightSide.jsp" />
-		
+
 		<section>
-		<form action="order.do" method="post">
-			<div id="orderContent">
-			<h2>ORDER</h2> <p class="rightback"><a href="/jsp_project/shop/cart/cart.do">go back ← </a></p> <!-- 장바구니로 돌아가기 -->
-			<div class="orderList">
-				<div class="orderTitle">
-					<p>주문 상품 <span>주문정보를 작성하신 후 주문하기를 눌러주세요</span></p>
-				</div>
-				<div class="orderTable">
-					<table>
-						<tr class="thColor">
-							<th class="pic">사진</th>
-							<th class="proName">제품명</th>
-							<th class="count">수량</th>
-							<th class="count">가격</th>
-						</tr>
-						<tr class="proContent">
-							<td><img src="../../images/J1.jpg" class="proImg"></td>
-							<td class="proNameTable">
+			<form action="order.do" method="post">
+				<div id="orderContent">
+					<h2>ORDER</h2>
+					<p class="rightback">
+						<a href="/jsp_project/shop/cart/cart.do">go back ← </a>
+					</p>
+					<!-- 장바구니로 돌아가기 -->
+					<div class="orderList">
+						<div class="orderTitle">
+							<p>
+								주문 상품 <span>주문정보를 작성하신 후 주문하기를 눌러주세요</span>
+							</p>
+						</div>
+						<div class="orderTable">
+							<table>
+								<tr class="thColor">
+									<th class="pic">사진</th>
+									<th class="proName">제품명</th>
+									<th class="count">수량</th>
+									<th class="count">가격</th>
+								</tr>
+								<tr class="proContent">
+									<td><img src="../../images/J1.jpg" class="proImg" name="proImg"></td>
+									<td class="proNameTable">
+										<table>
+											<tr>
+												<td><p name="productname">베이직 실리콘 귀걸이</p></td>
+											</tr>
+											<tr>
+												<td class="proNamehr"><p>옵션:[EX---]</p></td>
+											</tr>
+										</table>
+									</td>
+									<td>
+										<p>1개</p>
+									</td>
+
+									<td>
+										<p>1500원</p>
+									</td>
+								</tr>
+								<tr class="allProPrice">
+									<td colspan="5"><p>
+											결제 금액 : <span class="orderChargePrice">25000</span>원+배송료 <span
+												class="delfee">2500</span>원 = <span class="toalpriceorder"
+												name="toalpriceorder"></span>원
+										</p></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="orderInfo">
+						<p class="customerInfo">주문자 정보</p>
+						<div class="custable">
+							<table>
+								<tr>
+									<td class="grayBox">이름</td>
+									<td class="paddingInput"><input type="text" name="name"
+										readonly="readonly" value="이소정" class="username"></td>
+									<td class="grayBox">연락처</td>
+									<td class="paddingInput"><input type="text"
+										name="gongIlgong" readonly="readonly" value="010"> - <input
+										type="tel" name="middleNum" class="middleNum" value="2222">
+										- <input type="tel" name="lastNum" class="lastNum"
+										value="2222"></td>
+								</tr>
+								<tr>
+									<td class="grayBox">E-mail</td>
+									<td colspan="3" class="paddingInput"><input type="email"
+										name="email"> @ <select>
+											<option>naver.com</option>
+											<option>gmail.com</option>
+											<option>hanmail.com</option>
+									</select></td>
+								</tr>
+							</table>
+						</div>
+						<div class="addressInfo">
+							<p class="adrInfo">배송지 정보</p>
+							<input type="checkbox" name="checksamecus" class="checksameus">주문자
+							정보 입력
+							<div class="adrtable">
 								<table>
 									<tr>
-										<td><p>베이직 실리콘 귀걸이</p></td>
+										<td class="grayBox">이름</td>
+										<td class="paddingInput"><input type="text" name="name"
+											readonly="readonly" class="inputheight" id="orderusername"></td>
+										<td class="grayBox">연락처1</td>
+										<td class="paddingInput"><input type="text"
+											name="gongIlgong" readonly="readonly" value="010"
+											class="sizeInput"> - <input type="tel"
+											name="middleNum" class="sizeInput"> - <input
+											type="tel" name="lastNum" class="sizeInput"></td>
+										<td class="grayBox">연락처2</td>
+										<td class="paddingInput"><input type="text"
+											name="gongIlgong" readonly="readonly" value="010"
+											class="sizeInput"> - <input type="tel"
+											name="middleNum" class="sizeInput" id="phoneNum1"> -
+											<input type="tel" name="lastNum" class="sizeInput"
+											id="phoneNum2"></td>
 									</tr>
 									<tr>
-										<td class="proNamehr"><p>옵션:[EX---]</p></td>
+										<td class="grayBox">주소</td>
+										<td colspan="5" class="paddingInput">
+											<p>
+												<input type="radio" name="seladdress" value="homeadr"
+													class="radiosize"> 자택 <input type="radio"
+													name="seladdress" value="recentadr" class="radiosize">
+												최근 배송지
+												<button class="adrlist"
+													onclick="window.open('shipping.do', '배송지 목록', 'width=500, height=400');return false">배송지
+													목록</button>
+												<input type="radio" name="seladdress" value="newadr"
+													class="radiosize"> 신규 배송지
+											</p>
+											<p>
+												<input type="text" name="post1" class="post1">
+												<button class="postlist"
+													onclick="sample4_execDaumPostcode() ; return false">우편번호</button>
+											</p>
+											<p>
+												<input type="text" name="basicadr" class="inputheight"
+													id="inputheight2"> [기본주소]
+											</p>
+											<p>
+												<input type="text" name="detail" class="inputheight"
+													id="inputheight1"> [나머지주소]
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td class="grayBox">주문메세지(100자 내외)</td>
+										<td colspan="5" class="paddingInput"><textarea rows="4"
+												cols="100"></textarea>
+											<p class="sizeContent">0/70 bytes (* 영문/숫자 기준 70자, 한글 기준
+												35자까지 입력 가능합니다.)</p></td>
 									</tr>
 								</table>
-							</td>
-							<td>
-								<p>1개</p>
-							</td>
-							
-							<td>
-								<p>1500원</p>
-							</td>
-						</tr>
-						<tr class="allProPrice">
-							<td colspan="5"><p>결제 금액 : <span class="orderChargePrice">25000</span>원+배송료 <span class="delfee">2500</span>원
-								= <span class="toalpriceorder" name="toalpriceorder"></span>원
-							</p>
-							</td>
-						</tr>	
-					</table>
-				</div>
-			</div>
-			<div class="orderInfo">
-				<p class="customerInfo">주문자 정보</p>
-				<div class="custable">
-					<table>
-						<tr>
-							<td class="grayBox">이름</td>
-							<td class="paddingInput"><input type="text" name="name" readonly="readonly" value="이소정" class="username"></td>
-							<td class="grayBox">연락처</td>
-							<td class="paddingInput">
-								<input type="text" name="gongIlgong" readonly="readonly" value="010">
-								-
-								<input type="tel" name="middleNum" class="middleNum" value="2222">
-								-
-								<input type="tel" name="lastNum" class="lastNum" value="2222">
-							</td>
-						</tr>
-						<tr>
-							<td class="grayBox">E-mail</td>
-							<td colspan="3" class="paddingInput"><input type="email" name="email"> @ 
-								<select>
-									<option>naver.com</option>
-									<option>gmail.com</option>
-									<option>hanmail.com</option>
+							</div>
+						</div>
+						<div class="orderpayway">
+							<p class="orderway">결제방법</p>
+							<div class="orderchoice">
+								<select name="selorderway">
+									<option value="신용카드">신용카드</option>
+									<option value="계좌이체">계좌이체</option>
+									<option value="무통장입금">무통장입금</option>
 								</select>
-							</td>
-						</tr>	
-					</table>
+							</div>
+						</div>
+						<div class="couponUse">
+							<p class="couponP">쿠폰사용</p>
+							<div class="couponinfo">
+								<input type="text" name="coupon" class="inputCoupon"
+									readonly="readonly">
+								<button class="btnCoupon">쿠폰선택</button>
+								<p class="introCoupon">보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수
+									있습니다.</p>
+								<p class="final">
+									총 결제금액 : <span class="finalPrice"></span>원
+								</p>
+							</div>
+						</div>
+
+						<div class="OrderReac">
+							<input type="submit" value="주문하기" class="orderNow"><input
+								type="reset" value="주문취소" class="orderReset">
+						</div>
+					</div>
 				</div>
-			<div class="addressInfo">
-				<p class="adrInfo">배송지 정보</p><input type="checkbox" name="checksamecus" class="checksameus">주문자 정보 입력
-				<div class="adrtable">
-					<table>
-						<tr>
-							<td class="grayBox">이름</td>
-							<td class="paddingInput"><input type="text" name="name" readonly="readonly" class="inputheight" id="orderusername"></td>
-							<td class="grayBox">연락처1</td>
-							<td class="paddingInput">
-								<input type="text" name="gongIlgong" readonly="readonly" value="010" class="sizeInput" >
-								-
-								<input type="tel" name="middleNum" class="sizeInput">
-								-
-								<input type="tel" name="lastNum" class="sizeInput">
-							</td>
-							<td class="grayBox">연락처2</td>
-							<td class="paddingInput">
-								<input type="text" name="gongIlgong" readonly="readonly" value="010" class="sizeInput">
-								-
-								<input type="tel" name="middleNum" class="sizeInput" id="phoneNum1">
-								-
-								<input type="tel" name="lastNum" class="sizeInput" id="phoneNum2">
-							</td>
-						</tr>
-						<tr>
-							<td class="grayBox">주소</td>
-							<td colspan="5" class="paddingInput">
-								<p><input type="radio" name="seladdress" value="homeadr" class="radiosize"> 자택
-								<input type="radio" name="seladdress" value="recentadr" class="radiosize"> 최근 배송지 <button class="adrlist" onclick="window.open('shipping.do', '배송지 목록', 'width=500, height=400');return false">배송지 목록</button>
-								<input type="radio" name="seladdress" value="newadr" class="radiosize"> 신규 배송지</p>
-								<p><input type="text" name="post1" class="post1"> <button class="postlist" onclick="sample4_execDaumPostcode() ; return false">우편번호</button></p>
-								<p><input type="text" name="basicadr" class="inputheight" id="inputheight2"> [기본주소]</p>
-								<p><input type="text" name="detail" class="inputheight"  id="inputheight1"> [나머지주소]</p>
-							</td>
-						</tr>
-						<tr>
-							<td class="grayBox">주문메세지(100자 내외)</td>
-							<td colspan="5" class="paddingInput">
-								<textarea rows="4" cols="100"></textarea>
-								<p class="sizeContent">0/70 bytes (* 영문/숫자 기준 70자, 한글 기준 35자까지 입력 가능합니다.)</p>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			<div class="orderpayway">
-				<p class="orderway">결제방법</p>
-				<div class="orderchoice">
-					<select name="selorderway">
-						<option value="신용카드">신용카드</option>
-						<option value="계좌이체">계좌이체</option>
-						<option value="무통장입금">무통장입금</option>
-					</select>
-				</div>
-			</div>
-			<div class="couponUse">
-				<p class="couponP">쿠폰사용</p>
-				<div class="couponinfo">
-					<input type="text" name="coupon" class="inputCoupon" readonly="readonly" value="${cNo }">
-					<button class="btnCoupon">쿠폰선택</button><p class="introCoupon">보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.</p>
-					<p class="final">총 결제금액 : <span class="finalPrice"></span></p>
-				</div>
-			</div>
-			
-			<div class="OrderReac">
-				<input type="submit" value="주문하기" class="orderNow">
-				<input type="reset" value="주문취소" class="orderReset">
-			</div>
-		</div>
-			
-		</div>
-		</form>
-	</section>	
+			</form>
+		</section>
 	</div>
 	
 

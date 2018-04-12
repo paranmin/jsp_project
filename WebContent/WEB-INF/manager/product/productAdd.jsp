@@ -123,7 +123,7 @@ $(function(){
 		var td2 = $("<td>");
 		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
 		var td3 = $("<td>");
-		var td3in = $("<input type='text' name='op_cost' class='op_cost'>");
+		var td3in = $("<input type='text' name='op_cost' class='op_cost' value='0'>");
 		var td4 = $("<td>");
 		var td4in = $("<button id='op_add'>");
 		$(td4in).text("+추가");
@@ -144,7 +144,7 @@ $(function(){
 		var td2 = $("<td>");
 		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
 		var td3 = $("<td>");
-		var td3in = $("<input type='text' name='op_cost' class='op_cost'>");
+		var td3in = $("<input type='text' name='op_cost' class='op_cost' value='0'>");
 		var td4 = $("<td>");
 		var td4in = $("<button type='button' class='op_del'>");
 		$(td4in).text("-삭제");
@@ -159,6 +159,7 @@ $(function(){
  		$(this).parent().siblings().eq(0).prop("rowspan",++rowspan);          
  		return false;        
  	});
+ 	
  	$(document).on("click","button.op_del", function(){
  		var removeTarget = $(this).parents("tr"); 		
  		var rowTdObj = removeTarget.prevAll(".parent").eq(0).find("td").eq(0);
@@ -170,11 +171,21 @@ $(function(){
  		removeTarget.remove();
  		return false;
  	});
+ 	$("input[type='submit']").click(function(){
+ 		$("table#proOption").find(".parent").each(function(i,obj){
+ 			var span = $(obj).children("td").eq(0).prop("rowspan");
+ 			console.log(span);
+ 			var $hidden = $("<input type='hidden' name='span'>");
+ 			$($hidden).val(span);
+ 			$("p.submit").append($hidden);
+ 		});
+ 		$.post("add.do", $("#form").serialize());
+ 	});
 });
 </script>
 </head>
 <body>
-	<form action="add.do" method="post">
+	<form action="add.do" method="post" id="form">      
 		<fieldset class="productAdd">
 			<legend>상품 등록</legend>
 			<p>
@@ -264,7 +275,7 @@ $(function(){
 						<input type="text" name="op_desc" class="op_desc">
 					</td>
 					<td>
-						<input type="text" name="op_cost" class="op_cost">
+						<input type="text" name="op_cost" class="op_cost" value="0">
 					</td>
 					<td>
 						<button id="op_add">+추가</button>    
