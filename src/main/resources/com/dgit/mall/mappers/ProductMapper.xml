@@ -39,4 +39,10 @@
 		insert into option_detail(po_no, prd_no, pod_value, pod_cost)
 		value(#{poNo},#{prdNo}, #{podValue},#{podCost})
 	</insert>
+	<select id="selectAllProduct" resultMap="productResult">
+		select * from product;
+	</select>
+	<select id="selectCateProduct" resultMap="productResult">
+		select * from product where prd_category=#{category};
+	</select>
 </mapper>

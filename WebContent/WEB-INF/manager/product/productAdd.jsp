@@ -181,15 +181,6 @@ $(function(){
  		});
  		$.post("add.do", $("#form").serialize());
  	});
- 	/* $("input").submit(function(){
- 		$("table#proOption").find(".parent").each(function(i,obj){
- 			var span = $(obj).children("td").eq(0).prop("rowspan");
- 			var $hidden = $("<input type='hidden' name='span'>");
- 			$($hidden).val(span);
- 			$("p.submit").append($hidden);
- 		});   
- 		$.post("add.do", $("#form").serialize());
- 	}); */
 });
 </script>
 </head>

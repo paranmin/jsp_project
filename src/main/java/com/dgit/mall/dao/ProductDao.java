@@ -1,6 +1,7 @@
 package com.dgit.mall.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.dgit.mall.dto.Option;
 import com.dgit.mall.dto.OptionDetail;
@@ -14,4 +15,8 @@ public interface ProductDao {
 	public int insertOptionDetail(OptionDetail det) throws SQLException;
 	public int selectLastInsert() throws SQLException;
 	public int selectLastInsertOption() throws SQLException;
+	
+	public List<Product> selectAllProduct() throws SQLException;
+	public List<Product> selectCateProduct(Product pro) throws SQLException;
+	
 }
