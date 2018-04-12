@@ -10,5 +10,6 @@
 		<li <c:if test="${menu == 'order'}">class="gnb_over"</c:if>><a href="${pageContext.request.contextPath}/manager/order/">주문관리</a></li>
 		<li <c:if test="${menu == 'member'}">class="gnb_over"</c:if>><a href="${pageContext.request.contextPath}/manager/member/">회원관리</a></li>
 		<li <c:if test="${menu == 'board'}">class="gnb_over"</c:if>><a href="${pageContext.request.contextPath}/manager/board/">게시판관리</a></li>
+		<li <c:if test="${menu == 'coupon'}">class="gnb_over"</c:if>><a href="${pageContext.request.contextPath}/manager/coupon/">쿠폰관리</a></li>
 	</ul>
 </nav>
