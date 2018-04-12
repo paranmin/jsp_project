@@ -21,8 +21,21 @@
 
 		<section id="loginContent">
 			<h2>Find ID/PW</h2>
-			<div class="findArea">
-				${result_msg}
+			<div class="findPopArea">
+				<div class="msgArea">
+				<c:if test="${msg != null && msg != ''}">
+					<p>${msg }</p>
+				</c:if>
+				<c:if test="${msg == null || msg == ''}">
+					<p>
+					찾으시는 회원의 아이디는 [<span class="bold">${member.id}</span>]입니다.
+				</p>
+				</c:if>
+				
+				<p>
+					<a href="login.do" class="btn">확인</a>
+				</p>
+				</div>
 			</div>
 		</section>
 

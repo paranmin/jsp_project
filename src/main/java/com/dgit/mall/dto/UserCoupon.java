@@ -1,5 +1,7 @@
 package com.dgit.mall.dto;
 
+import com.dgit.mall.dto.type.CouponUseYN;
+
 public class UserCoupon {
 	private int ucNo;
 	private Coupon cNo;

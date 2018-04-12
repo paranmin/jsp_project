@@ -65,6 +65,8 @@
 	}
 	span.redfinallyPrice{
 		color:red;
+		font-size: 14px;
+		font-weight: bold;
 	}
 	td.lastPrice{
 		text-align: right;
@@ -81,6 +83,9 @@
 		border:1px solid black;
 		background-color: white;
 	}
+	a.itemNo{
+		color:blue;
+	}
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
@@ -88,24 +93,36 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$(".couponSub").click(function(){
-			var result = confirm("쿠폰을 적용하시겠습니까?");
-			if(result){
-				window.close();
-			}
+		$(".couponCan").click(function(){
+			window.close();
 		})
 		
 		var price1 = parseInt($(".oriPrice").text());
-		console.log(price1);
 		
 		$(".itemNo").click(function(){
-			var value = $(this).parent().next().next().next().text();
-			console.log(value);
-			$(".couponPrice").text(value);
-			var price2 =parseInt($("couponPrice").text());
-			console.log(price2);
-			$(".finallyPrice").text(price1-price2);
+			var price1 = parseInt($(".oriPrice").text());
+			var salePrice =  parseInt($(this).parent().next().next().next().text());
+			$(".couponPrice").text(salePrice);
+			$(".finallyPrice").text(price1-salePrice);
+			
+			var itemno = $(this).text();
+			var finallyprice = $(".finallyPrice").text();
+			
+			$(".couponSub").click(function(){
+				 var returnValue = {
+						    "key1": itemno,//쿠폰번호
+						    "key2": finallyprice//쿠폰할인된 가격
+						  };
+				window.opener.getReturnValue(JSON.stringify(returnValue));
+			})
 		})
+			$(".couponSub").click(function(){
+				var result = confirm("쿠폰을 적용하시겠습니까?");
+				if(result){
+					window.close();
+				}
+			})
+		
 	})
 </script>
 </head>

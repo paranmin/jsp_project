@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Member;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
+import com.dgit.mall.util.CommonUtil;
 
 public class ShopFindMemberHandler extends ShopCommandHandler {
 
@@ -50,14 +51,14 @@ public class ShopFindMemberHandler extends ShopCommandHandler {
 				request.setAttribute("error_msg", "내용과 일치하는 회원정보가 없습니다.");
 				return VIEW_FRONT_PATH + "/member/findMember.jsp";
 			}
-			
-			String result = "내용과 일치하는 회원정보가 없습니다.";
-			if (findType.equalsIgnoreCase("id")) {
-				result =  String.format("찾으시는 아이디는 %s입니다.", findedMember.getId());
-			} if (findType.equalsIgnoreCase("pwd")) {
-				result =  String.format("찾으시는 비밀번호는 %s입니다.", findedMember.getPwd());
+			String result = "";
+			if (findType.equalsIgnoreCase("pwd")) {
+				// 랜덤 비번 생성 후 맴버 업데이트 하기
+				CommonUtil.getInstance().sendFindPwdMail(findedMember);
+				result =  "비밀번호는 가입시 등록하신 이메일로 보내드렸습니다.";
 			}
-			request.setAttribute("result_msg", result);
+			request.setAttribute("member", findedMember);
+			request.setAttribute("msg", result);
 			return VIEW_FRONT_PATH + "/member/findedMember.jsp";
 		}
 		return null;

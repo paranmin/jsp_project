@@ -162,4 +162,36 @@
 	background-color: #333;
 	color: #fff;
 }
+
+#loginContent .findPopArea {
+	width: 500px;
+	height: 200px;
+	margin: 70px auto;
+}
+#loginContent .findPopArea div {
+	margin-top: 10px;
+	color: #888;
+	text-align: right;
+}
+#loginContent .findPopArea div.msgArea {
+	border: 1px solid #eaeaea;
+	padding: 10px;
+}
+#loginContent .findPopArea p {
+	margin: 30px;
+	text-align: center;
+	font-size: 1.2em;
+}
+#loginContent .findPopArea p span {
+	font-size: 1.2em;
+	color: #333;
+}
+#loginContent .findPopArea p a {
+	display: inline-block;
+	background-color: #333;
+	width: 100px;
+	height: 35px;
+	line-height: 35px;
+	color: #fff;
+}
 /* 아이디 / 비번 찾기 */
