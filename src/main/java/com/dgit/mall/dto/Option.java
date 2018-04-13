@@ -4,6 +4,7 @@ public class Option {
 	private int poNo;
 	private String poName;
 	private int prdNo;
+	
 	public Option() {}
 	public Option(int poNo, String poName, int prdNo) {
 		super();

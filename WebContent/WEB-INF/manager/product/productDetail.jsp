@@ -1,28 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-fieldset.productAdd{
+fieldset.productDetail{
 	width:60%;
 	margin:50px auto;
 	padding:10px;
 }
-fieldset.productAdd label{
+fieldset.productDetail label{
 	width:150px;
 	float:left;
 }
-fieldset.productAdd input[type='text']{
+fieldset.productDetail input[type='text']{
 	width:400px;
 }
-fieldset.productAdd input#price{
-	width:100px;
+fieldset.productDetail input#price{
+	text-align:right;
+	width:70px;
 }
-fieldset.productAdd input#cost{
-	width:100px;
+fieldset.productDetail input#cost{
+	text-align:right;
+	width:70px;
+}
+fieldset.productDetail input#discount{
+	text-align:right;
+	width:70px;
+}
+fieldset.productDetail input#stock{
+	text-align:right;
+	width:70px;
 }
 p.submit{
 	text-align:center;
@@ -36,10 +47,10 @@ p.submit input{
 p.submit input[type='submit']{
 	background: wheat;
 }
-fieldset.productAdd p{
+fieldset.productDetail p{
 	margin:20px;
 }
-fieldset.productAdd button{
+fieldset.productDetail button{
 	width:50px;
 	border:none;
 }
@@ -76,7 +87,6 @@ table#proOption button#op_nameadd{
 table#proOption{
 	width:100%;
 	text-align: center;
-	display:none;
 }
 table#proOption th#opname{
 	width:20%;
@@ -103,7 +113,6 @@ table#proOption td{
 			<p>
 				<label>상품 이름</label>
 				<input type="text" name="name" value="${pro.name }" readonly="readonly">
-				<!-- <p class="error">제목을 입력하세요.</p> -->
 			</p>
 			<p>
 				<label>상품 부가설명</label>
@@ -115,54 +124,71 @@ table#proOption td{
 			</p>
 			<p>
 				<label>할인</label>
-				<input type="text" value="" readonly="readonly">
+				<input type="text" value="${pro.discountPer }" id="discount" readonly="readonly">
 			</p>
 			<p>
 				<label>판매가</label>
-				<input type="text" value="" id="price" readonly="readonly">원  
+				<input type="text" value="${pro.sellingPrice }" id="price" readonly="readonly">원  
 			</p>
 			<p>
 				<label>재고</label>
-				<input type="text" value="" readonly="readonly">
+				<input type="text" value="${pro.stock }" id="stock" readonly="readonly">개   
 			</p>
 			<p>
 				<label>상품 메인 이미지</label>
 				<div class="img_main_plus">
-					<input type="file" name="mainimg" value="이미지 불러오기">
-					<!-- <button class="img_main_plus">추가</button> -->
+					<img src="${pro.mainImg }">
 				</div>
 			</p>
 			<p>
 				<label>상품 상세 이미지</label>
 				<div class="img_plus">
-				<input type="file" name="files" value="이미지 불러오기">
-				<button class="img_plus">추가</button>
+					<c:forEach var="pimg" items="${proimg }">
+						<img src="${pimg.img }">
+					</c:forEach>
 				</div>
 			</p>
-
 			<p>
 				<label>옵션 유무</label>
-				<input type="radio" id="option" name="use_option" value="1" readonly="readonly">사용 
-				<input type="radio" id="option" name="use_option" value="0" checked="checked" readonly="readonly">사용안함
+				<c:if test="${pro.useOption=='1'}">
+					<p>사용</p>
+				</c:if>
+				<c:if test="${pro.useOption=='0'}">
+					<p>사용안함</p>
+				</c:if>
 			</p>
-			<table id="proOption">
-				<tr>
-					<th id="opname">옵션명</th>
-					<th id="opvalue">옵션값</th>
-					<th id="opprice">옵션가</th>
-				</tr>
-				<tr class="parent" id="first">
-					<td rowspan="1">
-						<input type="text" name="op_name" class="op_name">
-					</td>
-					<td>
-						<input type="text" name="op_desc" class="op_desc">
-					</td>
-					<td>
-						<input type="text" name="op_cost" class="op_cost" value="0">
-					</td>
-				</tr>
-			</table>		
+			<c:if test="${pro.useOption=='1'}">
+				<table id="proOption">
+					<tr>
+						<th id="opname">옵션명</th>
+						<th id="opvalue">옵션값</th>
+						<th id="opprice">옵션가</th>
+					</tr>
+					<c:set value="0" var="first"/>
+					<c:forEach var="option" items="${opt }" varStatus="status">
+					<c:set value="${rownum[status.index]-1 }" var="end"/>
+						<tr class="parent">
+							<td rowspan="${rownum[status.index] }">         
+								${option.poName }
+							</td>
+							<td>
+								${res[0].podValue }
+							</td>
+							<td>
+								${res[0].podCost }
+							</td>
+						</tr>
+						<tr>
+							<td>
+								${res[1].podValue }
+							</td>
+							<td>
+								${res[1].podCost }
+							</td>
+						</tr>
+					</c:forEach>
+				</table>		
+			</c:if>
 			<p class="submit">
 				<input type="submit" value="수정">
 				<input type="reset" value="돌아가기">

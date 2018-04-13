@@ -21,5 +21,9 @@ public interface ProductDao {
 	public List<Product> selectNameProduct(Product pro) throws SQLException;
 	public List<Product> selectNCProduct(Product pro) throws SQLException;
 	
-	public Product SelectProductByno(Product pro) throws SQLException;
+	public Product SelectProductByno(int no) throws SQLException;
+	public List<Proimg> SelectProimgByno(int no) throws SQLException;
+	
+	public List<Option> SelectOptionByno(int no) throws SQLException;
+	public List<OptionDetail> SelectOpDeByno(int OPno) throws SQLException;
 } 

@@ -9,10 +9,29 @@
 		<result property="cost" column="prd_cost" />
 		<result property="sellingPrice" column="prd_selling_price" />
 		<result property="discountPer" column="prd_discount_per" />
-		<result property="content" column="prd_content" />
 		<result property="useOption" column="prd_use_option" />
-		<result property="stock" column="stock" />
-		<result property="mainImg" column="mainImg" />
+		<result property="stock" column="prd_stock" />
+		<result property="mainImg" column="prd_main_img" />
+		<result property="use" column="prd_use"/>
+	</resultMap>
+	
+	<resultMap type="Proimg" id="proimgResult">
+		<id property="imgNo" column="img_no"/>
+		<result property="prdNo" column="prd_no"/>
+		<result property="img" column="img"/>
+	</resultMap>
+	
+	<resultMap type="Option" id="optionResult">
+		<id property="poNo" column="po_no"/>
+		<result property="poName" column="po_name"/>
+		<result property="prdNo" column="prd_no"/>
+	</resultMap>
+	
+	<resultMap type="OptionDetail" id="optionDetailResult">
+		<id property="podNo" column="pod_no"/>
+		<result property="poNo" column="po_no"/>
+		<result property="podValue" column="pod_value"/>
+		<result property="podCost" column="pod_cost"/>
 	</resultMap>
 	
 	<insert id="insertProduct" parameterType="product">
@@ -36,8 +55,8 @@
 		value(#{poName},#{prdNo})
 	</insert>
 	<insert id="insertOptionDetail">
-		insert into option_detail(po_no, prd_no, pod_value, pod_cost)
-		value(#{poNo},#{prdNo}, #{podValue},#{podCost})
+		insert into option_detail(po_no, pod_value, pod_cost)
+		value(#{poNo}, #{podValue},#{podCost})
 	</insert>
 	<select id="selectAllProduct" resultMap="productResult">
 		select * from product
@@ -51,7 +70,16 @@
 	<select id="selectNCProduct" resultMap="productResult">
 		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%")
 	</select>
-	<select id="SelectProductByno" resultType="product">
+	<select id="SelectProductByno" resultMap="productResult">
 		select * from product where prd_no=#{prdNo}
+	</select>
+	<select id="SelectProimgByno" resultMap="proimgResult">
+		select * from proimg where prd_no=#{prdNo}
+	</select>
+	<select id="SelectOptionByno" resultMap="optionResult">
+		select * from pro_option where prd_no=#{prdNo}
+	</select>
+	<select id="SelectOpDeByno" resultMap="optionDetailResult">
+		select * from option_detail where po_no=#{poNo}
 	</select>
 </mapper>

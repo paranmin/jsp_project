@@ -13,12 +13,16 @@ public class Product {
 	private int stock; // 상품재고
 	private String useOption; // 옵션유무
 	private String category;
+	private String use;
 
 	public Product() {
 	}
 
-	public Product(int prdNo, String name, String subDesc, String mainImg, String content, int cost,
-			String discountPer, int sellingPrice, int stock, String useOption, String category) {
+	
+
+	public Product(int prdNo, String name, String subDesc, String mainImg, String content, int cost, String discountPer,
+			int sellingPrice, int stock, String useOption, String category, String use) {
+		super();
 		this.prdNo = prdNo;
 		this.name = name;
 		this.subDesc = subDesc;
@@ -30,8 +34,8 @@ public class Product {
 		this.stock = stock;
 		this.useOption = useOption;
 		this.category = category;
+		this.use = use;
 	}
-
 	public int getPrdNo() {
 		return prdNo;
 	}
@@ -120,11 +124,16 @@ public class Product {
 		this.category = category;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return String.format(
-				"Product [prdNo=%s, name=%s, subDesc=%s, mainImg=%s, content=%s, cost=%s, discountPer=%s, sellingPrice=%s, stock=%s, useOption=%s, category=%s]",
-				prdNo, name, subDesc, mainImg, content, cost, discountPer, sellingPrice, stock, useOption, category);
+				"Product [prdNo=%s, name=%s, subDesc=%s, mainImg=%s, content=%s, cost=%s, discountPer=%s, sellingPrice=%s, stock=%s, useOption=%s, category=%s, use=%s]",
+				prdNo, name, subDesc, mainImg, content, cost, discountPer, sellingPrice, stock, useOption, category,
+				use);
 	}
+
+
 
 }

@@ -80,13 +80,11 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 							if (i > 0) {
 								det.setPodCost(opCost[n + afterspan]);
 								det.setPodValue(opValue[n + afterspan]);
-								det.setPrdNo(prdno);
 								det.setPoNo(pono);
 								dao.insertOptionDetail(det);
 							} else {
 								det.setPodCost(opCost[n + afterspan]);
 								det.setPodValue(opValue[n + afterspan]);
-								det.setPrdNo(prdno);
 								det.setPoNo(pono);
 								dao.insertOptionDetail(det);
 							}
