@@ -88,7 +88,10 @@
 				dataType:"json",
 				data:{"checkedCp":checkedCp},
 				success:function(data){
-					console.log(data);
+					if(data.result=="ok"){
+						location.href="list.do"
+					};
+					
 				}
 			})
 		})

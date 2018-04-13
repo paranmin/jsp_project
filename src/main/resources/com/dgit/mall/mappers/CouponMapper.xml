@@ -18,10 +18,11 @@
 		<id property="no" column="m_no"/>
 		<result property="id" column="m_id"/>
 		<result property="name" column="m_name"/>
+		<result property="phone" column="m_phone"/>
 	</resultMap>
 	
 	
-	
+	<!-- 쿠폰 -->
 	<select id="selectByAll" resultMap="couponResult">
 		select*from coupon order by c_no desc
 	</select>
@@ -31,7 +32,13 @@
 	<insert id="insertCoupon" parameterType="Coupon">
 		insert into coupon values(#{cNo},#{cName},#{cuseMorePrice},#{csalePrice},#{climitDate})
 	</insert>
+	<delete id="deleteCoupon" parameterType="String">
+		delete from coupon where c_no=#{cNo}
+	</delete>
+	<!-- 쿠폰 -->
 	
-	
-
+	<!-- 쿠폰 회원 등록 -->
+	<insert id="insertMemberCoupon" parameterType="UserCoupon">
+		insert into user_coupon(c_no,m_no) values (#{cNo.cNo},#{mNo.no});
+	</insert>
 </mapper>
