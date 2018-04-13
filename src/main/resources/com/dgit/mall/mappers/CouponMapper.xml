@@ -9,6 +9,19 @@
 		<result property="climitDate" column="c_limit_date"/> <!-- 쿠폰사용기한 -->
 	</resultMap>
 	
+	<resultMap type="UserCoupon" id="userCouponResult" extends="couponResult">
+		<id property="ucNo" column="uc_no"/>
+		<result property="yn" column="uc_use_yn" />
+	</resultMap>
+	
+	<resultMap type="Member" id="userCouponWithmemberResult" extends="userCouponResult">
+		<id property="no" column="m_no"/>
+		<result property="id" column="m_id"/>
+		<result property="name" column="m_name"/>
+	</resultMap>
+	
+	
+	
 	<select id="selectByAll" resultMap="couponResult">
 		select*from coupon order by c_no desc
 	</select>
@@ -18,5 +31,7 @@
 	<insert id="insertCoupon" parameterType="Coupon">
 		insert into coupon values(#{cNo},#{cName},#{cuseMorePrice},#{csalePrice},#{climitDate})
 	</insert>
+	
+	
 
 </mapper>

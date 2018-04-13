@@ -31,7 +31,7 @@
 		<ul>
 			<li><a href="list.do">쿠폰 목록</a></li>
 			<li><a href="regi.do">쿠폰 등록</a></li>
-			<li><a href="#">회원 쿠폰 제공 등록</a></li>
+			<li><a href="regiuser.do">회원 쿠폰 제공 등록</a></li>
 		</ul>
 	</c:when>
 	<c:otherwise>
