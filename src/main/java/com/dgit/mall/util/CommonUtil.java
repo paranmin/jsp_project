@@ -1,5 +1,7 @@
 package com.dgit.mall.util;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +15,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.dgit.mall.dto.Member;
 
@@ -151,6 +156,20 @@ public class CommonUtil {
 
 		if (!sendMailBySSL(mailContent)) {
 			System.err.println("관리자에게 문의!!");
+		}
+	}
+
+	public void printMessageByJSON(HttpServletResponse response, Map<String, Object> jsonData) {
+		response.setContentType("application/json;charset=utf-8");
+
+		try {
+			String json = new ObjectMapper().writeValueAsString(jsonData);
+			PrintWriter out = response.getWriter();
+			out.println(json);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
