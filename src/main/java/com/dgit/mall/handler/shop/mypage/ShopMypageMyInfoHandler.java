@@ -58,8 +58,15 @@ public class ShopMypageMyInfoHandler extends ShopCommandHandler {
 			HttpSession session = request.getSession(false);
 			Member auth = (Member) session.getAttribute("auth");
 
+			if (!password.equals(checkPwd)) {
+				session.setAttribute("error_msg", "비밀번호가 다릅니다.");
+				response.sendRedirect("myinfo.do");
+				return null;
+			}
+			
 			Member modifyMember = new Member();
 			modifyMember.setNo(auth.getNo());
+			modifyMember.setName(name);
 			modifyMember.setPwd(password);
 			modifyMember.setBirth(String.format("%s-%s-%s", year, month, day));
 			modifyMember.setGender(gender.equalsIgnoreCase("male") ? Gender.MALE : Gender.FEMALE);
