@@ -40,13 +40,13 @@
 		value(#{poNo},#{prdNo}, #{podValue},#{podCost})
 	</insert>
 	<select id="selectAllProduct" resultMap="productResult">
-		select * from product;
+		select * from product
 	</select>
 	<select id="selectCateProduct" resultMap="productResult">
-		select * from product where prd_category=#{category};
+		select * from product where prd_category=#{category}
 	</select>
 	<select id="selectNameProduct" resultMap="productResult">
-		select * from product where prd_name like %#{name}%;
+		select * from product where prd_name like CONCAT("%",#{name},"%")
 	</select>
 	<select id="selectNCProduct" resultMap="productResult">
 		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%")

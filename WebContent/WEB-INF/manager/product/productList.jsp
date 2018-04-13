@@ -59,22 +59,21 @@ a{
 	<form action="list.do" method="post" id="cate">
 		상품 카테고리
 		<select name="cate">
-			<option value="All">All</option>
-			<option value="귀걸이">귀걸이</option>
-			<option value="이어커프">이어커프</option>
-			<option value="목걸이">목걸이</option>
-			<option value="팔찌">팔찌</option>
-			<option value="발찌">발찌</option>
-			<option value="반지">반지</option>
-			<option value="발가락지/토링">발가락지/토링</option>
-			<option value="헤어 ACC">헤어 ACC</option>
-			<option value="시계">시계</option>
-			<option value="폰 ACC">폰 ACC</option>
-			<option value="기타">기타</option>
+			<option value="All" <c:if test="${cate=='All' }"> selected="selected" </c:if>>All</option>
+			<option value="귀걸이" <c:if test="${cate=='귀걸이' }"> selected="selected" </c:if>>귀걸이</option>
+			<option value="이어커프" <c:if test="${cate=='이어커프' }"> selected="selected" </c:if>>이어커프</option>
+			<option value="목걸이" <c:if test="${cate=='목걸이' }"> selected="selected" </c:if>>목걸이</option>
+			<option value="팔찌" <c:if test="${cate=='팔찌' }"> selected="selected" </c:if>>팔찌</option>
+			<option value="발찌" <c:if test="${cate=='발찌' }"> selected="selected" </c:if>>발찌</option>
+			<option value="반지" <c:if test="${cate=='반지' }"> selected="selected" </c:if>>반지</option>
+			<option value="발가락지/토링" <c:if test="${cate=='발가락지/토링' }"> selected="selected" </c:if>>발가락지/토링</option>
+			<option value="헤어 ACC" <c:if test="${cate=='헤어 ACC' }"> selected="selected" </c:if>>헤어 ACC</option>
+			<option value="시계" <c:if test="${cate=='시계' }"> selected="selected" </c:if>>시계</option>
+			<option value="폰 ACC" <c:if test="${cate=='폰 ACC' }"> selected="selected" </c:if>>폰 ACC</option>
+			<option value="기타" <c:if test="${cate=='기타' }"> selected="selected" </c:if>>기타</option>
 		</select>
-		<button class="selectBtn">검색</button>
 		상품명
-		<input type="text" name="selectName">
+		<input type="text" name="selectName" <c:if test="${name!=null }"> value="${name}" </c:if>>   
 		<button class="selectBtn">검색</button>
 	</form>
 	<table>
