@@ -46,7 +46,7 @@ CREATE TABLE `member_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원배송주소';
 
 CREATE TABLE `mall`.`product` (
-  `prd_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '상품번호', -- auto increment
+  `prd_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '상품번호', 
   `prd_name` varchar(50) NOT NULL COMMENT '상품명',
   `prd_sub_desc` varchar(255) DEFAULT NULL COMMENT '상품부가설명',
   `prd_cost` int(11) NOT NULL COMMENT '원가',
@@ -54,11 +54,11 @@ CREATE TABLE `mall`.`product` (
   `prd_discount_per` varchar(10) DEFAULT NULL COMMENT '할인율',
   `prd_use_option` char(1) DEFAULT NULL COMMENT '옵션유무',
   `prd_stock` int(11) DEFAULT NULL COMMENT '상품재고',
+  prd_main_img text NOT null,
+  prd_category varchar(11) NOT null,
+  prd_use char(1) default 1,
   PRIMARY KEY (`prd_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='상품';
-
-alter table product add (prd_main_img text NOT NULL);
-alter table product add (prd_category varchar(11) NOT NULL);
+);
 
 create table proimg(
 	img_no int(11) not null auto_increment primary key,
@@ -79,15 +79,11 @@ CREATE TABLE `mall`.`pro_option` (
 CREATE TABLE `mall`.`option_detail` (
   `po_no` int(11) NOT NULL COMMENT '옵션번호',
   pod_no int(11) not null auto_increment primary key,
-  `prd_no` int(11) NOT NULL COMMENT '상품번호',
   pod_value varchar(10) not null,
   pod_cost int(11) not null,
   KEY `FK_pro_option_TO_option_detail` (`po_no`),
-  CONSTRAINT `FK_pro_option_TO_product_option_detail` FOREIGN KEY (`po_no`) REFERENCES `pro_option` (`po_no`),
-  KEY `FK_product_TO_option_detail` (`prd_no`),
-  CONSTRAINT `FK_product_TO_option_detail` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)
+  CONSTRAINT `FK_pro_option_TO_product_option_detail` FOREIGN KEY (`po_no`) REFERENCES `pro_option` (`po_no`)
 );
-
 CREATE TABLE `mall`.`board` (
   `brd_no` int(11) NOT NULL auto_increment COMMENT '글번호',
   `brd_code` varchar(20) NOT NULL COMMENT '게시판코드',
