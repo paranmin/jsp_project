@@ -1,7 +1,5 @@
 package com.dgit.mall.handler.shop.mypage;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,11 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Member;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
+import com.dgit.mall.util.CommonUtil;
 
 public class ShopMypageCheckEmailHandler extends ShopCommandHandler {
 
@@ -29,7 +26,7 @@ public class ShopMypageCheckEmailHandler extends ShopCommandHandler {
 		if (my.getEmail().equalsIgnoreCase(email)) {
 			json.put("msg", "현재 사용중인 정보와 동일합니다.");
 			json.put("result", "yes");
-			printMessageByJSON(response, json);
+			CommonUtil.getInstance().printMessageByJSON(response, json);
 			return null;
 		}
 
@@ -37,28 +34,14 @@ public class ShopMypageCheckEmailHandler extends ShopCommandHandler {
 		if (res > 0) {
 			json.put("msg", "사용불가합니다.");
 			json.put("result", "no");
-			printMessageByJSON(response, json);
+			CommonUtil.getInstance().printMessageByJSON(response, json);
 			return null;
 		}
 
 		json.put("msg", "사용가능합니다.");
 		json.put("result", "yes");
-		printMessageByJSON(response, json);
+		CommonUtil.getInstance().printMessageByJSON(response, json);
 		return null;
-	}
-
-	private void printMessageByJSON(HttpServletResponse response, Map<String, Object> jsonData) {
-		response.setContentType("application/json;charset=utf-8");
-
-		try {
-			String json = new ObjectMapper().writeValueAsString(jsonData);
-			PrintWriter out = response.getWriter();
-			out.println(json);
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 }

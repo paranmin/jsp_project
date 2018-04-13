@@ -11,6 +11,7 @@ CREATE TABLE `admin_board` (
   PRIMARY KEY (`ab_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='게시판 생성정보';
 
+
 CREATE TABLE `member` (
   `m_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원번호',
   `m_id` varchar(50) NOT NULL COMMENT '회원ID',
@@ -26,9 +27,11 @@ CREATE TABLE `member` (
   `m_push_email` enum('Y','N') DEFAULT 'N' COMMENT '이메일 알림 동의',
   `m_push_sms` enum('Y','N') DEFAULT 'N' COMMENT '문자 알림 동의',
   `m_push_app` enum('Y','N') DEFAULT 'N' COMMENT '앱 알림 동의',
+  `m_leave_yn` enum('Y','N') DEFAULT 'N' COMMENT '탈퇴 여부',
   `m_regdate` datetime DEFAULT NULL COMMENT '가입일',
   PRIMARY KEY (`m_no`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='회원';
+
 
 
 CREATE TABLE `member_address` (
