@@ -16,4 +16,6 @@ public interface MemberDao {
 	int updatePassword(Member member);
 
 	int modifyMember(Member member);
+
+	int leaveMember(Member member);
 }

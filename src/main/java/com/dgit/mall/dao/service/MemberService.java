@@ -67,4 +67,13 @@ public class MemberService {
 		return res;
 	}
 
+	public int leaveMember(Member member) {
+		int res = 0;
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			res = sqlSession.update(namespace + "leaveMember", member);
+			sqlSession.commit();
+		}
+		return res;
+	}
+
 }

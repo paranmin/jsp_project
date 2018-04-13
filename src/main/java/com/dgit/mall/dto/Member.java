@@ -3,6 +3,7 @@ package com.dgit.mall.dto;
 import java.util.Date;
 
 import com.dgit.mall.dto.type.Gender;
+import com.dgit.mall.dto.type.MemberLeave;
 import com.dgit.mall.dto.type.PrivacyTerms;
 import com.dgit.mall.dto.type.PushApp;
 import com.dgit.mall.dto.type.PushEmail;
@@ -25,6 +26,7 @@ public class Member {
 	private PushSMS pushSMS;
 	private PushApp pushApp;
 	private Address addr;
+	private MemberLeave leave;
 	private Date regdate;
 
 	public Member() {
@@ -47,7 +49,7 @@ public class Member {
 
 	public Member(int no, String id, String name, String pwd, String email, String phone, String tel, Gender gender,
 			String birth, ServiceTerms serviceAgree, PrivacyTerms privacyAgree, PushEmail pushEmail, PushSMS pushSMS,
-			PushApp pushApp, Address addr, Date regdate) {
+			PushApp pushApp, Address addr, MemberLeave leave, Date regdate) {
 		this.no = no;
 		this.id = id;
 		this.name = name;
@@ -63,6 +65,7 @@ public class Member {
 		this.pushSMS = pushSMS;
 		this.pushApp = pushApp;
 		this.addr = addr;
+		this.leave = leave;
 		this.regdate = regdate;
 	}
 
@@ -194,12 +197,20 @@ public class Member {
 		this.regdate = regdate;
 	}
 
+	public MemberLeave getLeave() {
+		return leave;
+	}
+
+	public void setLeave(MemberLeave leave) {
+		this.leave = leave;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
-				"Member [no=%s, id=%s, name=%s, pwd=%s, email=%s, phone=%s, tel=%s, gender=%s, birth=%s, serviceAgree=%s, privacyAgree=%s, pushEmail=%s, pushSMS=%s, pushApp=%s, addr=%s, regdate=%s]",
+				"Member [no=%s, id=%s, name=%s, pwd=%s, email=%s, phone=%s, tel=%s, gender=%s, birth=%s, serviceAgree=%s, privacyAgree=%s, pushEmail=%s, pushSMS=%s, pushApp=%s, addr=%s, leave=%s, regdate=%s]",
 				no, id, name, pwd, email, phone, tel, gender, birth, serviceAgree, privacyAgree, pushEmail, pushSMS,
-				pushApp, addr, regdate);
+				pushApp, addr, leave, regdate);
 	}
 
 }

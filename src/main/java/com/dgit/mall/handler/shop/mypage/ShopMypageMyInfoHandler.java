@@ -63,7 +63,7 @@ public class ShopMypageMyInfoHandler extends ShopCommandHandler {
 				response.sendRedirect("myinfo.do");
 				return null;
 			}
-			
+
 			Member modifyMember = new Member();
 			modifyMember.setNo(auth.getNo());
 			modifyMember.setName(name);
