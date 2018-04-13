@@ -97,7 +97,7 @@ a{
 				<tr>
 					<td>${item.category }</td>
 					<td>${item.prdNo }</td>
-					<td><a href="read.do?no=${item.prdNo }">${item.name }</a></td>
+					<td><a href="detail.do?no=${item.prdNo }">${item.name }</a></td>
 					<td>${item.cost }</td>
 					<td>${item.discountPer }</td>
 					<td>${item.sellingPrice }</td>

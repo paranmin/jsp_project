@@ -19,10 +19,12 @@ public class ProductService {
 	}
 
 	public int insertProduct(Product pro) {
+		System.out.println(pro);
 		int res = 0;
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			ProductDao dao = sqlSession.getMapper(ProductDao.class);
-
+			
+			System.out.println(sqlSession.toString());
 			res = dao.insertProduct(pro);
 			sqlSession.commit();
 		} catch(SQLException e) {

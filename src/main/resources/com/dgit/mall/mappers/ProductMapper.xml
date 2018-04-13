@@ -51,4 +51,7 @@
 	<select id="selectNCProduct" resultMap="productResult">
 		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%")
 	</select>
+	<select id="SelectProductByno" resultType="product">
+		select * from product where prd_no=#{prdNo}
+	</select>
 </mapper>

@@ -179,7 +179,9 @@ $(function(){
  			$($hidden).val(span);
  			$("p.submit").append($hidden);
  		});
- 		$.post("add.do", $("#form").serialize());
+ 		$("form").submit();
+ 		return false;
+ 		//$.post("add.do", $("#form").serialize());
  	});
 });
 </script>
