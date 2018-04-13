@@ -126,7 +126,7 @@ $(function(){
 		var td3 = $("<td>");
 		var td3in = $("<input type='text' name='op_cost' class='op_cost' value='0'>");
 		var td4 = $("<td>");
-		var td4in = $("<button id='op_add'>");
+		var td4in = $("<button class='op_add'>");
 		
 		$(td1inbtn).text("삭제");
 		$(td4in).text("+추가");
@@ -152,7 +152,7 @@ $(function(){
  		removeTarget.remove();
  		return false;
  	});
- 	$(document).on("click","button#op_add", function(){
+ 	$(document).on("click","button.op_add", function(){
  		var $tr = $("<tr>");
 		var td2 = $("<td>");
 		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
@@ -293,7 +293,7 @@ $(function(){
 						<input type="text" name="op_cost" class="op_cost" value="0">
 					</td>
 					<td>
-						<button id="op_add">+추가</button>    
+						<button class="op_add">+추가</button>    
 					</td>
 				</tr>
 			</table>		

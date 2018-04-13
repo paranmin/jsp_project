@@ -87,6 +87,7 @@ table#proOption button#op_nameadd{
 table#proOption{
 	width:100%;
 	text-align: center;
+	display:none;
 }
 table#proOption th#opname{
 	width:20%;
@@ -101,43 +102,182 @@ table#proOption td{
 	border-bottom:1px solid gainsboro;      
 }
 </style>    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+$(function(){
+    $("table#proOption").css("display","none");    
+	$("button.img_main_plus").click(function(){
+		var $input = $("<input type='file' name='mainimg'>");
+		$("div.img_main_plus").append($("<br>"));
+		$("div.img_main_plus").append($input);
+		return false;
+	});
+	$("button.img_plus").click(function(){
+		var $input = $("<input type='file' name='files'>");
+		$("div.img_plus").append($("<br>"));
+		$("div.img_plus").append($input);
+		return false;
+	});
+ 	
+ 	$("input#option").change(function(){
+ 		if($("input#option:checked").val()==1){
+ 			$("table#proOption").css("display","block"); 
+ 		}else{
+ 			$("table#proOption").css("display","none");
+ 		}
+ 	});  
+ 	
+ 	if($("input#option").val()==1){
+ 		$("table#proOption").css("display","block"); 
+ 	}else{
+ 		$("table#proOption").css("display","none");
+ 	};
+	
+ 	$("button#op_nameadd").click(function(){
+		var $tr = $("<tr class='parent'>");
+		var td1 = $("<td>");
+		var td1in = $("<input type='text' name='op_name' class='op_name'>");
+		var td1inbtn = $("<button class='op_nameDel'>");
+		var td2 = $("<td>");
+		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
+		var td3 = $("<td>");
+		var td3in = $("<input type='text' name='op_cost' class='op_cost' value='0'>");
+		var td4 = $("<td>");
+		var td4in = $("<button class='op_add'>");
+		
+		$(td1inbtn).text("삭제");
+		$(td4in).text("+추가");
+		$(td1).append(td1in);
+		$(td1).append(td1inbtn);
+		$(td2).append(td2in);
+		$(td3).append(td3in);
+		$(td4).append(td4in);
+		$($tr).append(td1);
+		$($tr).append(td2);
+		$($tr).append(td3);
+		$($tr).append(td4);
+		$("table#proOption").append($tr);     
+		return false;
+	});
+ 	$(document).on("click","button.op_nameDel", function(){
+ 		var rowspan = $(this).parent().prop("rowspan");
+ 		for(var i = 1; i<rowspan; i++){
+ 			var removeT = $(this).parents("tr").next();
+ 			removeT.remove();
+ 		} 		
+ 		var removeTarget = $(this).parents("tr"); 	
+ 		removeTarget.remove();
+ 		return false;
+ 	});
+ 	$(document).on("click","button.op_add", function(){
+ 		var $tr = $("<tr>");
+		var td2 = $("<td>");
+		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
+		var td3 = $("<td>");
+		var td3in = $("<input type='text' name='op_cost' class='op_cost' value='0'>");
+		var td4 = $("<td>");
+		var td4in = $("<button type='button' class='op_del'>");
+		$(td4in).text("-삭제");
+		$(td2).append(td2in);
+		$(td3).append(td3in);
+		$(td4).append(td4in);
+		$($tr).append(td2);
+		$($tr).append(td3);
+		$($tr).append(td4);
+		$($tr).insertAfter($(this).parent().parent());
+ 		var rowspan = $(this).parent().siblings().eq(0).prop("rowspan");
+ 		$(this).parent().siblings().eq(0).prop("rowspan",++rowspan);          
+ 		return false;        
+ 	});
+ 	
+ 	$(document).on("click","button.op_del", function(){
+ 		var removeTarget = $(this).parents("tr"); 		
+ 		var rowTdObj = removeTarget.prevAll(".parent").eq(0).find("td").eq(0);
+ 		
+		var rowspan = rowTdObj.attr("rowspan");
+		if(rowspan > 1){
+			rowTdObj.attr("rowspan",--rowspan);
+		}
+ 		removeTarget.remove();
+ 		return false;
+ 	});
+ 	$("input[type='submit']").click(function(){
+ 		$("table#proOption").find(".parent").each(function(i,obj){
+ 			var span = $(obj).children("td").eq(0).prop("rowspan");
+ 			console.log(span);
+ 			var $hidden = $("<input type='hidden' name='span'>");
+ 			$($hidden).val(span);
+ 			$("p.submit").append($hidden);
+ 		});
+ 		$("form").submit();
+ 		return false;
+ 		//$.post("add.do", $("#form").serialize());
+ 	});
+});
+</script>
 </head>
 <body>
 	<form action="update.do" method="post">      
 		<fieldset class="productDetail">
 			<legend>상품 정보</legend>
 			<p>
+				<label>게시 여부</label>
+				<input type="radio" id="view" name="view" value="1" <c:if test="${pro.use=='1' }"> checked="checked" </c:if>>게시
+				<input type="radio" id="view" name="view" value="0" <c:if test="${pro.use=='0' }"> checked="checked" </c:if>>게시 안함
+			</p>
+			<p>
 				<label>상품 카테고리</label>
-				<input type="text" value="${pro.category }" readonly="readonly">
+				<select name="cate">
+					<option value="All" <c:if test="${pro.category=='All' }"> selected="selected" </c:if>>All</option>
+					<option value="귀걸이" <c:if test="${pro.category=='귀걸이' }"> selected="selected" </c:if>>귀걸이</option>
+					<option value="이어커프" <c:if test="${pro.category=='이어커프' }"> selected="selected" </c:if>>이어커프</option>
+					<option value="목걸이" <c:if test="${pro.category=='목걸이' }"> selected="selected" </c:if>>목걸이</option>
+					<option value="팔찌" <c:if test="${pro.category=='팔찌' }"> selected="selected" </c:if>>팔찌</option>
+					<option value="발찌" <c:if test="${pro.category=='발찌' }"> selected="selected" </c:if>>발찌</option>
+					<option value="반지" <c:if test="${pro.category=='반지' }"> selected="selected" </c:if>>반지</option>
+					<option value="발가락지/토링" <c:if test="${pro.category=='발가락지/토링' }"> selected="selected" </c:if>>발가락지/토링</option>
+					<option value="헤어 ACC" <c:if test="${pro.category=='헤어 ACC' }"> selected="selected" </c:if>>헤어 ACC</option>
+					<option value="시계" <c:if test="${pro.category=='시계' }"> selected="selected" </c:if>>시계</option>
+					<option value="폰 ACC" <c:if test="${pro.category=='폰 ACC' }"> selected="selected" </c:if>>폰 ACC</option>
+					<option value="기타" <c:if test="${pro.category=='기타' }"> selected="selected" </c:if>>기타</option>
+				</select>
 			</p>
 			<p>
 				<label>상품 이름</label>
-				<input type="text" name="name" value="${pro.name }" readonly="readonly">
+				<input type="text" name="name" value="${pro.name }">
 			</p>
 			<p>
 				<label>상품 부가설명</label>
-				<input type="text" value="${pro.subDesc }" readonly="readonly">
+				<input type="text" name="desc" value="${pro.subDesc }">
 			</p>
 			<p>
 				<label>원가</label>
-				<input type="text" name="cost" value="${pro.cost }" id="cost" readonly="readonly">원
+				<input type="text" name="cost" value="${pro.cost }" id="cost">원
 			</p>
 			<p>
 				<label>할인</label>
-				<input type="text" value="${pro.discountPer }" id="discount" readonly="readonly">
+				<select name="discount">
+					<option <c:if test="${pro.discountPer=='0%' }"> selected="selected" </c:if>>0%</option>
+					<option <c:if test="${pro.discountPer=='7%' }"> selected="selected" </c:if>>7%</option>
+					<option <c:if test="${pro.discountPer=='10%' }"> selected="selected" </c:if>>10%</option>
+					<option <c:if test="${pro.discountPer=='20%' }"> selected="selected" </c:if>>20%</option>
+					<option <c:if test="${pro.discountPer=='30%' }"> selected="selected" </c:if>>30%</option>
+					<option <c:if test="${pro.discountPer=='50%' }"> selected="selected" </c:if>>50%</option>
+				</select>
 			</p>
 			<p>
 				<label>판매가</label>
-				<input type="text" value="${pro.sellingPrice }" id="price" readonly="readonly">원  
+				<input type="text" value="${pro.sellingPrice }" id="price" name="price">원  
 			</p>
 			<p>
 				<label>재고</label>
-				<input type="text" value="${pro.stock }" id="stock" readonly="readonly">개   
+				<input type="text" value="${pro.stock }" id="stock" name="stock">개   
 			</p>
 			<p>
 				<label>상품 메인 이미지</label>
 				<div class="img_main_plus">
 					<img src="${pro.mainImg }">
+					<input type="file" name="mainimg" value="이미지 불러오기">
 				</div>
 			</p>
 			<p>
@@ -146,34 +286,50 @@ table#proOption td{
 					<c:forEach var="pimg" items="${proimg }">
 						<img src="${pimg.img }">
 					</c:forEach>
+					<br>
+					<input type="file" name="files" value="이미지 불러오기">
+					<button class="img_plus">추가</button>
 				</div>
 			</p>
 			<p>
 				<label>옵션 유무</label>
-				<c:if test="${pro.useOption=='1'}">
-					<p>사용</p>
-				</c:if>
-				<c:if test="${pro.useOption=='0'}">
-					<p>사용안함</p>
-				</c:if>
+				<input type="radio" id="option" name="use_option" value="1" <c:if test="${pro.useOption=='1' }"> checked="checked" </c:if>>사용
+				<input type="radio" id="option" name="use_option" value="0" <c:if test="${pro.useOption=='0' }"> checked="checked" </c:if>>사용안함
 			</p>
 			<c:if test="${pro.useOption=='1'}">
 				<table id="proOption">
 					<tr>
+						<td><button id="op_nameadd">+옵션명추가</button></td>
+					</tr>
+					<tr>
 						<th id="opname">옵션명</th>
 						<th id="opvalue">옵션값</th>
 						<th id="opprice">옵션가</th>
+						<th id="empty"></th>
 					</tr>
 						<c:set value="0" var="fir"/>
 					<c:forEach var="option" items="${opt }" varStatus="status">
 						<c:set value="${fir+rownum[status.index]-1 }" var="end"/>
 						<tr class="parent">
-							<td rowspan="${rownum[status.index] }">         
-								${option.poName }
+							<td rowspan="${rownum[status.index] }">  
+								<input type="text" name="op_name" class="op_name" value="${option.poName }"> 
+								<c:if test="${!status.first }">
+									<button class='op_nameDel'>삭제</button>
+								</c:if>
 							</td>
 							<c:forEach var="result" items="${res }" begin="${fir}" end="${end}" varStatus="sta">
-									<td>${result.podValue}</td>
-									<td>${result.podCost}</td>
+									<td><input type="text" name="op_desc" class="op_desc" value="${result.podValue}"></td>
+									<td><input type="text" name="op_cost" class="op_cost" value="${result.podCost}"></td>
+									<c:if test="${sta.first }">
+										<td>
+											<button class="op_add">+추가</button>    
+										</td>
+									</c:if>
+									<c:if test="${!sta.first }">
+										<td>
+											<button class="op_del">-삭제</button>    
+										</td>
+									</c:if>									
 								</tr>
 								<c:if test="${sta.index != end }">
 								<tr>
@@ -185,7 +341,7 @@ table#proOption td{
 			</c:if>
 			<p class="submit">
 				<input type="submit" value="수정">
-				<input type="reset" value="돌아가기">
+				<input type="reset" value="취소">
 			</p>
 		</fieldset>
 	</form>

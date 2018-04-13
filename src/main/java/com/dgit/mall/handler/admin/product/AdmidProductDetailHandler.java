@@ -37,9 +37,6 @@ public class AdmidProductDetailHandler extends AdminCommandHandler {
 				result.addAll(detail);
 				rownum.add(detail.size());
 			}
-			System.out.println("rownum : "+rownum);
-			System.out.println("result : "+result);
-			
 			request.setAttribute("rownum", rownum);
 			request.setAttribute("res", result);
 			request.setAttribute("opt", option);

@@ -17,9 +17,6 @@ public class Product {
 
 	public Product() {
 	}
-
-	
-
 	public Product(int prdNo, String name, String subDesc, String mainImg, String content, int cost, String discountPer,
 			int sellingPrice, int stock, String useOption, String category, String use) {
 		super();
@@ -34,6 +31,14 @@ public class Product {
 		this.stock = stock;
 		this.useOption = useOption;
 		this.category = category;
+		this.use = use;
+	}
+	
+	
+	public String getUse() {
+		return use;
+	}
+	public void setUse(String use) {
 		this.use = use;
 	}
 	public int getPrdNo() {
