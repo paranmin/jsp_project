@@ -46,6 +46,28 @@
 		from member where m_no = #{no}
 	</select>
 	
+	<select id="selectMemberList" resultMap="memberResult">
+		select * from member order by m_regdate desc;
+	</select>
+	
+	<select id="selectMemberListBySearch" parameterType="map" resultMap="memberResult">
+		select * from member 
+		<where>
+			<choose>
+				<when test="where != null and where == 'id'">
+					m_id like CONCAT("%", #{query}, "%")
+				</when>
+				<when test="where != null and where == 'phone'">
+					m_phone = #{query} or m_tel = #{query}
+				</when>
+				<when test="where != null and where == 'name'">
+					m_name like CONCAT("%", #{query}, "%")
+				</when>
+			</choose>
+		</where>
+		order by m_regdate desc;
+	</select>
+	
 	<select id="checkDuplEmail" parameterType="String" resultType="int">
 		select count(m_no) from member where m_email = #{email};
 	</select>

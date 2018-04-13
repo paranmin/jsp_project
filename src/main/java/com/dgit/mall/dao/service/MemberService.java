@@ -1,5 +1,8 @@
 package com.dgit.mall.dao.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dto.Member;
@@ -31,6 +34,18 @@ public class MemberService {
 	public Member selectByMemberNo(int no) {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + "selectByMemberNo", no);
+		}
+	}
+
+	public List<Member> selectMemberList() {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectMemberList");
+		}
+	}
+
+	public List<Member> selectMemberListBySearch(Map<String, String> map) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectMemberListBySearch", map);
 		}
 	}
 

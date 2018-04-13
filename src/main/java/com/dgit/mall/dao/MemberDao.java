@@ -1,5 +1,8 @@
 package com.dgit.mall.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.dgit.mall.dto.Member;
 
 public interface MemberDao {
@@ -8,6 +11,10 @@ public interface MemberDao {
 	Member selectByFindMember(Member member);
 
 	Member selectByMemberNo(int no);
+
+	List<Member> selectMemberList();
+
+	List<Member> selectMemberListBySearch(Map<String, String> map);
 
 	int checkDuplEmail(String email);
 
