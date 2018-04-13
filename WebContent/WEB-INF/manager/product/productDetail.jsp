@@ -164,28 +164,22 @@ table#proOption td{
 						<th id="opvalue">옵션값</th>
 						<th id="opprice">옵션가</th>
 					</tr>
-					<c:set value="0" var="first"/>
+						<c:set value="0" var="fir"/>
 					<c:forEach var="option" items="${opt }" varStatus="status">
-					<c:set value="${rownum[status.index]-1 }" var="end"/>
+						<c:set value="${fir+rownum[status.index]-1 }" var="end"/>
 						<tr class="parent">
 							<td rowspan="${rownum[status.index] }">         
 								${option.poName }
 							</td>
-							<td>
-								${res[0].podValue }
-							</td>
-							<td>
-								${res[0].podCost }
-							</td>
-						</tr>
-						<tr>
-							<td>
-								${res[1].podValue }
-							</td>
-							<td>
-								${res[1].podCost }
-							</td>
-						</tr>
+							<c:forEach var="result" items="${res }" begin="${fir}" end="${end}" varStatus="sta">
+									<td>${result.podValue}</td>
+									<td>${result.podCost}</td>
+								</tr>
+								<c:if test="${sta.index != end }">
+								<tr>
+								</c:if>
+							</c:forEach>
+							<c:set value="${end+1 }" var="fir"/>
 					</c:forEach>
 				</table>		
 			</c:if>

@@ -50,7 +50,6 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 				pro.setStock(stock);
 				pro.setMainImg(main);
 				pro.setUseOption(option);
-				System.out.println("aaaaaaaaaa :"+pro);
 				dao.insertProduct(pro);
 
 				int prdno = dao.selectLastInsert();
@@ -93,7 +92,6 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 					}
 				}
 				sqlsession.commit();
-				JOptionPane.showMessageDialog(null, "상품이 등록되었습니다.");
 				request.setAttribute("contentPage", "product/productAdd.jsp");
 				request.setAttribute("sub_menu", "list");
 				request.setAttribute("menu", "product");
