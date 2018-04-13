@@ -90,8 +90,8 @@
 									<option value="${day}"<c:if test="${aBirth[2] == day}"> selected </c:if>>${day}</option>
 								</c:forEach>
 								</select> 일 
-								<input type="radio" name="gender" id="male"<c:if test="${modifyMember.getGender() == 'MALE'}"> checked</c:if> /> <label for="male">남</label> 
-								<input type="radio" name="gender" id="female"<c:if test="${modifyMember.getGender() == 'FEMALE'}"> checked</c:if> /> <label for="female">여</label> 
+								<input type="radio" name="gender" value="male" id="male"<c:if test="${modifyMember.getGender() == 'MALE'}"> checked</c:if> /> <label for="male">남</label> 
+								<input type="radio" name="gender" value="female" id="female"<c:if test="${modifyMember.getGender() == 'FEMALE'}"> checked</c:if> /> <label for="female">여</label> 
 								
 							</td>
 						</tr>
@@ -209,7 +209,7 @@
 								}
 								pageContext.setAttribute("aEmail", aEmail);
 							%>
-							<input type="text" name="email1" value="${aEmail[0]}" class="checkEmail" /> @ 
+							<input type="text" name="email1" value="${aEmail[0]}" class="checkEmail" data-checkDupl="Y" /> @ 
 								<select name="email2" class="checkEmail">
 									<option value="">선택</option>
 									<option value="naver.com"<c:if test="${aEmail[1] == 'naver.com'}"> selected </c:if>>naver.com</option>
@@ -228,28 +228,27 @@
 									<option value="netian.com"<c:if test="${aEmail[1] == 'netian.com'}"> selected </c:if>>netian.com</option>
 									<option value="hanmir.com"<c:if test="${aEmail[1] == 'hanmir.com'}"> selected </c:if>>hanmir.com</option>
 									<option value="sayclub.com"<c:if test="${aEmail[1] == 'sayclub.com'}"> selected </c:if>>sayclub.com</option>
-									<option value="direct">직접입력</option>
-								</select> <a href="#" class="btn" onclick="checkDulpEmail('input[name=email1]','input[name=email2]')">중복확인</a></td>
+								</select> <a href="#" class="btn" onclick="checkDulpEmail();return false;">중복확인</a></td>
 						</tr>
 						<tr>
 							<td>&nbsp;&nbsp;&nbsp;뉴스메일</td>
 							<td>
-								<input type="radio" name="newsmail" id="newsok"<c:if test="${modifyMember.getPushEmail() == 'Y'}"> checked</c:if> /> <label for="newsok">받습니다.</label>
-								<input type="radio" name="newsmail" id="nonews"<c:if test="${modifyMember.getPushEmail() == 'N'}"> checked</c:if> /> <label for="nonews">받지 않습니다.</label>
+								<input type="radio" name="newsmail" value="Y" id="newsok"<c:if test="${modifyMember.getPushEmail() == 'Y'}"> checked</c:if> /> <label for="newsok">받습니다.</label>
+								<input type="radio" name="newsmail" value="N" id="nonews"<c:if test="${modifyMember.getPushEmail() == 'N'}"> checked</c:if> /> <label for="nonews">받지 않습니다.</label>
 							</td>
 						</tr>
 						<tr>
 							<td>&nbsp;&nbsp;&nbsp;SMS안내</td>
 							<td>
-								<input type="radio" name="sms" id="smsok"<c:if test="${modifyMember.getPushSMS() == 'Y'}"> checked</c:if> /> <label for="smsok">받습니다.</label>
-								<input type="radio" name="sms" id="nosms"<c:if test="${modifyMember.getPushSMS() == 'N'}"> checked</c:if> /> <label for="nosms">받지 않습니다.</label>
+								<input type="radio" name="sms" value="Y" id="smsok"<c:if test="${modifyMember.getPushSMS() == 'Y'}"> checked</c:if> /> <label for="smsok">받습니다.</label>
+								<input type="radio" name="sms" value="N" id="nosms"<c:if test="${modifyMember.getPushSMS() == 'N'}"> checked</c:if> /> <label for="nosms">받지 않습니다.</label>
 							</td>
 						</tr>
 						<tr>
 							<td>&nbsp;&nbsp;&nbsp;앱Push알림</td>
 							<td>
-								<input type="radio" name="push" id="pushok"<c:if test="${modifyMember.getPushApp() == 'Y'}"> checked</c:if> /> <label for="pushok">받습니다.</label>
-								<input type="radio" name="push" id="nopush"<c:if test="${modifyMember.getPushApp() == 'N'}"> checked</c:if> /> <label for="nopush">받지 않습니다.</label>
+								<input type="radio" name="push" value="Y" id="pushok"<c:if test="${modifyMember.getPushApp() == 'Y'}"> checked</c:if> /> <label for="pushok">받습니다.</label>
+								<input type="radio" name="push" value="N" id="nopush"<c:if test="${modifyMember.getPushApp() == 'N'}"> checked</c:if> /> <label for="nopush">받지 않습니다.</label>
 							</td>
 						</tr>
 					</table>
@@ -266,6 +265,9 @@
 	</div>
 <script>
 $(function() {
+	$(".checkEmail").on("change", function() {
+		$("input[name='email1']").data("checkDupl", "N");
+	});
 	$("p.btn a.ok").on("click", function() {
 		var isCheck = true,
 			isPwd = 0,
@@ -335,6 +337,9 @@ $(function() {
 				alert("비밀번호가 틀립니다.\n다시 입력해주세요.");
 				return false;
 			}
+		}
+		if ($("input[name='email1']").data("checkDupl") == "N") {
+			alert("이메일 중복확인을 하셔야 정보 수정이 가능합니다.");
 			return false;
 		}
 		$("form").submit();
@@ -347,6 +352,37 @@ $(function() {
 		return false;
 	});
 });
+
+
+function checkDulpEmail() {
+	if ($("input[name='email1']").val() == '' || $("select[name='email2']").val() == '') {
+		alert("E-Mail 주소가 제대로 입력되지 않았습니다.");
+		return false;
+	}
+	var chkEmail = $("input[name='email1']").val()+"@"+$("select[name='email2']").val();
+	$.ajax({
+		url: "checkemail.do",
+		type: "post",
+		data: {email: chkEmail},
+		dataType: "json",
+		success: function(data) {
+			alert(data.msg);
+			if (data.result == 'yes') {
+				$("input[name='email1']").data("checkDupl", "Y");
+			}
+			return;
+		}
+	});
+}
+
 </script>
+<c:if test="${error_msg != null && error_msg != ''}">
+	<script>
+		alert("${error_msg}");
+	</script>
+	<%
+		session.removeAttribute("error_msg");
+	%>
+</c:if>
 </body>
 </html>

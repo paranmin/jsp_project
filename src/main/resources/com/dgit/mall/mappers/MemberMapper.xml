@@ -45,6 +45,10 @@
 		m_service_terms, m_privacy_terms, m_push_email, m_push_sms, m_push_app 
 		from member where m_no = #{no}
 	</select>
+	
+	<select id="checkDuplEmail" parameterType="String" resultType="int">
+		select count(m_no) from member where m_email = #{email};
+	</select>
 
 	<insert id="registerMember" parameterType="Member">
 		insert into
@@ -58,5 +62,55 @@
 	<update id="updatePassword" parameterType="Member">
 		update member set
 		m_pass = password(#{pwd}) where m_no = #{no}
+	</update>
+	<!-- 
+	modifyMember.setName(name);
+			modifyMember.setPwd(password);
+			modifyMember.setBirth(String.format("%s-%s-%s", year, month, day));
+			modifyMember.setGender(gender.equalsIgnoreCase("male") ? Gender.MALE : Gender.FEMALE);
+
+			String tel = String.format("%s%s%s", tel1, tel2, tel3);
+			modifyMember.setTel(CommonUtil.getInstance().phoneNumberHyphenAdd(tel, false));
+			String phone = String.format("%s%s%s", phone1, phone2, phone3);
+			modifyMember.setPhone(CommonUtil.getInstance().phoneNumberHyphenAdd(phone, false));
+
+			modifyMember.setEmail(String.format("%s@%s", email1, email2));
+
+			modifyMember.setPushEmail(newsmail.equalsIgnoreCase("Y") ? PushEmail.Y : PushEmail.N);
+			modifyMember.setPushSMS(sms.equalsIgnoreCase("Y") ? PushSMS.Y : PushSMS.N);
+			modifyMember.setPushApp(push.equalsIgnoreCase("Y") ? PushApp.Y : PushApp.N);
+	 -->
+	<update id="modifyMember" parameterType="Member">
+		update member 
+		<set>
+			<if test="pwd != null and pwd != ''">
+				m_pass = password(#{pwd}),
+			</if>
+			<if test="birth != null and birth != ''">
+				m_birth = #{birth},
+			</if>
+			<if test="gender != null">
+				m_gender = #{gender},
+			</if>
+			<if test="tel != null and tel != ''">
+				m_tel = #{tel},
+			</if>
+			<if test="phone != null and phone != ''">
+				m_phone = #{phone},
+			</if>
+			<if test="email != null and email != ''">
+				m_email = #{email},
+			</if>
+			<if test="pushEmail != null">
+				m_push_email = #{pushEmail},
+			</if>
+			<if test="pushSMS != null">
+				m_push_sms = #{pushSMS},
+			</if>
+			<if test="pushApp != null">
+				m_push_app = #{pushApp},
+			</if>
+		</set>
+		where m_no = #{no}
 	</update>
 </mapper>

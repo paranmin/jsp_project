@@ -95,7 +95,7 @@ CREATE TABLE `proimg` (
 
 
 CREATE TABLE `coupon` (
-  `c_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '쿠폰번호',
+  `c_no` int(11) NOT NULL COMMENT '쿠폰번호',
   `c_name` varchar(50) NOT NULL COMMENT '쿠폰이름',
   `c_use_more_price` int(11) NOT NULL COMMENT '사용가능금액',
   `c_sale_price` int(11) NOT NULL COMMENT '할인금액',

@@ -16,6 +16,15 @@ public class Address {
 	public Address() {
 	}
 
+	public Address(int memNo, String zipcode, String addr1, String addr2, AddressType addrType, Date regdate) {
+		this.memNo = memNo;
+		this.zipcode = zipcode;
+		this.addr1 = addr1;
+		this.addr2 = addr2;
+		this.addrType = addrType;
+		this.regdate = regdate;
+	}
+
 	public Address(int addrNo, int memNo, String zipcode, String addr1, String addr2, AddressType addrType,
 			Date regdate) {
 		this.addrNo = addrNo;
@@ -85,7 +94,7 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return String.format("[%s] %s %s",zipcode, addr1, addr2);
+		return String.format("[%s] %s %s", zipcode, addr1, addr2);
 	}
 
 }

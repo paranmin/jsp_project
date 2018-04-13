@@ -1,17 +1,16 @@
 package com.dgit.mall.dao.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.dgit.mall.dao.AddressDao;
 import com.dgit.mall.dto.Address;
 import com.dgit.mall.dto.Member;
 import com.dgit.mall.util.MySqlSessionFactory;
 
 public class AddressService {
 	private static AddressService instance = new AddressService();
+	private final String namespace = "com.dgit.mall.dao.AddressDao.";
 
 	public static AddressService getInstance() {
 		return instance;
@@ -21,25 +20,32 @@ public class AddressService {
 	}
 
 	public List<Address> selectByMemberNo(Member member) {
-		List<Address> list = null;
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
-			AddressDao dao = sqlSession.getMapper(AddressDao.class);
-
-			list = dao.selectByMemberNo(member);
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return sqlSession.selectList(namespace + "selectByMemberNo", member);
 		}
-		return list;
 	}
 
 	public Address selectHomeByMemberNo(Member member) {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
-			AddressDao dao = sqlSession.getMapper(AddressDao.class);
-
-			return dao.selectHomeByMemberNo(member);
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return sqlSession.selectOne(namespace + "selectHomeByMemberNo", member);
 		}
-		return null;
+	}
+
+	public int insertByMemberNo(Address address) {
+		int res = 0;
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "insertByMemberNo", address);
+			sqlSession.commit();
+		}
+		return res;
+	}
+
+	public int modifyByMemberNo(Address address) {
+		int res = 0;
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "modifyByMemberNo", address);
+			sqlSession.commit();
+		}
+		return res;
 	}
 }

@@ -1,17 +1,19 @@
 package com.dgit.mall.dao;
 
-import java.sql.SQLException;
-
 import com.dgit.mall.dto.Member;
 
 public interface MemberDao {
-	Member selectByLogin(Member member) throws SQLException;
+	Member selectByLogin(Member member);
 
-	Member selectByFindMember(Member member) throws SQLException;
-	
-	Member selectByMemberNo(int no) throws SQLException;
+	Member selectByFindMember(Member member);
 
-	int registerMember(Member member) throws SQLException;
-	
-	int updatePassword(Member member) throws SQLException;
+	Member selectByMemberNo(int no);
+
+	int checkDuplEmail(String email);
+
+	int registerMember(Member member);
+
+	int updatePassword(Member member);
+
+	int modifyMember(Member member);
 }

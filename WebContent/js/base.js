@@ -57,16 +57,3 @@ function daumPostcode(postEl, addr1, addr2) {
 		}
 	}).open();
 }
-
-function checkDulpEmail(emailId, emailBody) {
-	var chkEmail = $(emailId).val()+"@"+$(emailBody).val();
-	$.ajax({
-		url: "checkEmail.do",
-		type: "post",
-		data: {email: chkEmail},
-		dataType: "json",
-		success: function(result) {
-			console.log(result);
-		}
-	});
-}
