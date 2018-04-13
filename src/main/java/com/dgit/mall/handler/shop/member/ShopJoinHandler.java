@@ -8,7 +8,13 @@ import javax.servlet.http.HttpSession;
 
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Member;
+import com.dgit.mall.dto.type.PrivacyTerms;
+import com.dgit.mall.dto.type.PushApp;
+import com.dgit.mall.dto.type.PushEmail;
+import com.dgit.mall.dto.type.PushSMS;
+import com.dgit.mall.dto.type.ServiceTerms;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
+import com.dgit.mall.util.CommonUtil;
 
 public class ShopJoinHandler extends ShopCommandHandler {
 
@@ -62,22 +68,22 @@ public class ShopJoinHandler extends ShopCommandHandler {
 			joinMember.setName(name);
 			joinMember.setPwd(password);
 			joinMember.setEmail(email);
-			joinMember.setPhone(phone);
+			joinMember.setPhone(CommonUtil.getInstance().phoneNumberHyphenAdd(phone, false));
 
-			joinMember.setServiceAgree('Y');
-			joinMember.setPrivacyAgree('Y');
+			joinMember.setServiceAgree(ServiceTerms.Y);
+			joinMember.setPrivacyAgree(PrivacyTerms.Y);
 
-			joinMember.setPushEmail('N');
+			joinMember.setPushEmail(PushEmail.N);
 			if (ademail != null && ademail.equalsIgnoreCase("y")) {
-				joinMember.setPushEmail('Y');
+				joinMember.setPushEmail(PushEmail.N);
 			}
-			joinMember.setPushSMS('N');
+			joinMember.setPushSMS(PushSMS.N);
 			if (adsms != null && adsms.equalsIgnoreCase("y")) {
-				joinMember.setPushSMS('Y');
+				joinMember.setPushSMS(PushSMS.Y);
 			}
-			joinMember.setPushApp('N');
+			joinMember.setPushApp(PushApp.N);
 			if (adpush != null && adpush.equalsIgnoreCase("y")) {
-				joinMember.setPushApp('Y');
+				joinMember.setPushApp(PushApp.Y);
 			}
 			joinMember.setRegdate(new Date());
 

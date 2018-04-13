@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mall.dao.AddressDao">
+	<resultMap type="Address" id="addressResult">
+		<id property="addrNo" column="ma_no" />
+		<result property="memNo" column="m_no" />
+		<result property="zipcode" column="ma_zipcode" />
+		<result property="addr1" column="ma_addr1" />
+		<result property="addr2" column="ma_addr2" />
+		<result property="addrType" column="ma_addr_type" />
+		<result property="regdate" column="ma_regdate" />
+	</resultMap>
+	
+	<select id="selectByMemberNo" parameterType="Member" resultMap="addressResult">
+		select ma_no, m_no, ma_zipcode, ma_addr1, ma_addr2, ma_addr_type, ma_regdate
+		from member_address
+		where m_no = #{no}
+	</select>
+	
+	<select id="selectHomeByMemberNo" parameterType="Member" resultMap="addressResult">
+		select ma_no, m_no, ma_zipcode, ma_addr1, ma_addr2, ma_addr_type, ma_regdate
+		from member_address
+		where m_no = #{no} and ma_addr_type = 'HOME'
+	</select>
+	
+	<insert id="insertByMemberNo" parameterType="Address">
+		insert into member_address(m_no, ma_zipcode, ma_addr1, ma_addr2, ma_addr_type, ma_regdate)
+		values(#{memNo},#{zipcode},#{addr1},#{addr2},#{addrType}, #{regdate})
+	</insert>
+	
+	<update id="modifyByMemberNo" parameterType="Address">
+		update member_address
+		<set>
+			<if test="zipcode != null and zipcode != ''">
+				ma_zipcode = #{zipcode},
+			</if>
+			<if test="addr1 != null and addr1 != ''">
+				ma_addr1 = #{addr1},
+			</if>
+			<if test="addr2 != null and addr2 != ''">
+				ma_addr2 = #{addr2},
+			</if>
+			<if test="addrType != null">
+				ma_addr_type = #{addrType},
+			</if>
+		</set>
+		<where>
+			<if test="addrNo != null and addrNo > 0">
+				ma_no = #{addrNo}
+			</if>
+			<if test="memNo != null and memNo != ''">
+				and m_no = #{memNo}
+			</if>
+			<if test="addrType != null">
+				and ma_addr_type = #{addrType}
+			</if>
+		</where>
+	</update>
+</mapper>

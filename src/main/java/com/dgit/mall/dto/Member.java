@@ -2,6 +2,13 @@ package com.dgit.mall.dto;
 
 import java.util.Date;
 
+import com.dgit.mall.dto.type.Gender;
+import com.dgit.mall.dto.type.PrivacyTerms;
+import com.dgit.mall.dto.type.PushApp;
+import com.dgit.mall.dto.type.PushEmail;
+import com.dgit.mall.dto.type.PushSMS;
+import com.dgit.mall.dto.type.ServiceTerms;
+
 public class Member {
 	private int no;
 	private String id;
@@ -9,11 +16,14 @@ public class Member {
 	private String pwd;
 	private String email;
 	private String phone;
-	private char serviceAgree;
-	private char privacyAgree;
-	private char pushEmail;
-	private char pushSMS;
-	private char pushApp;
+	private String tel;
+	private Gender gender;
+	private String birth;
+	private ServiceTerms serviceAgree;
+	private PrivacyTerms privacyAgree;
+	private PushEmail pushEmail;
+	private PushSMS pushSMS;
+	private PushApp pushApp;
 	private Address addr;
 	private Date regdate;
 
@@ -35,14 +45,18 @@ public class Member {
 		this.regdate = regdate;
 	}
 
-	public Member(int no, String id, String name, String pwd, String email, String phone, char serviceAgree,
-			char privacyAgree, char pushEmail, char pushSMS, char pushApp, Address addr, Date regdate) {
+	public Member(int no, String id, String name, String pwd, String email, String phone, String tel, Gender gender,
+			String birth, ServiceTerms serviceAgree, PrivacyTerms privacyAgree, PushEmail pushEmail, PushSMS pushSMS,
+			PushApp pushApp, Address addr, Date regdate) {
 		this.no = no;
 		this.id = id;
 		this.name = name;
 		this.pwd = pwd;
 		this.email = email;
 		this.phone = phone;
+		this.tel = tel;
+		this.gender = gender;
+		this.birth = birth;
 		this.serviceAgree = serviceAgree;
 		this.privacyAgree = privacyAgree;
 		this.pushEmail = pushEmail;
@@ -100,43 +114,67 @@ public class Member {
 		this.phone = phone;
 	}
 
-	public char getServiceAgree() {
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
+	public ServiceTerms getServiceAgree() {
 		return serviceAgree;
 	}
 
-	public void setServiceAgree(char serviceAgree) {
+	public void setServiceAgree(ServiceTerms serviceAgree) {
 		this.serviceAgree = serviceAgree;
 	}
 
-	public char getPrivacyAgree() {
+	public PrivacyTerms getPrivacyAgree() {
 		return privacyAgree;
 	}
 
-	public void setPrivacyAgree(char privacyAgree) {
+	public void setPrivacyAgree(PrivacyTerms privacyAgree) {
 		this.privacyAgree = privacyAgree;
 	}
 
-	public char getPushEmail() {
+	public PushEmail getPushEmail() {
 		return pushEmail;
 	}
 
-	public void setPushEmail(char pushEmail) {
+	public void setPushEmail(PushEmail pushEmail) {
 		this.pushEmail = pushEmail;
 	}
 
-	public char getPushSMS() {
+	public PushSMS getPushSMS() {
 		return pushSMS;
 	}
 
-	public void setPushSMS(char pushSMS) {
+	public void setPushSMS(PushSMS pushSMS) {
 		this.pushSMS = pushSMS;
 	}
 
-	public char getPushApp() {
+	public PushApp getPushApp() {
 		return pushApp;
 	}
 
-	public void setPushApp(char pushApp) {
+	public void setPushApp(PushApp pushApp) {
 		this.pushApp = pushApp;
 	}
 
@@ -159,9 +197,9 @@ public class Member {
 	@Override
 	public String toString() {
 		return String.format(
-				"Member [no=%s, id=%s, name=%s, pwd=%s, email=%s, phone=%s, serviceAgree=%s, privacyAgree=%s, pushEmail=%s, pushSMS=%s, pushApp=%s, addr=%s, regdate=%s]",
-				no, id, name, pwd, email, phone, serviceAgree, privacyAgree, pushEmail, pushSMS, pushApp, addr,
-				regdate);
+				"Member [no=%s, id=%s, name=%s, pwd=%s, email=%s, phone=%s, tel=%s, gender=%s, birth=%s, serviceAgree=%s, privacyAgree=%s, pushEmail=%s, pushSMS=%s, pushApp=%s, addr=%s, regdate=%s]",
+				no, id, name, pwd, email, phone, tel, gender, birth, serviceAgree, privacyAgree, pushEmail, pushSMS,
+				pushApp, addr, regdate);
 	}
 
 }

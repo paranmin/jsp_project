@@ -28,5 +28,27 @@
 	<select id="selectLastInsert" resultType="int">
 		SELECT LAST_INSERT_ID() from product GROUP BY LAST_INSERT_ID()
 	</select>
-	
+	<select id="selectLastInsertOption" resultType="int">
+		SELECT LAST_INSERT_ID() from pro_option GROUP BY LAST_INSERT_ID()
+	</select>
+	<insert id="insertOption">
+		insert into pro_option(po_name, prd_no)
+		value(#{poName},#{prdNo})
+	</insert>
+	<insert id="insertOptionDetail">
+		insert into option_detail(po_no, prd_no, pod_value, pod_cost)
+		value(#{poNo},#{prdNo}, #{podValue},#{podCost})
+	</insert>
+	<select id="selectAllProduct" resultMap="productResult">
+		select * from product;
+	</select>
+	<select id="selectCateProduct" resultMap="productResult">
+		select * from product where prd_category=#{category};
+	</select>
+	<select id="selectNameProduct" resultMap="productResult">
+		select * from product where prd_name like %#{name}%;
+	</select>
+	<select id="selectNCProduct" resultMap="productResult">
+		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%")
+	</select>
 </mapper>

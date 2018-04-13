@@ -54,7 +54,18 @@ public class ShopFindMemberHandler extends ShopCommandHandler {
 			String result = "";
 			if (findType.equalsIgnoreCase("pwd")) {
 				// 랜덤 비번 생성 후 맴버 업데이트 하기
-				CommonUtil.getInstance().sendFindPwdMail(findedMember);
+				String tempPwd = CommonUtil.getInstance().createRandomPassword();
+				Member updateMember = new Member();
+				updateMember.setNo(findedMember.getNo());
+				updateMember.setName(findedMember.getName());
+				updateMember.setEmail(findedMember.getEmail());
+				updateMember.setPwd(tempPwd);
+				
+				if (MemberService.getInstance().updatePassword(updateMember) == 0) {
+					request.setAttribute("error_msg", "임시 비밀번호를 발급하지 못했습니다.\n다시 시도해주십시오.");
+					return VIEW_FRONT_PATH + "/member/findMember.jsp";
+				}
+				CommonUtil.getInstance().sendFindPwdMail(updateMember);
 				result =  "비밀번호는 가입시 등록하신 이메일로 보내드렸습니다.";
 			}
 			request.setAttribute("member", findedMember);
