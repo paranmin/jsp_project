@@ -13,7 +13,10 @@
 		select*from coupon order by c_no desc
 	</select>
 	<select id="selectByNo" resultMap="couponResult">
-		select*from coupon where cNo=#{c_no}
+		select*from coupon where c_no=#{cNo}
 	</select>
+	<insert id="insertCoupon" parameterType="Coupon">
+		insert into coupon values(#{cNo},#{cName},#{cuseMorePrice},#{csalePrice},#{climitDate})
+	</insert>
 
 </mapper>

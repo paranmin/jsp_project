@@ -8,4 +8,5 @@ import com.dgit.mall.dto.Coupon;
 public interface CouponDao {
 	public List<Coupon> selectByAll() throws SQLException;
 	public int selectByNo(Coupon coupon) throws SQLException;
+	public int insertCoupon(Coupon coupon) throws SQLException;
 }
