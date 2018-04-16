@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mall.dao.MemberDao">
+	<resultMap type="Member" id="memberResult">
+		<id property="no" column="m_no" />
+		<result property="id" column="m_id" />
+		<result property="name" column="m_name" />
+		<result property="pwd" column="m_pass" />
+		<result property="email" column="m_email" />
+		<result property="phone" column="m_phone" />
+		<result property="tel" column="m_tel" />
+		<result property="gender" column="m_gender" />
+		<result property="birth" column="m_birth" />
+		<result property="regdate" column="m_regdate" />
+		<result property="serviceAgree" column="m_service_terms" />
+		<result property="privacyAgree" column="m_privacy_terms" />
+		<result property="pushEmail" column="m_push_email" />
+		<result property="pushSMS" column="m_push_sms" />
+		<result property="pushApp" column="m_push_app" />
+		<result property="leave" column="m_leave_yn" />
+	</resultMap>
+
+	<select id="selectByLogin" parameterType="Member"
+		resultMap="memberResult">
+		select m_no, m_id, m_name, m_email, m_phone, m_leave_yn from member
+		where m_leave_yn = 'N' and m_id = #{id} and m_pass = password(#{pwd})
+	</select>
+
+	<select id="selectByFindMember" parameterType="Member"
+		resultMap="memberResult">
+		select * from member
+		<where>
+			m_name = #{name}
+			<if test="email != null and email != ''">
+				and m_email = #{email}
+			</if>
+			<if test="phone != null and phone != ''">
+				and m_phone = #{phone}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByMemberNo" resultMap="memberResult">
+		select m_no, m_id, m_name, m_pass, m_email, m_phone, m_tel, m_gender, m_birth, m_regdate,
+		m_service_terms, m_privacy_terms, m_push_email, m_push_sms, m_push_app 
+		from member where m_no = #{no}
+	</select>
+	
+	<select id="selectMemberList" resultMap="memberResult">
+		select * from member order by m_regdate desc;
+	</select>
+	
+	<select id="selectMemberListBySearch" parameterType="map" resultMap="memberResult">
+		select * from member 
+		<where>
+			<choose>
+				<when test="where != null and where == 'id'">
+					m_id like CONCAT("%", #{query}, "%")
+				</when>
+				<when test="where != null and where == 'phone'">
+					m_phone = #{query} or m_tel = #{query}
+				</when>
+				<when test="where != null and where == 'name'">
+					m_name like CONCAT("%", #{query}, "%")
+				</when>
+			</choose>
+		</where>
+		order by m_regdate desc;
+	</select>
+	
+	<select id="checkDuplEmail" parameterType="String" resultType="int">
+		select count(m_no) from member where m_email = #{email};
+	</select>
+
+	<insert id="registerMember" parameterType="Member">
+		insert into
+		member(m_id, m_name, m_pass, m_email, m_phone, m_regdate,
+		m_service_terms, m_privacy_terms, m_push_email, m_push_sms,
+		m_push_app)
+		values (#{id}, #{name}, password(#{pwd}), #{email}, #{phone}, #{regdate}, 
+		#{serviceAgree}, #{privacyAgree}, #{pushEmail}, #{pushSMS}, #{pushApp})
+	</insert>
+
+	<update id="updatePassword" parameterType="Member">
+		update member set
+		m_pass = password(#{pwd}) where m_no = #{no}
+	</update>
+
+	<update id="modifyMember" parameterType="Member">
+		update member 
+		<set>
+			<if test="pwd != null and pwd != ''">
+				m_pass = password(#{pwd}),
+			</if>
+			<if test="birth != null and birth != ''">
+				m_birth = #{birth},
+			</if>
+			<if test="gender != null">
+				m_gender = #{gender},
+			</if>
+			<if test="tel != null and tel != ''">
+				m_tel = #{tel},
+			</if>
+			<if test="phone != null and phone != ''">
+				m_phone = #{phone},
+			</if>
+			<if test="email != null and email != ''">
+				m_email = #{email},
+			</if>
+			<if test="pushEmail != null">
+				m_push_email = #{pushEmail},
+			</if>
+			<if test="pushSMS != null">
+				m_push_sms = #{pushSMS},
+			</if>
+			<if test="pushApp != null">
+				m_push_app = #{pushApp},
+			</if>
+		</set>
+		where m_no = #{no}
+	</update>
+	
+	<update id="leaveMember" parameterType="Member">
+		update member set m_leave_yn = 'Y' where m_no = #{no}
+	</update>
+</mapper>

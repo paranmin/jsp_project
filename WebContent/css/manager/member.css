@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+section #container {
+	width: 95%;
+	margin: 10px auto;
+	min-height: 500px;
+}
+
+section #container h2 {
+	margin-bottom: 20px;
+}
+
+section #container .searchArea {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+section #container .searchArea select, section #container .searchArea input {
+	outline: none;
+	vertical-align: top;
+}
+
+section #container .searchArea select {
+	height: 28px;
+}
+
+section #container .searchArea input[type='text'] {
+	height: 25px;
+}
+
+section #container .searchArea input[type='submit'] {
+	width: 50px;
+	height: 28px;
+}
+
+section #container table.memlist {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+section #container table.memlist th, section #container table.memlist td
+	{
+	border: 1px solid #eaeaea;
+	padding: 5px;
+}
+
+section #container table.memlist th {
+	background-color: #f1f1f1;
+	height: 30px;
+}
+
+.td-center {
+	text-align: center;
+}

@@ -1,0 +1,299 @@
+@CHARSET "UTF-8";
+
+
+
+div#orderContent{
+	width: 1410px;
+	min-width: 1240px;
+	margin: 150px auto;
+	overflow: hidden;
+}
+div#orderContent h2{
+	font-size: 18px;
+	text-align: center;
+	display: block;
+	font-family: 'IBM Plex Serif', serif;
+}
+div#orderContent p.rightback{
+	text-align: right;
+}
+div#orderContent p a{
+	color:#ccc;
+	text-decoration: none;
+	font-family: 'IBM Plex Serif', serif;
+}
+div.orderList{
+	overflow: hidden;
+}
+
+div#orderContent .orderList .orderTitle{
+	text-align:left;
+	font-size: 13px;
+	margin-top: 10px;
+}
+div#orderContent .orderList .orderTitle p{
+	font-weight: bold;
+}
+div#orderContent .orderList .orderTitle span{
+	font-weight: normal;
+	padding-left: 10px;
+}
+div#orderContent .orderList .orderTable{
+	margin:10px 0px 10px 10px;
+	text-align: center;
+	font-size: 13px;
+}
+div#orderContent .orderList .orderTable table{
+	width: 100%;
+	
+}
+
+div#orderContent .orderList .orderTable th{
+	height: 32px;
+	line-height: 32px;
+}
+
+div#orderContent .orderList .orderTable .pic{
+	width: 212px;
+}
+div#orderContent .orderList .orderTable .proName{
+	width: 777px;
+}
+div#orderContent .orderList .orderTable .count{
+	width: 195px;
+}
+
+tr.proContent td{
+	text-align: center;
+}
+div.orderTable .proImg{
+	padding:5px;
+	text-align: center;
+	width: 150px;
+	height: 187px;
+	line-height: 213px;
+}
+
+td.proNamehr{
+	width: 400px;
+}
+div.orderTable tr.allProPrice td{
+	border:1px solid #EAEAEA;
+	height: 73px;
+	
+}
+div.orderTable tr.allProPrice td p{
+	text-align: right;
+	font-size: 13px;
+	line-height: 73px;
+	border:1px solid #EAEAEA;
+}
+tr.allProPrice td{
+	border-bottom:1px solid #EAEAEA;
+}
+div.orderInfo{
+	margin-top: 50px;
+	overflow: hidden;
+}
+div.orderInfo p.customerInfo{
+	font-weight: bold;
+	font-size: 13px;
+	float: left;
+	padding-left: 13px;
+}
+div.custable{
+	margin-top: 40px;
+	padding-left: 13px;
+	font-size: 13px;
+	font-weight: bold;
+}
+div.custable .grayBox{
+	background-color: #EAEAEA;
+	text-align: center;
+	width: 200px;
+}
+div.custable table{
+	width: 1390px;
+	border-collapse: collapse;
+}
+div.custable table td{
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	height: 50px;
+	line-height: 50px;
+}
+div.custable .paddingInput{
+	padding-left: 20px;
+}
+div.custable input{
+	border:1px solid #EAEAEA;
+	height: 30px;
+	width: 120px;
+	text-align: center;
+}
+div.adrtable .grayBox{
+	background-color: #EAEAEA;
+	text-align: center;
+	width: 200px;
+	font-weight: bold;
+}
+div.addressInfo{
+	margin-top: 40px;
+	font-size: 13px;
+	overflow: hidden;
+	padding-left: 13px;
+}
+div.adrtable{
+	margin-top: 20px;
+}
+div.adrtable table{
+	width: 1390px;
+	border-collapse: collapse;
+}
+div.adrtable table td{
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	padding:3px;
+	/* height: 50px;
+	line-height: 50px; */
+}
+div.addressInfo p.adrInfo{
+	font-weight: bold;
+	float: left;
+	margin-right: 10px;
+}
+div.adrtable .paddingInput{
+	padding-left: 13px;
+}
+div.adrtable input{
+	border:1px solid #EAEAEA;
+	text-align: center;
+}
+div.adrtable input.sizeInput{
+	width: 50px;
+}
+td.paddingInput select{
+	height: 30px;
+	
+}
+td.paddingInput .post1{
+	width: 100px;
+}
+td.paddingInput textarea{
+	margin-top:8px;
+}
+td.paddingInput .sizeContent{
+	margin-bottom:0px;
+	font-size: 9px;
+	
+}
+input.inputheight{
+	width: 120px;
+}
+input#inputheight2{
+	width: 300px;
+}
+input#inputheight1{
+	width: 300px;
+}
+
+input.inputheight,input.sizeInput,input.post1,input.post2{
+	height: 30px;
+}
+ta.paddingInput p.sizeContent{
+	height: 31px;
+	line-height: 31px;
+}
+button.adrlist{
+	border:1px solid black;
+	background-color: white;
+	font-weight: bold;
+	font-size: 11px;
+	padding:3px 10px;
+}
+button.postlist{
+	border:1px solid #EAEAEA;
+	background-color:#EAEAEA;
+	font-size: 11px;
+	padding:3px 10px;
+}
+div.couponUse{
+	margin-top: 40px;
+	font-size: 13px;
+	overflow: hidden;
+}
+div.couponUse p.couponP{
+	font-weight: bold;
+}
+div.couponinfo{
+	margin-top: 20px;
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	padding:10px 10px 10px 13px;
+}
+input.inputCoupon{
+	height: 30px;
+	border:1px solid #EAEAEA;
+}
+
+button.btnCoupon{
+	color:black;
+	background-color: #EAEAEA;
+	font-size: 13px;
+	border-color:#EAEAEA;
+	width: 80px;
+	height: 25px;
+	padding:5px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+}
+div.couponinfo > p.introCoupon{
+	margin-top: 10px;
+}
+div.couponinfo > p.final{
+	font-size: 15px;
+	font-weight: bold;
+}
+div.orderpayway{
+	
+	margin-top: 40px;
+	padding-left: 13px;
+}
+div.orderpayway p.orderway{
+	font-weight: bold;
+	font-size: 13px;
+}
+div.orderchoice{
+	margin-top: 20px;
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	padding:10px 10px 10px 13px;
+}
+div.orderchoice select{
+	
+	height: 20px;
+	border-color: #EAEAEA;
+}
+div.OrderReac{
+	margin-top: 40px;
+	text-align: center;
+}
+div.OrderReac .orderNow{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	background-color:  #1b1b1b;
+	border-color:#1b1b1b;
+	color:white;
+	margin-left: 5px;
+}
+div.OrderReac .orderReset{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	border-color: #EAEAEA;
+}
+
+

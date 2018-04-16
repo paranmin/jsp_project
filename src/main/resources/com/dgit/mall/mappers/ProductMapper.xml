@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mall.dao.ProductDao">
+	<resultMap type="Product" id="productResult">
+		<id property="prdNo" column="prd_no" />
+		<result property="category" column="prd_category" />
+		<result property="name" column="prd_name" />
+		<result property="subDesc" column="prd_sub_desc" />
+		<result property="cost" column="prd_cost" />
+		<result property="sellingPrice" column="prd_selling_price" />
+		<result property="discountPer" column="prd_discount_per" />
+		<result property="content" column="prd_content" />
+		<result property="useOption" column="prd_use_option" />
+		<result property="stock" column="stock" />
+		<result property="mainImg" column="mainImg" />
+	</resultMap>
+	
+	<insert id="insertProduct" parameterType="product">
+		insert into 
+		product(prd_category, prd_name, prd_sub_desc, prd_cost, prd_selling_price, prd_discount_per, prd_use_option, prd_stock, prd_main_img) 
+		values(#{category}, #{name}, #{subDesc}, #{cost}, #{sellingPrice}, #{discountPer}, #{useOption}, #{stock}, #{mainImg})
+	</insert>
+	<insert id="insertProImg" parameterType="proimg">
+		insert into
+		proimg(img, prd_no)
+		values(#{img}, #{prdNo});
+	</insert>
+	<select id="selectLastInsert" resultType="int">
+		SELECT LAST_INSERT_ID() from product GROUP BY LAST_INSERT_ID()
+	</select>
+	<select id="selectLastInsertOption" resultType="int">
+		SELECT LAST_INSERT_ID() from pro_option GROUP BY LAST_INSERT_ID()
+	</select>
+	<insert id="insertOption">
+		insert into pro_option(po_name, prd_no)
+		value(#{poName},#{prdNo})
+	</insert>
+	<insert id="insertOptionDetail">
+		insert into option_detail(po_no, prd_no, pod_value, pod_cost)
+		value(#{poNo},#{prdNo}, #{podValue},#{podCost})
+	</insert>
+	<select id="selectAllProduct" resultMap="productResult">
+		select * from product;
+	</select>
+	<select id="selectCateProduct" resultMap="productResult">
+		select * from product where prd_category=#{category};
+	</select>
+	<select id="selectNameProduct" resultMap="productResult">
+		select * from product where prd_name like %#{name}%;
+	</select>
+	<select id="selectNCProduct" resultMap="productResult">
+		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%")
+	</select>
+</mapper>

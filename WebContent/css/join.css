@@ -1,0 +1,228 @@
+@charset "UTF-8";
+
+#joinContent {
+	width: 1410px;
+	margin: 83px auto 150px;
+	min-height: 580px;
+	font-size: 12px;
+	min-height: 700px;
+}
+
+/* 이용 약관 */
+#joinContent h2 {
+	margin-top: 50px;
+	font-family: 'IBM Plex Serif', serif;
+	font-size: 1.5em;
+	letter-spacing: 3px;
+	text-align: center;
+}
+
+#joinContent .allAgree {
+	margin-top: 30px;
+	width: 1408px;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #EAEAEA;
+	overflow: hidden;
+}
+
+#joinContent .allAgree label {
+	display: inline-block;
+	font-size: 1.4em;
+	font-weight: bold;
+	margin-left: 20px;
+}
+#joinContent .allAgree label input {
+	height: 15px;
+	width: 15px;
+}
+
+#joinContent .unitAgree {
+	border-right: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	border-left: 1px solid #EAEAEA;
+}
+
+#joinContent .unitAgree ul {
+	width: 600px;
+	overflow: hidden;
+}
+#joinContent .unitAgree ul li {
+	height: 45px;
+	line-height: 45px;
+}
+#joinContent .unitAgree ul li:first-child {
+	float: left;
+	margin-left: 50px;
+}
+#joinContent .unitAgree ul li:last-child {
+	float: right;
+	margin-right: 50px;
+}
+#joinContent .unitAgree ul li a {
+	border: 1px solid #ccc;
+	padding: 6px 10px;
+	color: #333;
+}
+
+#joinContent .unitAgree .marketingArea {
+	border-top: 1px dotted #EAEAEA;
+	margin: 0 20px;
+}
+
+#joinContent .unitAgree .marketingArea p {
+	margin: 20px 30px;
+	line-height: 20px;
+}
+#joinContent .agreeArea {
+	border-bottom: 1px solid #EAEAEA;
+}
+#joinContent .agreeArea p.btn {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+#joinContent .agreeArea input[type="submit"] {
+	border: none;
+	height: 45px;
+	background-color: #000;
+	color: #fff;
+	width: 250px;
+	font-weight: bold;
+	outline: none;
+	cursor: pointer;
+}
+
+#joinContent .termsArea {
+	margin-top: 40px;
+}
+#joinContent .termsArea h3 {
+	margin: 10px 5px;
+}
+
+#joinContent .termsArea textarea {
+	border-color: #EAEAEA;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+#joinContent .termsArea table {
+	border-collapse: collapse;
+	width: 1408px;
+}
+
+#joinContent .termsArea table th, #joinContent .termsArea table td {
+	border: 1px solid #e0e0e0;
+	padding: 15px;
+	text-align: center;
+}
+#joinContent .termsArea table th {
+	background-color: #f6f6f6;
+}
+
+#joinContent .termsArea p {
+	margin-top: 50px;
+	font-weight: bold;
+}
+/* 이용 약관 */
+
+/* 회원 가입 페이지 */
+#joinContent .formArea {
+	width: 600px;
+	margin: 80px auto;
+	min-height: 500px;
+}
+
+#joinContent .formArea h2 {
+	border-bottom: 3px solid #333;
+	padding-bottom: 3px;
+}
+
+#joinContent .formArea ul {
+	width: 510px;
+	margin: 30px auto;
+}
+#joinContent .formArea ul li {
+	position: relative;
+}
+#joinContent .formArea ul li > label {
+	position: absolute;
+	left: 30px;
+	font-weight: bold;
+	font-family: 'Nanum Myeongjo', serif;
+	font-size: 1.2em;
+}
+
+#joinContent .formArea ul li.input {
+	border-top: 1px solid #EAEAEA;
+	border-right: 1px solid #EAEAEA;
+	border-left: 1px solid #EAEAEA;
+	height: 50px;
+	line-height: 50px;
+}
+
+#joinContent .formArea ul li.input.last {
+	border-bottom: 1px solid #EAEAEA;
+}
+
+#joinContent .formArea ul li.input input {
+	margin-left: 30px;
+	height: 30px;
+	vertical-align: middle;
+	width: 460px;
+	border: none;
+	outline: none;
+	font-weight: bold;
+	font-family: 'Nanum Myeongjo', serif;
+	font-size: 1.2em;
+}
+
+#joinContent .formArea ul li.chk {
+	margin-top: 15px;
+	font-weight: bold;
+	color: #0549bb;
+}
+
+#joinContent .formArea ul li.msg {
+	margin-top: 5px;
+	color: #888;
+}
+
+#joinContent .formArea p {
+	margin-top: 50px;
+	text-align: center;
+}
+
+#joinContent .formArea p input[type="submit"] {
+	border: 3px solid #eaeaea;
+	border-radius: 10px;
+	background-color: #333;
+	color: #fff;
+	width: 200px;
+	height: 60px;
+	font-size: 2em;
+	cursor: pointer;
+	outline: none;
+}
+/* 회원 가입 페이지 */
+
+/* 회원 완료 */
+#joinContent > div.joinComplate {
+	width: 500px;
+	margin: 30px auto;
+}
+
+#joinContent > div.joinComplate h3 {
+	border-bottom: 2px solid #333;
+	padding-bottom: 5px;
+	margin-bottom: 20px;
+}
+
+#joinContent > div p {
+	margin: 10px 0;
+}
+/* 회원 완료 */
+
+/* 회원 찾기 */
+
+/* 회원 찾기 */
