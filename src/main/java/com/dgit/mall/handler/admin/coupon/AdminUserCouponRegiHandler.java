@@ -1,5 +1,6 @@
 package com.dgit.mall.handler.admin.coupon;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,9 @@ import org.apache.ibatis.session.SqlSession;
 import com.dgit.mall.dao.CouponDao;
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Coupon;
-import com.dgit.mall.dto.Member;
+import com.dgit.mall.dto.Member;import com.dgit.mall.dto.UserCoupon;
 import com.dgit.mall.handler.admin.AdminCommandHandler;
+import com.dgit.mall.util.CommonUtil;
 import com.dgit.mall.util.MySqlSessionFactory;
 
 public class AdminUserCouponRegiHandler extends AdminCommandHandler {
@@ -51,9 +53,39 @@ public class AdminUserCouponRegiHandler extends AdminCommandHandler {
 			request.setAttribute("query", valueSearch);
 			return TEMPLATE_PAGE;
 		}else if(request.getMethod().equalsIgnoreCase("post")){
-			
+			SqlSession sql = null;
+			String[] couponNo =request.getParameterValues("couponlist");
+			String[] memberNo = request.getParameterValues("memberlist");
+			//List<UserCoupon> uclist = null;
+			try {
+				sql = MySqlSessionFactory.openSession();
+				CouponDao dao = sql.getMapper(CouponDao.class);
+					for(int m=0; m<memberNo.length; m++){
+						Member mr = new Member();
+						mr.setNo(Integer.parseInt(memberNo[m]));
+						for(int i=0; i<couponNo.length; i++){
+							Coupon cp = new Coupon();
+							cp.setcNo(couponNo[i]);
+							UserCoupon uc = new UserCoupon();
+							uc.setmNo(mr);
+							uc.setcNo(cp);
+							dao.insertMemberCoupon(uc);
+							//uclist.add(uc);
+						}	
+					}
+					/*for(UserCoupon uCoupon : uclist){
+						dao.insertMemberCoupon(uCoupon);
+					}*/
+					sql.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				sql.close();
+			}
+			Map<String, Object> map = new HashMap<>();
+			map.put("result", "send");
+			CommonUtil.getInstance().printMessageByJSON(response, map);
 		}
-		
 		return null;
 	}
 
