@@ -19,17 +19,14 @@ public class ShopCouponHandler extends ShopCommandHandler {
 		if(request.getMethod().equalsIgnoreCase("get")){
 			String pr = request.getParameter("price");
 			int price = Integer.parseInt(pr);
-			SqlSession se = null;
-			try {
-				se = MySqlSessionFactory.openSession();
+			
+			try (SqlSession se = MySqlSessionFactory.openSession()){
 				CouponDao dao = se.getMapper(CouponDao.class);
 				List<Coupon> list = dao.selectByAll();
 				request.setAttribute("list", list);
 				request.setAttribute("price", price);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}finally {
-				se.close();
 			}
 			return VIEW_FRONT_PATH+"order/coupon.jsp";
 		}else if(request.getMethod().equalsIgnoreCase("post")){

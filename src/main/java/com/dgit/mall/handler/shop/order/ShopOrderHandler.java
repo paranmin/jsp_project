@@ -16,9 +16,8 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			request.setAttribute("cNo", cNo);*/
 			return VIEW_FRONT_PATH + "order/orderPage.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
-			String imgsrc = request.getParameter("proImg");
-			String proname = request.getParameter("productname");
-			
+			String productPr = request.getParameter("orderChargePrice");
+			String delfee = request.getParameter("delfee");
 		}
 		return null;
 	}

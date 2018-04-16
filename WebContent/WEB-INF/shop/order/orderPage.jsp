@@ -235,6 +235,8 @@ $(function(){
 											결제 금액 : <span class="orderChargePrice">25000</span>원+배송료 <span
 												class="delfee">2500</span>원 = <span class="toalpriceorder"
 												name="toalpriceorder"></span>원
+												<input type="hidden" value="25000" name="orderChargePrice"> <!-- 결제금액  -->
+												<input type="hidden" value="2500" name="delfee"><!--배송비 -->
 										</p></td>
 								</tr>
 							</table>
@@ -354,7 +356,7 @@ $(function(){
 						</div>
 
 						<div class="OrderReac">
-							<input type="submit" value="주문하기" class="orderNow"><input
+							<input type="submit" value="주문하기" class="orderNow" name="orderNow"><input
 								type="reset" value="주문취소" class="orderReset">
 						</div>
 					</div>
