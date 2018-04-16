@@ -1,3 +1,4 @@
+<%@page import="com.dgit.mall.dto.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -135,6 +136,9 @@ fieldset.productDetail button.imgdelete{
 }
 </style>    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<%
+	Product pro = (Product)request.getAttribute("pro");
+%>
 <script>
 $(function(){
     $("table#proOption").css("display","none");    
@@ -168,12 +172,6 @@ $(function(){
  			$("table#proOption").css("display","none");
  		}
  	});  
- 	
- 	if($("input#option").val()==1){
- 		$("table#proOption").css("display","block"); 
- 	}else{
- 		$("table#proOption").css("display","none");
- 	};
 	
  	$("button#op_nameadd").click(function(){
 		var $tr = $("<tr class='parent'>");
@@ -283,6 +281,13 @@ $(function(){
  		return false;   
  	});
 });
+	window.onload = function(){
+		if($("input#option:checked").val()==1){
+	 		$("table#proOption").css("display","block"); 
+	 	}else{
+	 		$("table#proOption").css("display","none");
+	 	};
+	}
 </script>
 </head>
 <body>
@@ -372,7 +377,7 @@ $(function(){
 				<input type="radio" id="option" name="use_option" value="1" <c:if test="${pro.useOption=='1' }"> checked="checked" </c:if>>사용
 				<input type="radio" id="option" name="use_option" value="0" <c:if test="${pro.useOption=='0' }"> checked="checked" </c:if>>사용안함
 			</p>
-			<c:if test="${pro.useOption=='1'}">
+			
 				<table id="proOption">
 					<tr>
 						<td><button id="op_nameadd">+옵션명추가</button></td>
@@ -413,8 +418,7 @@ $(function(){
 							</c:forEach>
 							<c:set value="${end+1 }" var="fir"/>
 					</c:forEach>
-				</table>		
-			</c:if>
+				</table>	
 			<p class="submit">
 				<input type="submit" value="수정">
 				<input type="reset" value="취소">
