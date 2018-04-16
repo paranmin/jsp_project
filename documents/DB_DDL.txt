@@ -80,7 +80,7 @@ CREATE TABLE `member` (
 CREATE TABLE `member_address` (
   `ma_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원주소 번호',
   `m_no` int(11) DEFAULT NULL COMMENT '회원번호',
-  `ma_zipcode` varchar(6) DEFAULT NULL COMMENT '우편번호',
+  `ma_zipcode` varchar(7) DEFAULT NULL COMMENT '우편번호',
   `ma_addr1` varchar(255) DEFAULT NULL COMMENT '도로명주소',
   `ma_addr2` varchar(255) DEFAULT NULL COMMENT '상세주소',
   `ma_addr_type` enum('HOME','OTHER') DEFAULT NULL COMMENT '주소 타입',
@@ -88,7 +88,7 @@ CREATE TABLE `member_address` (
   PRIMARY KEY (`ma_no`),
   KEY `FK_member_TO_member_address` (`m_no`),
   CONSTRAINT `FK_member_TO_member_address` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원배송주소';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='회원배송주소';
 
 
 CREATE TABLE `order` (
