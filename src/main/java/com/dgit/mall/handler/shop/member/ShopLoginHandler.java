@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Member;
+import com.dgit.mall.dto.type.MemberLeave;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 
 public class ShopLoginHandler extends ShopCommandHandler {
@@ -30,7 +31,6 @@ public class ShopLoginHandler extends ShopCommandHandler {
 				response.sendRedirect("login.do");
 				return null;
 			}
-
 			session.setAttribute("auth", loginMember);
 			response.sendRedirect(request.getContextPath() + "/shop/main.do");
 		}

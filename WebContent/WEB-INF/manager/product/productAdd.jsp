@@ -102,11 +102,21 @@ $(function(){
 		return false;
 	});
 	$("button.img_plus").click(function(){
+		var $div = $("<div>");
 		var $input = $("<input type='file' name='files'>");
-		$("div.img_plus").append($("<br>"));
-		$("div.img_plus").append($input);
+		var $btn = $("<button class='img_del'>");
+		$($btn).text("삭제");   
+		/* $("div.img_plus").append($("<br>")); */
+		$($div).append($input);
+		$($div).append($btn);   
+		$("div.img_plus").append($div);
 		return false;
 	});
+	
+	$(document).on("click","button.img_del", function(){
+ 		$(this).parent().remove();
+ 		return false;
+ 	});
  	
  	$("input#option").change(function(){
  		if($("input#option:checked").val()==1){

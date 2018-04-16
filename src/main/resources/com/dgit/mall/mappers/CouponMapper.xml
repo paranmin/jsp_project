@@ -9,11 +9,36 @@
 		<result property="climitDate" column="c_limit_date"/> <!-- 쿠폰사용기한 -->
 	</resultMap>
 	
+	<resultMap type="UserCoupon" id="userCouponResult" extends="couponResult">
+		<id property="ucNo" column="uc_no"/>
+		<result property="yn" column="uc_use_yn" />
+	</resultMap>
+	
+	<resultMap type="Member" id="userCouponWithmemberResult" extends="userCouponResult">
+		<id property="no" column="m_no"/>
+		<result property="id" column="m_id"/>
+		<result property="name" column="m_name"/>
+		<result property="phone" column="m_phone"/>
+	</resultMap>
+	
+	
+	<!-- 쿠폰 -->
 	<select id="selectByAll" resultMap="couponResult">
 		select*from coupon order by c_no desc
 	</select>
 	<select id="selectByNo" resultMap="couponResult">
-		select*from coupon where cNo=#{c_no}
+		select*from coupon where c_no=#{cNo}
 	</select>
-
+	<insert id="insertCoupon" parameterType="Coupon">
+		insert into coupon values(#{cNo},#{cName},#{cuseMorePrice},#{csalePrice},#{climitDate})
+	</insert>
+	<delete id="deleteCoupon" parameterType="String">
+		delete from coupon where c_no=#{cNo}
+	</delete>
+	<!-- 쿠폰 -->
+	
+	<!-- 쿠폰 회원 등록 -->
+	<insert id="insertMemberCoupon" parameterType="UserCoupon">
+		insert into user_coupon(c_no,m_no) values (#{cNo.cNo},#{mNo.no});
+	</insert>
 </mapper>

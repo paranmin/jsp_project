@@ -101,6 +101,38 @@ table#proOption th#opprice{
 table#proOption td{
 	border-bottom:1px solid gainsboro;      
 }
+div.img img{
+	width:300px;
+	height:300px;      
+}
+.img_main_plus div.img{
+	position: relative;
+	width:300px;
+	height:300px;
+}
+.img_plus div.img{
+	position: relative;
+	width:300px;
+	height:300px;
+}
+fieldset.productDetail button.imgdeletemain{
+	border:1px solid red;
+	background:red;
+	color:white;
+	position: absolute;
+	top:10px;
+	right:0;
+	width:100px;
+}
+fieldset.productDetail button.imgdelete{
+	border:1px solid red;
+	background:red;
+	color:white;
+	position: absolute;
+	top:10px;
+	right:0;
+	width:100px;
+}
 </style>    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
@@ -113,11 +145,21 @@ $(function(){
 		return false;
 	});
 	$("button.img_plus").click(function(){
+		var $div = $("<div>");
 		var $input = $("<input type='file' name='files'>");
-		$("div.img_plus").append($("<br>"));
-		$("div.img_plus").append($input);
+		var $btn = $("<button class='img_del'>");
+		$($btn).text("삭제");   
+		/* $("div.img_plus").append($("<br>")); */
+		$($div).append($input);
+		$($div).append($btn);   
+		$("div.img_plus").append($div);
 		return false;
 	});
+	
+	$(document).on("click","button.img_del", function(){
+ 		$(this).parent().remove();
+ 		return false;
+ 	});
  	
  	$("input#option").change(function(){
  		if($("input#option:checked").val()==1){
@@ -213,6 +255,33 @@ $(function(){
  		return false;
  		//$.post("add.do", $("#form").serialize());
  	});
+ 	/* $("button.imgdeletemain").click(function(){
+ 		var $src = $(this).prev().attr("src");
+ 		var src = $src.split("/");
+ 		console.log(src);  
+ 		console.log(src.length); 
+ 		console.log(src[src.length-1]);
+ 		$("input#deleteMainImage").val(src[src.length-1]);
+ 		$(this).parent().remove();
+ 		return false;   
+ 	}); */
+ 	var i = 0;
+ 	$("button.imgdelete").click(function(){
+ 		i++;
+ 		var $src = $(this).prev().attr("src");
+ 		var src = $src.split("/");
+ 		var val = $("input#deleteDetailImage").val();
+ 		if(i==1){
+ 			$("input#deleteDetailImage").val(src[src.length-1]);
+ 		}else{
+ 			$("input#deleteDetailImage").val(val+","+src[src.length-1]);
+ 		}
+ 		
+ 		console.log(i);
+ 		console.log("val : "+$("input#deleteDetailImage").val()); 
+ 		$(this).parent().remove();
+ 		return false;   
+ 	});
 });
 </script>
 </head>
@@ -276,18 +345,25 @@ $(function(){
 			<p>
 				<label>상품 메인 이미지</label>
 				<div class="img_main_plus">
-					<img src="${pro.mainImg }">
-					<input type="file" name="mainimg" value="이미지 불러오기">
+					<div class="img">
+						<img src="${pageContext.request.contextPath}/images/${pro.mainImg }">   
+						<button class="imgdeletemain">이미지 삭제</button>
+					</div>
+					<br>
+					<input type="file" name="mainimg" value="이미지 불러오기" accept="image/*">
 				</div>
 			</p>
 			<p>
 				<label>상품 상세 이미지</label>
 				<div class="img_plus">
 					<c:forEach var="pimg" items="${proimg }">
-						<img src="${pimg.img }">
+						<div class="img">
+							<img src="${pageContext.request.contextPath}/images/${pimg.img }">
+							<button class="imgdelete">이미지 삭제</button>
+						</div>
 					</c:forEach>
 					<br>
-					<input type="file" name="files" value="이미지 불러오기">
+					<input type="file" name="files" value="이미지 불러오기" accept="image/*">
 					<button class="img_plus">추가</button>
 				</div>
 			</p>
@@ -342,6 +418,8 @@ $(function(){
 			<p class="submit">
 				<input type="submit" value="수정">
 				<input type="reset" value="취소">
+				<input type="hidden" id="no" name="no" value="${pro.prdNo }">
+				<input type="hidden" id="deleteDetailImage" name="deleteDetailImage">
 			</p>
 		</fieldset>
 	</form>

@@ -82,4 +82,20 @@
 	<select id="SelectOpDeByno" resultMap="optionDetailResult">
 		select * from option_detail where po_no=#{poNo}
 	</select>
+	
+	<update id="updateProduct">
+		update product set prd_category=#{category}, prd_name=#{name}, prd_sub_desc=#{subDesc}, prd_cost=#{cost}, 
+		prd_selling_price=#{sellingPrice}, prd_discount_per=#{discountPer}, prd_use_option=#{useOption}, prd_stock=#{stock}, 
+		prd_main_img=#{mainImg}
+		where prd_no=#{prdNo}
+	</update>
+	<delete id="deleteOption">
+		delete from pro_option where prd_no=#{prdNo}
+	</delete>
+	<delete id="deleteOptionDetail">
+		delete from option_detail where po_no=#{poNo}
+	</delete>
+	<delete id="deleteProimg">
+		delete from proimg where prd_no=#{prdNo} and img=#{img}
+	</delete>
 </mapper>

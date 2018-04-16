@@ -56,9 +56,11 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 
 				Proimg img = new Proimg();
 				for (int i = 0; i < files.length; i++) {
-					img.setPrdNo(prdno);
-					img.setImg(files[i]);
-					dao.insertProImg(img);
+					if(!files[i].isEmpty()){
+						img.setPrdNo(prdno);
+						img.setImg(files[i]);
+						dao.insertProImg(img);
+					}
 				}
 
 				if (option.equals("1")) {

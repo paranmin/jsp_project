@@ -26,4 +26,11 @@ public interface ProductDao {
 	
 	public List<Option> SelectOptionByno(int no) throws SQLException;
 	public List<OptionDetail> SelectOpDeByno(int OPno) throws SQLException;
+	
+	public void updateProduct(Product pro) throws SQLException;
+	
+	public void deleteOption(int no) throws SQLException;
+	public void deleteOptionDetail(int no) throws SQLException;
+	
+	public void deleteProimg(Proimg img) throws SQLException;
 } 
