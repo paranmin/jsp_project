@@ -1,4 +1,4 @@
-package com.dgit.mall.handler.shop.mypage;
+package com.dgit.mall.handler.shop.member;
 
 import java.util.HashMap;
 import java.util.Map;

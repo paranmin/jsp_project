@@ -9,7 +9,6 @@ CREATE TABLE `admin_board` (
   PRIMARY KEY (`ab_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='게시판 생성정보';
 
-<<<<<<< HEAD
 CREATE TABLE `member` (
   `m_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원번호',
   `m_id` varchar(50) NOT NULL COMMENT '회원ID',
@@ -52,11 +51,12 @@ CREATE TABLE `mall`.`product` (
   `prd_discount_per` varchar(10) DEFAULT NULL COMMENT '할인율',
   `prd_use_option` char(1) DEFAULT NULL COMMENT '옵션유무',
   `prd_stock` int(11) DEFAULT NULL COMMENT '상품재고',
-  prd_main_img text NOT null,
+  prd_main_img text,
   prd_category varchar(11) NOT null,
   prd_use char(1) default 1,
   PRIMARY KEY (`prd_no`)
 );
+
 
 create table proimg(
 	img_no int(11) not null auto_increment primary key,
@@ -82,12 +82,9 @@ CREATE TABLE `mall`.`option_detail` (
   KEY `FK_pro_option_TO_option_detail` (`po_no`),
   CONSTRAINT `FK_pro_option_TO_product_option_detail` FOREIGN KEY (`po_no`) REFERENCES `pro_option` (`po_no`)
 );
+
 CREATE TABLE `mall`.`board` (
   `brd_no` int(11) NOT NULL auto_increment COMMENT '글번호',
-=======
-CREATE TABLE `board` (
-  `brd_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '글번호',
->>>>>>> refs/remotes/origin/master
   `brd_code` varchar(20) NOT NULL COMMENT '게시판코드',
   `brd_title` varchar(50) NOT NULL COMMENT '글 제목',
   `brd_content` text NOT NULL COMMENT '글 내용',
