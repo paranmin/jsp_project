@@ -7,8 +7,11 @@
 <link rel="stylesheet" href="footercss/footer.css" />
 <link rel="stylesheet" href="footercss/footer_in.css" />
 <link rel="stylesheet" href="footercss/footerInfo.css" />
-<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display"
+	rel="stylesheet">
 <title>Insert title here</title>
+
 <style type="text/css">
 * {
 	margin: 0;
