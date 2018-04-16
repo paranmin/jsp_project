@@ -59,21 +59,26 @@ CREATE TABLE `coupon` (
 CREATE TABLE `member` (
   `m_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원번호',
   `m_id` varchar(50) NOT NULL COMMENT '회원ID',
-  `m_name` varchar(50) NOT NULL COMMENT '회원이름',
-  `m_pass` varchar(50) NOT NULL COMMENT '회원비밀번호',
-  `m_email` varchar(40) NOT NULL COMMENT '회원이메일',
-  `m_phone` varchar(30) NOT NULL COMMENT '회원전화번호',
-  `m_service_terms` enum('Y','N') DEFAULT NULL COMMENT '이용약관 동의',
-  `m_privacy_terms` enum('Y','N') DEFAULT NULL COMMENT '개인정보 동의',
-  `m_push_email` enum('Y','N') DEFAULT NULL COMMENT '이메일 알림 동의',
-  `m_push_sms` enum('Y','N') DEFAULT NULL COMMENT '문자 알림 동의',
-  `m_push_app` enum('Y','N') DEFAULT NULL COMMENT '앱 알림 동의',
+  `m_name` varchar(50) NOT NULL COMMENT '이름',
+  `m_pass` varchar(50) NOT NULL COMMENT '비밀번호',
+  `m_email` varchar(40) NOT NULL COMMENT '이메일',
+  `m_phone` varchar(14) NOT NULL COMMENT '휴대폰번호',
+  `m_tel` varchar(14) DEFAULT NULL COMMENT '전화번호',
+  `m_gender` enum('MALE','FEMALE') DEFAULT NULL COMMENT '성별',
+  `m_birth` varchar(10) DEFAULT NULL COMMENT '생일',
+  `m_service_terms` enum('Y','N') DEFAULT 'N' COMMENT '이용약관 동의',
+  `m_privacy_terms` enum('Y','N') DEFAULT 'N' COMMENT '개인정보 동의',
+  `m_push_email` enum('Y','N') DEFAULT 'N' COMMENT '이메일 알림 동의',
+  `m_push_sms` enum('Y','N') DEFAULT 'N' COMMENT '문자 알림 동의',
+  `m_push_app` enum('Y','N') DEFAULT 'N' COMMENT '앱 알림 동의',
+  `m_leave_yn` enum('Y','N') DEFAULT 'N' COMMENT '탈퇴 여부',
   `m_regdate` datetime DEFAULT NULL COMMENT '가입일',
   PRIMARY KEY (`m_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='회원';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원';
+
 
 CREATE TABLE `member_address` (
-  `ma_no` int(11) NOT NULL COMMENT '새 컬럼3',
+  `ma_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원주소 번호',
   `m_no` int(11) DEFAULT NULL COMMENT '회원번호',
   `ma_zipcode` varchar(6) DEFAULT NULL COMMENT '우편번호',
   `ma_addr1` varchar(255) DEFAULT NULL COMMENT '도로명주소',
@@ -84,6 +89,7 @@ CREATE TABLE `member_address` (
   KEY `FK_member_TO_member_address` (`m_no`),
   CONSTRAINT `FK_member_TO_member_address` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원배송주소';
+
 
 CREATE TABLE `order` (
   `ord_no` varchar(20) NOT NULL COMMENT '주문번호',
