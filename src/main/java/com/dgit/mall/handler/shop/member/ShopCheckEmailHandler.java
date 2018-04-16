@@ -12,7 +12,7 @@ import com.dgit.mall.dto.Member;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.CommonUtil;
 
-public class ShopMypageCheckEmailHandler extends ShopCommandHandler {
+public class ShopCheckEmailHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
