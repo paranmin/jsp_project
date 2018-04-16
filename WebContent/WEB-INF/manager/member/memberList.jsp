@@ -52,7 +52,7 @@
 	</c:if>
 	<c:if test="${memList == null || memList.size() == 0}">
 		<tr>
-			<td colspan="6">등록된 회원이 없습니다.</td>
+			<td colspan="7">등록된 회원이 없습니다.</td>
 		</tr>
 	</c:if>
 	</table>
@@ -62,3 +62,12 @@ $(function() {
 	
 });
 </script>
+</script>
+<c:if test="${error_msg != null && error_msg != ''}">
+	<script>
+		alert("${error_msg}");
+	</script>
+	<%
+		session.removeAttribute("error_msg");
+	%>
+</c:if>

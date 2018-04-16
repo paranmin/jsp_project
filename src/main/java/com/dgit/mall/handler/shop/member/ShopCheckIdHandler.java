@@ -5,32 +5,24 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.dgit.mall.dao.service.MemberService;
-import com.dgit.mall.dto.Member;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.CommonUtil;
 
-public class ShopCheckEmailHandler extends ShopCommandHandler {
+public class ShopCheckIdHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String email = request.getParameter("email");
+		String id = request.getParameter("id");
 
-		HttpSession session = request.getSession(false);
-		Member auth = (Member) session.getAttribute("auth");
-
-		if (auth != null) {
-			Member my = MemberService.getInstance().selectByFindMember(auth);
-
-			if (my != null && my.getEmail().equalsIgnoreCase(email)) {
-				returnResultJSON(response, "현재 사용중인 정보와 동일합니다.", "yes");
-				return null;
-			}
+		System.out.println(id);
+		if (id == null || id.equals("")) {
+			returnResultJSON(response, "아이디를 입력해주세요.", "no");
+			return null;
 		}
 
-		int res = MemberService.getInstance().checkDuplEmail(email);
+		int res = MemberService.getInstance().checkDuplId(id);
 		if (res > 0) {
 			returnResultJSON(response, "사용불가합니다.", "no");
 			return null;
@@ -46,4 +38,5 @@ public class ShopCheckEmailHandler extends ShopCommandHandler {
 		json.put("result", result);
 		CommonUtil.getInstance().printMessageByJSON(response, json);
 	}
+
 }
