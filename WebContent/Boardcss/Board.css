@@ -1,0 +1,138 @@
+@CHARSET "UTF-8";
+
+.titleArea {
+	padding: 0 0 50px;
+	clear: both;
+	text-align: center;
+	padding: 30px 30px;
+	position: relative;
+}
+
+.titleArea h1 {
+	font-size: 13px;
+	letter-spacing: 2px;
+	font-weight: normal;
+	color: #000;
+	font-weight: 900;
+	font-size: 17px;
+}
+
+caption, legend {
+	display: none;
+}
+
+.top_box {
+	clear: both;
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	margin: 0 0 10px;
+}
+
+.top_box ul li {
+	display: inline-block;
+	height: 40px;
+	margin: 0 10px 0 0;
+	list-style: none;
+	line-height: 40px;
+}
+
+.top_box ul li a {
+	color: #6f6f6f;
+}
+
+.top_box ul li a:HOVER {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.bbs-table-list {
+	margin-top: 0px;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+table {
+	width: 100%;
+	border-spacing: 0;
+	table-layout: fixed;
+	color: #494849;
+}
+
+.bbs-table-list thead th {
+	padding: 12px 0;
+	background: #f5f5f5;
+	font-size: 11px;
+	color: #222;
+	font-weight: normal;
+	border-top: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.bbs-sch {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	text-align: left;
+	float: left;
+}
+
+.bbsData .bbs-link-btm {
+	float: right;
+	margin: 20px 0px 0;
+	text-align: left;
+}
+
+.bbsData .bbs-link {
+	position: relative;
+}
+
+.btn_box_01 {
+	width: auto;
+	padding: 6px 15px;
+}
+
+img, fieldset, button {
+	border: 0 none;
+}
+
+.btn_light {
+	display: inline-block;
+	text-align: center;
+	background: #e5e5e5;
+	color: #555;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid #e5e5e5;
+}
+
+.btn_dark {
+	display: inline-block;
+	text-align: center;
+	background: #222;
+	color: #fff;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid #222;
+}
+
+a {
+	text-decoration: none;
+	color: #222;
+	letter-spacing: 0.05em;
+}
+
+.paging {
+	clear: both;
+	padding: 40px 0;
+	text-align: center;
+	font-size: 0;
+	line-height: 0;
+}
+
+.paging li {
+	display: inline;
+	list-style: none;
+}
+
+.paging li.last {
+	margin-left: -10px;
+}
