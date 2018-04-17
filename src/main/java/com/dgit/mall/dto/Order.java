@@ -3,7 +3,7 @@ package com.dgit.mall.dto;
 import com.dgit.mall.dto.type.PayType;
 
 public class Order {
-	private String ordNo;
+	private OrderProduct ordNo;
 	private int ordPrice;
 	private int ordCouponPrice;
 	private String ordOption;
@@ -11,10 +11,24 @@ public class Order {
 	private String ordMessage;
 	private PayType type;
 	private Member memberNo;
-	public String getOrdNo() {
+	public Order(OrderProduct ordNo, int ordPrice, int ordCouponPrice, String ordOption, int deliveryFee,
+			String ordMessage, PayType type, Member memberNo) {
+		super();
+		this.ordNo = ordNo;
+		this.ordPrice = ordPrice;
+		this.ordCouponPrice = ordCouponPrice;
+		this.ordOption = ordOption;
+		this.deliveryFee = deliveryFee;
+		this.ordMessage = ordMessage;
+		this.type = type;
+		this.memberNo = memberNo;
+	}
+	public Order() {
+	}
+	public OrderProduct getOrdNo() {
 		return ordNo;
 	}
-	public void setOrdNo(String ordNo) {
+	public void setOrdNo(OrderProduct ordNo) {
 		this.ordNo = ordNo;
 	}
 	public int getOrdPrice() {
@@ -59,24 +73,12 @@ public class Order {
 	public void setMemberNo(Member memberNo) {
 		this.memberNo = memberNo;
 	}
-	public Order(String ordNo, int ordPrice, int ordCouponPrice, String ordOption, int deliveryFee, String ordMessage,
-			PayType type, Member memberNo) {
-		super();
-		this.ordNo = ordNo;
-		this.ordPrice = ordPrice;
-		this.ordCouponPrice = ordCouponPrice;
-		this.ordOption = ordOption;
-		this.deliveryFee = deliveryFee;
-		this.ordMessage = ordMessage;
-		this.type = type;
-		this.memberNo = memberNo;
-	}
-	public Order() {
-	}
 	@Override
 	public String toString() {
 		return "Order [ordNo=" + ordNo + ", ordPrice=" + ordPrice + ", ordCouponPrice=" + ordCouponPrice
 				+ ", ordOption=" + ordOption + ", deliveryFee=" + deliveryFee + ", ordMessage=" + ordMessage + ", type="
 				+ type + ", memberNo=" + memberNo + "]";
 	}
+	
+
 }

@@ -44,5 +44,6 @@
 		<mapper resource="com/dgit/mall/mappers/CouponMapper.xml" />
 		<mapper resource="com/dgit/mall/mappers/BoardMapper.xml" />
 		<mapper resource="com/dgit/mall/mappers/AdBoardMapper.xml" />
+		<mapper resource="com/dgit/mall/mappers/CartMapper.xml" />
 	</mappers>
 </configuration>
