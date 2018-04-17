@@ -108,9 +108,7 @@
 			}
 		})
 		//상품 번호 번호(체크박스) 숫자 임의로 넣음 ->나중에 수정하기
-		$(".proContent").each(function(i,obj){
-			$("input:checkbox[name='chkAll']").val(i);
-		})
+		
 		//상품 옵션 input val
 		var oprionname = $(".optionname").text();
 		$("input:hidden[name='proNamehr']").val(oprionname);
@@ -157,35 +155,43 @@
 								<th class="count">가격</th>
 								<th class="cancel">취소</th>
 							</tr>
-							<tr class="proContent">
-								<td><input type="checkbox" name="chkAll"></td>
-								<td><img src="../../images/J1.jpg" class="proImg"></td>
-								<input type="hidden" name="proImg">
-								<td class="proNameTable">
-									<table>
-										<tr>
-											<td class="prdName">베이직 실리콘 귀걸이</td>
+							<c:if test="${list.size()==0 }">
+								<tr class="proContent">
+									<td colspan="6">장바구니에 담긴 상품이 없습니다. 상품을 담아주세요.</td>
+								</tr>
+							</c:if>
+								<c:if test="${list.size()>0 }">
+									<c:forEach var="items" items="${list }">
+										<tr class="proContent">
+											<td><input type="checkbox" name="chkAll" value="${list.prdNo }"></td>
+											<td><img src="../../images/${list.mainImg }" class="proImg"></td>
+											<input type="hidden" name="proImg">
+											<td class="proNameTable">
+												<table>
+													<tr>
+														<td class="prdName">${list.name }</td>
+													</tr>
+													<tr>
+														<td class="proNamehr">옵션:<span class="optionname">${list.ctPrdOpname }</span></td>
+
+													</tr>
+												</table> <input type="hidden" name="prdName"> <input
+												type="hidden" name="proNamehr">
+											</td>
+											<td class="numcount">
+												<button class="plus">+</button> <input type="text"
+												class="cartnum" value="1" name="cartnum">
+												<button class="minus">-</button>
+											</td>
+											<td><span class="productPrice">${list.sellingPrice }</span>원</td>
+											<input type="hidden" name="productPrice">
+											<td>
+												<button class="delete">삭제하기</button>
+											</td>
 										</tr>
-										<tr>
-											<td class="proNamehr">옵션:<span class="optionname">[EX---]</span></td>
-											
-										</tr>
-									</table>
-									<input type="hidden" name="prdName">
-									<input type="hidden" name="proNamehr">
-								</td>
-								<td class="numcount">
-									<button class="plus">+</button> <input type="text"
-									class="cartnum" value="1" name="cartnum">
-									<button class="minus">-</button>
-								</td>
-								<td><span class="productPrice">1500</span>원</td>
-								<input type="hidden" name="productPrice">
-								<td>
-									<button class="delete">삭제하기</button>
-								</td>
-							</tr>
-							<tr class="allProPrice">
+									</c:forEach>
+								</c:if>
+								<tr class="allProPrice">
 								<td colspan="6"><p>
 										총 결제 금액:<span class="prdsPrice"></span>원+배송료 2,500원 = <span
 											class="prdplusdel"></span>원
