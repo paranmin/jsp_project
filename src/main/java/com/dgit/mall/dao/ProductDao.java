@@ -17,7 +17,7 @@ public interface ProductDao {
 	public int selectLastInsertOption() throws SQLException;
 	
 	public List<Product> selectAllProduct() throws SQLException;
-	public List<Product> selectCateProduct(Product pro) throws SQLException;
+	public List<Product> selectCateProduct(String cate) throws SQLException;
 	public List<Product> selectNameProduct(Product pro) throws SQLException;
 	public List<Product> selectNCProduct(Product pro) throws SQLException;
 	
@@ -33,4 +33,7 @@ public interface ProductDao {
 	public void deleteOptionDetail(int no) throws SQLException;
 	
 	public void deleteProimg(Proimg img) throws SQLException;
+	
+	public List<Product> selectBestAllProduct() throws SQLException;
+	public List<Product> selectBestCateProduct(String cate) throws SQLException;
 } 

@@ -40,8 +40,7 @@ public class AdminProductListHandler extends AdminCommandHandler {
 				if(cate.equals("All")&&name==null){
 					listPro = dao.selectAllProduct();
 				}else if(!(cate.equals("All"))&&name==null){
-					pro.setCategory(cate);
-					listPro = dao.selectCateProduct(pro);
+					listPro = dao.selectCateProduct(cate);
 				}else if((cate.equals("All"))&&(name!=null)){
 					pro.setName(name);
 					listPro = dao.selectNameProduct(pro);
