@@ -13,6 +13,7 @@
 		<result property="stock" column="prd_stock" />
 		<result property="mainImg" column="prd_main_img" />
 		<result property="use" column="prd_use"/>
+		<result property="prdNum" column="prd_num"/>
 	</resultMap>
 	
 	<resultMap type="Proimg" id="proimgResult">
@@ -59,16 +60,17 @@
 		value(#{poNo}, #{podValue},#{podCost})
 	</insert>
 	<select id="selectAllProduct" resultMap="productResult">
-		select * from product
+		select * from product order by prd_no desc
 	</select>
 	<select id="selectCateProduct" resultMap="productResult">
-		select * from product where prd_category=#{category}
+		select * from product where prd_category=#{category} order by prd_no desc
 	</select>
 	<select id="selectNameProduct" resultMap="productResult">
 		select * from product where prd_name like CONCAT("%",#{name},"%")
 	</select>
 	<select id="selectNCProduct" resultMap="productResult">
-		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%")
+		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%") 
+		order by prd_no desc
 	</select>
 	<select id="SelectProductByno" resultMap="productResult">
 		select * from product where prd_no=#{prdNo}
@@ -98,4 +100,12 @@
 	<delete id="deleteProimg">
 		delete from proimg where prd_no=#{prdNo} and img=#{img}
 	</delete>
+	
+	<select id="selectBestAllProduct" resultMap="productResult">
+		select * from product order by prd_num desc;
+	</select>
+	<select id="selectBestCateProduct" resultMap="productResult">
+		select * from product where prd_category=#{category}
+		order by prd_num desc;
+	</select>
 </mapper>
