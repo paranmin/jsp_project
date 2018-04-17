@@ -51,6 +51,7 @@
 		//수량 카운트 작업,가격작업
 		var count = $(".cartnum").val();
 		var str = parseInt($(".productPrice").text());
+		$("input:hidden[name='productPrice']").val(str);
 		$(".prdsPrice").text(str);
 		$(".prdplusdel").text(str+2500);
 		$(".plus").click(function(){
@@ -66,7 +67,7 @@
 			var productPrice1 = parseInt($(".productPrice").text());
 			$(".prdsPrice").text(productPrice1);
 			$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
-			console.log($("input:hidden[name='prdsPrice']").val());
+			$("input:hidden[name='productPrice']").val($(".productPrice").text());
 			$(".prdplusdel").text(productPrice1+2500);
 			return false;
 		})
@@ -82,12 +83,11 @@
 			var productPrice1 = parseInt($(".productPrice").text());
 			$(".prdsPrice").text(productPrice1);
 			$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
-			console.log($("input:hidden[name='prdsPrice']").val());
+			$("input:hidden[name='productPrice']").val($(".productPrice").text());
 			$(".prdplusdel").text(productPrice1+2500);
 			return false;
 		})
 		$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
-		console.log($("input:hidden[name='prdsPrice']").val());
 		
 		//상품 삭제 (삭제버튼으로) -- 각각 삭제
 		$(".delete").click(function(){
@@ -114,6 +114,20 @@
 		//상품 옵션 input val
 		var oprionname = $(".optionname").text();
 		$("input:hidden[name='proNamehr']").val(oprionname);
+		
+		//상품 이름
+		var name = $(".prdName").text();
+		$("input:hidden[name='prdName']").val(name);
+		
+		//상품 이미지
+		$("#go_order").click(function(){
+			var imgsrc =$(".proImg").attr("src");
+			var src = imgsrc.split("/");
+			$("input:hidden[name='proImg']").val(src[src.length-1]);
+			console.log($("input:hidden[name='proImg']").val());
+		})
+	
+		
 	})
 </script>
 </head>
@@ -146,16 +160,19 @@
 							<tr class="proContent">
 								<td><input type="checkbox" name="chkAll"></td>
 								<td><img src="../../images/J1.jpg" class="proImg"></td>
+								<input type="hidden" name="proImg">
 								<td class="proNameTable">
 									<table>
 										<tr>
-											<td>베이직 실리콘 귀걸이</td>
+											<td class="prdName">베이직 실리콘 귀걸이</td>
 										</tr>
 										<tr>
 											<td class="proNamehr">옵션:<span class="optionname">[EX---]</span></td>
-											<input type="hidden" name="proNamehr">
+											
 										</tr>
 									</table>
+									<input type="hidden" name="prdName">
+									<input type="hidden" name="proNamehr">
 								</td>
 								<td class="numcount">
 									<button class="plus">+</button> <input type="text"
@@ -163,6 +180,7 @@
 									<button class="minus">-</button>
 								</td>
 								<td><span class="productPrice">1500</span>원</td>
+								<input type="hidden" name="productPrice">
 								<td>
 									<button class="delete">삭제하기</button>
 								</td>

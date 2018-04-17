@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -221,31 +222,33 @@ function getReturnValue(returnValue) {
 									<th class="count">수량</th>
 									<th class="count">가격</th>
 								</tr>
-								<tr class="proContent">
-									<td><img src="../../images/J1.jpg" class="proImg" name="proImg"></td>
-									<td class="proNameTable">
-										<table>
-											<tr>
-												<td><p name="productname">베이직 실리콘 귀걸이</p></td>
-											</tr>
-											<tr>
-												<td class="proNamehr">옵션:<span class="optionYN">[EX---]</span></td>
-											</tr>
-										</table>
-										<input type="hidden" name="proNo" value="2"> <!-- 상품번호 -->
-										<input type="hidden" name="optionYN">
-										<input type="hidden" name="optionValue" class="ttt">
-									</td>
-									<td>
-										<p><span class="productCount">1</span>개</p>
-										<input type="hidden" name="productCount">
-									</td>
+									<tr class="proContent">
+										<td><img src="../../images/J1.jpg" class="proImg"
+											name="proImg"></td>
+										<td class="proNameTable">
+											<table>
+												<tr>
+													<td><p name="productname">${prdName }</p></td>
+												</tr>
+												<tr>
+													<td class="proNamehr">옵션:<span class="optionYN">[EX---]</span></td>
+												</tr>
+											</table> <input type="hidden" name="proNo" value="2"> <!-- 상품번호 -->
+											<input type="hidden" name="optionYN"> <input
+											type="hidden" name="optionValue" class="ttt">
+										</td>
+										<td>
+											<p>
+												<span class="productCount">1</span>개
+											</p> <input type="hidden" name="productCount">
+										</td>
 
-									<td>
-										<p><span  class="productPrice">1500</span>원</p>
-										<input type="hidden" name="productPrice">
-									</td>
-								</tr>
+										<td>
+											<p>
+												<span class="productPrice">1500</span>원
+											</p> <input type="hidden" name="productPrice">
+										</td>
+									</tr>
 								<tr class="allProPrice">
 									<td colspan="5"><p>
 											결제 금액 : <span class="orderChargePrice">25000</span>원+배송료 <span

@@ -35,7 +35,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			String optionvalue = request.getParameter("optionValue");//옵션유무
 			HttpSession session = request.getSession(false);
 		    Member loginMember = (Member) session.getAttribute("auth");
-			
+			System.out.println(loginMember);
 			
 			//오더 테이블 넣을거
 			
