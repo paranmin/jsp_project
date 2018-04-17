@@ -266,7 +266,7 @@
 <script>
 $(function() {
 	$(".checkEmail").on("change", function() {
-		$("input[name='email1']").data("checkDupl", "N");
+		$("input[name='email1']").data("checkdupl", "N");
 	});
 	$("p.btn a.ok").on("click", function() {
 		var isCheck = true,
@@ -275,26 +275,22 @@ $(function() {
 			isTel = 0;
 		$("form").find(".checkEmail").each(function(i, obj) {
 			if ($(obj).val().trim() == '') {
-				alert("이메일 항목을 입력해주세요.");
-				$(obj).val("");
-				$(obj).focus();
 				isCheck = false;
 				return;
 			}
 		});
 		if (!isCheck) {
+			alert("이메일 항목을 입력해주세요.");
 			return false;
 		}
 		$("form").find(".checkPhone").each(function(i, obj) {
 			if ($(obj).val().trim() == '') {
-				alert("휴대폰 항목을 입력해주세요.");
-				$(obj).val("");
-				$(obj).focus();
 				isCheck = false;
 				return;
 			}
 		});
 		if (!isCheck) {
+			alert("휴대폰 항목을 입력해주세요.");
 			return false;
 		}
 		$("form").find(".checkTel").each(function(i, obj) {
@@ -338,7 +334,7 @@ $(function() {
 				return false;
 			}
 		}
-		if ($("input[name='email1']").data("checkDupl") == "N") {
+		if ($("input[name='email1']").data("checkdupl") == "N") {
 			alert("이메일 중복확인을 하셔야 정보 수정이 가능합니다.");
 			return false;
 		}
@@ -363,29 +359,6 @@ $(function() {
 		return false;
 	});
 });
-
-
-function checkDulpEmail() {
-	if ($("input[name='email1']").val() == '' || $("select[name='email2']").val() == '') {
-		alert("E-Mail 주소가 제대로 입력되지 않았습니다.");
-		return false;
-	}
-	var chkEmail = $("input[name='email1']").val()+"@"+$("select[name='email2']").val();
-	$.ajax({
-		url: "checkemail.do",
-		type: "post",
-		data: {email: chkEmail},
-		dataType: "json",
-		success: function(data) {
-			alert(data.msg);
-			if (data.result == 'yes') {
-				$("input[name='email1']").data("checkDupl", "Y");
-			}
-			return;
-		}
-	});
-}
-
 </script>
 <c:if test="${error_msg != null && error_msg != ''}">
 	<script>
