@@ -16,8 +16,13 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			request.setAttribute("cNo", cNo);*/
 			return VIEW_FRONT_PATH + "order/orderPage.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
-			String productPr = request.getParameter("orderChargePrice");
-			String delfee = request.getParameter("delfee");
+			String productPr = request.getParameter("orderChargePrice");//상품가격
+			String delfee = request.getParameter("delfee");//배송비
+			String useCpPrice = request.getParameter("finalPrice");//총가격
+			String payType = request.getParameter("selorderway");//결제타입
+			String message = request.getParameter("orderMsg");//주문메세지
+			String optionvalue = request.getParameter("optionValue");//옵션유무
+			
 		}
 		return null;
 	}

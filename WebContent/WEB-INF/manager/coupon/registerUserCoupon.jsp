@@ -235,7 +235,7 @@
 			</tr>
 			<c:if test="${mlist.size()==0 }">
 				<tr>
-					<td>회원가입한 고객이 없습니다.</td>
+					<td colspan="4">회원가입한 고객이 없습니다.</td>
 				</tr>			
 			</c:if>
 			<c:if test="${mlist.size() > 0 }">
