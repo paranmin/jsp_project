@@ -13,7 +13,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
 </head>
-<body>
+<body> 
 	<div id="container">  
 		<c:import url="modules/header.jsp" />
 		<c:import url="modules/leftSide.jsp" />
