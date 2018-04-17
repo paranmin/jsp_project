@@ -5,42 +5,58 @@
 <html>
 <head>
 <meta charset=UTF-8">
-<link rel="stylesheet" href="Boardcss/Board.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Boardcss/writeform.css"
+	media="all" />
+
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="css/base.css" media="all" />
-<link rel="stylesheet" href="Boardcss/writeform.css" media="all" />
-<link rel="stylesheet" href="css/Board.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/base.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Boardcss/Board.css"
+	media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/base.js"></script>
+
+
 <title>Insert title here</title>
 <style type="text/css">
 .titleArea h2 {
 	font-size: 17px;
 }
+
+#submit {
+	padding: 8px;
+	border: 0;
+}
 </style>
 </head>
 <body>
-	<c:import url="modules/header.jsp" />
-	<div class="titleArea">
-		<h2>REVIEW</h2>
-	</div>
-	<div class="top_box">
-		<ul>
-			<li><a href="#">Notice</a></li>
-			<li><span><a>/</a></span></li>
-			<li><a href="#">Q&amp;A</a></li>
-			<li><span><a>/</a></span></li>
-			<li><a href="#">Review(후기)</a></li>
-		</ul>
-	</div>
+	<c:import url="../modules/header.jsp" />
+	<c:import url="../modules/leftSide.jsp" />
+	<c:import url="../modules/rightSide.jsp" />
 	<section>
+		<div class="titleArea">
+			<h2>REVIEW</h2>
+		</div>
+		<div class="top_box">
+			<ul>
+				<li><a href="#">Notice</a></li>
+				<li><span><a>/</a></span></li>
+				<li><a href="#">Q&amp;A</a></li>
+				<li><span><a>/</a></span></li>
+				<li><a href="#">Review(후기)</a></li>
+			</ul>
+		</div>
+
 		<div id="bbsData">
 			<div class="page-body">
-
-
-
-				<form name="form1" action="board.html" method="post"
+				<form action="ReviewBoard.do" method="post"
 					enctype="multipart/form-data" style="position: relative;"
 					autocomplete="off">
 					<div id="passimg" name="passimg"
@@ -110,7 +126,7 @@
 										<th><div class="title">파일</div></th>
 										<td colspan="3">
 											<div>
-											<input id="bw_input_file" type="file" name="file_name1"
+												<input id="bw_input_file" type="file" name="file_name1"
 													value="첨부">
 											</div>
 										</td>
@@ -123,9 +139,8 @@
 					<dl class="bbs-link bbs-link-btm">
 						<dt></dt>
 						<dd>
-							<a class="write btn_dark btn_box_01" href="JavaScript:send();">글쓰기</a>
-							<a
-								href="/board/board.html?code=curiouswiz_board3&amp;page=1&amp;board_cate=&amp;s_id=&amp;stext=&amp;ssubject=&amp;scontent=&amp;shname=&amp;sbrand=&amp;sgid=&amp;branduid="
+							<input type="submit" value="글등록" id="submit"> <a
+								href="${pageContext.request.contextPath}/shop/ReviewBoard.do"
 								class="btn_light btn_box_01">목록</a>
 						</dd>
 					</dl>
@@ -135,6 +150,6 @@
 			<!-- .page-body -->
 		</div>
 	</section>
-	<c:import url="modules/footer.jsp" />
+	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

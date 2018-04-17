@@ -5,13 +5,17 @@
 <html>
 <head>
 <meta charset=UTF-8">
-<link rel="stylesheet" href="Boardcss/Board.css" />
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="css/base.css" media="all" />
-<link rel="stylesheet" href="css/Board.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/base.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Boardcss/Board.css"
+	media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
 <title>Insert title here</title>
 <style type="text/css">
 table {
@@ -33,7 +37,9 @@ table {
 </style>
 </head>
 <body>
-	<c:import url="modules/header.jsp" />
+	<c:import url="../modules/header.jsp" />
+	<c:import url="../modules/leftSide.jsp" />
+	<c:import url="../modules/rightSide.jsp" />
 	<section>
 		<div id="container">
 
@@ -477,7 +483,7 @@ table {
 					</div>
 					<dl class="bbs-link bbs-link-btm">
 						<dd>
-							<a class="write  btn_dark btn_box_01" href="writeform.jsp">글쓰기</a>
+							<a class="write  btn_dark btn_box_01" href="${pageContext.request.contextPath}/shop/ReviewFormBoard.do">글쓰기</a>
 						</dd>
 					</dl>
 					<!-- .page-body -->
@@ -493,6 +499,6 @@ table {
 			</div>
 		</div>
 	</section>
-	<c:import url="modules/footer.jsp" />
+	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

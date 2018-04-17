@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mall.dao.AdBoardDao">
+	<resultMap type="AdBoard" id="AdBoardResult">
+		<id property="abNo" column="brd_no" /> <!-- 글번호 -->
+		<result property="abcode" column="brd_code" /> <!-- 게시판코드 -->
+		<result property="adbtitle" column="brd_title" /> <!-- 글 제목 -->
+		<result property="adbcontent" column="brd_content" /> <!-- 글 내용 -->
+		<result property="adbrdparent" column="brd_parent" /> <!-- 글 부모 -->
+		<result property="adbrddepth" column="brd_depth" /> <!-- 글 깊이 -->
+		<result property="adbrduseattachment" column="brd_use_attachment" /> <!-- 첨부파일유무 -->
+		<result property="abregdate" column="prd_no" /> <!-- 작성일 -->
+	</resultMap>
+
+	<select id="selectByAllAdBoard" parameterType="Board" resultMap="AdBoardResult">
+		select brd_no, brd_code, brd_title, brd_content, brd_parent,
+		brd_depth, brd_use_attachment, prd_no
+		from board
+		where brd_code = #{brdcode}
+	</select>
+
+
+</mapper>
+

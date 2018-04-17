@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mall.dao.BoardDao">
+	<resultMap type="Board" id="BoardResult">
+		<id property="brdNo" column="brd_no" /> <!-- 글번호 -->
+		<result property="brdcode" column="brd_code" /> <!-- 게시판코드 -->
+		<result property="brdtitle" column="brd_title" /> <!-- 글 제목 -->
+		<result property="brdcontent" column="brd_content" /> <!-- 글 내용 -->
+		<result property="brdparent" column="brd_parent" /> <!-- 글 부모 -->
+		<result property="brddepth" column="brd_depth" /> <!-- 글 깊이 -->
+		<result property="brduseattachment" column="brd_use_attachment" /> <!-- 첨부파일유무 -->
+		<result property="prdno" column="prd_no" /> <!-- 상품번호 -->
+		<result property="brdregdate" column="brd_regdate" /> <!-- 작성일 -->
+	</resultMap>
+	<select id="selectByAllBoard" parameterType="Board"
+		resultMap="BoardResult">
+		select brd_no, brd_code, brd_title, brd_content, brd_parent, brd_depth, brd_use_attachment, prd_no
+		from board
+		where brd_code = #{brdcode}
+	</select>
+
+	<select id="selectByAllQandABoard" parameterType="Board"
+		resultMap="BoardResult">
+		select brd_no, brd_code, brd_title, brd_content, brd_parent, brd_depth, brd_use_attachment, prd_no
+		from board
+		where brd_code = #{brdcode}
+	</select>
+
+</mapper>

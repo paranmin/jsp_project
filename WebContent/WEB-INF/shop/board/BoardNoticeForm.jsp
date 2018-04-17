@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset=UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Boardcss/writeform.css"
 	media="all" />
@@ -25,12 +23,16 @@ pageEncoding="UTF-8"%>
 <script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
 
+
 <title>Insert title here</title>
 <style type="text/css">
 .titleArea h2 {
-	font-size: 17px; # submit { padding : 8px;
-	border: 0;
+	font-size: 17px;
 }
+
+#submit {
+	padding: 8px;
+	border: 0;
 }
 </style>
 </head>
@@ -38,9 +40,9 @@ pageEncoding="UTF-8"%>
 	<c:import url="../modules/header.jsp" />
 	<c:import url="../modules/leftSide.jsp" />
 	<c:import url="../modules/rightSide.jsp" />
-	<section>	
+	<section>
 		<div class="titleArea">
-			<h2>Q&amp;A</h2>
+			<h2>Notice</h2>
 		</div>
 		<div class="top_box">
 			<ul>
@@ -52,13 +54,9 @@ pageEncoding="UTF-8"%>
 			</ul>
 		</div>
 
-
 		<div id="bbsData">
 			<div class="page-body">
-
-
-
-				<form action="BoardQandA.do" method="post"
+				<form action="BoardNoticeForm.do" method="post"
 					enctype="multipart/form-data" style="position: relative;"
 					autocomplete="off">
 					<div id="passimg" name="passimg"
@@ -108,18 +106,9 @@ pageEncoding="UTF-8"%>
 									</tr>
 									<tr>
 										<th><div class="title">제목</div></th>
-
 										<td colspan="3">
 											<div class="title">
-												<select name="subhead" class="MS_select"><option
-														value="선택">선택</option>
-													<option value="상품">상품</option>
-													<option value="배송">배송</option>
-													<option value="교환/반품">교환/반품</option>
-													<option value="입금">입금</option>
-													<option value="재입고">재입고</option>
-													<option value="기타">기타</option>
-												</select><br> <input id="bw_input_subject"
+												<input id="bw_input_subject"
 													class="MS_input_txt input_style2" type="text"
 													name="subject" value="">
 											</div>
@@ -139,7 +128,6 @@ pageEncoding="UTF-8"%>
 											<div>
 												<input id="bw_input_file" type="file" name="file_name1"
 													value="첨부">
-
 											</div>
 										</td>
 									</tr>
@@ -152,15 +140,16 @@ pageEncoding="UTF-8"%>
 						<dt></dt>
 						<dd>
 							<input type="submit" value="글등록" id="submit"> <a
-								href="${pageContext.request.contextPath}/shop/BoardQandA.do"
+								href="${pageContext.request.contextPath}/shop/NoticeBoard.do"
 								class="btn_light btn_box_01">목록</a>
 						</dd>
 					</dl>
 				</form>
 
 			</div>
+			<!-- .page-body -->
+		</div>
 	</section>
-	</div>
 	<c:import url="../modules/footer.jsp" />
 </body>
 </html>
