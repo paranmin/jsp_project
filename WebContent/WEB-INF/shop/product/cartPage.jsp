@@ -61,11 +61,14 @@
 				alert("상품 한개당 10개 이하로만 주문 하실 수 있습니다.");
 				$(".cartnum").val(10);
 				$(".productPrice").text(10*str);
-				return;
+				return false;
 			}
 			var productPrice1 = parseInt($(".productPrice").text());
 			$(".prdsPrice").text(productPrice1);
+			$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
+			console.log($("input:hidden[name='prdsPrice']").val());
 			$(".prdplusdel").text(productPrice1+2500);
+			return false;
 		})
 		$(".minus").click(function(){
 			count--;
@@ -74,12 +77,18 @@
 			if(	$(".cartnum").val()<=1){
 				$(".cartnum").val(1);
 				$(".productPrice").text(1*str);
-				return;
+				return false;
 			}
 			var productPrice1 = parseInt($(".productPrice").text());
 			$(".prdsPrice").text(productPrice1);
+			$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
+			console.log($("input:hidden[name='prdsPrice']").val());
 			$(".prdplusdel").text(productPrice1+2500);
+			return false;
 		})
+		$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
+		console.log($("input:hidden[name='prdsPrice']").val());
+		
 		//상품 삭제 (삭제버튼으로) -- 각각 삭제
 		$(".delete").click(function(){
 			$(this).parent().parent().remove();
@@ -98,7 +107,13 @@
 				$("input:checkbox[name='chkAll']").parent().parent().remove();
 			}
 		})
-		
+		//상품 번호 번호(체크박스) 숫자 임의로 넣음 ->나중에 수정하기
+		$(".proContent").each(function(i,obj){
+			$("input:checkbox[name='chkAll']").val(i);
+		})
+		//상품 옵션 input val
+		var oprionname = $(".optionname").text();
+		$("input:hidden[name='proNamehr']").val(oprionname);
 	})
 </script>
 </head>
@@ -137,13 +152,14 @@
 											<td>베이직 실리콘 귀걸이</td>
 										</tr>
 										<tr>
-											<td class="proNamehr">옵션:[EX---]</td>
+											<td class="proNamehr">옵션:<span class="optionname">[EX---]</span></td>
+											<input type="hidden" name="proNamehr">
 										</tr>
 									</table>
 								</td>
 								<td class="numcount">
 									<button class="plus">+</button> <input type="text"
-									class="cartnum" value="1">
+									class="cartnum" value="1" name="cartnum">
 									<button class="minus">-</button>
 								</td>
 								<td><span class="productPrice">1500</span>원</td>
@@ -155,6 +171,7 @@
 								<td colspan="6"><p>
 										총 결제 금액:<span class="prdsPrice"></span>원+배송료 2,500원 = <span
 											class="prdplusdel"></span>원
+											<input type="hidden" name="prdsPrice">
 									</p></td>
 							</tr>
 						</table>

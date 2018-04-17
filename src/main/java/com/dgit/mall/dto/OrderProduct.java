@@ -4,8 +4,18 @@ public class OrderProduct {
 	private int opSellingPrice;
 	private int opQuantity;
 	private String opOption;
-	private Order ordNo;
+	private String ordNo;
 	private Product prdNo;
+	public OrderProduct() {
+	}
+	public OrderProduct(int opSellingPrice, int opQuantity, String opOption, String ordNo, Product prdNo) {
+		super();
+		this.opSellingPrice = opSellingPrice;
+		this.opQuantity = opQuantity;
+		this.opOption = opOption;
+		this.ordNo = ordNo;
+		this.prdNo = prdNo;
+	}
 	public int getOpSellingPrice() {
 		return opSellingPrice;
 	}
@@ -24,10 +34,10 @@ public class OrderProduct {
 	public void setOpOption(String opOption) {
 		this.opOption = opOption;
 	}
-	public Order getOrdNo() {
+	public String getOrdNo() {
 		return ordNo;
 	}
-	public void setOrdNo(Order ordNo) {
+	public void setOrdNo(String ordNo) {
 		this.ordNo = ordNo;
 	}
 	public Product getPrdNo() {
@@ -36,21 +46,12 @@ public class OrderProduct {
 	public void setPrdNo(Product prdNo) {
 		this.prdNo = prdNo;
 	}
-	public OrderProduct(int opSellingPrice, int opQuantity, String opOption, Order ordNo, Product prdNo) {
-		super();
-		this.opSellingPrice = opSellingPrice;
-		this.opQuantity = opQuantity;
-		this.opOption = opOption;
-		this.ordNo = ordNo;
-		this.prdNo = prdNo;
-	}
-	public OrderProduct() {
-	}
 	@Override
 	public String toString() {
 		return "OrderProduct [opSellingPrice=" + opSellingPrice + ", opQuantity=" + opQuantity + ", opOption="
 				+ opOption + ", ordNo=" + ordNo + ", prdNo=" + prdNo + "]";
 	}
+	
 	
 	
 }

@@ -176,7 +176,14 @@ $(function(){
 	}else if($(".optionYN").text()==""){
 		$("input:hidden[name='optionValue']").val("0");
 	}
+	var optionName = $(".optionYN").text();
+	$("input:hidden[name='optionYN']").val(optionName);
 	
+	
+	var price1 = $(".productPrice").text();
+	$("input:hidden[name='productPrice']").val(price1);
+	var count1 = $(".productCount").text();
+	$("input:hidden[name='productCount']").val(count1);
 })
 function getReturnValue(returnValue) {
 	 var p = $.parseJSON(returnValue);
@@ -225,14 +232,18 @@ function getReturnValue(returnValue) {
 												<td class="proNamehr">옵션:<span class="optionYN">[EX---]</span></td>
 											</tr>
 										</table>
+										<input type="hidden" name="proNo" value="2"> <!-- 상품번호 -->
+										<input type="hidden" name="optionYN">
 										<input type="hidden" name="optionValue" class="ttt">
 									</td>
 									<td>
-										<p>1개</p>
+										<p><span class="productCount">1</span>개</p>
+										<input type="hidden" name="productCount">
 									</td>
 
 									<td>
-										<p>1500원</p>
+										<p><span  class="productPrice">1500</span>원</p>
+										<input type="hidden" name="productPrice">
 									</td>
 								</tr>
 								<tr class="allProPrice">
