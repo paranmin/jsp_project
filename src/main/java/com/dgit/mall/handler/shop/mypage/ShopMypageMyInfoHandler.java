@@ -69,7 +69,11 @@ public class ShopMypageMyInfoHandler extends ShopCommandHandler {
 			modifyMember.setName(name);
 			modifyMember.setPwd(password);
 			modifyMember.setBirth(String.format("%s-%s-%s", year, month, day));
-			modifyMember.setGender(gender.equalsIgnoreCase("male") ? Gender.MALE : Gender.FEMALE);
+			if (gender == null || gender.equalsIgnoreCase("female")) {
+				modifyMember.setGender(Gender.FEMALE);
+			} else {
+				modifyMember.setGender(Gender.MALE);
+			}
 
 			String tel = String.format("%s%s%s", tel1, tel2, tel3);
 			modifyMember.setTel(CommonUtil.getInstance().phoneNumberHyphenAdd(tel, false));

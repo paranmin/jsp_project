@@ -30,7 +30,7 @@
 			</ul>
 			<div class="infoArea">
 				<div class="memberInfo">
-					<p>${loginMember.name}[${loginMember.id}]님 <a href="#">수정</a></p>
+					<p>${loginMember.name}[${loginMember.id}]님 <a href="myinfo.do">수정</a></p>
 					<p>전&nbsp;&nbsp;&nbsp;화 : ${loginMember.phone}</p>
 					<p>이메일 : ${loginMember.email }</p>
 					<p>주&nbsp;&nbsp;&nbsp;소 : ${loginMember.addr}</p>
@@ -40,7 +40,7 @@
 				</div>
 			</div>
 			<div class="board">
-				<h3>최근 주문 정보 <a href="#">전체보기</a></h3>
+				<h3>최근 주문 정보 <a href="order.do">전체보기</a></h3>
 				<table>
 					<colgroup>
 						<col width="10%"/>
@@ -73,7 +73,7 @@
 				</table>
 			</div>
 			<div class="board">
-				<h3>최근 등록 게시글 <a href="#">전체보기</a></h3>
+				<h3>최근 등록 게시글 <a href="board.do">전체보기</a></h3>
 				<table>
 					<colgroup>
 						<col width="10%"/>

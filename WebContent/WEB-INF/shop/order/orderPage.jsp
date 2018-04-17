@@ -171,15 +171,19 @@ $(function(){
 		 window.open('coupon.do?price='+price, '쿠폰 적용', 'width=650, height=550');
 		 return false;
 	})
+	if($(".optionYN").text()!=""){     
+		$("input:hidden[name='optionValue']").val("1");
+	}else if($(".optionYN").text()==""){
+		$("input:hidden[name='optionValue']").val("0");
+	}
 	
 })
-	function getReturnValue(returnValue) {
-	 	var p = $.parseJSON(returnValue);
-	 	console.log(p.key1);
-	 	$(".inputCoupon").val(p.key1);
-	 	$(".finalPrice").text(p.key2);
-	 	
-	}
+function getReturnValue(returnValue) {
+	 var p = $.parseJSON(returnValue);
+	 $(".inputCoupon").val(p.key1);
+	 $(".finalPrice").text(p.key2);
+	 $("input:hidden[name='finalPrice']").val(p.key2);
+}
 </script>
 </head>
 <body>
@@ -218,9 +222,10 @@ $(function(){
 												<td><p name="productname">베이직 실리콘 귀걸이</p></td>
 											</tr>
 											<tr>
-												<td class="proNamehr"><p>옵션:[EX---]</p></td>
+												<td class="proNamehr">옵션:<span class="optionYN">[EX---]</span></td>
 											</tr>
 										</table>
+										<input type="hidden" name="optionValue" class="ttt">
 									</td>
 									<td>
 										<p>1개</p>
@@ -235,6 +240,8 @@ $(function(){
 											결제 금액 : <span class="orderChargePrice">25000</span>원+배송료 <span
 												class="delfee">2500</span>원 = <span class="toalpriceorder"
 												name="toalpriceorder"></span>원
+												<input type="hidden" value="25000" name="orderChargePrice"> <!-- 결제금액  -->
+												<input type="hidden" value="2500" name="delfee"><!--배송비 -->
 										</p></td>
 								</tr>
 							</table>
@@ -322,7 +329,7 @@ $(function(){
 									<tr>
 										<td class="grayBox">주문메세지(100자 내외)</td>
 										<td colspan="5" class="paddingInput"><textarea rows="4"
-												cols="100"></textarea>
+												cols="100" name="orderMsg"></textarea>
 											<p class="sizeContent">0/70 bytes (* 영문/숫자 기준 70자, 한글 기준
 												35자까지 입력 가능합니다.)</p></td>
 									</tr>
@@ -333,9 +340,9 @@ $(function(){
 							<p class="orderway">결제방법</p>
 							<div class="orderchoice">
 								<select name="selorderway">
-									<option value="신용카드">신용카드</option>
-									<option value="계좌이체">계좌이체</option>
-									<option value="무통장입금">무통장입금</option>
+									<option value="CARD">신용카드</option>
+									<option value="BANK">계좌이체</option>
+									<option value="ONLINE">무통장입금</option>
 								</select>
 							</div>
 						</div>
@@ -349,12 +356,13 @@ $(function(){
 									있습니다.</p>
 								<p class="final">
 									총 결제금액 : <span class="finalPrice"></span>원
+									<input type="hidden" name="finalPrice">
 								</p>
 							</div>
 						</div>
 
 						<div class="OrderReac">
-							<input type="submit" value="주문하기" class="orderNow"><input
+							<input type="submit" value="주문하기" class="orderNow" name="orderNow"><input
 								type="reset" value="주문취소" class="orderReset">
 						</div>
 					</div>

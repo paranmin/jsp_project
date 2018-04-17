@@ -115,6 +115,7 @@
 					<a href="#">go back ← </a>
 				</p>
 				<!-- 상품상세페이지로 돌아가기 -->
+				<form action="cart.do" method="post">
 				<div class="cartList">
 					<div class="cartTable">
 						<table>
@@ -167,6 +168,7 @@
 						<button id="go_shop">계속 쇼핑하기</button>
 					</div>
 				</div>
+				</form>
 			</div>
 		</section>
 		<c:import url="../modules/footer.jsp" />

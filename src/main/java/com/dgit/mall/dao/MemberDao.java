@@ -16,9 +16,13 @@ public interface MemberDao {
 
 	List<Member> selectMemberListBySearch(Map<String, String> map);
 
+	int checkDuplId(String id);
+
 	int checkDuplEmail(String email);
 
 	int registerMember(Member member);
+	
+	int registerFullMember(Member member);
 
 	int updatePassword(Member member);
 

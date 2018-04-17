@@ -56,26 +56,32 @@ CREATE TABLE `coupon` (
   PRIMARY KEY (`c_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='쿠폰';
 
+
 CREATE TABLE `member` (
   `m_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원번호',
   `m_id` varchar(50) NOT NULL COMMENT '회원ID',
-  `m_name` varchar(50) NOT NULL COMMENT '회원이름',
-  `m_pass` varchar(50) NOT NULL COMMENT '회원비밀번호',
-  `m_email` varchar(40) NOT NULL COMMENT '회원이메일',
-  `m_phone` varchar(30) NOT NULL COMMENT '회원전화번호',
-  `m_service_terms` enum('Y','N') DEFAULT NULL COMMENT '이용약관 동의',
-  `m_privacy_terms` enum('Y','N') DEFAULT NULL COMMENT '개인정보 동의',
-  `m_push_email` enum('Y','N') DEFAULT NULL COMMENT '이메일 알림 동의',
-  `m_push_sms` enum('Y','N') DEFAULT NULL COMMENT '문자 알림 동의',
-  `m_push_app` enum('Y','N') DEFAULT NULL COMMENT '앱 알림 동의',
+  `m_name` varchar(50) NOT NULL COMMENT '이름',
+  `m_pass` varchar(50) NOT NULL COMMENT '비밀번호',
+  `m_email` varchar(40) NOT NULL COMMENT '이메일',
+  `m_phone` varchar(14) NOT NULL COMMENT '휴대폰번호',
+  `m_tel` varchar(14) DEFAULT NULL COMMENT '전화번호',
+  `m_gender` enum('MALE','FEMALE') DEFAULT NULL COMMENT '성별',
+  `m_birth` varchar(10) DEFAULT NULL COMMENT '생일',
+  `m_service_terms` enum('Y','N') DEFAULT 'N' COMMENT '이용약관 동의',
+  `m_privacy_terms` enum('Y','N') DEFAULT 'N' COMMENT '개인정보 동의',
+  `m_push_email` enum('Y','N') DEFAULT 'N' COMMENT '이메일 알림 동의',
+  `m_push_sms` enum('Y','N') DEFAULT 'N' COMMENT '문자 알림 동의',
+  `m_push_app` enum('Y','N') DEFAULT 'N' COMMENT '앱 알림 동의',
+  `m_leave_yn` enum('Y','N') DEFAULT 'N' COMMENT '탈퇴 여부',
   `m_regdate` datetime DEFAULT NULL COMMENT '가입일',
   PRIMARY KEY (`m_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='회원';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원';
+
 
 CREATE TABLE `member_address` (
-  `ma_no` int(11) NOT NULL COMMENT '새 컬럼3',
+  `ma_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원주소 번호',
   `m_no` int(11) DEFAULT NULL COMMENT '회원번호',
-  `ma_zipcode` varchar(6) DEFAULT NULL COMMENT '우편번호',
+  `ma_zipcode` varchar(7) DEFAULT NULL COMMENT '우편번호',
   `ma_addr1` varchar(255) DEFAULT NULL COMMENT '도로명주소',
   `ma_addr2` varchar(255) DEFAULT NULL COMMENT '상세주소',
   `ma_addr_type` enum('HOME','OTHER') DEFAULT NULL COMMENT '주소 타입',
@@ -83,7 +89,8 @@ CREATE TABLE `member_address` (
   PRIMARY KEY (`ma_no`),
   KEY `FK_member_TO_member_address` (`m_no`),
   CONSTRAINT `FK_member_TO_member_address` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원배송주소';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='회원배송주소';
+
 
 CREATE TABLE `order` (
   `ord_no` varchar(20) NOT NULL COMMENT '주문번호',
@@ -117,33 +124,43 @@ CREATE TABLE `product` (
   `prd_sub_desc` varchar(255) DEFAULT NULL COMMENT '상품부가설명',
   `prd_cost` int(11) NOT NULL COMMENT '원가',
   `prd_selling_price` int(11) NOT NULL COMMENT '판매가',
-  `prd_discount_per` char(1) DEFAULT NULL COMMENT '할인율',
-  `prd_content` text COMMENT '상세설명',
+  `prd_discount_per` varchar(10) DEFAULT NULL COMMENT '할인율',
   `prd_use_option` char(1) DEFAULT NULL COMMENT '옵션유무',
   `prd_stock` int(11) DEFAULT NULL COMMENT '상품재고',
-  `prd_category` int(12) DEFAULT NULL COMMENT '카테고리',
-  `prd_main_img` varchar(100) DEFAULT NULL COMMENT '메인 이미지',
+  `prd_main_img` text DEFAULT NULL,
+  `prd_category` varchar(11) NOT NULL,
+  `prd_use` char(1) DEFAULT '1',
   PRIMARY KEY (`prd_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='상품';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `product_option` (
+CREATE TABLE `proimg` (
+  `img_no` int(11) NOT NULL AUTO_INCREMENT,
+  `img` text NOT NULL,
+  `prd_no` int(11) NOT NULL,
+  PRIMARY KEY (`img_no`),
+  KEY `prd_no` (`prd_no`),
+  CONSTRAINT `proimg_ibfk_1` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `pro_option` (
   `po_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '옵션번호',
   `po_name` varchar(50) NOT NULL COMMENT '옵션명',
-  `po_desc` varchar(255) DEFAULT NULL COMMENT '옵션설명',
-  `po_parent` int(11) NOT NULL COMMENT '옵션부모',
-  `po_depth` int(11) NOT NULL COMMENT '옵션깊이',
   `prd_no` int(11) NOT NULL COMMENT '상품번호',
   PRIMARY KEY (`po_no`),
   KEY `FK_product_TO_product_option` (`prd_no`),
   CONSTRAINT `FK_product_TO_product_option` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='상품옵션';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `product_option_detail` (
+
+CREATE TABLE `option_detail` (
   `po_no` int(11) NOT NULL COMMENT '옵션번호',
-  `pod_detail` varchar(255) DEFAULT NULL COMMENT '옵션상세설명',
-  KEY `FK_product_option_TO_product_option_detail` (`po_no`),
-  CONSTRAINT `FK_product_option_TO_product_option_detail` FOREIGN KEY (`po_no`) REFERENCES `product_option` (`po_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='상품옵션정보';
+  `pod_no` int(11) NOT NULL AUTO_INCREMENT,
+  `pod_value` varchar(10) NOT NULL,
+  `pod_cost` int(11) NOT NULL,
+  PRIMARY KEY (`pod_no`),
+  KEY `FK_pro_option_TO_option_detail` (`po_no`),
+  CONSTRAINT `FK_pro_option_TO_product_option_detail` FOREIGN KEY (`po_no`) REFERENCES `pro_option` (`po_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user_coupon` (
   `uc_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원쿠폰번호',

@@ -49,6 +49,12 @@ public class MemberService {
 		}
 	}
 
+	public int checkDuplId(String id) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "checkDuplId", id);
+		}
+	}
+
 	public int checkDuplEmail(String email) {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + "checkDuplEmail", email);
@@ -59,6 +65,15 @@ public class MemberService {
 		int res = 0;
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			res = sqlSession.insert(namespace + "registerMember", member);
+			sqlSession.commit();
+		}
+		return res;
+	}
+
+	public int registerFullMember(Member member) {
+		int res = 0;
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "registerFullMember", member);
 			sqlSession.commit();
 		}
 		return res;

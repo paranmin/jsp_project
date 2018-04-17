@@ -19,5 +19,19 @@
 		<result property="phone" column="m_phone" />
 		<result property="regdate" column="m_regdate" />
 	</resultMap>
+	<resultMap type="MemberAddress" id="memberwithaddressResult" extends="orderWithMemberResult">
+		<result property="mdZipcode" column="md_zipcode"/>
+		<result property="mdAddress" column="md_address"/>
+	</resultMap>
+	<resultMap type="OrderProduct" id="orderwithorderproductResult" extends="memberwithaddressResult">
+		<result property="opSellingPrice" column="op_selling_price"/>
+		<result property="opQuantity" column="op_quantity"/>
+		<result property="opOption" column="op_option"/>
+	</resultMap>
+	
 
+	<!-- order 주문등록 -->
+	<insert id="insertOrder" parameterType="Order">
+		insert into `order` values(#{ordNo},#{ordPrice},#{ordCouponPrice},#{type},#{ordOption},#{deliveryFee},#{ordMessage},#{no});
+	</insert>
 </mapper>
