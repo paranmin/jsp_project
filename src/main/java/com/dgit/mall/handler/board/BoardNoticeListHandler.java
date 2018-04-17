@@ -1,4 +1,4 @@
-package com.dgit.mall.handler.shop.adboard;
+package com.dgit.mall.handler.board;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.dgit.mall.dao.AdBoardDao;
-import com.dgit.mall.dto.AdBoard;
+import com.dgit.mall.dao.BoardDao;
+import com.dgit.mall.dto.Board;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
 
-public class AdBoardListHandler extends ShopCommandHandler {
+public class BoardNoticeListHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -22,9 +22,9 @@ public class AdBoardListHandler extends ShopCommandHandler {
 		request.setAttribute("sub_menu", "list");
 
 		sqlSession = MySqlSessionFactory.openSession();
-		AdBoardDao Dao = sqlSession.getMapper(AdBoardDao.class);
+		BoardDao Dao = sqlSession.getMapper(BoardDao.class);
 
-		List<AdBoard> list = Dao.selectByAllAdBoard();
+		List<Board> list = Dao.selectNoticeBoardAll();
 		request.setAttribute("list", list);
 
 

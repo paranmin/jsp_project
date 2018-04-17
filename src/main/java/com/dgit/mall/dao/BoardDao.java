@@ -7,8 +7,11 @@ import com.dgit.mall.dto.Board;
 
 
 public interface BoardDao {
-	List<Board> selectByAllBoard();
+	List<Board> selectByAllReviewBoard();
 
 	List<Board> selectByAllQandABoard();
+
+	List<Board> selectNoticeBoardAll();
+
 
 }

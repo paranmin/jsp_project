@@ -19,10 +19,18 @@ public class BoardService {
 	public BoardService() {
 	}
 
-	public List<Board> selectByAllBoard() throws SQLException {
+	public List<Board> selectByAllReviewBoard() throws SQLException {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			BoardDao dao = sqlSession.getMapper(BoardDao.class);
-			return dao.selectByAllBoard();
+			return dao.selectByAllReviewBoard();
 		}
 	}
+
+	public List<Board> selectNoticeBoardAll() throws SQLException {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			BoardDao dao = sqlSession.getMapper(BoardDao.class);
+			return dao.selectNoticeBoardAll();
+		}
+	}
+	
 }

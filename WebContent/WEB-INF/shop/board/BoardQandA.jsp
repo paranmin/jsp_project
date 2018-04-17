@@ -78,16 +78,18 @@ table {
 									<th><div class="tb-center">작성일</div></th>
 									<th><div class="tb-center">조회</div></th>
 								</tr>
-								<%-- <c:if test="${board.size()>0 }">
+								<c:if test="${board.size()>0 }">
 									<c:forEach var="item" items="${board }">
 										<tr>
-											<td><a href="projectread.do?projectno=${board.brd_no }">${board.brd_no }</a></td>
-											<td>${board.brd_no }</td>
-											<td>${item.enddate }</td>
-											<td>${item.nowproject }</td>
+											<td><a href="/shop/QandABoardRead.do?projectno=${item.brdNo }">${item.brdNo }</a></td>
+											<td>${item.prdno }
+											<td>${item.brdtitle }</td>
+											<td>${item.brdwriter }</td>
+											<td>${item.brdregdate }</td>
+											<td>${item.brdch }</td>
 										</tr>
 									</c:forEach>
-								</c:if> --%>
+								</c:if>
 							</thead>
 							<tbody>
 								<!-- .공지사항 리스트 시작 -->
@@ -128,7 +130,8 @@ table {
 					</div>
 					<dl class="bbs-link bbs-link-btm">
 						<dd>
-							<a class="write  btn_dark btn_box_01" href="${pageContext.request.contextPath}/shop/BoardQandAForm.do">글쓰기</a>
+							<a class="write  btn_dark btn_box_01"
+								href="${pageContext.request.contextPath}/shop/BoardQandAForm.do">글쓰기</a>
 						</dd>
 					</dl>
 					<!-- .page-body -->

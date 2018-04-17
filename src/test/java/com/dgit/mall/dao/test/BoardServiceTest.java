@@ -28,11 +28,10 @@ public class BoardServiceTest {
 
 	@Test
 	public void test1Select() throws SQLException {
-		List<Board> list = service.selectByAllBoard();
-		System.out.println(list);
-		assertNotNull(list);
-		for (Board cp : list) {
-			System.out.println(list);
-		}
+		Board brd = new Board();
+		brd.setBrdNo(1);
+		brd.setBrdtitle("123");
+		brd.setBrdcode("Notice");
+
 	}
 }

@@ -5,13 +5,17 @@
 <html>
 <head>
 <meta charset=UTF-8">
-<link rel="stylesheet" href="Boardcss/Board.css" />
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="css/base.css" media="all" />
-<link rel="stylesheet" href="css/Board.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/base.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Boardcss/Board.css"
+	media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
 <title>Insert title here</title>
 
 <style type="text/css">
@@ -84,7 +88,9 @@ input, select, textarea {
 </style>
 </head>
 <body>
-	<c:import url="modules/header.jsp" />
+	<c:import url="../modules/header.jsp" />
+	<c:import url="../modules/leftSide.jsp" />
+	<c:import url="../modules/rightSide.jsp" />
 	<section>
 		<div id="container">
 
@@ -103,57 +109,56 @@ input, select, textarea {
 					</ul>
 				</div>
 			</div>
-				<div id="bbsData">
-					<div class="page-body">
+			<div id="bbsData">
+				<div class="page-body">
 
-						<div class="bbs-table-pwd">
-							<form  action="Modify.do" method="post"
-								autocomplete="off">
-								<input type="hidden" name="BRO_CHK_KEY"
-									value="8bbc6ef77da9e371044f00cc1a8a06310a761d7ab63b5b0a42db20dc7a2ca3c9">
-								<input type="hidden" name="code" value="curiouswiz_board3">
-								<input type="hidden" name="num1" value="941772"> <input
-									type="hidden" name="num2" value="00000"> <input
-									type="hidden" name="page" value="1"> <input
-									type="hidden" name="type" value="u">
-								<fieldset>
-									<legend>비밀번호 찾기</legend>
-									<table summary="비밀번호찾기테이블">
-										<caption>비밀번호 찾기</caption>
-										<colgroup>
-											<col width="90">
-											<col>
-										</colgroup>
-										<tbody>
-											<tr>
-												<th><div>비밀번호</div></th>
-												<td><div>
-														<input id="bp_input_passwd" type="password"
-															class="MS_input_txt" name="passwd">
-													</div></td>
-											</tr>
-										</tbody>
-									</table>
-								</fieldset>
-								<dl class="bbs-link pwd-link">
-									<dt></dt>
-									<dd>
-										<a href="javascript:document.form1.submit();"
-											class="none btn_light btn_box_01">확인</a> <a
-											href="javascript:history.go(-1);"
-											class="btn_light_border btn_box_01">취소</a> <a
-											href="/board/board.html?code=curiouswiz_board3&amp;page=1&amp;board_cate="
-											class="btn_light_border btn_box_01">목록</a>
-									</dd>
-								</dl>
-							</form>
-						</div>
+					<div class="bbs-table-pwd">
+						<form action="Modify.do" method="post" autocomplete="off">
+							<input type="hidden" name="BRO_CHK_KEY"
+								value="8bbc6ef77da9e371044f00cc1a8a06310a761d7ab63b5b0a42db20dc7a2ca3c9">
+							<input type="hidden" name="code" value="curiouswiz_board3">
+							<input type="hidden" name="num1" value="941772"> <input
+								type="hidden" name="num2" value="00000"> <input
+								type="hidden" name="page" value="1"> <input
+								type="hidden" name="type" value="u">
+							<fieldset>
+								<legend>비밀번호 찾기</legend>
+								<table summary="비밀번호찾기테이블">
+									<caption>비밀번호 찾기</caption>
+									<colgroup>
+										<col width="90">
+										<col>
+									</colgroup>
+									<tbody>
+										<tr>
+											<th><div>비밀번호</div></th>
+											<td><div>
+													<input id="bp_input_passwd" type="password"
+														class="MS_input_txt" name="passwd">
+												</div></td>
+										</tr>
+									</tbody>
+								</table>
+							</fieldset>
+							<dl class="bbs-link pwd-link">
+								<dt></dt>
+								<dd>
+									<a href="javascript:document.form1.submit();"
+										class="none btn_light btn_box_01">확인</a> <a
+										href="javascript:history.go(-1);"
+										class="btn_light_border btn_box_01">취소</a> <a
+										href="/board/board.html?code=curiouswiz_board3&amp;page=1&amp;board_cate="
+										class="btn_light_border btn_box_01">목록</a>
+								</dd>
+							</dl>
+						</form>
 					</div>
-					<!-- .page-body -->
 				</div>
-				<!-- #bbsData -->
+				<!-- .page-body -->
 			</div>
+			<!-- #bbsData -->
+		</div>
 	</section>
-	<c:import url="modules/footer.jsp" />
+	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

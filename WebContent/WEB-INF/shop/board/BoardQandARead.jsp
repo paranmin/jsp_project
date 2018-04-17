@@ -274,7 +274,7 @@ a {
 	<div id="container">
 
 		<div class="titleArea">
-			<h1>REVIEW</h1>
+			<h1>Q&amp;A</h1>
 		</div>
 		<div>
 			<!--#top_box-->
