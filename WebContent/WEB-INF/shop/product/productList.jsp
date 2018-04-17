@@ -146,7 +146,7 @@ div.category_best_white{
 									<p>
 										<b>${bestItem.name }</b>
 										<br> ${bestItem.subDesc }
-										<br><fmt:formatNumber value="${bestItem.sellingPrice }" pattern="#,###원"/>
+										<br><fmt:formatNumber value="${bestItem.sellingPrice }" pattern="￦#,###"/>
 									</p>
 								</a>
 							</div>
@@ -211,7 +211,7 @@ div.category_best_white{
 								<p>
 									<b>${prolist.name }</b>
 									<br> ${prolist.subDesc }
-									<br><fmt:formatNumber value="${prolist.sellingPrice }" pattern="#,###원"/>
+									<br><fmt:formatNumber value="${prolist.sellingPrice }" pattern="￦#,###"/>
 								</p>
 							</a>
 						</div>
