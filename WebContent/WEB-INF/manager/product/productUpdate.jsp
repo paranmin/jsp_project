@@ -388,7 +388,7 @@ $(function(){
 						<th id="opprice">옵션가</th>
 						<th id="empty"></th>
 					</tr>
-						<c:set value="0" var="fir"/>
+					<c:set value="0" var="fir"/>
 					<c:forEach var="option" items="${opt }" varStatus="status">
 						<c:set value="${fir+rownum[status.index]-1 }" var="end"/>
 						<tr class="parent">
