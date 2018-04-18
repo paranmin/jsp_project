@@ -5,20 +5,16 @@
 		<result property="ctNo" column="ct_no"/>
 		<result property="ctPrdQuantity" column="ct_prd_quantity"/>
 		<result property="ctPrdOpname" column="ct_prd_op_name"/>
-	</resultMap>
-	<resultMap type="Member" id="memberwithcartResult" extends="cartResult">
-		<result property="mNo" column="m_no"/>
-	</resultMap>
-	<resultMap type="Product" id="productwithcartResult" extends="memberwithcartResult">
-		<result property="prdNo" column="prd_no"/>
-		<result property="name" column="prd_name"/>
-		<result property="cost" column="prd_cost"/><!-- 할인전 가격 -->
-		<result property="sellingPrice" column="prd_selling_price"/><!-- 할인후 가격 -->
-		<result property="useOption" column="prd_use_option"/><!-- 옵션유무  -->
-		<result property="mainImg" column="prd_main_img"/><!-- 상품메인이미지 -->
+		<result property="mNo.no" column="m_no"/>
+		<result property="prd.prdNo" column="prd_no"/>
+		<result property="prd.name" column="prd_name"/>
+		<result property="prd.cost" column="prd_cost"/><!-- 할인전 가격 -->
+		<result property="prd.sellingPrice" column="prd_selling_price"/><!-- 할인후 가격 -->
+		<result property="prd.useOption" column="prd_use_option"/><!-- 옵션유무  -->
+		<result property="prd.mainImg" column="prd_main_img"/><!-- 상품메인이미지 -->
 	</resultMap>
 	
-	<select id="selectAllCart" resultMap="productwithcartResult">
-		select c.ct_no,c.ct_prd_quantity,c.ct_prd_op_name,c.m_no,c.prd_no,p.prd_selling_price,p.prd_main_img from cart c join product p on c.prd_no = p.prd_no
+	<select id="selectAllCart" resultMap="cartResult">
+		select c.ct_no,c.ct_prd_quantity,c.ct_prd_op_name,c.m_no,c.prd_no,p.prd_selling_price,p.prd_name,p.prd_main_img from cart c join product p on c.prd_no = p.prd_no where m_no=#{mNo}
 	</select>
 </mapper>
