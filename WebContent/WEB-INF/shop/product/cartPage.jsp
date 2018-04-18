@@ -51,6 +51,7 @@
 		//수량 카운트 작업,가격작업
 		var count = $(".cartnum").val();
 		var str = parseInt($(".productPrice").text());
+		$("input:hidden[name='productPrice']").val(str);
 		$(".prdsPrice").text(str);
 		$(".prdplusdel").text(str+2500);
 		$(".plus").click(function(){
@@ -61,11 +62,14 @@
 				alert("상품 한개당 10개 이하로만 주문 하실 수 있습니다.");
 				$(".cartnum").val(10);
 				$(".productPrice").text(10*str);
-				return;
+				return false;
 			}
 			var productPrice1 = parseInt($(".productPrice").text());
 			$(".prdsPrice").text(productPrice1);
+			$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
+			$("input:hidden[name='productPrice']").val($(".productPrice").text());
 			$(".prdplusdel").text(productPrice1+2500);
+			return false;
 		})
 		$(".minus").click(function(){
 			count--;
@@ -74,12 +78,17 @@
 			if(	$(".cartnum").val()<=1){
 				$(".cartnum").val(1);
 				$(".productPrice").text(1*str);
-				return;
+				return false;
 			}
 			var productPrice1 = parseInt($(".productPrice").text());
 			$(".prdsPrice").text(productPrice1);
+			$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
+			$("input:hidden[name='productPrice']").val($(".productPrice").text());
 			$(".prdplusdel").text(productPrice1+2500);
+			return false;
 		})
+		$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
+		
 		//상품 삭제 (삭제버튼으로) -- 각각 삭제
 		$(".delete").click(function(){
 			$(this).parent().parent().remove();
@@ -98,6 +107,24 @@
 				$("input:checkbox[name='chkAll']").parent().parent().remove();
 			}
 		})
+		//상품 번호 번호(체크박스) 숫자 임의로 넣음 ->나중에 수정하기
+		
+		//상품 옵션 input val
+		var oprionname = $(".optionname").text();
+		$("input:hidden[name='proNamehr']").val(oprionname);
+		
+		//상품 이름
+		var name = $(".prdName").text();
+		$("input:hidden[name='prdName']").val(name);
+		
+		//상품 이미지
+		$("#go_order").click(function(){
+			var imgsrc =$(".proImg").attr("src");
+			var src = imgsrc.split("/");
+			$("input:hidden[name='proImg']").val(src[src.length-1]);
+			console.log($("input:hidden[name='proImg']").val());
+		})
+	
 		
 	})
 </script>
@@ -115,6 +142,7 @@
 					<a href="#">go back ← </a>
 				</p>
 				<!-- 상품상세페이지로 돌아가기 -->
+				<form action="cart.do" method="post">
 				<div class="cartList">
 					<div class="cartTable">
 						<table>
@@ -127,33 +155,47 @@
 								<th class="count">가격</th>
 								<th class="cancel">취소</th>
 							</tr>
-							<tr class="proContent">
-								<td><input type="checkbox" name="chkAll"></td>
-								<td><img src="../../images/J1.jpg" class="proImg"></td>
-								<td class="proNameTable">
-									<table>
-										<tr>
-											<td>베이직 실리콘 귀걸이</td>
+							<c:if test="${list.size()==0 }">
+								<tr class="proContent">
+									<td colspan="6">장바구니에 담긴 상품이 없습니다. 상품을 담아주세요.</td>
+								</tr>
+							</c:if>
+								<c:if test="${list.size()>0 }">
+									<c:forEach var="items" items="${list }">
+										<tr class="proContent">
+											<td><input type="checkbox" name="chkAll" value="${list.prdNo }"></td>
+											<td><img src="../../images/${list.mainImg }" class="proImg"></td>
+											<input type="hidden" name="proImg">
+											<td class="proNameTable">
+												<table>
+													<tr>
+														<td class="prdName">${list.name }</td>
+													</tr>
+													<tr>
+														<td class="proNamehr">옵션:<span class="optionname">${list.ctPrdOpname }</span></td>
+
+													</tr>
+												</table> <input type="hidden" name="prdName"> <input
+												type="hidden" name="proNamehr">
+											</td>
+											<td class="numcount">
+												<button class="plus">+</button> <input type="text"
+												class="cartnum" value="1" name="cartnum">
+												<button class="minus">-</button>
+											</td>
+											<td><span class="productPrice">${list.sellingPrice }</span>원</td>
+											<input type="hidden" name="productPrice">
+											<td>
+												<button class="delete">삭제하기</button>
+											</td>
 										</tr>
-										<tr>
-											<td class="proNamehr">옵션:[EX---]</td>
-										</tr>
-									</table>
-								</td>
-								<td class="numcount">
-									<button class="plus">+</button> <input type="text"
-									class="cartnum" value="1">
-									<button class="minus">-</button>
-								</td>
-								<td><span class="productPrice">1500</span>원</td>
-								<td>
-									<button class="delete">삭제하기</button>
-								</td>
-							</tr>
-							<tr class="allProPrice">
+									</c:forEach>
+								</c:if>
+								<tr class="allProPrice">
 								<td colspan="6"><p>
 										총 결제 금액:<span class="prdsPrice"></span>원+배송료 2,500원 = <span
 											class="prdplusdel"></span>원
+											<input type="hidden" name="prdsPrice">
 									</p></td>
 							</tr>
 						</table>
@@ -167,6 +209,7 @@
 						<button id="go_shop">계속 쇼핑하기</button>
 					</div>
 				</div>
+				</form>
 			</div>
 		</section>
 		<c:import url="../modules/footer.jsp" />

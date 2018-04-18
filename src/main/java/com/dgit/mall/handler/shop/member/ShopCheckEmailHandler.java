@@ -20,28 +20,30 @@ public class ShopCheckEmailHandler extends ShopCommandHandler {
 
 		HttpSession session = request.getSession(false);
 		Member auth = (Member) session.getAttribute("auth");
-		Member my = MemberService.getInstance().selectByFindMember(auth);
 
-		Map<String, Object> json = new HashMap<>();
-		if (my.getEmail().equalsIgnoreCase(email)) {
-			json.put("msg", "현재 사용중인 정보와 동일합니다.");
-			json.put("result", "yes");
-			CommonUtil.getInstance().printMessageByJSON(response, json);
-			return null;
+		if (auth != null) {
+			Member my = MemberService.getInstance().selectByFindMember(auth);
+
+			if (my != null && my.getEmail().equalsIgnoreCase(email)) {
+				returnResultJSON(response, "현재 사용중인 정보와 동일합니다.", "yes");
+				return null;
+			}
 		}
 
 		int res = MemberService.getInstance().checkDuplEmail(email);
 		if (res > 0) {
-			json.put("msg", "사용불가합니다.");
-			json.put("result", "no");
-			CommonUtil.getInstance().printMessageByJSON(response, json);
+			returnResultJSON(response, "사용불가합니다.", "no");
 			return null;
 		}
 
-		json.put("msg", "사용가능합니다.");
-		json.put("result", "yes");
-		CommonUtil.getInstance().printMessageByJSON(response, json);
+		returnResultJSON(response, "사용가능합니다.", "yes");
 		return null;
 	}
 
+	private void returnResultJSON(HttpServletResponse response, String msg, String result) {
+		Map<String, Object> json = new HashMap<>();
+		json.put("msg", msg);
+		json.put("result", result);
+		CommonUtil.getInstance().printMessageByJSON(response, json);
+	}
 }

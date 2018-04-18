@@ -45,9 +45,9 @@
 					</li>
 					<li><a href="${pageContext.request.contextPath}/shop/board/board.do">BOARD</a>
 						<ul class="sub_nav">
-							<li><a href="#">후기 - Review</a></li>
-							<li><a href="#">질문 - Q&A</a></li>
-							<li><a href="#">공지사항 - Notice</a></li>
+							<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">후기 - Review</a></li>
+							<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">질문 - Q&A</a></li>
+							<li><a href="${pageContext.request.contextPath}/shop/NoticeBoard.do">공지사항 - Notice</a></li>
 						</ul>
 					</li>
 					<li><a href="${pageContext.request.contextPath}/shop/cart/cart.do"><i class="fa fa-cart-plus"></i>(0)</a></li>

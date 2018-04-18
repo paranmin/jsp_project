@@ -15,7 +15,8 @@ section #container .searchArea {
 	margin-bottom: 5px;
 }
 
-section #container .searchArea select, section #container .searchArea input {
+section #container .searchArea select, section #container .searchArea input
+	{
 	outline: none;
 	vertical-align: top;
 }
@@ -38,8 +39,7 @@ section #container table.memlist {
 	width: 100%;
 }
 
-section #container table.memlist th, section #container table.memlist td
-	{
+section #container table.memlist th, section #container table.memlist td {
 	border: 1px solid #eaeaea;
 	padding: 5px;
 }
@@ -51,4 +51,78 @@ section #container table.memlist th {
 
 .td-center {
 	text-align: center;
+}
+
+section #container table.register {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+section #container table.register td span.required {
+	color: red
+}
+
+section #container table.register tr:first-child td {
+	border-top: 1px solid #eaeaea;
+}
+
+section #container table.register td {
+	padding: 10px;
+	border-bottom: 1px solid #eaeaea;
+}
+section #container table.register td input, section #container table.register td select{
+	vertical-align: middle;
+	outline: none;
+}
+section #container table.register td input {
+	height: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+section #container table.register td select {
+	height: 27px;
+}
+
+section #container table.register td input.checkPwd {
+	width: 250px;
+}
+
+section #container table.register td input.form_addr {
+	width: 450px;
+}
+
+section #container table.register td a.btn {
+	display: inline-block;
+	background-color: #e5e5e5;
+	color: #555;
+	width: 70px;
+	height: 25px;
+	line-height: 25px;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #e0e0e0;
+	font-size: 0.9em;
+}
+
+section #container p.btn {
+	margin-top: 40px;
+	text-align: center;
+}
+
+section #container p.btn a {
+	display: inline-block;
+	width: 150px;
+	height: 40px;
+	line-height: 40px;
+}
+
+section #container p.btn a.ok {
+	background-color: #333;
+	color: #fff;
+}
+
+section #container p.btn a.cancel {
+	background-color: #e8e8e8;
+	color: #333;
 }

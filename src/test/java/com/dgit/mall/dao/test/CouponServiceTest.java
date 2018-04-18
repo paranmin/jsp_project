@@ -1,9 +1,8 @@
 package com.dgit.mall.dao.test;
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -13,9 +12,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.dgit.mall.dao.service.CouponService;
-import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Coupon;
-import com.dgit.mall.dto.Member;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CouponServiceTest {

@@ -1,11 +1,11 @@
-package com.dgit.mall.handler.admin.coupon;
+package com.dgit.mall.handler.shop.board;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dgit.mall.handler.admin.AdminCommandHandler;
+import com.dgit.mall.handler.shop.ShopCommandHandler;
 
-public class AdminInsertcptomemHandler extends AdminCommandHandler {
+public class BoardNoticeReadHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {

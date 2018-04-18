@@ -57,3 +57,49 @@ function daumPostcode(postEl, addr1, addr2) {
 		}
 	}).open();
 }
+
+function checkDulpEmail() {
+	if ($("input[name='email1']").val() == '' || $("select[name='email2']").val() == '') {
+		alert("E-Mail 주소가 제대로 입력되지 않았습니다.");
+		return false;
+	}
+	var chkEmail = $("input[name='email1']").val()+"@"+$("select[name='email2']").val();
+	$.ajax({
+		url: "/jsp_project/shop/checkemail.do",
+		type: "post",
+		data: {email: chkEmail},
+		dataType: "json",
+		success: function(data) {
+			alert(data.msg);
+			if (data.result == 'yes') {
+				$("input[name='email1']").data("checkdupl", "Y");
+			}
+			return;
+		}
+	});
+}
+
+function checkDuplId(el) {
+	if ($(el).val().trim() == '') {
+		alert("아이디를 입력해주세요.");
+		$(el).val("");
+		$(el).focus();
+		return false;
+	}
+	console.log($(el).val());
+	$.ajax({
+		url: "/jsp_project/shop/checkid.do",
+		type: "post",
+		data: {id: $(el).val().trim()},
+		dataType: "json",
+		success: function(data) {
+			alert(data.msg);
+			if (data.result == 'yes') {
+				console.log("dfafafa");
+				$(el).data("checkduplid", "Y");
+			}
+			return;
+		}
+	});
+}
+

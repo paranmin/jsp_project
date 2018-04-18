@@ -68,6 +68,10 @@
 		order by m_regdate desc;
 	</select>
 	
+	<select id="checkDuplId" parameterType="String" resultType="int">
+		select count(m_no) from member where m_id = #{id};
+	</select>
+
 	<select id="checkDuplEmail" parameterType="String" resultType="int">
 		select count(m_no) from member where m_email = #{email};
 	</select>
@@ -79,6 +83,15 @@
 		m_push_app)
 		values (#{id}, #{name}, password(#{pwd}), #{email}, #{phone}, #{regdate}, 
 		#{serviceAgree}, #{privacyAgree}, #{pushEmail}, #{pushSMS}, #{pushApp})
+	</insert>
+	
+	<insert id="registerFullMember" parameterType="Member">
+		insert into
+		member(m_id, m_name, m_pass, m_email, m_phone,
+		m_tel, m_gender, m_birth, m_service_terms, m_privacy_terms,
+		m_push_email, m_push_sms, m_push_app, m_regdate)
+		values (#{id}, #{name}, password(#{pwd}), #{email}, #{phone}, #{tel}, #{gender}, #{birth},
+		#{serviceAgree}, #{privacyAgree}, #{pushEmail}, #{pushSMS}, #{pushApp}, #{regdate})
 	</insert>
 
 	<update id="updatePassword" parameterType="Member">

@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dgit.mall.dao.OrderDao">
 	<resultMap type="Order" id="orderResult">
-		<id property="ordNo" column="ord_no"/> <!-- 주문번호 -->
 		<result property="ordPrice" column="ord_price"/> <!-- 주문가격 -->
 		<result property="ordCouponPrice" column="ord_coupon_price"/> <!-- 쿠폰사용가격 -->
 		<result property="ordOption" column="ord_use_prd_option"/> <!-- 주문상품 옵션유무 -->
@@ -19,5 +18,27 @@
 		<result property="phone" column="m_phone" />
 		<result property="regdate" column="m_regdate" />
 	</resultMap>
+	<resultMap type="MemberAddress" id="memberwithaddressResult" extends="orderWithMemberResult">
+		<result property="mdZipcode" column="md_zipcode"/>
+		<result property="mdAddress" column="md_address"/>
+	</resultMap>
+	<resultMap type="OrderProduct" id="orderwithorderproductResult" extends="memberwithaddressResult">
+		<id property="ordNo" column="ord_no"/>
+		<result property="opSellingPrice" column="op_selling_price"/>
+		<result property="opQuantity" column="op_quantity"/>
+		<result property="opOption" column="op_option"/>
+	</resultMap>
+	<resultMap type="Product" id="orderproductwidthproductResult" extends="orderwithorderproductResult">
+		<result property="prdNo" column="prd_no"/>
+		<result property="name" column="prd_name"/>
+	</resultMap>
+	
 
+	<!-- order 주문등록 -->
+	<insert id="insertOrder" parameterType="Order">
+		insert into `order` values(#{ordNo.ordNo},#{ordPrice},#{ordCouponPrice},#{type},#{ordOption},#{deliveryFee},#{ordMessage},#{memberNo.no});
+	</insert>
+	<insert id="insertOrderProduct" parameterType="OrderProduct">
+		insert into order_product values(#{opSellingPrice},#{opQuantity},#{opOption},#{ordNo},#{prdNo.prdNo});
+	</insert>
 </mapper>

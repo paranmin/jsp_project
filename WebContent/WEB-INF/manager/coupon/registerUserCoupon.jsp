@@ -148,12 +148,15 @@
 				return false;
 			}
 			$.ajax({
-				url:"insertcptomember.do",
-				type"post",
+				url:"regiuser.do",
+				type:"post",
 				dataType:"json",
 				data:{"couponlist":couponlist,"memberlist":memberlist},
 				success:function(data){
-					
+					if(data.result=="send"){
+						console.log(couponlist,memberlist);
+						alert("aaa");
+					};
 				}
 			})
 		})
@@ -163,6 +166,7 @@
 </head>
 <body>
 	<div class="table">
+		<form action="regiuser.do">
 		<table>
 			<tr>
 				<th class="width4"><input type="checkbox" name="check"></th>
@@ -176,9 +180,10 @@
 			<c:if test="${list.size()==0 }">
 				<tr>
 					<td colspan="5">쿠폰이 없습니다. 쿠폰을 등록해주세요</td>
+				</tr>
 			</c:if>
 			<c:if test="${list.size() > 0 }">
-				<%
+					<%
 						Date now = new Date();
 						pageContext.setAttribute("now", now);
 					%>
@@ -205,7 +210,7 @@
 			</c:if>
 		</table>
 		<div class="search">
-			<form action="regiuser.do">
+			
 			<p class="selectb">
 					<select name="search">
 						<option value="id"<c:if test="${where == 'id'}"> selected </c:if>>Id</option>
@@ -219,7 +224,7 @@
 				<p class="submitb">
 					<input type="submit" value="검색" class="searchBtn" />
 				</p>
-			</form>
+			
 		</div>
 		<table class="tablewidth">
 			<tr>
@@ -230,7 +235,7 @@
 			</tr>
 			<c:if test="${mlist.size()==0 }">
 				<tr>
-					<td>회원가입한 고객이 없습니다.</td>
+					<td colspan="4">회원가입한 고객이 없습니다.</td>
 				</tr>			
 			</c:if>
 			<c:if test="${mlist.size() > 0 }">
@@ -247,6 +252,7 @@
 		<div class="addCoupontoMember">
 			<button class="addCoupon" name="addCoupontoMember">쿠폰 보내기</button>
 		</div>
+		</form>
 	</div>
 
 

@@ -7,43 +7,58 @@ pageEncoding="UTF-8"%>
 <head>
 <meta charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="Boardcss/Board.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Boardcss/writeform.css"
+	media="all" />
+
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="css/base.css" media="all" />
-<link rel="stylesheet" href="Boardcss/writeform.css" media="all" />
-<link rel="stylesheet" href="css/Board.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/base.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Boardcss/Board.css"
+	media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/base.js"></script>
+
 <title>Insert title here</title>
 <style type="text/css">
 .titleArea h2 {
-	font-size: 17px;
+	font-size: 17px; # submit { padding : 8px;
+	border: 0;
+}
 }
 </style>
 </head>
 <body>
-	<c:import url="modules/header.jsp" />
-	<div class="titleArea">
-		<h2>Q&amp;A</h2>
-	</div>
-	<div class="top_box">
-		<ul>
-			<li><a href="#">Notice</a></li>
-			<li><span><a>/</a></span></li>
-			<li><a href="#">Q&amp;A</a></li>
-			<li><span><a>/</a></span></li>
-			<li><a href="#">Review(후기)</a></li>
-		</ul>
-	</div>
+	<c:import url="../modules/header.jsp" />
+	<c:import url="../modules/leftSide.jsp" />
+	<c:import url="../modules/rightSide.jsp" />
+	<section>	
+		<div class="titleArea">
+			<h2>Q&amp;A</h2>
+		</div>
+		<div class="top_box">
+			<ul>
+				<li><a href="#">Notice</a></li>
+				<li><span><a>/</a></span></li>
+				<li><a href="#">Q&amp;A</a></li>
+				<li><span><a>/</a></span></li>
+				<li><a href="#">Review(후기)</a></li>
+			</ul>
+		</div>
 
-	<section>
+
 		<div id="bbsData">
 			<div class="page-body">
 
 
 
-				<form action="boardqanda.do" method="post"
+				<form action="BoardQandA.do" method="post"
 					enctype="multipart/form-data" style="position: relative;"
 					autocomplete="off">
 					<div id="passimg" name="passimg"
@@ -136,8 +151,9 @@ pageEncoding="UTF-8"%>
 					<dl class="bbs-link bbs-link-btm">
 						<dt></dt>
 						<dd>
-							<a class="write btn_dark btn_box_01" href="JavaScript:send();">글쓰기</a>
-							<a href="#" class="btn_light btn_box_01">목록</a>
+							<input type="submit" value="글등록" id="submit"> <a
+								href="${pageContext.request.contextPath}/shop/BoardQandA.do"
+								class="btn_light btn_box_01">목록</a>
 						</dd>
 					</dl>
 				</form>
@@ -145,6 +161,6 @@ pageEncoding="UTF-8"%>
 			</div>
 	</section>
 	</div>
-	<c:import url="modules/footer.jsp" />
+	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

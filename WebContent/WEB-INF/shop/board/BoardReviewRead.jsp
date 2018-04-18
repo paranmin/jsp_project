@@ -91,8 +91,9 @@ th {
 .new-privercy-contract {
 	padding: 20px;
 }
+
 .new-privercy-contract {
-    text-align: left;
+	text-align: left;
 }
 
 .new-privercy-contract p {
@@ -391,13 +392,6 @@ a {
 												</tr>
 											</tbody>
 										</table>
-									</div>
-									<div style="margin-top: 5px;">* 동의하셔야 서비스를 이용하실 수 있습니다.</div>
-									<div class="privercy-agree">
-										<label><input type="radio" name="privercy_agree"
-											value="Y"> 정보수집에 동의합니다.</label> <label><input
-											type="radio" name="privercy_agree" value="N" checked="">
-											동의하지 않습니다.</label>
 									</div>
 								</div>
 							</div>

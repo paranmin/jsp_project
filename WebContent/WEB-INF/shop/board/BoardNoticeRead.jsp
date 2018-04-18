@@ -105,93 +105,13 @@ tbody td.line {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="line">
-									<div class="cont-sub-des">
-										<div>
-											<span><em>작성일 :</em> 2018-03-21</span>
-										</div>
-										<div>
-											<span><em>작성자 :</em> <img
-												src="/board/images/neo_adminimg.gif" border="0"
-												align="absmiddle"></span> <span><em>파일 :</em> <a
-												href="http://board.makeshop.co.kr/board/special132/curiouswiz_board2/%B8%F0%B9%D9%C0%CF%C6%CB%BE%F7_2.jpg">모바일팝업_2.jpg</a></span>
-										</div>
-										<div class="hit">
-											<span><em>조회 :</em> 1747</span>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="data-bd-cont">
-										<div class="attach">
-											<img width="800"
-												src="http://board.makeshop.co.kr/board/special132/curiouswiz_board2/%B8%F0%B9%D9%C0%CF%C6%CB%BE%F7_2.jpg">
-										</div>
-									</div>
-								</td>
-							</tr>
+							
 						</tbody>
 					</table>
-					<hr size="1" color="#E5E5E5">
-					<div class="view-link">
-						<dl class="bbs-link con-link">
-							<dt></dt>
-							<dd></dd>
-						</dl>
-						<dl class="bbs-link">
-							<dt></dt>
-							<dd>
-								<a
-									href="/board/board.html?code=curiouswiz_board2&amp;page=1&amp;board_cate=&amp;s_id=&amp;stext=&amp;ssubject=&amp;shname=&amp;scontent=&amp;sbrand=&amp;sgid=&amp;datekey=&amp;branduid="
-									class="none btn_light btn_box_01"> 목록</a>
-							</dd>
-						</dl>
-					</div>
-					<div class="bbs-table-list">
-						<table summary="게시글 목록">
-							<caption>게시글 목록</caption>
-							<colgroup>
-								<col>
-								<col width="120">
-								<col width="90">
-								<col width="60">
-							</colgroup>
-							<thead>
-								<tr>
-									<th scope="col"><div class="tb-center">제목</div></th>
-									<th scope="col"><div class="tb-center">작성자</div></th>
-									<th scope="col"><div class="tb-center">작성일</div></th>
-									<th scope="col"><div class="tb-center">조회</div></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<div class="tb-left">
-											<img src="/board/images/neo_jpg.gif"> <img
-												src="/board/images/neo_head.gif" style="margin-left: 00px">
-											<a
-												href="/board/board.html?code=curiouswiz_board2&amp;page=1&amp;type=v&amp;board_cate=&amp;num1=999737&amp;num2=00000&amp;s_id=&amp;stext=&amp;ssubject=&amp;shname=&amp;scontent=&amp;sbrand=&amp;sgid=&amp;datekey=&amp;branduid=&amp;number=&amp;lock=N">[03/23]
-												워크샵 휴무/배송 공지</a>
-										</div>
-									</td>
-									<td>
-										<div class="tb-center">
-											<img src="/board/images/neo_adminimg.gif">
-										</div>
-									</td>
-									<td><div class="tb-center">2018-03-21</div></td>
-									<td><div class="tb-center">1747</div></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
 				</div>
 			</div>
-			<!-- .page-body -->
+		</div>
+		<!-- .page-body -->
 		</div>
 	</section>
 	<c:import url="modules/footer.jsp" />
