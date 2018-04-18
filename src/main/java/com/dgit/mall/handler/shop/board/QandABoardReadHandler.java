@@ -1,11 +1,11 @@
-package com.dgit.mall.handler.board;
+package com.dgit.mall.handler.shop.board;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 
-public class BoardNoticeReadHandler extends ShopCommandHandler {
+public class QandABoardReadHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {

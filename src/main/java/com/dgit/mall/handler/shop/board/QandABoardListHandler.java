@@ -1,4 +1,4 @@
-package com.dgit.mall.handler.board;
+package com.dgit.mall.handler.shop.board;
 
 import java.util.List;
 

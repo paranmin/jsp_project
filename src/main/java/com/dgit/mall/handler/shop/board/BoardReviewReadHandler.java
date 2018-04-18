@@ -1,4 +1,4 @@
-package com.dgit.mall.handler.board;
+package com.dgit.mall.handler.shop.board;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
