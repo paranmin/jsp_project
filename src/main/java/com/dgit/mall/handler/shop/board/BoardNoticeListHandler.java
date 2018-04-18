@@ -1,4 +1,4 @@
-package com.dgit.mall.handler.board;
+package com.dgit.mall.handler.shop.board;
 
 import java.util.List;
 
@@ -12,22 +12,23 @@ import com.dgit.mall.dto.Board;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
 
-public class BoardReviewListHandler extends ShopCommandHandler {
+public class BoardNoticeListHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		SqlSession sqlSession = null;
-
-		request.setAttribute("contentPage", "board/BoardReview.jsp");
+		
+		request.setAttribute("contentPage", "board/BoardNotice.jsp");
 		request.setAttribute("sub_menu", "list");
 
 		sqlSession = MySqlSessionFactory.openSession();
 		BoardDao Dao = sqlSession.getMapper(BoardDao.class);
 
-		List<Board> list = Dao.selectByAllQandABoard();
+		List<Board> list = Dao.selectNoticeBoardAll();
 		request.setAttribute("list", list);
 
-		return VIEW_FRONT_PATH + "board/BoardReview.jsp";
+
+		return VIEW_FRONT_PATH + "board/BoardNotice.jsp";
 	}
 
 }

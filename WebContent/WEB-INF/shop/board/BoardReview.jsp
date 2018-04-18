@@ -85,6 +85,7 @@ table {
 										<tr>
 											<td><a href="ReviewBoardRead.do?abNo=${item.brdNo }">${item.brdNo }</a></td>
 											<td>${item.brdtitle }</td>
+											<td display="hidden">${item.brdtitle }</td>BoardReview
 											<td>${item.brdwriter }</td>
 											<td>${item.brdregdate }</td>
 											<td>${item.brdch }</td>

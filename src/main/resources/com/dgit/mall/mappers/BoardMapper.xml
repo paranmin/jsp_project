@@ -19,8 +19,7 @@
 		select brd_no, brd_code, brd_title, brd_content, brd_parent,
 		brd_depth, brd_use_attachment, prd_no,brd_ch
 		from board
-		where brd_code =
-		#{brdcode}
+		where brd_code = #{brdcode}
 	</select>
 
 	<select id="selectByAllQandABoard" parameterType="Board"

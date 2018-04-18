@@ -1,6 +1,8 @@
+<%@page import="com.dgit.mall.dto.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,16 +177,46 @@ div.detail_menu div.button button#qaBtn, div.detail_menu div.button button#revie
 	color:white;
 	font-weight: bold;
 }
+#line{
+	text-decoration: line-through;
+}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<%
+	Product pro = (Product)request.getAttribute("pro");
+%>
+<script type="text/javascript">
+$(function(){
+	$("select").change(function(){  
+		console.log("$(option:selected).val() : "+$("option:selected").val());
+		if($("option:selected").val()!=null){
+			var li = $("<li>");
+			var $text = $(this).children("option:selected").text();
+			var plusBtn = $("<button>");
+			$(plusBtn).text("+");
+			var $input = $("<input type='text'>");
+			$($input).val("1");
+			var minusBtn = $("<button>");
+			$(minusBtn).text("-");
+			var price = <%=pro.getSellingPrice()%>+$('option:selected').val()+"원";
+			var closeBtn=$("<button>");
+			$(closeBtn).text("X");
+			console.log("$text : "+$text);
+			console.log(price);
+			console.log($('option:selected').val());
+		}
+	});	
+});
+</script>
 </head>
 <body>
 	<div id="container">
-		<c:import url="../../modules/header.jsp" />
-		<c:import url="../../modules/leftSide.jsp" />
-		<c:import url="../../modules/rightSide.jsp" />
+		<c:import url="../modules/header.jsp" />
+		<c:import url="../modules/leftSide.jsp" />
+		<c:import url="../modules/rightSide.jsp" />
 		<section id="detail_product">
 			<div class="detail_left">
-				<h2 class="catename">JEWELRY... (반지)</h2>
+				<h2 class="catename">JEWELRY... ${pro.category }</h2>
 				<div class="detail_menu" id="detail_menu_detail">
 					<ul>
 						<li><a href="#detail" id="detail">Detail</a></li>
@@ -192,39 +224,56 @@ div.detail_menu div.button button#qaBtn, div.detail_menu div.button button#revie
 						<li><a href="#qa">Q&A</a></li>
 					</ul>
 				</div>
-				<img src="../../images/01.jpg"> <img src="../../images/02.jpg">
-				<img src="../../images/03.jpg"> <img src="../../images/04.jpg">
-				<img src="../../images/05.jpg"> <img
-					src="../../images/ringsize_notice.jpg"> <img
-					src="../../images/common_notice.gif">
+				<c:forEach var="imglist" items="${img }">
+					<img src="${pageContext.request.contextPath}/images/${imglist.img }">
+				</c:forEach>
 			</div>
 			<div class="detail_right">
-				<h4>925 트윙클 컷팅 반지</h4>
+				<h3>${pro.name }</h3>
 				<hr>
 				<table>
 					<tr>
-						<td>적립금</td>
-						<td><input type="text" value="1%" readonly="readonly"></td>
+						<td colspan="2">${pro.subDesc }</td>
 					</tr>
 					<tr>
 						<td>판매가격</td>
-						<td><input type="text" value="￦3,000" readonly="readonly"></td>
-					</tr>
-					<tr>
-						<td>색상</td>
-						<td>
-							<select name="option">
-								<option>--옵션 선택--</option>
-								<option>실버 5호</option>
-								<option>실버 7호</option>
-								<option>실버 9호</option>
-							</select> 
-						</td>
-					</tr>
+						<c:if test="${pro.cost == pro.sellingPrice }">
+							<td><b><fmt:formatNumber value="${pro.sellingPrice }" pattern="￦#,###"/></b></td>
+						</c:if>
+						<c:if test="${pro.cost != pro.sellingPrice }">
+							<td>
+								<span id="line"><fmt:formatNumber value="${pro.cost }" pattern="￦#,###"/></span>
+								<b><fmt:formatNumber value="${pro.sellingPrice }" pattern="￦#,###"/></b>
+								(${pro.discountPer } 할인)
+							</td>
+						</c:if>
+					</tr>	
+					<c:set value="0" var="fir"/>
+					<c:forEach var="option" items="${opt }" varStatus="status">
+						<c:set value="${fir+rownum[status.index]-1 }" var="end"/>
+						<tr>
+							<td>${option.poName }</td>
+							<td>
+								<select>
+									<option value="null">==선택하세요==</option>
+									<c:forEach var="result" items="${res }" begin="${fir}" end="${end}">
+										<option value="${result.podCost}">${result.podValue} / <fmt:formatNumber value="${result.podCost}" pattern="#,###원"/></option>
+									</c:forEach>
+								</select>
+							</td>
+							<c:set value="${end+1 }" var="fir"/>
+					</c:forEach>
 				</table>
 				<hr>
-				<input type="submit" value="BUY IT NOW"><br>
-				<p class="cartgo"><a href="#">Add Cart</a><p>
+				<div id="selectedItem">
+					<ul></ul>
+				</div>
+				<hr>
+				<div id="resultPrice">
+					<p></p>
+				</div>
+				<input type="submit" value="Add Cart"><br>
+				<!-- <p class="cartgo"><a href="#">Add Cart</a><p> -->
 			</div>
 			<div class="datail_board">
 				<div class="detail_menu" id="detail_menu_review">
@@ -289,6 +338,7 @@ div.detail_menu div.button button#qaBtn, div.detail_menu div.button button#revie
 				</div>
 			</div>
 		</section>
+		<c:import url="../modules/footer.jsp" />
 	</div>
 </body>
 </html>

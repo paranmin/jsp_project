@@ -1,8 +1,10 @@
 package com.dgit.mall.handler.admin.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -14,56 +16,106 @@ import com.dgit.mall.dto.Proimg;
 import com.dgit.mall.handler.admin.AdminCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
 
-public class AdminProductAddHandler extends AdminCommandHandler {
+public class AdmidProductUpdateHandler extends AdminCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (request.getMethod().equalsIgnoreCase("get")) {
-			request.setAttribute("contentPage", "product/productAdd.jsp");
-			request.setAttribute("sub_menu", "list");
-			request.setAttribute("menu", "product");
-			request.setAttribute("css", "product.css");
-
-			return TEMPLATE_PAGE;
-		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			SqlSession sqlsession = null;
+			int no = Integer.parseInt(request.getParameter("no"));
+			try {
+				sqlsession = MySqlSessionFactory.openSession();
+				ProductDao dao = sqlsession.getMapper(ProductDao.class);
+				Product pro = dao.SelectProductByno(no);
+				List<Proimg> proimg = dao.SelectProimgByno(no);
+				List<Option> option = dao.SelectOptionByno(no);
+				ArrayList<Integer> rownum = new ArrayList<>();
+				ArrayList<OptionDetail> result = new ArrayList<>();
+
+				for (int i = 0; i < option.size(); i++) {
+					int num = option.get(i).getPoNo();
+					List<OptionDetail> detail = dao.SelectOpDeByno(num);
+					result.addAll(detail);
+					rownum.add(detail.size());
+				}
+				request.setAttribute("rownum", rownum);
+				request.setAttribute("res", result);
+				request.setAttribute("opt", option);
+				request.setAttribute("proimg", proimg);
+				request.setAttribute("pro", pro);
+
+				request.setAttribute("contentPage", "product/productUpdate.jsp");
+				request.setAttribute("sub_menu", "list");
+				request.setAttribute("menu", "product");
+				request.setAttribute("css", "product.css");
+
+				return TEMPLATE_PAGE;
+			} finally {
+				sqlsession.close();
+			}
+		} else if (request.getMethod().equalsIgnoreCase("post")) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			String view = request.getParameter("view");
 			String cate = request.getParameter("cate");
 			String name = request.getParameter("name");
-			String sub_desc = request.getParameter("sub_desc");
+			String desc = request.getParameter("desc");
 			int cost = Integer.parseInt(request.getParameter("cost"));
 			String discount = request.getParameter("discount");
 			int price = Integer.parseInt(request.getParameter("price"));
 			int stock = Integer.parseInt(request.getParameter("stock"));
-			String main = request.getParameter("mainimg");
-			String[] files = request.getParameterValues("files");
 			String option = request.getParameter("use_option");
-			try {
+			String mainImg = request.getParameter("mainimg");
+			String deleteDetailImage = request.getParameter("deleteDetailImage");
+			String deleteImage[] = deleteDetailImage.split(",");
+			String[] files = request.getParameterValues("files");
+			
+			SqlSession sqlsession = null;
+			try{
 				sqlsession = MySqlSessionFactory.openSession();
 				ProductDao dao = sqlsession.getMapper(ProductDao.class);
 				Product pro = new Product();
+				pro.setPrdNo(no);
 				pro.setCategory(cate);
+				pro.setUse(view);
 				pro.setName(name);
-				pro.setSubDesc(sub_desc);
+				pro.setSubDesc(desc);
 				pro.setCost(cost);
 				pro.setDiscountPer(discount);
 				pro.setSellingPrice(price);
 				pro.setStock(stock);
-				pro.setMainImg(main);
 				pro.setUseOption(option);
-				dao.insertProduct(pro);
-
-				int prdno = dao.selectLastInsert();
-
-				Proimg img = new Proimg();
+				Product selectPro = dao.SelectProductByno(no);
+				if(!mainImg.isEmpty()){
+					pro.setMainImg(mainImg);
+				}else{
+					pro.setMainImg(selectPro.getMainImg());
+				}
+				
+				dao.updateProduct(pro);
+				
+				Proimg proimg = new Proimg();
+				for(int i=0; i<deleteImage.length; i++){
+					proimg.setPrdNo(no);
+					proimg.setImg(deleteImage[i]);
+					dao.deleteProimg(proimg);
+				}
+			
 				for (int i = 0; i < files.length; i++) {
 					if(!files[i].isEmpty()){
-						img.setPrdNo(prdno);
-						img.setImg(files[i]);
-						dao.insertProImg(img);
-					}
+						proimg.setPrdNo(no);
+						proimg.setImg(files[i]);
+						dao.insertProImg(proimg);
+					}	
 				}
-
+				
 				if (option.equals("1")) {
+					List<Option> selectOpt = dao.SelectOptionByno(no);
+					
+					for(int i=0; i<selectOpt.size(); i++){
+						dao.deleteOptionDetail(selectOpt.get(i).getPoNo());
+					}
+					dao.deleteOption(no);
+					
 					Option opt = new Option();
 					OptionDetail det = new OptionDetail();
 					String[] opName = request.getParameterValues("op_name");
@@ -73,7 +125,7 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 					int afterspan = 0;
 					for (int i = 0; i < opName.length; i++) {
 						opt.setPoName(opName[i]);
-						opt.setPrdNo(prdno);
+						opt.setPrdNo(no);
 						dao.insertOption(opt);
 						int pono = dao.selectLastInsertOption();
 						int rowspan = Integer.parseInt(rspan[i]);
@@ -93,19 +145,24 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 						afterspan += rowspan;
 					}
 				}
+				
+				
+				
+				
+				
+				
 				sqlsession.commit();
-				request.setAttribute("contentPage", "product/productAdd.jsp");
+			
+				request.setAttribute("contentPage", "list.do");
 				request.setAttribute("sub_menu", "list");
 				request.setAttribute("menu", "product");
 				request.setAttribute("css", "product.css");
 				return TEMPLATE_PAGE;
-			} catch (Exception e) {
-				e.printStackTrace();
-				sqlsession.rollback();
-			} finally {
+			}finally{
 				sqlsession.close();
-			}
+			}			
 		}
 		return null;
 	}
+
 }
