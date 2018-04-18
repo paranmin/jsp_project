@@ -7,7 +7,7 @@
 		<result property="ctPrdOpname" column="ct_prd_op_name"/>
 	</resultMap>
 	<resultMap type="Member" id="memberwithcartResult" extends="cartResult">
-		<result property="mNo" column="m_no"/>
+		<result property="no" column="m_no"/>
 	</resultMap>
 	<resultMap type="Product" id="productwithcartResult" extends="memberwithcartResult">
 		<result property="prdNo" column="prd_no"/>

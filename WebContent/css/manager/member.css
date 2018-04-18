@@ -34,7 +34,7 @@ section #container .searchArea input[type='submit'] {
 	height: 28px;
 }
 
-section #container table.memlist {
+section #container table {
 	border-collapse: collapse;
 	width: 100%;
 }
@@ -47,6 +47,11 @@ section #container table.memlist th, section #container table.memlist td {
 section #container table.memlist th {
 	background-color: #f1f1f1;
 	height: 30px;
+}
+
+section #container table.memlist td a {
+	color: #414ba9;
+	font-weight: bold;
 }
 
 .td-center {
@@ -92,7 +97,7 @@ section #container table.register td input.form_addr {
 	width: 450px;
 }
 
-section #container table.register td a.btn {
+section #container table td a.btn {
 	display: inline-block;
 	background-color: #e5e5e5;
 	color: #555;
@@ -125,4 +130,50 @@ section #container p.btn a.ok {
 section #container p.btn a.cancel {
 	background-color: #e8e8e8;
 	color: #333;
+}
+
+section #container table.modify {
+	width: 100%;
+	margin:5px auto 20px;
+}
+
+section #container table.modify tr:first-child th, section #container table.modify tr:first-child td {
+	border-top: 2px solid #6E7074;
+}
+
+section #container table.modify th, section #container table.modify td {
+	border-bottom: 1px solid #e1e1e1;
+	padding: 10px;
+}
+
+section #container table.modify th {
+	text-align: left;
+	background-color: #f2f2f2;
+}
+
+section #container table.modify td {
+}
+
+section #container table.modify td p {
+	margin-top: 5px;
+}
+
+section #container table.modify td input.form_addr {
+	width: 450px;
+}
+
+section #container table.modify td input.checkPwd {
+	width: 250px;
+}
+
+section #container table.modify td input, section #container table.modify td select {
+	height: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
+	outline: none;
+	vertical-align: middle;
+}
+
+section #container table.modify td .checkEmail {
+	width: 120px;
 }

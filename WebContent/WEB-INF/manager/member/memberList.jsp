@@ -40,7 +40,7 @@
 		<c:forEach var="mem" items="${memList}">
 			<tr>
 				<td class="td-center">${mem.no}</td>
-				<td>${mem.name}(${mem.id})</td>
+				<td><a href="modify.do?no=${mem.no}">${mem.name}(${mem.id})</a></td>
 				<td class="td-center">${mem.email}</td>
 				<td class="td-center">${mem.phone}<c:if test="${mem.tel != null && mem.tel != ''}"><br>(${mem.tel})</c:if></td>
 				<td class="td-center">${mem.gender}</td>
@@ -52,7 +52,7 @@
 	</c:if>
 	<c:if test="${memList == null || memList.size() == 0}">
 		<tr>
-			<td colspan="7">등록된 회원이 없습니다.</td>
+			<td colspan="7" class="td-center">등록된 회원이 없습니다.</td>
 		</tr>
 	</c:if>
 	</table>
@@ -61,7 +61,6 @@
 $(function() {
 	
 });
-</script>
 </script>
 <c:if test="${error_msg != null && error_msg != ''}">
 	<script>

@@ -61,7 +61,7 @@
 			</tr>
 			<tr>
 				<td>&nbsp;&nbsp;우편번호</td>
-				<td><input type="text" name="zipcode" class="checkZipcode" maxlength="6" size="6" readonly /> <a href="#" class="btn" onclick="daumPostcode('input[name=zipcode]', 'input[name=addr1]', 'input[name=addr2]'); return false;">우편번호</a></td>
+				<td><input type="text" name="zipcode" class="checkZipcode" maxlength="7" size="7" readonly /> <a href="#" class="btn" onclick="daumPostcode('input[name=zipcode]', 'input[name=addr1]', 'input[name=addr2]'); return false;">우편번호</a></td>
 			</tr>
 			<tr>
 				<td>&nbsp;&nbsp;집주소</td>
@@ -145,8 +145,8 @@
 						<option value="0507">온세텔레콤(0507)</option>
 						<option value="070">인터넷전화 (070)</option>
 						<option value="080">착신 과금 서비스 (080)</option>
-					</select> - <input type="text" name="phone2" maxlength="4" size="4" class="checkPhone" value="${aPhone[1]}" /> - 
-					<input type="text" name="phone3" maxlength="4" size="4" class="checkPhone" value="${aPhone[2]}" />
+					</select> - <input type="text" name="phone2" maxlength="4" size="4" class="checkPhone" /> - 
+					<input type="text" name="phone3" maxlength="4" size="4" class="checkPhone" />
 				</td>
 			</tr>
 			<tr>
