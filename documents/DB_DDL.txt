@@ -2,14 +2,14 @@ drop database mall;
 create database mall;
 use mall;
 
-CREATE TABLE `admin` (
+CREATE TABLE `mall`.`admin` (
   `am_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '관리자번호',
   `am_id` varchar(50) NOT NULL COMMENT '관리자ID',
   `am_name` varchar(50) NOT NULL COMMENT '관리자이름',
   `am_pass` varchar(50) NOT NULL COMMENT '관리자비밀번호',
   `am_regdate` datetime DEFAULT NULL COMMENT '가입일',
   PRIMARY KEY (`am_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='관리자 회원';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='관리자 회원';
 
 
 CREATE TABLE `admin_board` (
@@ -35,9 +35,10 @@ CREATE TABLE `member` (
   `m_push_email` enum('Y','N') DEFAULT 'N' COMMENT '이메일 알림 동의',
   `m_push_sms` enum('Y','N') DEFAULT 'N' COMMENT '문자 알림 동의',
   `m_push_app` enum('Y','N') DEFAULT 'N' COMMENT '앱 알림 동의',
+  `m_leave_yn` enum('Y','N') DEFAULT 'N' COMMENT '탈퇴여부',
   `m_regdate` datetime DEFAULT NULL COMMENT '가입일',
   PRIMARY KEY (`m_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='회원';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원';
 
 
 CREATE TABLE `member_address` (
@@ -159,5 +160,4 @@ CREATE TABLE `user_coupon` (
   KEY `FK_member_TO_user_coupon` (`m_no`),
   CONSTRAINT `FK_coupon_TO_user_coupon` FOREIGN KEY (`c_no`) REFERENCES `coupon` (`c_no`),
   CONSTRAINT `FK_member_TO_user_coupon` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='회원 쿠폰';
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원 쿠폰';
