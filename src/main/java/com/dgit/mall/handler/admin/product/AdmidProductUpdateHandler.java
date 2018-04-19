@@ -50,6 +50,7 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				request.setAttribute("css", "product.css");
 
 				return TEMPLATE_PAGE;
+				
 			} finally {
 				sqlsession.close();
 			}
@@ -145,19 +146,9 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 						afterspan += rowspan;
 					}
 				}
-				
-				
-				
-				
-				
-				
 				sqlsession.commit();
-			
-				request.setAttribute("contentPage", "list.do");
-				request.setAttribute("sub_menu", "list");
-				request.setAttribute("menu", "product");
-				request.setAttribute("css", "product.css");
-				return TEMPLATE_PAGE;
+				response.sendRedirect("/jsp_project/manager/product/list.do");
+				
 			}finally{
 				sqlsession.close();
 			}			

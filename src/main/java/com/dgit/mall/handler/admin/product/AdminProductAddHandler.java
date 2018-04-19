@@ -94,11 +94,8 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 					}
 				}
 				sqlsession.commit();
-				/*request.setAttribute("contentPage", "product/productAdd.jsp");
-				request.setAttribute("sub_menu", "list");
-				request.setAttribute("menu", "product");
-				request.setAttribute("css", "product.css");*/
-				return "/manager/product/list.do";
+				
+				response.sendRedirect("/jsp_project/manager/product/list.do");
 			} catch (Exception e) {
 				e.printStackTrace();  
 				sqlsession.rollback();
