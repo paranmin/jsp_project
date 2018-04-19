@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dgit.mall.dao.service.AdminMemberService;
-import com.dgit.mall.dto.AdminMember;
+import com.dgit.mall.dao.service.AdminService;
+import com.dgit.mall.dto.Admin;
 
 public class AdminLoginListHandler extends AdminCommandHandler {
 
@@ -24,7 +24,7 @@ public class AdminLoginListHandler extends AdminCommandHandler {
 				return viewAdminLogin(request, "아이디 또는 비밀번호를 입력해주세요.");
 			}
 
-			AdminMember admin = AdminMemberService.getInstance().selectByLogin(new AdminMember(id, pwd));
+			Admin admin = AdminService.getInstance().selectByLogin(new Admin(id, pwd));
 			if (admin == null) {
 				return viewAdminLogin(request, "다시 입력해주세요.");
 			}

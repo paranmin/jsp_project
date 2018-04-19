@@ -2,22 +2,22 @@ package com.dgit.mall.dto;
 
 import java.util.Date;
 
-public class AdminMember {
+public class Admin {
 	private int no;
 	private String id;
 	private String name;
 	private String password;
 	private Date regdate;
 
-	public AdminMember() {
+	public Admin() {
 	}
 
-	public AdminMember(String id, String password) {
+	public Admin(String id, String password) {
 		this.id = id;
 		this.password = password;
 	}
 
-	public AdminMember(int no, String id, String name, String password, Date regdate) {
+	public Admin(int no, String id, String name, String password, Date regdate) {
 		this.no = no;
 		this.id = id;
 		this.name = name;
