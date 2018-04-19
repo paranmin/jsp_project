@@ -127,6 +127,13 @@ section #container p.btn a.ok {
 	color: #fff;
 }
 
+section #container p.btn a.leave {
+	background-color: #c25350;
+	color: #fff;
+	display: inline-block;
+	float: right;
+}
+
 section #container p.btn a.cancel {
 	background-color: #e8e8e8;
 	color: #333;

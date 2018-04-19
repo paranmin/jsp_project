@@ -97,10 +97,10 @@ public class MemberService {
 		return res;
 	}
 
-	public int leaveMember(Member member) {
+	public int leaveMember(int no) {
 		int res = 0;
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
-			res = sqlSession.update(namespace + "leaveMember", member);
+			res = sqlSession.update(namespace + "leaveMember", no);
 			sqlSession.commit();
 		}
 		return res;

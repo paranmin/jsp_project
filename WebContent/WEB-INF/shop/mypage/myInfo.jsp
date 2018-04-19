@@ -344,8 +344,9 @@ $(function() {
 	$("p.btn a.cancel").on("click", function() {
 		if (confirm("정말 회원 탈퇴를 하시겠습니까?")) {
 			$.ajax({
-				url: "leave.do",
+				url: "<%= request.getContextPath() + "/shop/leave.do" %>",
 				type: "post",
+				data: {"type": "shop"},
 				dataType: "json",
 				success: function(data) {
 					alert(data.msg);

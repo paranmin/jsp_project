@@ -13,7 +13,7 @@
 	<h2>회원 정보 수정</h2>
 	<h3>기본 정보</h3>
 	<form action="modify.do" method="post">
-	<input type="hidden" name="no" value="${no}" />
+	<input type="hidden" name="no" value="${member.no}" />
 		<table class="modify">
 			<colgroup>
 			<col width="13%">
@@ -42,7 +42,7 @@
 					pageContext.setAttribute("emailId", email[0]);
 					pageContext.setAttribute("emailBody", email[1]);
 				%>
-				<input type="text" name="email1" value="${emailId}" class="checkEmail" /> @ <input type="text" name="email2" value="${emailBody}" class="checkEmail" />
+				<input type="text" name="email1" value="${emailId}" class="checkEmail" data-checkdupl="Y" /> @ <input type="text" name="email2" value="${emailBody}" class="checkEmail" />
 					<select name="email_type" class="checkEmail">
 						<option value="">직접입력</option>
 						<option value="naver.com"<c:if test="${emailBody == 'naver.com'}"> selected </c:if>>naver.com</option>
@@ -192,7 +192,7 @@
 						<option value="">선택</option>
 					<%
 						String[] birth = new String[] {"0", "0", "0"};
-						if (!modifyMem.getBirth().equals("")) {
+						if (modifyMem.getBirth() != null && !modifyMem.getBirth().equals("")) {
 							birth = modifyMem.getBirth().split("-");
 						}
 						pageContext.setAttribute("birthMonth", birth[1]);
@@ -224,11 +224,40 @@
 		<p class="btn">
 			<a href="modify.do" class="ok">수정</a>
 			<a href="list.do" class="cancel">취소</a>
+			<a href="#" class="leave">탈퇴</a>
 		</p>
 	</form>
 </div>
 <script>
 $(function() {
+	$(".checkEmail").on("change", function() {
+		$("input[name='email1']").data("checkdupl", "N");
+	});
+	$("select[name='email_type']").on("change", function() {
+		$("input[name='email2']").val($(this).val());
+		if ($(this).val() == "") {
+			$("input[name='email2']").focus();
+		}
+	});
+	$("p.btn a.leave").on("click", function() {
+		if (confirm("정말 탈퇴처리하시겠습니까?")) {
+			var no = $("input[name='no']").val();
+			$.ajax({
+				url: "<%= request.getContextPath() + "/shop/leave.do" %>",
+				type: "post",
+				data: {"type": "admin", "no": no},
+				dataType: "json",
+				success: function(data) {
+					alert(data.msg);
+					if (data.result == 'yes') {
+						location.href = "list.do";
+					}
+					return;
+				}
+			});
+		}
+		return false;
+	});
 	$("p.btn a.ok").on("click", function() {
 		var isCheck = true,
 			checkPwd = 0;
@@ -258,8 +287,7 @@ $(function() {
 				return false;
 			}
 		}
-		if (checkPwd == 2) {
-			alert("adfadfafafa");
+		if (checkPwd == 0) {
 			if ($("input[name='password']").val().trim() != $("input[name='chkPassword']").val().trim()) {
 				alert("비밀번호가 틀립니다.");
 				$("input[name='password']").val("");
@@ -291,6 +319,7 @@ $(function() {
 			alert("이메일 중복확인을 해주세요.");
 			return false;
 		}
+		$("form").submit();
 		return false;
 	});
 });

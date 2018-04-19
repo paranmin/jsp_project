@@ -1,4 +1,4 @@
-package com.dgit.mall.handler.shop.mypage;
+package com.dgit.mall.handler.shop.member;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,25 +12,41 @@ import com.dgit.mall.dto.Member;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.CommonUtil;
 
-public class ShopMypageLeaveHandler extends ShopCommandHandler {
+public class ShopLeaveHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (request.getMethod().equalsIgnoreCase("post")) {
-			HttpSession session = request.getSession(false);
-			Member auth = (Member) session.getAttribute("auth");
+			String type = request.getParameter("type");
 
-			int res = MemberService.getInstance().leaveMember(auth);
+			int res = 0;
+			if (type != null && type.equals("shop")) {
+				HttpSession session = request.getSession(false);
+				Member auth = (Member) session.getAttribute("auth");
+
+				res = MemberService.getInstance().leaveMember(auth.getNo());
+				if (res > 0) {
+					session.invalidate();
+				}
+			} else if (type != null && type.equals("admin")) {
+				String sNo = request.getParameter("no");
+				int no = Integer.parseInt(sNo);
+				res = MemberService.getInstance().leaveMember(no);
+			}
+
 			if (res > 0) {
-				session.invalidate();
-				Map<String, Object> json = new HashMap<>();
-				json.put("msg", "회원탈퇴 되었습니다.");
-				json.put("result", "yes");
-				CommonUtil.getInstance().printMessageByJSON(response, json);
-				return null;
+				returnJSONLeaveResult(response, "회원탈퇴 되었습니다.", "yes");
+			} else {
+				returnJSONLeaveResult(response, "회원탈퇴 되지 않았습니다.", "no");
 			}
 		}
 		return null;
 	}
 
+	private void returnJSONLeaveResult(HttpServletResponse response, String msg, String result) {
+		Map<String, Object> json = new HashMap<>();
+		json.put("msg", msg);
+		json.put("result", result);
+		CommonUtil.getInstance().printMessageByJSON(response, json);
+	}
 }
