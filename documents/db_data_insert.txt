@@ -1,0 +1,3 @@
+
+## admin member
+insert into mall.admin_member values (0, 'admin', '관리자', password('admin'), now());

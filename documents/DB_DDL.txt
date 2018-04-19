@@ -1,6 +1,16 @@
 drop database mall;
 create database mall;
 use mall;
+
+CREATE TABLE `admin_member` (
+  `am_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '관리자번호',
+  `am_id` varchar(50) NOT NULL COMMENT '관리자ID',
+  `am_name` varchar(50) NOT NULL COMMENT '관리자이름',
+  `am_pass` varchar(50) NOT NULL COMMENT '관리자비밀번호',
+  `am_regdate` datetime DEFAULT NULL COMMENT '가입일',
+  PRIMARY KEY (`am_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='관리자 회원';
+
 CREATE TABLE `admin_board` (
   `ab_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '게시판번호',
   `ab_code` varchar(20) NOT NULL COMMENT '게시판코드',
