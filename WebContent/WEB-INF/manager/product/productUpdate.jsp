@@ -250,6 +250,7 @@ $(function(){
  			$("p.submit").append($hidden);
  		});
  		$("form").submit();
+ 		alert("상품 정보가 수정되었습니다.");
  		return false;
  		//$.post("add.do", $("#form").serialize());
  	});
