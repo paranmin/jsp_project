@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css" media="all" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/base.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -50,15 +52,15 @@
 							<td>5</td>
 							<td>2018-02-11</td>
 							<td>아주 멋진 귀걸이</td>
-							<td><a href="#">조회</a></td>
-							<td><a href="#">조회</a></td>
+							<td><a href="#" class="btn" onclick="viewOrder('2222');return false;">조회</a></td>
+							<td><a href="#">배송대기</a></td>
 						</tr>
 						<tr>
 							<td>2</td>
 							<td>2018-02-25</td>
 							<td>아주 이쁜 반지 셋</td>
-							<td><a href="#">조회</a></td>
-							<td><a href="#">조회</a></td>
+							<td><a href="#" class="btn" onclick="viewOrder('11111');return false;">조회</a></td>
+							<td><a href="#">배송중</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -67,5 +69,13 @@
 
 		<c:import url="../modules/footer.jsp" />
 	</div>
+<script>
+$(function() {
+	
+});
+function viewOrder(orderNo) {
+	window.open('<%= request.getContextPath() + "/shop/mypage/vieworder.do?no=" %>'+orderNo, '주문상세내역', 'width=1200,height=1000,menubar=no,status=no,toolbar=no,scrollbars=yes,resizable=no,top=100,left=100');
+}
+</script>
 </body>
 </html>

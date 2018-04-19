@@ -128,6 +128,16 @@
 	margin-bottom: 60px;
 }
 
+#mypageContent .board td a.btn {
+	display: inline-block;
+	width: 50px;
+	height: 25px;
+	line-height: 25px;
+	background-color: #e8e8e8;
+	border: 1px solid #e1e1e1;
+	color: #333;
+}
+
 #mypageContent .board .checkPw {
 	width: 600px;
 	margin: 30px auto 50px;
