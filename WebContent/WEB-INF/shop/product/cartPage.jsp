@@ -99,7 +99,7 @@
 								</c:if>
 								<tr class="allProPrice">
 								<td colspan="6"><p>
-										총 결제 금액:<span class="prdsPrice"></span>원+배송료 2,500원 = <span
+										총 결제 금액:<span class="prdsPrice"></span>원+배송료 <span class="deliveryfee">2500</span>원 = <span
 											class="prdplusdel"></span>원
 											<input type="hidden" name="prdsPrice">
 									</p></td>

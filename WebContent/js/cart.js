@@ -14,21 +14,28 @@ $(function(){
 			}
 		})
 		//전체 체크된것 계산
+		var priceArray = new Array();
+		var priceSum = 0;
 		$(".proContent").each(function(i,obj){
 			var checkPr = $("input:checkbox[name='chkAll']").eq(i).is(":checked"); //체크
 			if(checkPr==true){
 				var checkedPrdPrice =parseInt($(".proContent").eq(i).children().eq(5).children().eq(0).text());//체크된 가격들
-				console.log(checkedPrdPrice);
-				for(var n =0; n<checkedPrdPrice.length; n++){
-				}
-				
-				
+				priceArray[i] = checkedPrdPrice;
+				priceSum += priceArray[i];
 			}
 		})
+		$(".prdsPrice").text(priceSum); //상품 합 금액
+		$("input:hidden[name='prdsPrice']").val(priceSum);//상품 합 금액 인풋
+		var deliveryFee = parseInt($(".deliveryfee").text());
+		$(".prdplusdel").text(priceSum+deliveryFee); //상품+배송비
 		//체크 된것만 계산할 때
 		$(".proContent").each(function(i,obj){
 			$("input:checkbox[name='chkAll']").click(function(){
-				//console.log($("input:checkbox[name='chkAll']").eq(i).is(":checked"));
+				var ischecked = $("input:checkbox[name='chkAll']").eq(i).is(":checked"); //체크된것만
+				if(ischecked == true){
+					var o = $("proContent").eq(i).children().eq(5).children().eq(0).text();
+					console.log(o);          
+				}
 				
 			})
 		})
@@ -40,47 +47,7 @@ $(function(){
 			
 		}
 		
-		
-		//수량 카운트 작업,가격작업
-		var count = $(".cartnum").val();
-		var str = parseInt($(".productPrice").text());
-		$("input:hidden[name='productPrice']").val(str);
-		$(".prdsPrice").text(str);
-		$(".prdplusdel").text(str+2500);
-		$(".plus").click(function(){
-			count++;
-			$(".cartnum").val(count);
-			$(".productPrice").text(str*count);
-			if(count>10){
-				alert("상품 한개당 10개 이하로만 주문 하실 수 있습니다.");
-				$(".cartnum").val(10);
-				$(".productPrice").text(10*str);
-				return false;
-			}
-			var productPrice1 = parseInt($(".productPrice").text());
-			$(".prdsPrice").text(productPrice1);
-			$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
-			$("input:hidden[name='productPrice']").val($(".productPrice").text());
-			$(".prdplusdel").text(productPrice1+2500);
-			return false;
-		})
-		$(".minus").click(function(){
-			count--;
-			$(".cartnum").val(count);
-			$(".productPrice").text(str*count);
-			if(	$(".cartnum").val()<=1){
-				$(".cartnum").val(1);
-				$(".productPrice").text(1*str);
-				return false;
-			}
-			var productPrice1 = parseInt($(".productPrice").text());
-			$(".prdsPrice").text(productPrice1);
-			$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
-			$("input:hidden[name='productPrice']").val($(".productPrice").text());
-			$(".prdplusdel").text(productPrice1+2500);
-			return false;
-		})
-		$("input:hidden[name='prdsPrice']").val($(".productPrice").text());
+	
 		
 		//상품 삭제 (삭제버튼으로) -- 각각 삭제
 		$(".delete").click(function(){

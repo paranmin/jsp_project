@@ -38,7 +38,7 @@ public class ShopCartHandler extends ShopCommandHandler {
 				Member member = new Member();
 				member.setNo(loginMember.getNo());
 				cart.setMNo(member);
-				System.out.println("[no =======================]"+loginMember.getNo());
+				//System.out.println("[no =======================]"+loginMember.getNo());
 				List<Cart> list = dao.selectAllCart(loginMember.getNo()); 
 				request.setAttribute("list", list);
 			} catch (Exception e) {
