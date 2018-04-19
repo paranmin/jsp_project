@@ -38,8 +38,8 @@ public class ProductDetailShowHandler extends ShopCommandHandler {
 				result.addAll(detail);
 				rownum.add(detail.size());
 			}
-			req.setAttribute("rownum", rownum);
-			req.setAttribute("res", result);
+			req.setAttribute("rownum", rownum); 
+			req.setAttribute("res", result);			
 			req.setAttribute("opt", option);
 			req.setAttribute("pro", pro);
 			req.setAttribute("img", proimg);
