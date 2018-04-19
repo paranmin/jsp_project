@@ -203,6 +203,7 @@ $(function(){
  			$("p.submit").append($hidden);
  		});
  		$("form").submit();
+ 		alert("상품이 등록되었습니다.")
  		return false;
  		//$.post("add.do", $("#form").serialize());
  	});
@@ -265,14 +266,14 @@ $(function(){
 			<p>
 				<label>상품 메인 이미지</label>
 				<div class="img_main_plus">
-					<input type="file" name="mainimg" value="이미지 불러오기">
+					<input type="file" name="mainimg" value="이미지 불러오기" accept="image/*">
 					<!-- <button class="img_main_plus">추가</button> -->
 				</div>
 			</p>
 			<p>
 				<label>상품 상세 이미지</label>
 				<div class="img_plus">
-				<input type="file" name="files" value="이미지 불러오기">
+				<input type="file" name="files" value="이미지 불러오기" accept="image/*">
 				<button class="img_plus">추가</button>
 				</div>
 			</p>

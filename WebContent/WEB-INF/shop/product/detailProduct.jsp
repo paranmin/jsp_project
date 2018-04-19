@@ -1,3 +1,5 @@
+<%@page import="com.dgit.mall.dto.Option"%>
+<%@page import="java.util.List"%>
 <%@page import="com.dgit.mall.dto.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -180,33 +182,247 @@ div.detail_menu div.button button#qaBtn, div.detail_menu div.button button#revie
 #line{
 	text-decoration: line-through;
 }
+div#selectedItem li{
+	margin:10px;
+}
+div#selectedItem input{
+	width: 30px;
+    height: 18px;
+    border: 1px solid whitesmoke;
+    position: absolute;
+    left: 370px;
+    text-align: center;
+}
+div#selectedItem button{
+	width: 20px;
+    height: 20px;
+}
+div#selectedItem button.plusNum{
+	position: absolute;
+    left: 402px;
+}
+div#selectedItem button.minusNum{
+	position: absolute;
+    left: 350px; 
+}
+div#selectedItem span{
+	position: absolute;
+    left: 450px; 
+    width:100px;
+    text-align: right;
+}
+div#selectedItem button.closeli{
+	position: absolute;
+    left: 580px; 
+}
+div#resultPrice{
+	padding:10px;
+	display:none;
+}
+div#resultPrice p{
+	width: 200px;
+    position: absolute;
+    right: 20px;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <%
 	Product pro = (Product)request.getAttribute("pro");
+	List<Option> opt = (List<Option>)request.getAttribute("opt");
+	int optSize = opt.size();
 %>
 <script type="text/javascript">
-$(function(){
-	$("select").change(function(){  
-		console.log("$(option:selected).val() : "+$("option:selected").val());
-		if($("option:selected").val()!=null){
-			var li = $("<li>");
-			var $text = $(this).children("option:selected").text();
-			var plusBtn = $("<button>");
-			$(plusBtn).text("+");
-			var $input = $("<input type='text'>");
-			$($input).val("1");
-			var minusBtn = $("<button>");
-			$(minusBtn).text("-");
-			var price = <%=pro.getSellingPrice()%>+$('option:selected').val()+"원";
-			var closeBtn=$("<button>");
-			$(closeBtn).text("X");
-			console.log("$text : "+$text);
-			console.log(price);
-			console.log($('option:selected').val());
+$(function(){	
+	var size = <%=optSize%>;
+	var productCost = <%=pro.getSellingPrice()%>
+	for(var i=0; i<size; i++){
+		checkSelect(i);
+	}
+	
+	function checkSelect(i){
+		$("select#select"+i).change(function(){
+			if($(this).children("option:selected").val()!="==선택하세요=="){
+				var target = $(this).parents("tr").next().find("select");
+				if(target!=null){
+					target.removeAttr("disabled");
+					target.val("==선택하세요==");
+				}
+				target = target.parents("tr").next().find("select");
+				if(target != null){
+					target.attr("disabled", "disabled");
+					target.val("==선택하세요==");
+				}
+			}else if($(this).children("option:selected").val()=="==선택하세요=="){
+				var target = $(this).parents("tr").next().find("select");
+				if(target!=null){
+					target.val("==선택하세요==");
+					target.attr("disabled", "disabled");
+				}
+				target = target.parents("tr").next().find("select");
+				if(target!=null){
+					target.val("==선택하세요==");
+					target.attr("disabled", "disabled");
+				}
+			}	
+		});
+	}
+	
+	$("select#select"+(size-1)).change(function(){
+		if($(this).children("option:selected").val()!="==선택하세요=="){
+			createValue();
+			/* appendLi(); */
+			calPrice();
+			for(var i=0; i<size; i++){
+				$("select#select"+i).val("==선택하세요==");
+				$("select#select"+(i+1)).attr("disabled", "disabled");
+			}
 		}
-	});	
-});
+	});
+	
+	
+	var value = new Array();
+	var value2 = new Array();
+	var str = "";
+	var ocost = 0;
+	var flag = 0;
+	function createValue(){
+		$("option:selected").each(function(j,obj){
+			value[j] = $(obj).val();
+			value2[j] = $(obj).attr("data-cost");
+		});
+		str = "";
+		ocost = 0;
+		if(value.indexOf("==선택하세요==")==-1){
+			for(var i=0;i<value.length;i++){
+				if(i==value.length-1){
+					str += value[i];
+				}else{
+					str += value[i] +"/";
+				}
+				ocost += Number(value2[i]);
+			}
+			if(ocost==0){
+				ocost = "";
+			}else if(ocost>0){
+				ocost = " (+"+ocost+"원)";
+			}else if(ocost<0){
+				ocost = " ("+ocost+"원)";
+			}
+		}	
+		
+		if(flag == 0){
+			appendLi();
+			flag++;
+		}else{
+			$("div#selectedItem li").each(function(i,obj){
+				var target = $(this).text();
+				console.log("str : "+str);
+				if(target.indexOf(str)==-1){
+					appendLi();
+				}else{
+					alert("이미 추가된 상품입니다.");
+				}
+			});
+		}
+	}
+	
+	var Sumcost = 0;
+	function appendLi(){
+		var li = $("<li>");
+		var $text = str+ocost;
+		var plusBtn = $("<button class='plusNum'>");
+		$(plusBtn).text("+");
+		var $input = $("<input type='text' class='productNum'>");
+		$($input).val("1");
+		var minusBtn = $("<button class='minusNum'>");
+		$(minusBtn).text("-");
+		var span = $("<span>");
+		
+		var cost = new Array();
+		Sumcost = 0;
+		$('option:selected').each(function(i, obj){
+			cost[i]= Number($(obj).attr("data-cost"));
+			Sumcost += cost[i];
+		});
+		
+		var price = productCost+Sumcost+"원";
+		
+		var closeBtn=$("<button class='closeli'>");
+		$(closeBtn).text("×");
+		$(li).text($text);
+		$(span).text(price);
+		$(li).append(plusBtn);
+		$(li).append($input);
+		$(li).append(minusBtn);
+		$(li).append(span);
+		$(li).append(closeBtn);
+		var hidden = $("<input type='hidden'>");
+		$(hidden).val(productCost+Sumcost);
+		$(li).append(hidden);
+		$("div#selectedItem").children("ul").append(li);
+	}
+	
+	$(document).on("click","button.plusNum", function(){
+		var $num = $(this).next().val();
+		var num = Number($num);
+		$(this).next().val(num+1);
+		var stock = Number($(this).next().val()); //갯수
+		var target = $(this).next().next().next().next().next().val();
+		
+		$(this).next().next().next().text((stock*target)+"원");
+		
+		calPrice();
+		return false;
+	})
+	
+	$(document).on("click","button.minusNum", function(){
+		var $num = $(this).prev().val();   
+		var num = Number($num);
+		if(num>1){
+			$(this).prev().val(num-1);
+		}
+		var stock = Number($(this).prev().val()); //갯수
+		var target = $(this).next().next().next().val();
+		
+		$(this).next().text((stock*target)+"원");
+		
+		calPrice();
+		return false;
+	})
+	
+	$(document).on("click","button.closeli", function(){
+		$(this).parent().remove();
+		calPrice();
+		var next = $("div#selectedItem li");
+		if(next.length==0){
+			$("div#resultPrice").css("display","none");
+		}
+		return false;
+	})
+	
+	var sum = 0;
+	function calPrice(){
+		$("div#resultPrice").css("display","block");
+		sum = 0;
+		var price = new Array();
+		$("div#selectedItem li").each(function(i,obj){
+			var target = $(this).find("span").text();
+			price = target.split("원");
+			sum += Number(price[0]);      
+		});
+		$("div#resultPrice").find("span").text(sum);
+	}
+		
+	$(window).scroll(function(){
+		var left = $("div.detail_left").outerHeight();
+		var right = $("div.detail_right").outerHeight()
+		if($(this).scrollTop()>=(left-right)){
+			$("div.detail_right").css("display","none");
+		}else{
+			$("div.detail_right").css("display","block");
+		}
+	});
+});	
 </script>
 </head>
 <body>
@@ -254,14 +470,24 @@ $(function(){
 						<tr>
 							<td>${option.poName }</td>
 							<td>
-								<select>
-									<option value="null">==선택하세요==</option>
+								<c:if test="${status.first }">
+								<select id="select${status.index }">
+								</c:if>
+								<c:if test="${!status.first }">
+								<select id="select${status.index }" disabled="disabled">
+								</c:if>
+									<option>==선택하세요==</option>
 									<c:forEach var="result" items="${res }" begin="${fir}" end="${end}">
-										<option value="${result.podCost}">${result.podValue} / <fmt:formatNumber value="${result.podCost}" pattern="#,###원"/></option>
+										<option value="${result.podValue}" data-cost="${result.podCost}">${result.podValue}
+										<c:if test="${result.podCost !=0}">
+										 / <fmt:formatNumber value="${result.podCost}" pattern="#,###원"/>
+										</c:if>
+										</option>
 									</c:forEach>
 								</select>
 							</td>
-							<c:set value="${end+1 }" var="fir"/>
+						</tr>
+						<c:set value="${end+1 }" var="fir"/>
 					</c:forEach>
 				</table>
 				<hr>
@@ -270,10 +496,9 @@ $(function(){
 				</div>
 				<hr>
 				<div id="resultPrice">
-					<p></p>
+					<p>총 상품 금액 <span></span>원</p>
 				</div>
 				<input type="submit" value="Add Cart"><br>
-				<!-- <p class="cartgo"><a href="#">Add Cart</a><p> -->
 			</div>
 			<div class="datail_board">
 				<div class="detail_menu" id="detail_menu_review">
