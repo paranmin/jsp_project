@@ -2,7 +2,6 @@ package com.dgit.mall.handler.admin.product;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 import org.apache.ibatis.session.SqlSession;
 
