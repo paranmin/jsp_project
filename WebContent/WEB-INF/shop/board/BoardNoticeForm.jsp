@@ -59,24 +59,6 @@
 				<form action="BoardNoticeForm.do" method="post"
 					enctype="multipart/form-data" style="position: relative;"
 					autocomplete="off">
-					<div id="passimg" name="passimg"
-						style="position: absolute; visibility: hidden; z-index: 999;"></div>
-					<input type="hidden" name="attach1" value=""> <input
-						type="hidden" name="type" value="i"> <input type="hidden"
-						name="data" value="yes"> <input type="hidden" name="code"
-						value="curiouswiz_board3"> <input type="hidden"
-						name="num1" value=""> <input type="hidden" name="num2"
-						value=""> <input type="hidden" name="page" value="1">
-					<input type="hidden" name="ok" value="N"> <input
-						type="hidden" name="board_cate" value=""> <input
-						type="hidden" name="b_score[1]" value=""> <input
-						type="hidden" name="b_score[2]" value=""> <input
-						type="hidden" name="b_score[3]" value=""> <input
-						type="hidden" name="b_score[4]" value=""> <input
-						type="hidden" name="b_score[5]" value=""> <input
-						type="hidden" name="branduid" value=""> <input
-						type="hidden" name="BRO_CHK_KEY"
-						value="95becf641cdef54229ba48b8c6fc8138c9f632df2d199eb86bcf2b56772dd75f">
 					<div class="bbs-table-write">
 						<fieldset>
 							<legend>일반게시판 쓰기</legend>
@@ -92,14 +74,15 @@
 									<tr>
 										<th class=""><div class="title">작성자</div></th>
 										<td><div>
-												<input id="bw_input_writer" type="text" name="hname"
-													class="MS_input_txt input_style" readonly="readonly"
-													value="qowlsgh1">
+												<input id="bw_input_writer" type="text" name="brdwriter"
+													class="MS_input_txt input_style" 
+													>
+														<input type="hidden" name ="brdcode" value="NoticeBoard">
 											</div></td>
 										<th><div class="title">비밀번호</div></th>
 										<td>
 											<div>
-												<input id="bw_input_passwd" type="password" name="passwd"
+												<input id="bw_input_passwd" type="password" name="brdpassword"
 													class="MS_input_txt input_style">
 											</div>
 										</td>
@@ -110,7 +93,7 @@
 											<div class="title">
 												<input id="bw_input_subject"
 													class="MS_input_txt input_style2" type="text"
-													name="subject" value="">
+													name="brdtitle" value="">
 											</div>
 										</td>
 									</tr>
@@ -118,7 +101,7 @@
 										<th><div class="title">내용</div></th>
 										<td colspan="3">
 											<div>
-												<textarea rows="120" cols="500"></textarea>
+												<textarea rows="120" cols="500" name="brdcontent"></textarea>
 											</div>
 										</td>
 									</tr>

@@ -12,6 +12,8 @@ import com.dgit.mall.dao.BoardDao;
 import com.dgit.mall.dto.Board;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class BoardModifyHandler extends ShopCommandHandler {
 
@@ -22,12 +24,9 @@ public class BoardModifyHandler extends ShopCommandHandler {
 			int number = Integer.parseInt(num);
 			SqlSession sqlSession = null;
 			
-			System.out.println(num);
-
-			System.out.println(number);
 
 			try {
-				request.setAttribute("contentPage", "board/BoardReview.jsp");
+				request.setAttribute("contentPage", "board/BoardModify.jsp");
 
 				sqlSession = MySqlSessionFactory.openSession();
 				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
@@ -45,21 +44,36 @@ public class BoardModifyHandler extends ShopCommandHandler {
 			return VIEW_FRONT_PATH + "board/BoardModify.jsp";
 
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
+			String ReviewformPath = request.getRealPath("Reviewform");
 			Date now = new Date();
-			String num = request.getParameter("brdno");
-			int number = Integer.parseInt(num);
+			
+		
 			SqlSession sqlSession = null;
+			int size = 1024 * 1024 * 10;// 10M
 			
-			
-			System.out.println(num);
-			System.out.println(number);
+			MultipartRequest multi = new MultipartRequest(request, // upload할
 
-			String brdwriter = request.getParameter("brdwriter");
-			String brdpassword = request.getParameter("brdpassword");
-			String brdtitle = request.getParameter("brdtitle");
-			String brdcontent = request.getParameter("brdcontent");
+					// 파일정보
+					ReviewformPath, // 서버경로
+					size, // 한번에 업로드할 사이즈
+					"utf-8", // 한글 파일명 깨짐 방지
+					new DefaultFileRenamePolicy());
+			
+			
+			String brdwriter = multi.getParameter("brdwriter");
+			String brdpassword = multi.getParameter("brdpassword");
+			String brdtitle = multi.getParameter("brdtitle");
+			String brdcontent = multi.getParameter("brdcontent");
+			String num = multi.getParameter("brdNo");
+			int number = Integer.parseInt(num);
 			//String brduseattachment =multi.getParameter("brduseattachment");
+			 
+			System.out.println(number);
+			
 			try {
+				
+				
+				
 				sqlSession = MySqlSessionFactory.openSession();
 				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
 
@@ -67,7 +81,7 @@ public class BoardModifyHandler extends ShopCommandHandler {
 
 				BoardREAD.updateBoardReview(board);
 				sqlSession.commit();
-				request.setAttribute("brdNo", number);
+				request.setAttribute("brdno", number);
 				request.setAttribute("brdcode", "ReviewBoard");
 				request.setAttribute("brdwriter", brdwriter);
 				request.setAttribute("brdpassword", brdpassword);
@@ -83,7 +97,7 @@ public class BoardModifyHandler extends ShopCommandHandler {
 			}
 
 		}
-		return VIEW_FRONT_PATH + "/board/BoardReview.jsp";
+		return "ReviewBoard.do";
 	}
 
 }

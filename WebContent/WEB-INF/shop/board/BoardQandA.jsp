@@ -10,14 +10,12 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/base.css" media="all" />
+	href="${pageContext.request.contextPath}/css/base.css" media="all" /> 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Boardcss/Board.css"
 	media="all" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
-<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/base.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 table {
@@ -36,6 +34,9 @@ table {
 .bbs-table-list tbody td {
 	border-top: 1px solid rgb(232, 232, 232);
 }
+td{
+text-align: center;
+}
 </style>
 </head>
 <body>
@@ -44,6 +45,7 @@ table {
 	<c:import url="../modules/rightSide.jsp" />
 	<section>
 		<div id="container">
+
 			<div class="titleArea">
 				<h1>Q&amp;A</h1>
 			</div>
@@ -71,6 +73,9 @@ table {
 								<tr>
 									<th><div class="tb-center">번호</div></th>
 									<th><div class="tb-center">&nbsp;</div></th>
+									<th class="hidden"><div>
+											<input type="hidden" name="brdcode" value="QandABoard">
+										</div></th>
 									<!-- .상품정보가 있을 경우에만 나타남 -->
 									<th><div class="tb-center">상품</div></th>
 									<th><div class="tb-center">제목</div></th>
@@ -78,27 +83,23 @@ table {
 									<th><div class="tb-center">작성일</div></th>
 									<th><div class="tb-center">조회</div></th>
 								</tr>
-								<c:if test="${board.size()>0 }">
+							</thead>
+							<tbody>
+								<!-- .공지사항 리스트 시작 -->
+								<c:if test="${list.size()>0 }">
 									<c:forEach var="item" items="${list }">
 										<tr>
-											<td><a href="QandABoardRead.do?brdno=${item.brdNo }">${item.brdNo }</a></td>
-											<td>${item.prdno }
-											<td>${item.brdtitle }</td>
+											<td>${item.brdNo }</td>
+											<td></td>
+											<td>${item.prdno }</td>
+											<td><a href="ReviewBoardRead.do?brdno=${item.brdNo }">${item.brdtitle }</a></td>
 											<td>${item.brdwriter }</td>
 											<td>${item.brdregdate }</td>
 											<td>${item.brdch }</td>
 										</tr>
 									</c:forEach>
 								</c:if>
-							</thead>
-							<tbody>
-								<!-- .공지사항 리스트 시작 -->
-								<tr>
-
-								</tr>
 							</tbody>
-							</div>
-
 						</table>
 					</div>
 

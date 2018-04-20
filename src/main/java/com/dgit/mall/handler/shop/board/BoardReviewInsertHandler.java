@@ -44,6 +44,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 						"utf-8", // 한글 파일명 깨짐 방지
 						new DefaultFileRenamePolicy());
 				
+				String brdcode = multi.getParameter("brdcode");
 				String brdwriter = multi.getParameter("brdwriter");
 				String brdpassword = multi.getParameter("brdpassword");
 				String brdtitle = multi.getParameter("brdtitle");
@@ -54,7 +55,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				sqlSession = MySqlSessionFactory.openSession();
 				BoardDao Dao = sqlSession.getMapper(BoardDao.class);
 				Date now = new Date();		
-				Board board = new Board(0,"ReviewBoard",brdtitle,brdwriter, brdpassword,1,0 ,null, brdcontent,0,now,"",0);
+				Board board = new Board(0,brdcode,brdtitle,brdwriter, brdpassword,1,0 ,null, brdcontent,0,now,"",0);
 
 				System.out.println(brdwriter);
 				System.out.println(brdpassword);
@@ -63,7 +64,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 
 				
 				request.setAttribute("brdNo", 0);
-				request.setAttribute("brdcode", "ReviewBoard");
+				request.setAttribute("brdcode", brdcode);
 				request.setAttribute("brdwriter", brdwriter);
 				request.setAttribute("brdpassword", brdpassword);
 				request.setAttribute("brdtitle", brdtitle);

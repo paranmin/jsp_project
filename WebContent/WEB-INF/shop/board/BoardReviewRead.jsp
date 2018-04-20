@@ -360,18 +360,6 @@ a {
 					<form id="comment_form" name="comment"
 						action="board.html?code=curiouswiz_board3&amp;page=2&amp;type=v&amp;board_cate=&amp;num1=942911&amp;num2=00000&amp;number=102643&amp;lock=N"
 						method="post" autocomplete="off">
-						<input type="hidden" name="page_type" value="board_view">
-						<input type="hidden" name="formnum" value="0"> <input
-							type="hidden" name="code" value="curiouswiz_board3"> <input
-							type="hidden" name="num1" value="942911"> <input
-							type="hidden" name="num2" value="00000"> <input
-							type="hidden" name="page" value="1"> <input type="hidden"
-							name="lock" value="N"> <input type="hidden" name="type"
-							value="v"> <input type="hidden" name="type2"> <input
-							type="hidden" name="comnum"> <input type="hidden"
-							name="comtype"> <input type="text" name="___DUMMY___"
-							readonly="" disabled="" style="display: none;"><input
-							type="hidden" name="secret" value="N">
 						<fieldset>
 							<legend>코멘트 쓰기</legend>
 							<table summary="코멘트 쓰기" class="comment-box">
@@ -415,7 +403,7 @@ a {
 							<dd>
 								<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
 									class="none btn_light_border btn_box_01">수정</a> <a
-									href="BoardDelCheckpassword.do?brdno=${readBoard.brdNo }"
+									href="BoardDel.do?brdno=${readBoard.brdNo }"
 									class="btn_light_border btn_box_01">삭제</a> <a
 									href="/board/board.html?code=curiouswiz_board3&amp;page=2&amp;board_cate=&amp;num1=942911&amp;num2=00000&amp;type=r&amp;lock_re=N"
 									class="btn_light btn_box_01">답변</a>

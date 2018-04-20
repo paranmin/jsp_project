@@ -81,6 +81,7 @@
 											<div>
 												<input id="bw_input_passwd" type="password"
 													name="brdpassword" class="MS_input_txt input_style">
+													<input type="hidden" name ="brdcode" value="ReviewBoard">
 											</div>
 										</td>
 

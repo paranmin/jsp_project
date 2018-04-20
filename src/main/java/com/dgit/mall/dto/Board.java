@@ -1,5 +1,6 @@
 package com.dgit.mall.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Board {
@@ -147,6 +148,7 @@ public class Board {
 
 	@Override
 	public String toString() {
+
 		return "Board [brdNo=" + brdNo + ", brdcode=" + brdcode + ", brdtitle=" + brdtitle + ", brdwriter=" + brdwriter
 				+ ", brdpassword=" + brdpassword + ", brdparent=" + brdparent + ", brddepth=" + brddepth
 				+ ", brduseattachment=" + brduseattachment + ", brdcontent=" + brdcontent + ", prdno=" + prdno

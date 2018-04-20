@@ -17,9 +17,11 @@
 	</resultMap>
 	<select id="selectByAllReviewBoard" parameterType="Board"
 		resultMap="BoardResult">
-		select brd_no , prd_no, brd_code,brd_title,brd_writer,brd_ch,regdate
+		select brd_no , prd_no,
+		brd_code,brd_title,brd_writer,brd_ch,regdate
 		from board
-		where brd_code = "ReviewBoard"
+		where brd_code =
+		"ReviewBoard"
 	</select>
 
 	<select id="selectByAllQandABoard" parameterType="Board"
@@ -28,43 +30,52 @@
 		brd_depth, brd_use_attachment, prd_no,brd_ch
 		from board
 		where brd_code =
-		#{QandABoard}
+		"QandABoard"
 	</select>
 
 	<select id="selectNoticeBoardAll" parameterType="Board"
 		resultMap="BoardResult">
-		select brd_no , prd_no, brd_code,brd_title,brd_writer,brd_ch,regdate
+		select brd_no , prd_no,
+		brd_code,brd_title,brd_writer,brd_ch,regdate
 		from board
 		where brd_code =
 		"NoticeBoard"
 	</select>
 
 	<select id="selectlistBoardReviewByid" parameterType="int"
-	resultMap="BoardResult">
-		select brd_no,brd_writer, brd_title, brd_content,brd_password, brd_parent,
-		brd_depth, brd_use_attachment, prd_no,brd_ch,regdate
+		resultMap="BoardResult">
+		select brd_no,brd_writer, brd_title,
+		brd_content,brd_password, brd_parent,
+		brd_depth, brd_use_attachment,
+		prd_no,brd_ch,regdate
 		from board
-		where brd_no =
-		#{number}
+		where brd_no = #{number}
 	</select>
-	
-	<select id="selectCheckPass" parameterType="int"
-	resultMap="BoardResult">
-		select brd_no, brd_password
+
+
+	<select id="selectCheckPass" parameterType="int" resultMap="BoardResult">
+		select brd_no, brd_password,brd_writer,brd_title,brd_content,brd_code
 		from board
 		where brd_no = #{number};
 	</select>
-	
+
 	<insert id="insertBoard" parameterType="Board">
 		insert into board
 		(brd_writer,brd_password,brd_title,brd_content,brd_code,brd_parent,brd_depth,regdate)
 		value(#{brdwriter},#{brdpassword},#{brdtitle},#{brdcontent},#{brdcode},#{brdparent},#{brddepth},#{brdregdate})
 	</insert>
-	
+
 	<update id="updateBoardReview" parameterType="Board">
-		date board set brd_password=#{brdpassword},brd_title=#{brdtitle},brd_content=#{brdcontent},regdate=#{brdregdate}
-	where brd_no = #{brdno};
-		
+		update board set
+		brd_password=#{brdpassword},brd_title=#{brdtitle},brd_content=#{brdcontent},regdate=#{brdregdate}
+		where brd_no = #{brdNo} and brd_password=#{brdpassword};
+
 	</update>
+
+	<delete id="deleteReview">
+
+		delete from board where brd_no= #{number};
+
+	</delete>
 
 </mapper>
