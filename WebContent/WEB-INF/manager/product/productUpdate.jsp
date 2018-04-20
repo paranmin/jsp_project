@@ -364,7 +364,7 @@ $(function(){
 						<button class="imgdeletemain">이미지 삭제</button>
 					</div>
 					<br>
-					<input type="file" name="mainimg" value="이미지 불러오기" accept="image/*">
+					<input type="file" name="mainimg" accept="image/*">
 				</div>
 			</p>
 			<p>
@@ -377,7 +377,7 @@ $(function(){
 						</div>
 					</c:forEach>
 					<br>
-					<input type="file" name="files" value="이미지 불러오기" accept="image/*">
+					<input type="file" name="files" accept="image/*">
 					<button class="img_plus">추가</button>
 				</div>
 			</p>

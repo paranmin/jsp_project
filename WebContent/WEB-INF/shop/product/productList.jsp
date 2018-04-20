@@ -140,7 +140,7 @@ div.category_best_white{
 			<div class="category_best">
 				<c:forEach var="bestItem" items="${best }" begin="0" end="7">
 						<div class="item">
-							<img src="${pageContext.request.contextPath}/images/${bestItem.mainImg }">
+							<img src="${pageContext.request.contextPath}/upload/${bestItem.mainImg }">
 							<div class="category_best_white">
 								<a href="${pageContext.request.contextPath}/shop/detailProductShow.do?no=${bestItem.prdNo }">
 									<p>
@@ -153,34 +153,6 @@ div.category_best_white{
 						</div>
 					
 				</c:forEach>
-				<!-- <div class="item">
-					<img src="../../images/J1.jpg">
-					<div class="category_best_white"></div>
-				</div>
-				<div class="item">
-					<img src="../../images/J1.jpg">
-					<div class="category_best_white"></div>
-				</div>
-				<div class="item">
-					<img src="../../images/J1.jpg">
-					<div class="category_best_white"></div>
-				</div>
-				<div class="item">
-					<img src="../images/J2.jpg">
-					<div class="category_best_white"></div>
-				</div>
-				<div class="item">
-					<img src="../../images/J2.jpg">
-					<div class="category_best_white"></div>
-				</div>
-				<div class="item">
-					<img src="../../images/J2.jpg">
-					<div class="category_best_white"></div>
-				</div>
-				<div class="item">
-					<img src="../../images/J2.jpg">
-					<div class="category_best_white"></div>
-				</div> -->
 			</div>
 			<hr>
 			<c:if test="${cate==null }">
@@ -205,7 +177,7 @@ div.category_best_white{
 				</c:if>
 				<c:forEach var="prolist" items="${list }">
 					<div class="item">
-						<img src="${pageContext.request.contextPath}/images/${prolist.mainImg }">
+						<img src="${pageContext.request.contextPath}/upload/${prolist.mainImg }">
 						<div class="item_white">
 							<a href="${pageContext.request.contextPath}/shop/detailProductShow.do?no=${prolist.prdNo }">
 								<p>
