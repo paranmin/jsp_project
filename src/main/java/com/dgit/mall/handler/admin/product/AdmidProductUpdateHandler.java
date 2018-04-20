@@ -1,6 +1,8 @@
 package com.dgit.mall.handler.admin.product;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,8 @@ import com.dgit.mall.dto.Product;
 import com.dgit.mall.dto.Proimg;
 import com.dgit.mall.handler.admin.AdminCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class AdmidProductUpdateHandler extends AdminCommandHandler {
 
@@ -47,7 +51,7 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				request.setAttribute("contentPage", "product/productUpdate.jsp");
 				request.setAttribute("sub_menu", "list");
 				request.setAttribute("menu", "product");
-				request.setAttribute("css", "product.css");
+				/*request.setAttribute("css", "product.css");*/
 
 				return TEMPLATE_PAGE;
 				
@@ -55,23 +59,52 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				sqlsession.close();
 			}
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
-			int no = Integer.parseInt(request.getParameter("no"));
-			String view = request.getParameter("view");
-			String cate = request.getParameter("cate");
-			String name = request.getParameter("name");
-			String desc = request.getParameter("desc");
-			int cost = Integer.parseInt(request.getParameter("cost"));
-			String discount = request.getParameter("discount");
-			int price = Integer.parseInt(request.getParameter("price"));
-			int stock = Integer.parseInt(request.getParameter("stock"));
-			String option = request.getParameter("use_option");
-			String mainImg = request.getParameter("mainimg");
-			String deleteDetailImage = request.getParameter("deleteDetailImage");
-			String deleteImage[] = deleteDetailImage.split(",");
-			String[] files = request.getParameterValues("files");
+			String uploadPath = request.getRealPath("upload");
+			System.out.println("uploadPath = "+ uploadPath);
+			
+			File dir = new File(uploadPath);
+			if(dir.exists() == false){
+				dir.mkdirs();
+			}
+			int size = 1024*1024*10; //10Mbyte
+			
 			
 			SqlSession sqlsession = null;
 			try{
+				MultipartRequest multi = 
+						new MultipartRequest(request,//업로드할 파일정보
+									uploadPath,//서버 경로
+									size,//한번에 업로드할 사이즈
+									"utf-8",//한글 파일명 깨짐 처리
+									new DefaultFileRenamePolicy());//rename처리
+				
+				int no = Integer.parseInt(multi.getParameter("no"));
+				String view = multi.getParameter("view");
+				String cate = multi.getParameter("cate");
+				String name = multi.getParameter("name");
+				String desc = multi.getParameter("desc");
+				int cost = Integer.parseInt(multi.getParameter("cost"));
+				String discount = multi.getParameter("discount");
+				int price = Integer.parseInt(multi.getParameter("price"));
+				int stock = Integer.parseInt(multi.getParameter("stock"));
+				String option = multi.getParameter("use_option");
+				String mainImg = multi.getFilesystemName("mainimg");
+				String originalFilename = multi.getOriginalFileName("mainimg");
+				String deleteDetailImage = multi.getParameter("deleteDetailImage");
+				String deleteImage[] = deleteDetailImage.split(",");
+				/*String[] files = multi.getParameterValues("files");*/
+				List<String> files = new ArrayList<>();
+				
+				Enumeration serfiles = multi.getFileNames();
+				while(serfiles.hasMoreElements()) {
+					String filename1 = (String) serfiles.nextElement();
+					if(!filename1.equals("mainimg")){
+						String detailimg = multi.getFilesystemName(filename1);
+						String originaldetailimg = multi.getOriginalFileName(filename1);
+						files.add(detailimg);
+					}
+				}
+				
 				sqlsession = MySqlSessionFactory.openSession();
 				ProductDao dao = sqlsession.getMapper(ProductDao.class);
 				Product pro = new Product();
@@ -86,6 +119,8 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				pro.setStock(stock);
 				pro.setUseOption(option);
 				Product selectPro = dao.SelectProductByno(no);
+				
+				System.out.println(mainImg);
 				if(!mainImg.isEmpty()){
 					pro.setMainImg(mainImg);
 				}else{
@@ -101,12 +136,21 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 					dao.deleteProimg(proimg);
 				}
 			
-				for (int i = 0; i < files.length; i++) {
+				/*for (int i = 0; i < files.length; i++) {
 					if(!files[i].isEmpty()){
 						proimg.setPrdNo(no);
 						proimg.setImg(files[i]);
 						dao.insertProImg(proimg);
 					}	
+				}*/
+				
+				Proimg img = new Proimg();
+				for (int i = 0; i < files.size(); i++) {
+					if(!files.get(i).isEmpty()){
+						img.setPrdNo(no);
+						img.setImg(files.get(i));
+						dao.insertProImg(img);
+					}
 				}
 				
 				if (option.equals("1")) {
@@ -149,6 +193,9 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				sqlsession.commit();
 				response.sendRedirect("/jsp_project/manager/product/list.do");
 				
+			}catch(Exception e){
+				e.printStackTrace();
+				sqlsession.rollback();
 			}finally{
 				sqlsession.close();
 			}			
