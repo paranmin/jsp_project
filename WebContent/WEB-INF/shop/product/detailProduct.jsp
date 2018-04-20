@@ -285,7 +285,11 @@ $(function(){
 	var str = "";
 	var ocost = 0;
 	var flag = 0;
+	
+	
 	function createValue(){
+		var duplicate = 0;
+		
 		$("option:selected").each(function(j,obj){
 			value[j] = $(obj).val();
 			value2[j] = $(obj).attr("data-cost");
@@ -315,14 +319,20 @@ $(function(){
 			flag++;
 		}else{
 			$("div#selectedItem li").each(function(i,obj){
-				var target = $(this).text();
+				var $target = $(this).text().split("(");
+				var target = $target[0].trim();	
 				console.log("str : "+str);
-				if(target.indexOf(str)==-1){
-					appendLi();
-				}else{
-					alert("이미 추가된 상품입니다.");
+				if(target==str){
+					duplicate++;
 				}
 			});
+			console.log(duplicate);
+			if(duplicate>0){
+				alert("이미 추가된 상품입니다.");
+			}else{
+				appendLi();
+				
+			}
 		}
 	}
 	
@@ -332,7 +342,7 @@ $(function(){
 		var $text = str+ocost;
 		var plusBtn = $("<button class='plusNum'>");
 		$(plusBtn).text("+");
-		var $input = $("<input type='text' class='productNum'>");
+		var $input = $("<input type='text' class='productNum' name='cartnum'>");
 		$($input).val("1");
 		var minusBtn = $("<button class='minusNum'>");
 		$(minusBtn).text("-");
@@ -356,9 +366,14 @@ $(function(){
 		$(li).append(minusBtn);
 		$(li).append(span);
 		$(li).append(closeBtn);
-		var hidden = $("<input type='hidden'>");
+		var hidden = $("<input type='hidden' name='opPrice'>");
+		var hidden2 = $("<input type='hidden' name='optionName'>");
 		$(hidden).val(productCost+Sumcost);
+		var $text = $(li).text();
+		var text = $text.split(")");
+		$(hidden2).val(text[0]+")");
 		$(li).append(hidden);
+		$(li).append(hidden2);  
 		$("div#selectedItem").children("ul").append(li);
 	}
 	
@@ -422,6 +437,7 @@ $(function(){
 			$("div.detail_right").css("display","block");
 		}
 	});
+	
 });	
 </script>
 </head>
@@ -430,18 +446,20 @@ $(function(){
 		<c:import url="../modules/header.jsp" />
 		<c:import url="../modules/leftSide.jsp" />
 		<c:import url="../modules/rightSide.jsp" />
+		<form action="${pageContext.request.contextPath}/shop/cart/cart.do" method="post">
+		<input type="hidden" name="chkAll" value="${pro.prdNo }">   
 		<section id="detail_product">
-			<div class="detail_left">
+			<div class="detail_left">    
 				<h2 class="catename">JEWELRY... ${pro.category }</h2>
 				<div class="detail_menu" id="detail_menu_detail">
 					<ul>
 						<li><a href="#detail" id="detail">Detail</a></li>
 						<li><a href="#review">Review</a></li>
 						<li><a href="#qa">Q&A</a></li>
-					</ul>
+					</ul>    
 				</div>
 				<c:forEach var="imglist" items="${img }">
-					<img src="${pageContext.request.contextPath}/images/${imglist.img }">
+					<img src="${pageContext.request.contextPath}/upload/${imglist.img }">    
 				</c:forEach>
 			</div>
 			<div class="detail_right">
@@ -563,6 +581,7 @@ $(function(){
 				</div>
 			</div>
 		</section>
+		</form>
 		<c:import url="../modules/footer.jsp" />
 	</div>
 </body>
