@@ -2,7 +2,9 @@ package com.dgit.mall.handler.shop.cart;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dgit.mall.dao.CartDao;
 import com.dgit.mall.dto.Cart;
 import com.dgit.mall.dto.Member;
+import com.dgit.mall.dto.Product;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
 

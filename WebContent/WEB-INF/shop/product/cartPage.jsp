@@ -30,10 +30,8 @@
 	href="${pageContext.request.contextPath}/css/cartPage.css">
 <script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
-<script src="${pageContext.request.contextPath}/js/cart.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/cart.js?a=5"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -88,9 +86,10 @@
 												<button class="plus">+</button> <input type="text"
 												class="cartnum" value="1" name="cartnum">
 												<button class="minus">-</button>
+												<input type="hidden" name="stock" value="${items.prd.stock }">
 											</td>
-											<td><span class="productPrice">${items.prd.sellingPrice }</span>원</td>
-											<input type="hidden" name="productPrice">
+											<td><span class="productPrice" data-price="${items.prd.sellingPrice }">${items.prd.sellingPrice }</span>원</td>
+											<input type="hidden" name="productPrice" class="prdPr">
 											<td>
 												<button class="delete">삭제하기</button>
 											</td>
@@ -98,12 +97,12 @@
 									</c:forEach>
 								</c:if>
 								<tr class="allProPrice">
-								<td colspan="6"><p>
+									<td colspan="6"><p>
 										총 결제 금액:<span class="prdsPrice"></span>원+배송료 <span class="deliveryfee">2500</span>원 = <span
 											class="prdplusdel"></span>원
 											<input type="hidden" name="prdsPrice">
 									</p></td>
-							</tr>
+								</tr>
 						</table>
 					</div>
 					<div class="notice">35,000원 미만의 주문은 배송료를 청구합니다.</div>
