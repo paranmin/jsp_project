@@ -6,6 +6,6 @@ import java.util.List;
 import com.dgit.mall.dto.Cart;
 
 public interface CartDao {
-	public List<Cart> selectAllCart() throws SQLException;
+	public List<Cart> selectAllCart(int mno) throws SQLException;
 	
 }

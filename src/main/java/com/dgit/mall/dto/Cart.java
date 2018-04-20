@@ -5,7 +5,7 @@ public class Cart {
 	private int ctPrdQuantity;
 	private String ctPrdOpname;
 	private Member mNo;
-	private Product prdNo;
+	private Product prd;
 	public int getCtNo() {
 		return ctNo;
 	}
@@ -27,19 +27,20 @@ public class Cart {
 	public Member getmNo() {
 		return mNo;
 	}
-	public void setmNo(Member mNo) {
+	public void setMNo(Member mNo) {
 		this.mNo = mNo;
 	}
-	public Product getPrdNo() {
-		return prdNo;
+	
+	public Product getPrd() {
+		return prd;
 	}
-	public void setPrdNo(Product prdNo) {
-		this.prdNo = prdNo;
+	public void setPrd(Product prd) {
+		this.prd = prd;
 	}
 	@Override
 	public String toString() {
 		return "Cart [ctNo=" + ctNo + ", ctPrdQuantity=" + ctPrdQuantity + ", ctPrdOpname=" + ctPrdOpname + ", mNo="
-				+ mNo + ", prdNo=" + prdNo + "]";
+				+ mNo + ", prdNo=" + prd + "]";
 	}
 	public Cart(int ctNo, int ctPrdQuantity, String ctPrdOpname, Member mNo, Product prdNo) {
 		super();
@@ -47,7 +48,7 @@ public class Cart {
 		this.ctPrdQuantity = ctPrdQuantity;
 		this.ctPrdOpname = ctPrdOpname;
 		this.mNo = mNo;
-		this.prdNo = prdNo;
+		this.prd = prdNo;
 	}
 	public Cart() {
 	}

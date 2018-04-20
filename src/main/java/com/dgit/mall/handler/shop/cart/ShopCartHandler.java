@@ -2,15 +2,21 @@ package com.dgit.mall.handler.shop.cart;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.swing.plaf.metal.MetalMenuBarUI;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.CartDao;
 import com.dgit.mall.dto.Cart;
+import com.dgit.mall.dto.Member;
+import com.dgit.mall.dto.Product;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
 
@@ -25,7 +31,18 @@ public class ShopCartHandler extends ShopCommandHandler {
 			try {
 				sql = MySqlSessionFactory.openSession();
 				CartDao dao = sql.getMapper(CartDao.class);
-				List<Cart> list = dao.selectAllCart(); 
+				HttpSession session = request.getSession(false);
+			    Member loginMember = (Member) session.getAttribute("auth");
+				Cart cart = new Cart();
+				if(loginMember==null){
+					response.sendRedirect(request.getContextPath()+"/shop/login.do");
+					return null;
+				}
+				Member member = new Member();
+				member.setNo(loginMember.getNo());
+				cart.setMNo(member);
+				//System.out.println("[no =======================]"+loginMember.getNo());
+				List<Cart> list = dao.selectAllCart(loginMember.getNo()); 
 				request.setAttribute("list", list);
 			} catch (Exception e) {
 				e.printStackTrace();

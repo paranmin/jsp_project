@@ -13,5 +13,14 @@ public interface BoardDao {
 
 	List<Board> selectNoticeBoardAll();
 
+	Board selectlistBoardReviewByid(int number);
+
+
+	Board selectCheckPass(int number);
+
+	public int insertBoard(Board board);
+
+	public int updateBoardReview(Board board);
+
 
 }
