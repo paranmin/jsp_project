@@ -156,7 +156,7 @@ div.category_best_white{
 			</div>
 			<hr>
 			<c:if test="${cate==null }">
-				<p class="list_title">JEWELRY BEST</p>
+				<p class="list_title">JEWELRY ITEM</p>
 			</c:if>
 			<c:if test="${cate!=null }">
 				<p class="list_title">${cate } ITEM</p>
