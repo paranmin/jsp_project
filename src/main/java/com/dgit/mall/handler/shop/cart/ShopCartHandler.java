@@ -52,6 +52,10 @@ public class ShopCartHandler extends ShopCommandHandler {
 			
 			return VIEW_FRONT_PATH + "product/cartPage.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
+			String[] ctNo = request.getParameterValues("chkAll");
+			for(int i=0; i<ctNo.length; i++){
+				System.out.println(ctNo[i]);
+			}
 			/*String[] prdNo = request.getParameterValues("chkAll");//상품번호
 			String[] prdName = request.getParameterValues("prdName");//상품이름
 			String[] prdOptionName = request.getParameterValues("proNamehr"); //상품 옵션
