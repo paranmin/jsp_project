@@ -92,12 +92,13 @@ CREATE TABLE `option_detail` (
   `po_no` int(11) NOT NULL COMMENT '옵션번호',
   `pod_no` int(11) NOT NULL AUTO_INCREMENT,
   `pod_value` varchar(10) NOT NULL,
-  `pod_cost` int(11) NOT NULL,
+  `pod_cost` int(11) default 0,
   PRIMARY KEY (`pod_no`),
   KEY `FK_pro_option_TO_option_detail` (`po_no`),
   CONSTRAINT `FK_pro_option_TO_product_option_detail` FOREIGN KEY (`po_no`) REFERENCES `pro_option` (`po_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+alter table option_detail add(pod_stock int(5) not null default 0);
 
 CREATE TABLE `board` (
   `brd_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '글번호',
