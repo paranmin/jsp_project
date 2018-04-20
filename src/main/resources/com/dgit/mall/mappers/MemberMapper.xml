@@ -133,7 +133,7 @@
 		where m_no = #{no}
 	</update>
 	
-	<update id="leaveMember" parameterType="Member">
+	<update id="leaveMember" parameterType="int">
 		update member set m_leave_yn = 'Y' where m_no = #{no}
 	</update>
 </mapper>

@@ -102,11 +102,21 @@ $(function(){
 		return false;
 	});
 	$("button.img_plus").click(function(){
+		var $div = $("<div>");
 		var $input = $("<input type='file' name='files'>");
-		$("div.img_plus").append($("<br>"));
-		$("div.img_plus").append($input);
+		var $btn = $("<button class='img_del'>");
+		$($btn).text("삭제");   
+		/* $("div.img_plus").append($("<br>")); */
+		$($div).append($input);
+		$($div).append($btn);   
+		$("div.img_plus").append($div);
 		return false;
 	});
+	
+	$(document).on("click","button.img_del", function(){
+ 		$(this).parent().remove();
+ 		return false;
+ 	});
  	
  	$("input#option").change(function(){
  		if($("input#option:checked").val()==1){
@@ -120,14 +130,18 @@ $(function(){
 		var $tr = $("<tr class='parent'>");
 		var td1 = $("<td>");
 		var td1in = $("<input type='text' name='op_name' class='op_name'>");
+		var td1inbtn = $("<button class='op_nameDel'>");
 		var td2 = $("<td>");
 		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
 		var td3 = $("<td>");
 		var td3in = $("<input type='text' name='op_cost' class='op_cost' value='0'>");
 		var td4 = $("<td>");
-		var td4in = $("<button id='op_add'>");
+		var td4in = $("<button class='op_add'>");
+		
+		$(td1inbtn).text("삭제");
 		$(td4in).text("+추가");
 		$(td1).append(td1in);
+		$(td1).append(td1inbtn);
 		$(td2).append(td2in);
 		$(td3).append(td3in);
 		$(td4).append(td4in);
@@ -138,8 +152,17 @@ $(function(){
 		$("table#proOption").append($tr);     
 		return false;
 	});
- 	
- 	$(document).on("click","button#op_add", function(){
+ 	$(document).on("click","button.op_nameDel", function(){
+ 		var rowspan = $(this).parent().prop("rowspan");
+ 		for(var i = 1; i<rowspan; i++){
+ 			var removeT = $(this).parents("tr").next();
+ 			removeT.remove();
+ 		} 		
+ 		var removeTarget = $(this).parents("tr"); 	
+ 		removeTarget.remove();
+ 		return false;
+ 	});
+ 	$(document).on("click","button.op_add", function(){
  		var $tr = $("<tr>");
 		var td2 = $("<td>");
 		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
@@ -179,7 +202,10 @@ $(function(){
  			$($hidden).val(span);
  			$("p.submit").append($hidden);
  		});
- 		$.post("add.do", $("#form").serialize());
+ 		$("form").submit();
+ 		alert("상품이 등록되었습니다.")
+ 		return false;
+ 		//$.post("add.do", $("#form").serialize());
  	});
 });
 </script>
@@ -240,14 +266,14 @@ $(function(){
 			<p>
 				<label>상품 메인 이미지</label>
 				<div class="img_main_plus">
-					<input type="file" name="mainimg" value="이미지 불러오기">
+					<input type="file" name="mainimg" value="이미지 불러오기" accept="image/*">
 					<!-- <button class="img_main_plus">추가</button> -->
 				</div>
 			</p>
 			<p>
 				<label>상품 상세 이미지</label>
 				<div class="img_plus">
-				<input type="file" name="files" value="이미지 불러오기">
+				<input type="file" name="files" value="이미지 불러오기" accept="image/*">
 				<button class="img_plus">추가</button>
 				</div>
 			</p>
@@ -278,7 +304,7 @@ $(function(){
 						<input type="text" name="op_cost" class="op_cost" value="0">
 					</td>
 					<td>
-						<button id="op_add">+추가</button>    
+						<button class="op_add">+추가</button>    
 					</td>
 				</tr>
 			</table>		
