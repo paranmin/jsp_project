@@ -101,15 +101,17 @@ $(function(){
 		$("div.img_main_plus").append($input);
 		return false;
 	});
+	var i = 1;
 	$("button.img_plus").click(function(){
 		var $div = $("<div>");
-		var $input = $("<input type='file' name='files'>");
+		var $input = $("<input type='file' name='files"+i+"'>");
 		var $btn = $("<button class='img_del'>");
 		$($btn).text("삭제");   
 		/* $("div.img_plus").append($("<br>")); */
 		$($div).append($input);
 		$($div).append($btn);   
 		$("div.img_plus").append($div);
+		i++;
 		return false;
 	});
 	
@@ -211,7 +213,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<form action="add.do" method="post" id="form">      
+	<form action="add.do" enctype="multipart/form-data" method="post" id="form">      
 		<fieldset class="productAdd">
 			<legend>상품 등록</legend>
 			<p>

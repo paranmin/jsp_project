@@ -148,23 +148,20 @@ $(function(){
 		$("div.img_main_plus").append($input);
 		return false;
 	});
+	var i = 1;
 	$("button.img_plus").click(function(){
 		var $div = $("<div>");
-		var $input = $("<input type='file' name='files'>");
+		var $input = $("<input type='file' name='files"+i+"'>");
 		var $btn = $("<button class='img_del'>");
 		$($btn).text("삭제");   
 		/* $("div.img_plus").append($("<br>")); */
 		$($div).append($input);
 		$($div).append($btn);   
 		$("div.img_plus").append($div);
+		i++;
 		return false;
 	});
 	
-	$(document).on("click","button.img_del", function(){
- 		$(this).parent().remove();
- 		return false;
- 	});
- 	
  	$("input#option").change(function(){
  		if($("input#option:checked").val()==1){
  			$("table#proOption").css("display","block"); 
@@ -252,9 +249,8 @@ $(function(){
  		$("form").submit();
  		alert("상품 정보가 수정되었습니다.");
  		return false;
- 		//$.post("add.do", $("#form").serialize());
  	});
- 	/* $("button.imgdeletemain").click(function(){
+ 	 $("button.imgdeletemain").click(function(){
  		var $src = $(this).prev().attr("src");
  		var src = $src.split("/");
  		console.log(src);  
@@ -263,7 +259,13 @@ $(function(){
  		$("input#deleteMainImage").val(src[src.length-1]);
  		$(this).parent().remove();
  		return false;   
- 	}); */
+ 	}); 
+ 	 
+ 	$(document).on("click","button.img_del", function(){
+ 		$(this).parent().remove();
+ 		return false;
+ 	});
+ 	 
  	var i = 0;
  	$("button.imgdelete").click(function(){
  		i++;
@@ -292,7 +294,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<form action="update.do" method="post">      
+	<form action="update.do" enctype="multipart/form-data" method="post">      
 		<fieldset class="productDetail">
 			<legend>상품 정보</legend>
 			<p>
