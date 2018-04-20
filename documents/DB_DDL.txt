@@ -134,12 +134,14 @@ CREATE TABLE `cart` (
   `ct_prd_op_name` varchar(100) DEFAULT NULL COMMENT '상품옵션명',
   `m_no` int(11) NOT NULL COMMENT '회원번호',
   `prd_no` int(11) NOT NULL COMMENT '상품번호',
+  `type` enum('ORDER','CART') DEFAULT 'CART' COMMENT '타입',
   PRIMARY KEY (`ct_no`),
   KEY `FK_member_TO_cart` (`m_no`),
   KEY `FK_product_TO_cart` (`prd_no`),
   CONSTRAINT `FK_member_TO_cart` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`),
   CONSTRAINT `FK_product_TO_cart` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='장바구니';
+
 
 CREATE TABLE `coupon` (
   `c_no` varchar(20) NOT NULL COMMENT '쿠폰번호',

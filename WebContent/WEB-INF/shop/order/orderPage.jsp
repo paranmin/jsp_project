@@ -222,6 +222,7 @@ function getReturnValue(returnValue) {
 									<th class="count">수량</th>
 									<th class="count">가격</th>
 								</tr>
+								<c:if test=""></c:if>
 									<tr class="proContent">
 										<td><img src="../../images/J1.jpg" class="proImg"
 											name="proImg"></td>
