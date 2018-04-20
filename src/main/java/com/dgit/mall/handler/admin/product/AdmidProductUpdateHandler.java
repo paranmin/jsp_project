@@ -88,7 +88,9 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				int price = Integer.parseInt(multi.getParameter("price"));
 				int stock = Integer.parseInt(multi.getParameter("stock"));
 				String option = multi.getParameter("use_option");
+				/*String mainImg = multi.getParameter("mainimg");*/
 				String mainImg = multi.getFilesystemName("mainimg");
+				
 				String originalFilename = multi.getOriginalFileName("mainimg");
 				String deleteDetailImage = multi.getParameter("deleteDetailImage");
 				String deleteImage[] = deleteDetailImage.split(",");
@@ -120,11 +122,14 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				pro.setUseOption(option);
 				Product selectPro = dao.SelectProductByno(no);
 				
-				System.out.println(mainImg);
-				if(!mainImg.isEmpty()){
-					pro.setMainImg(mainImg);
+				System.out.println(mainImg + "fghffgd");
+				System.out.println("sadfsadsafs");
+				
+				if(mainImg == null){
+					
+					pro.setMainImg(selectPro.getMainImg());   
 				}else{
-					pro.setMainImg(selectPro.getMainImg());
+					pro.setMainImg(mainImg);   
 				}
 				
 				dao.updateProduct(pro);
@@ -145,11 +150,13 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				}*/
 				
 				Proimg img = new Proimg();
-				for (int i = 0; i < files.size(); i++) {
-					if(!files.get(i).isEmpty()){
-						img.setPrdNo(no);
-						img.setImg(files.get(i));
-						dao.insertProImg(img);
+				if(files.size()>0){
+					for (int i = 0; i < files.size(); i++) {
+						if(!(files.get(i) == null)){
+							img.setPrdNo(no);
+							img.setImg(files.get(i));
+							dao.insertProImg(img);
+						}
 					}
 				}
 				
@@ -163,10 +170,10 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 					
 					Option opt = new Option();
 					OptionDetail det = new OptionDetail();
-					String[] opName = request.getParameterValues("op_name");
-					String[] opValue = request.getParameterValues("op_desc");
-					String[] opCost = request.getParameterValues("op_cost");
-					String[] rspan = request.getParameterValues("span");
+					String[] opName = multi.getParameterValues("op_name");
+					String[] opValue = multi.getParameterValues("op_desc");
+					String[] opCost = multi.getParameterValues("op_cost");
+					String[] rspan = multi.getParameterValues("span");
 					int afterspan = 0;
 					for (int i = 0; i < opName.length; i++) {
 						opt.setPoName(opName[i]);

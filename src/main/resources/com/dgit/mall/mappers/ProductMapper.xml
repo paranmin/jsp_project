@@ -102,7 +102,7 @@
 	</delete>
 	
 	<select id="selectBestAllProduct" resultMap="productResult">
-		select * from product order by prd_num desc;
+		select * from product order by prd_no desc;
 	</select>
 	<select id="selectBestCateProduct" resultMap="productResult">
 		select * from product where prd_category=#{category}

@@ -103,10 +103,10 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 				if (option.equals("1")) {
 					Option opt = new Option();
 					OptionDetail det = new OptionDetail();
-					String[] opName = request.getParameterValues("op_name");
-					String[] opValue = request.getParameterValues("op_desc");
-					String[] opCost = request.getParameterValues("op_cost");
-					String[] rspan = request.getParameterValues("span");
+					String[] opName = multi.getParameterValues("op_name");
+					String[] opValue = multi.getParameterValues("op_desc");
+					String[] opCost = multi.getParameterValues("op_cost");
+					String[] rspan = multi.getParameterValues("span");
 					int afterspan = 0;
 					for (int i = 0; i < opName.length; i++) {
 						opt.setPoName(opName[i]);
