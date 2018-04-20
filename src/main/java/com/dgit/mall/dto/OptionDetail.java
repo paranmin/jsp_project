@@ -5,14 +5,23 @@ public class OptionDetail {
 	private int podNo;
 	private String podValue;
 	private String podCost;
+	private int podStock;
 	
 	public OptionDetail() {}
-	public OptionDetail(int poNo, int podNo, String podValue, String podCost) {
+
+	public OptionDetail(int poNo, int podNo, String podValue, String podCost, int podStock) {
 		super();
 		this.poNo = poNo;
 		this.podNo = podNo;
 		this.podValue = podValue;
 		this.podCost = podCost;
+		this.podStock = podStock;
+	}
+	public int getPodStock() {
+		return podStock;
+	}
+	public void setPodStock(int podStock) {
+		this.podStock = podStock;
 	}
 	public int getPoNo() {
 		return poNo;

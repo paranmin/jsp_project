@@ -65,6 +65,9 @@ table#proOption input.op_name{
 table#proOption input.op_cost{
 	width:150px;
 }
+table#proOption input.op_stock{
+	width:150px;
+}
 table#proOption tr:first-child td{
 	text-align: left;
 	border:none;
@@ -76,16 +79,19 @@ table#proOption button#op_nameadd{
 table#proOption{
 	width:100%;
 	text-align: center;
-	display:none;
+	display:none;   
 }
 table#proOption th#opname{
 	width:20%;
 }
 table#proOption th#opvalue{
-	width:40%;    
+	width:30%;    
 }
 table#proOption th#opprice{
-	width:20%;    
+	width:15%;    
+}
+table#proOption th#opstock{
+	width:15%;    
 }
 table#proOption td{
 	border-bottom:1px solid gainsboro;      
@@ -120,8 +126,8 @@ $(function(){
  		return false;
  	});
  	
- 	$("input#option").change(function(){
- 		if($("input#option:checked").val()==1){
+ 	$("input[type='radio']").change(function(){
+ 		if($("input[type='radio']:checked").val()==1){
  			$("table#proOption").css("display","block"); 
  		}else{
  			$("table#proOption").css("display","none");
@@ -136,21 +142,25 @@ $(function(){
 		var td2 = $("<td>");
 		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
 		var td3 = $("<td>");
-		var td3in = $("<input type='text' name='op_cost' class='op_cost' value='0'>");
+		var td3in = $("<input type='text' name='op_cost' class='op_cost'>");
 		var td4 = $("<td>");
-		var td4in = $("<button class='op_add'>");
+		var td4in = $("<input type='text' name='op_stock' class='op_stock'>");
+		var td5 = $("<td>");
+		var td5in = $("<button class='op_add'>");
 		
 		$(td1inbtn).text("삭제");
-		$(td4in).text("+추가");
+		$(td5in).text("+추가");
 		$(td1).append(td1in);
 		$(td1).append(td1inbtn);
 		$(td2).append(td2in);
 		$(td3).append(td3in);
 		$(td4).append(td4in);
+		$(td5).append(td5in);
 		$($tr).append(td1);
 		$($tr).append(td2);
 		$($tr).append(td3);
 		$($tr).append(td4);
+		$($tr).append(td5);
 		$("table#proOption").append($tr);     
 		return false;
 	});
@@ -169,16 +179,20 @@ $(function(){
 		var td2 = $("<td>");
 		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
 		var td3 = $("<td>");
-		var td3in = $("<input type='text' name='op_cost' class='op_cost' value='0'>");
+		var td3in = $("<input type='text' name='op_cost' class='op_cost'>");
 		var td4 = $("<td>");
-		var td4in = $("<button type='button' class='op_del'>");
-		$(td4in).text("-삭제");
+		var td4in = $("<input type='text' name='op_stock' class='op_stock'>");
+		var td5 = $("<td>");
+		var td5in = $("<button type='button' class='op_del'>");
+		$(td5in).text("-삭제");
 		$(td2).append(td2in);
 		$(td3).append(td3in);
 		$(td4).append(td4in);
+		$(td5).append(td5in);
 		$($tr).append(td2);
 		$($tr).append(td3);
 		$($tr).append(td4);
+		$($tr).append(td5);
 		$($tr).insertAfter($(this).parent().parent());
  		var rowspan = $(this).parent().siblings().eq(0).prop("rowspan");
  		$(this).parent().siblings().eq(0).prop("rowspan",++rowspan);          
@@ -293,6 +307,7 @@ $(function(){
 					<th id="opname">옵션명</th>
 					<th id="opvalue">옵션값</th>
 					<th id="opprice">옵션가</th>
+					<th id="opstock">재고</th>
 					<th id="empty"></th>
 				</tr>
 				<tr class="parent" id="first">
@@ -303,7 +318,10 @@ $(function(){
 						<input type="text" name="op_desc" class="op_desc">
 					</td>
 					<td>
-						<input type="text" name="op_cost" class="op_cost" value="0">
+						<input type="text" name="op_cost" class="op_cost">
+					</td>
+					<td>
+						<input type="text" name="op_stock" class="op_stock">
 					</td>
 					<td>
 						<button class="op_add">+추가</button>    
