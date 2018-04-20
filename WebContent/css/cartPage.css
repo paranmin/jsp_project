@@ -88,6 +88,14 @@ div.cartTable tr.allProPrice td p{
 	font-size: 13px;
 	line-height: 73px;
 }
+td.secondTd{
+	display: none;
+}
+td.secondTd .prdsPrice2{
+	font-size: 18px;
+	color: red;
+	font-weight: bold;
+}
 input.cartnum{
 	width:20px;
 	text-align: center;

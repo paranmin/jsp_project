@@ -2,6 +2,9 @@ package com.dgit.mall.handler.shop.order;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.dgit.mall.dao.CartDao;
 import com.dgit.mall.dao.OrderDao;
+import com.dgit.mall.dto.Cart;
 import com.dgit.mall.dto.Member;
 import com.dgit.mall.dto.OrderProduct;
 import com.dgit.mall.dto.Product;
@@ -22,9 +27,29 @@ public class ShopOrderHandler extends ShopCommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (request.getMethod().equalsIgnoreCase("get")) {
-		/*	String num = request.getParameter("no");
-			int cNo = Integer.getInteger(num);
-			request.setAttribute("cNo", cNo);*/
+			SqlSession sql = null;
+			try {
+				sql = MySqlSessionFactory.openSession();
+				CartDao dao = sql.getMapper(CartDao.class);
+				HttpSession session = request.getSession(false);
+				String[] ctno = (String[]) session.getAttribute("ctNo");
+				Member loginMember = (Member) session.getAttribute("auth");
+				
+				if(loginMember==null){
+					response.sendRedirect(request.getContextPath()+"/shop/login.do");
+					return null;
+				}
+				Map<String, Object> map = new HashMap<>();
+				map.put("mNo", loginMember.getNo());
+				map.put("ctNo", ctno);
+				List<Cart> list = dao.selectByselectedCart(map);
+				System.out.println(list);
+				request.setAttribute("list", list);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			
 			return VIEW_FRONT_PATH + "order/orderPage.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String productPr = request.getParameter("orderChargePrice");//상품가격

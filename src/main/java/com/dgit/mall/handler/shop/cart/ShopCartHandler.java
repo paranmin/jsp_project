@@ -52,18 +52,17 @@ public class ShopCartHandler extends ShopCommandHandler {
 			
 			return VIEW_FRONT_PATH + "product/cartPage.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
-			
-			
-			
+
+			String[] ctNo = request.getParameterValues("chkAll");
+			for(int i=0; i<ctNo.length; i++){
+				System.out.println(ctNo[i]);
+			}
+			HttpSession session = request.getSession(false);
 			//장바구니 테이블 값 넣기
-			
-		/*	request.setAttribute("prdNo", prdNo);
-			request.setAttribute("prdName", prdName);
-			request.setAttribute("prdOptionName", prdOptionName);
-			request.setAttribute("count", count);
-			request.setAttribute("price", price);*/
-			
-			return VIEW_FRONT_PATH+"order/orderPage.jsp";
+		
+			session.setAttribute("ctNo", ctNo);
+			response.sendRedirect(request.getContextPath()+"/shop/order/order.do");
+			return null;
 		}
 		return null;
 	}

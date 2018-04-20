@@ -102,7 +102,7 @@ table#proOption td{
 $(function(){
     $("table#proOption").css("display","none");    
 	$("button.img_main_plus").click(function(){
-		var $input = $("<input type='file' name='mainimg'>");
+		var $input = $("<input type='file' multiple='multiple' name='mainimg'>");
 		$("div.img_main_plus").append($("<br>"));
 		$("div.img_main_plus").append($input);
 		return false;
@@ -227,7 +227,11 @@ $(function(){
 </script>
 </head>
 <body>
+<<<<<<< HEAD
 	<form action="add.do" enctype="multipart/form-data" method="post" id="form">      
+=======
+	<form action="add.do" enctype="multipart/form-data"  method="post" id="form">
+>>>>>>> refs/remotes/origin/master
 		<fieldset class="productAdd">
 			<legend>상품 등록</legend>
 			<p>
