@@ -19,5 +19,10 @@
 		select c.ct_no,c.ct_prd_quantity,c.ct_prd_op_name,c.m_no,c.prd_no,p.prd_selling_price,p.prd_name,p.prd_main_img,p.prd_stock from cart c join product p on c.prd_no = p.prd_no where m_no=#{mNo}
 	</select>
 	
+	<insert id="insertCart">
+		insert into cart(ct_prd_quantity, ct_prd_op_name, m_no, prd_no)
+		values(#{ctPrdQuantity},#{ctPrdOpname},#{mNo.no},#{prd.prdNo})
+	</insert>
+	
 	
 </mapper>

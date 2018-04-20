@@ -52,13 +52,7 @@ public class ShopCartHandler extends ShopCommandHandler {
 			
 			return VIEW_FRONT_PATH + "product/cartPage.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
-			/*String[] prdNo = request.getParameterValues("chkAll");//상품번호
-			String[] prdName = request.getParameterValues("prdName");//상품이름
-			String[] prdOptionName = request.getParameterValues("proNamehr"); //상품 옵션
-			String[] count = request.getParameterValues("cartnum");//상품 수량
-			String[] price = request.getParameterValues("productPrice");//상품 가격
-			String[] proImg = request.getParameterValues("proImg");//상품이미지
-			System.out.println(proImg[0]);*/
+			
 			
 			
 			//장바구니 테이블 값 넣기
