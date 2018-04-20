@@ -10,7 +10,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/base.css" media="all" />
+	href="${pageContext.request.contextPath}/css/base.css" media="all" /> 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Boardcss/Board.css"
 	media="all" />
