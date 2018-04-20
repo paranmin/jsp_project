@@ -4,14 +4,18 @@
 <html>
 <head>
 <meta charset=UTF-8">
-<link rel="stylesheet" href="Boardcss/Board.css" />
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="css/base.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/base.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Boardcss/Board.css"
+	media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
 <title>Insert title here</title>
-
 <style type="text/css">
 section {
 	width: 1410px;
@@ -262,19 +266,29 @@ a {
 	letter-spacing: 0.05em;
 }
 
+.line {
+	text-align: left;
+}
+
 .list-link li {
 	padding: 4px 0px;
+}
+
+.readBoardcontent {
+	text-align: left;
 }
 </style>
 
 </head>
 
 <body>
-	<c:import url="modules/header.jsp" />
+	<c:import url="../modules/header.jsp" />
+	<c:import url="../modules/leftSide.jsp" />
+	<c:import url="../modules/rightSide.jsp" />
 	<div id="container">
 
 		<div class="titleArea">
-			<h1>Q&amp;A</h1>
+			<h1>REVIEW</h1>
 		</div>
 		<div>
 			<!--#top_box-->
@@ -290,18 +304,13 @@ a {
 		</div>
 		<section>
 			<div class="page-body">
-
-
 				<dl class="prd-tinfo">
 					<dt>
-						<a
-							href="/shop/shopdetail.html?branduid=976526&amp;xcode=068&amp;mcode=001&amp;scode=&amp;GfDT=bm54W1w%3D"><img
-							src="#"></a>
+						<a href="#"><img src="#"></a>
 					</dt>
 					<dd>
 						<ul>
-							<li class="name"><span class="tit">상 품 명:</span><a
-								href="/shop/shopdetail.html?branduid=976526&amp;xcode=068&amp;mcode=001&amp;scode=&amp;GfDT=bm54W1w%3D">타이니
+							<li class="name"><span class="tit">상 품 명:</span><a href="#">타이니
 									크로스 바벨</a> <span class="MK-product-icons"></span> <!--/coupon_icon/--></li>
 							<li class="price"><span class="tit">상품가격:</span><strong>3,000원</strong></li>
 						</ul>
@@ -312,7 +321,8 @@ a {
 						<caption>게시글 보기</caption>
 						<thead>
 							<tr>
-								<th><div class="tb-center">왼쪽귓볼</div></th>
+								<th><div class="tb-center">
+										<em>제목 :</em>${readBoard.brdtitle }</div></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -320,15 +330,14 @@ a {
 								<td class="line">
 									<div class="cont-sub-des">
 										<div>
-											<span><em>작성일 :</em> 2018-04-06</span>
+											<span><em>작성일 :</em> ${readBoard.brdregdate }</span>
 										</div>
 										<div>
-											<span><em>작성자 :</em> rnlwlsdl10</span> <span><em>파일
-													:</em> <a
-												href="http://board.makeshop.co.kr/board/special132/curiouswiz_board3/20180406142851.jpg">20180406142851.jpg</a></span>
+											<span><em>작성자 :</em>${readBoard.brdwriter }</span> <span><em>파일
+													:</em> <a href="#"></a></span>
 										</div>
 										<div class="hit">
-											<span><em>조회 :</em> 7</span>
+											<span><em>조회 :</em>${readBoard.brdch }</span>
 										</div>
 									</div>
 								</td>
@@ -337,10 +346,11 @@ a {
 								<td>
 									<div class="data-bd-cont">
 										<div class="attach">
-											<img width="999"
-												src="http://board.makeshop.co.kr/board/special132/curiouswiz_board3/20180406142851.jpg">
+											<img width="999" src="#">
+											<div class="readBoardcontent">
+												<em>${readBoard.brdcontent }</em>
+											</div>
 										</div>
-										작아서 귀여워요!
 									</div>
 								</td>
 							</tr>
@@ -350,51 +360,8 @@ a {
 					<form id="comment_form" name="comment"
 						action="board.html?code=curiouswiz_board3&amp;page=2&amp;type=v&amp;board_cate=&amp;num1=942911&amp;num2=00000&amp;number=102643&amp;lock=N"
 						method="post" autocomplete="off">
-						<input type="hidden" name="page_type" value="board_view">
-						<input type="hidden" name="formnum" value="0"> <input
-							type="hidden" name="code" value="curiouswiz_board3"> <input
-							type="hidden" name="num1" value="942911"> <input
-							type="hidden" name="num2" value="00000"> <input
-							type="hidden" name="page" value="1"> <input type="hidden"
-							name="lock" value="N"> <input type="hidden" name="type"
-							value="v"> <input type="hidden" name="type2"> <input
-							type="hidden" name="comnum"> <input type="hidden"
-							name="comtype"> <input type="text" name="___DUMMY___"
-							readonly="" disabled="" style="display: none;"><input
-							type="hidden" name="secret" value="N">
 						<fieldset>
 							<legend>코멘트 쓰기</legend>
-							<div class="new-privercy-contract">
-								<div class="new-privercy-contract">
-									<p>개인정보 수집·이용</p>
-									<div class="privercy-contract">
-										<table class="tbl" summary="목적, 항목, 보유기간">
-											<caption>개인정보 수집/이용</caption>
-											<colgroup>
-												<col width="30%">
-												<col width="*">
-												<col width="20%">
-											</colgroup>
-											<thead>
-												<tr>
-													<th scope="col">목적</th>
-													<th scope="col">항목</th>
-													<th scope="col">보유기간</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td class="purpose"><div class="txt-l">게시판 서비스
-															제공</div></td>
-													<td class="items"><div class="txt-l">이름, 비밀번호,
-															작성내용, IP Address</div></td>
-													<td class="holding"><div class="txt-l">게시글 삭제 시</div></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
 							<table summary="코멘트 쓰기" class="comment-box">
 								<caption>코멘트 쓰기</caption>
 								<colgroup>
@@ -409,8 +376,8 @@ a {
 												<div class="wrt">
 													<label>작성자</label><span><input type="text"
 														name="cname" class="MS_input_txt input-style input-style2"
-														value="" onclick="CheckLogin()" onkeypress="CheckLogin()"
-														placeholder="이름"></span> <label>비밀번호</label><span><input
+														value="${readBoard.brdwriter }" onclick="CheckLogin()"
+														onkeypress="CheckLogin()" placeholder="이름"></span> <label>비밀번호</label><span><input
 														type="password" name="cpass"
 														class="MS_input_txt input-style input-style2"
 														onclick="CheckLogin()" onkeypress="CheckLogin()"
@@ -434,10 +401,9 @@ a {
 						<dl class="bbs-link con-link">
 							<dt></dt>
 							<dd>
-								<a
-									href="/board/board.html?code=curiouswiz_board3&amp;page=2&amp;board_cate=&amp;num1=942911&amp;num2=00000&amp;type=q&amp;type2=u"
+								<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
 									class="none btn_light_border btn_box_01">수정</a> <a
-									href="/board/board.html?code=curiouswiz_board3&amp;page=2&amp;board_cate=&amp;num1=942911&amp;num2=00000&amp;type=q&amp;type2=d"
+									href="BoardDel.do?brdno=${readBoard.brdNo }"
 									class="btn_light_border btn_box_01">삭제</a> <a
 									href="/board/board.html?code=curiouswiz_board3&amp;page=2&amp;board_cate=&amp;num1=942911&amp;num2=00000&amp;type=r&amp;lock_re=N"
 									class="btn_light btn_box_01">답변</a>
@@ -447,9 +413,9 @@ a {
 							<dt></dt>
 							<dd>
 								<a class="write btn_dark btn_box_01"
-									href="/board/board.html?code=curiouswiz_board3&amp;page=2&amp;board_cate=&amp;type=i">글쓰기</a>
+									href="${pageContext.request.contextPath}/shop/ReviewForm.do">글쓰기</a>
 								<a
-									href="/board/board.html?code=curiouswiz_board3&amp;page=2&amp;board_cate=&amp;s_id=&amp;stext=&amp;ssubject=&amp;shname=&amp;scontent=&amp;sbrand=&amp;sgid=&amp;datekey=&amp;branduid="
+									href="${pageContext.request.contextPath}/shop/ReviewBoard.do"
 									class="btn_light btn_box_01"> 목록</a>
 							</dd>
 						</dl>
@@ -467,6 +433,6 @@ a {
 				</div>
 			</div>
 		</section>
-		<c:import url="modules/footer.jsp" />
+		<c:import url="../modules/footer.jsp" />
 </body>
 </html>

@@ -75,7 +75,7 @@ td {
 									<th><div class="tb-center">번호</div></th>
 									<th><div class="tb-center">&nbsp;</div></th>
 									<th class="hidden"><div>
-											<input type="hidden" name="brdcode" value="NoticeBoard">ReviewBoard
+											<input type="hidden" name="brdcode" value="NoticeBoard">
 										</div></th>
 									<th><div class="tb-center">제목</div></th>
 									<th><div class="tb-center">작성자</div></th>
@@ -88,9 +88,9 @@ td {
 								<c:if test="${list.size()>0 }">
 									<c:forEach var="item" items="${list }">
 										<tr>
-											<td><a href="NoticeBoardRead.do?brdNo=${item.brdNo }">${item.brdNo }</a></td>
+											<td>${item.brdNo }</td>
 											<td></td>
-											<td>${item.brdtitle }</td>
+											<td><a href="NoticeBoardRead.do?brdNo=${item.brdNo }">${item.brdtitle }</a></td>
 											<td>${item.brdwriter }</td>
 											<td>${item.brdregdate }</td>
 											<td>${item.brdch }</td>
@@ -126,7 +126,7 @@ td {
 					<dl class="bbs-link bbs-link-btm">
 						<dd>
 							<a class="write  btn_dark btn_box_01"
-								href="${pageContext.request.contextPath}/shop/ReviewForm.do">글쓰기</a>
+								href="${pageContext.request.contextPath}/shop/BoardNoticeForm.do">글쓰기</a>
 						</dd>
 					</dl>
 					<!-- .page-body -->

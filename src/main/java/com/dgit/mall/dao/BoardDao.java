@@ -22,5 +22,7 @@ public interface BoardDao {
 
 	public int updateBoardReview(Board board);
 
+	public int deleteReview(int number);
+
 
 }

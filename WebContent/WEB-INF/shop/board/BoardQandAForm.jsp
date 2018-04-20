@@ -61,24 +61,7 @@ pageEncoding="UTF-8"%>
 				<form action="BoardQandA.do" method="post"
 					enctype="multipart/form-data" style="position: relative;"
 					autocomplete="off">
-					<div id="passimg" name="passimg"
-						style="position: absolute; visibility: hidden; z-index: 999;"></div>
-					<input type="hidden" name="attach1" value=""> <input
-						type="hidden" name="type" value="i"> <input type="hidden"
-						name="data" value="yes"> <input type="hidden" name="code"
-						value="curiouswiz_board3"> <input type="hidden"
-						name="num1" value=""> <input type="hidden" name="num2"
-						value=""> <input type="hidden" name="page" value="1">
-					<input type="hidden" name="ok" value="N"> <input
-						type="hidden" name="board_cate" value=""> <input
-						type="hidden" name="b_score[1]" value=""> <input
-						type="hidden" name="b_score[2]" value=""> <input
-						type="hidden" name="b_score[3]" value=""> <input
-						type="hidden" name="b_score[4]" value=""> <input
-						type="hidden" name="b_score[5]" value=""> <input
-						type="hidden" name="branduid" value=""> <input
-						type="hidden" name="BRO_CHK_KEY"
-						value="95becf641cdef54229ba48b8c6fc8138c9f632df2d199eb86bcf2b56772dd75f">
+				
 					<div class="bbs-table-write">
 						<fieldset>
 							<legend>일반게시판 쓰기</legend>
@@ -94,14 +77,13 @@ pageEncoding="UTF-8"%>
 									<tr>
 										<th class=""><div class="title">작성자</div></th>
 										<td><div>
-												<input id="bw_input_writer" type="text" name="hname"
-													class="MS_input_txt input_style" readonly="readonly"
-													value="qowlsgh1">
+												<input id="bw_input_writer" type="text" name="brdwriter"
+													class="MS_input_txt input_style">
 											</div></td>
 										<th><div class="title">비밀번호</div></th>
 										<td>
 											<div>
-												<input id="bw_input_passwd" type="password" name="passwd"
+												<input id="bw_input_passwd" type="password" name="brdpassword"
 													class="MS_input_txt input_style">
 											</div>
 										</td>
@@ -112,7 +94,7 @@ pageEncoding="UTF-8"%>
 										<td colspan="3">
 											<div class="title">
 												<select name="subhead" class="MS_select"><option
-														value="선택">선택</option>
+														value="select">선택</option>
 													<option value="상품">상품</option>
 													<option value="배송">배송</option>
 													<option value="교환/반품">교환/반품</option>
@@ -121,7 +103,7 @@ pageEncoding="UTF-8"%>
 													<option value="기타">기타</option>
 												</select><br> <input id="bw_input_subject"
 													class="MS_input_txt input_style2" type="text"
-													name="subject" value="">
+													name="select" value="">
 											</div>
 										</td>
 									</tr>
@@ -129,7 +111,7 @@ pageEncoding="UTF-8"%>
 										<th><div class="title">내용</div></th>
 										<td colspan="3">
 											<div>
-												<textarea rows="120" cols="500"></textarea>
+												<textarea rows="120" cols="500" name="brdtitle"></textarea>
 											</div>
 										</td>
 									</tr>
@@ -137,7 +119,7 @@ pageEncoding="UTF-8"%>
 										<th><div class="title">파일</div></th>
 										<td colspan="3">
 											<div>
-												<input id="bw_input_file" type="file" name="file_name1"
+												<input id="bw_input_file" type="file" name="brduseattachment"
 													value="첨부">
 
 											</div>

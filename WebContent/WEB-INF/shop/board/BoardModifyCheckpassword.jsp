@@ -104,7 +104,7 @@ input, select, textarea {
 		<div id="container">
 
 			<div class="titleArea">
-				<h1>REVIEW</h1>
+				<h1>Modify</h1>
 			</div>
 			<div>
 				<!--#top_box-->
@@ -124,6 +124,10 @@ input, select, textarea {
 					<div class="bbs-table-pwd">
 						<form action="BoardModifyCheckPassword.do" method="post" autocomplete="off">
 							<input  type="hidden" name="brdno" value="${number }">
+								<input  type="hidden" name="brdwriter" value="${brdwriter }">
+									<input  type="hidden" name="brdtitle" value="${brdtitle }">
+										<input  type="hidden" name="brdcode" value="${brdcode}">
+											<input  type="hidden" name="brdcontent" value="${brdcontent}">
 							<fieldset>
 								<legend>비밀번호 찾기</legend>
 								<table summary="비밀번호찾기테이블">
@@ -133,10 +137,6 @@ input, select, textarea {
 										<col>
 									</colgroup>
 									<tbody>
-										<tr class="boardhidden">
-											<th><div>게시판번호</div></th>
-											<td><div></div></td>
-										</tr>
 										<tr>
 											<th><div>비밀번호</div></th>
 											<td><div>

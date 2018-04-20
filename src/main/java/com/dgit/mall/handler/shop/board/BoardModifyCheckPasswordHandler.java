@@ -18,15 +18,19 @@ public class BoardModifyCheckPasswordHandler extends ShopCommandHandler {
 		if (request.getMethod().equalsIgnoreCase("get")) {
 			String num = request.getParameter("brdno");
 			int number = Integer.parseInt(num);
-
+			String brdwriter = request.getParameter("brdwriter");
+			String brdtitle = request.getParameter("brdtitle");
+			String brdcontent = request.getParameter("brdcontent");
 			
 			
 			request.setAttribute("number", number);
+			request.setAttribute("brdwriter", brdwriter);
 			return VIEW_FRONT_PATH + "board/BoardModifyCheckpassword.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String num = request.getParameter("brdno");
 			int number = Integer.parseInt(num);
 			String pw = request.getParameter("brdpassword");
+			String brdcode = request.getParameter("brdcode");
 			SqlSession sqlSession = null;
 
 			request.setAttribute("number", number);
@@ -35,15 +39,29 @@ public class BoardModifyCheckPasswordHandler extends ShopCommandHandler {
 				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
 
 				Board readBoard = BoardREAD.selectCheckPass(number);
-
+				request.setAttribute("brdcode", brdcode);
 				request.setAttribute("readBoard", readBoard);
 				System.out.println(readBoard);
 				if (readBoard.getBrdpassword().equals(pw)) {
 					return VIEW_FRONT_PATH + "board/BoardModify.jsp";
 
 				} else {
-					JOptionPane.showConfirmDialog(null, "다시 입력하세요");
-					return VIEW_FRONT_PATH + "board/BoardModifyCheckpassword.jsp";
+					int dialogButton2 = JOptionPane.YES_NO_OPTION;
+					int dialogResult2  =JOptionPane.showConfirmDialog(null, "비밀번호가 틀립니다 다시 하시겠습니까 ?.", "비번확인창", dialogButton2);
+					if(dialogResult2 == 0){
+						return VIEW_FRONT_PATH + "board/BoardModifyCheckpassword.jsp";
+					}else{
+						if(readBoard.getBrdcode().equals("ReviewBoard")){
+							return "ReviewBoard.do";
+						}else if(readBoard.getBrdcode().equals("NoticeBoard")){
+							return "NoticeBoard.do";
+						}else{
+							return "QandABoardRead.do";
+						}
+							
+						
+					}
+					
 				}
 
 			} catch (Exception e) {

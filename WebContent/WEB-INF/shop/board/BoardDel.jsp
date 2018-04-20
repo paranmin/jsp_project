@@ -16,8 +16,8 @@
 	media="all" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 <title>Insert title here</title>
-
 <style type="text/css">
 .bbs-table-pwd {
 	margin-top: 25px;
@@ -85,7 +85,39 @@ input, select, textarea {
 	border: 1px solid #999;
 	font-size: 12px;
 }
+
+#submit {
+	padding: 8px;
+	border: 0;
+}
+
+.boardhidden {
+	display: none;
+}
 </style>
+<script type="text/javascript">
+	$(function(){
+		
+		var con_test = confirm("삭제하실건가요?");
+		if(con_test == true){
+			alert("삭제하셨습니다.");
+		}
+		else if(con_test == false){
+			 return;
+		}
+		
+		$("#submit").on("click",function(){
+			if (!confirm("삭제하시겠습니까?")) {
+				return false;
+			} else {
+				document.list.action = "D"
+			}
+		})
+		)
+		
+
+	}
+</script>
 </head>
 <body>
 	<c:import url="../modules/header.jsp" />
@@ -95,7 +127,7 @@ input, select, textarea {
 		<div id="container">
 
 			<div class="titleArea">
-				<h1>REVIEW</h1>
+				<h1>REVIEWDEL(삭제)</h1>
 			</div>
 			<div>
 				<!--#top_box-->
@@ -113,14 +145,8 @@ input, select, textarea {
 				<div class="page-body">
 
 					<div class="bbs-table-pwd">
-						<form action="Del.do" method="post" autocomplete="off">
-							<input type="hidden" name="BRO_CHK_KEY"
-								value="8bbc6ef77da9e371044f00cc1a8a06310a761d7ab63b5b0a42db20dc7a2ca3c9">
-							<input type="hidden" name="code" value="curiouswiz_board3">
-							<input type="hidden" name="num1" value="941772"> <input
-								type="hidden" name="num2" value="00000"> <input
-								type="hidden" name="page" value="1"> <input
-								type="hidden" name="type" value="u">
+						<form action="BoardDel.do" method="post" autocomplete="off">
+							<input type="hidden" name="brdno" value="${number }">
 							<fieldset>
 								<legend>비밀번호 찾기</legend>
 								<table summary="비밀번호찾기테이블">
@@ -134,7 +160,7 @@ input, select, textarea {
 											<th><div>비밀번호</div></th>
 											<td><div>
 													<input id="bp_input_passwd" type="password"
-														class="MS_input_txt" name="passwd">
+														class="MS_input_txt" name="brdpassword">
 												</div></td>
 										</tr>
 									</tbody>
@@ -143,11 +169,10 @@ input, select, textarea {
 							<dl class="bbs-link pwd-link">
 								<dt></dt>
 								<dd>
-									<a href="javascript:document.form1.submit();"
-										class="none btn_light btn_box_01">확인</a> <a
-										href="javascript:history.go(-1);"
+									<input type="submit" value="확인" id="submit"> <a
+										href="ReviewBoardRead.do?brdno=${number }"
 										class="btn_light_border btn_box_01">취소</a> <a
-										href="/board/board.html?code=curiouswiz_board3&amp;page=1&amp;board_cate="
+										href="${pageContext.request.contextPath}/shop/ReviewBoard.do"
 										class="btn_light_border btn_box_01">목록</a>
 								</dd>
 							</dl>
