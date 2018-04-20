@@ -19,27 +19,27 @@ public class ProductListHandler extends ShopCommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String cate = req.getParameter("cate");
 		SqlSession sqlsession = null;
-		try{
+		try {
 			sqlsession = MySqlSessionFactory.openSession();
 			ProductDao dao = sqlsession.getMapper(ProductDao.class);
 			List<Product> prolist = new ArrayList<>();
 			List<Product> bestlist = new ArrayList<>();
-						
-			if(cate==null){
+
+			if (cate == null) {
 				prolist = dao.selectAllProduct();
 				bestlist = dao.selectBestAllProduct();
 				req.setAttribute("list", prolist);
 				req.setAttribute("best", bestlist);
-			}else{
+			} else {
 				prolist = dao.selectCateProduct(cate);
 				bestlist = dao.selectBestCateProduct(cate);
 				req.setAttribute("list", prolist);
 				req.setAttribute("best", bestlist);
 			}
-			
+
 			req.setAttribute("cate", cate);
 			return VIEW_FRONT_PATH + "product/productList.jsp";
-		}finally{
+		} finally {
 			sqlsession.close();
 		}
 	}

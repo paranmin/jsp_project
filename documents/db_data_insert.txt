@@ -47,3 +47,6 @@ insert into mall.`member`(m_id, m_name, m_pass, m_email, m_phone, m_tel, m_gende
 ('test39', '테스터39', password('test39'), 'test39@naver.com', '010-1122-3344', null, null, null, 'Y', 'Y', 'N', 'N', 'N', 'N', now()),
 ('test40', '테스터40', password('test40'), 'test40@naver.com', '010-1122-3344', null, null, null, 'Y', 'Y', 'N', 'N', 'N', 'N', now()),
 ('test41', '테스터41', password('test41'), 'test41@naver.com', '010-1122-3344', null, null, null, 'Y', 'Y', 'N', 'N', 'N', 'N', now());
+
+
+
