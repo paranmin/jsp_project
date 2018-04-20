@@ -79,9 +79,9 @@ table {
 									<th><div class="tb-center">조회</div></th>
 								</tr>
 								<c:if test="${board.size()>0 }">
-									<c:forEach var="item" items="${board }">
+									<c:forEach var="item" items="${list }">
 										<tr>
-											<td><a href="/shop/QandABoardRead.do?projectno=${item.brdNo }">${item.brdNo }</a></td>
+											<td><a href="QandABoardRead.do?brdno=${item.brdNo }">${item.brdNo }</a></td>
 											<td>${item.prdno }
 											<td>${item.brdtitle }</td>
 											<td>${item.brdwriter }</td>

@@ -34,6 +34,9 @@ table {
 .bbs-table-list tbody td {
 	border-top: 1px solid rgb(232, 232, 232);
 }
+td{
+text-align: center;
+}
 </style>
 </head>
 <body>
@@ -70,6 +73,9 @@ table {
 								<tr>
 									<th><div class="tb-center">번호</div></th>
 									<th><div class="tb-center">&nbsp;</div></th>
+									<th class="hidden"><div>
+											<input type="hidden" name="brdcode" value="ReviewBoard">ReviewBoard
+										</div></th>
 									<!-- .상품정보가 있을 경우에만 나타남 -->
 									<th><div class="tb-center">상품</div></th>
 									<th><div class="tb-center">제목</div></th>
@@ -83,9 +89,10 @@ table {
 								<c:if test="${list.size()>0 }">
 									<c:forEach var="item" items="${list }">
 										<tr>
-											<td><a href="ReviewBoardRead.do?abNo=${item.brdNo }">${item.brdNo }</a></td>
-											<td>${item.brdtitle }</td>
-											<td display="hidden">${item.brdtitle }</td>BoardReview
+											<td>${item.brdNo }</td>
+											<td></td>
+											<td>${item.prdno }</td>
+											<td><a href="ReviewBoardRead.do?brdno=${item.brdNo }">${item.brdtitle }</a></td>
 											<td>${item.brdwriter }</td>
 											<td>${item.brdregdate }</td>
 											<td>${item.brdch }</td>
@@ -125,7 +132,7 @@ table {
 					<dl class="bbs-link bbs-link-btm">
 						<dd>
 							<a class="write  btn_dark btn_box_01"
-								href="${pageContext.request.contextPath}/shop/ReviewFormBoard.do">글쓰기</a>
+								href="${pageContext.request.contextPath}/shop/ReviewForm.do">글쓰기</a>
 						</dd>
 					</dl>
 					<!-- .page-body -->
