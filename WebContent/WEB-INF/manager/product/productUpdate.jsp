@@ -250,6 +250,12 @@ $(function(){
  		alert("상품 정보가 수정되었습니다.");
  		return false;
  	});
+ 	
+ 	$("input[type='reset']").click(function(){
+ 		location.href="list.do";
+ 		return false;
+ 	});
+ 	
  	 $("button.imgdeletemain").click(function(){
  		var $src = $(this).prev().attr("src");
  		var src = $src.split("/");
@@ -354,7 +360,7 @@ $(function(){
 				<label>상품 메인 이미지</label>
 				<div class="img_main_plus">
 					<div class="img">
-						<img src="${pageContext.request.contextPath}/images/${pro.mainImg }">   
+						<img src="${pageContext.request.contextPath}/upload/${pro.mainImg }">   
 						<button class="imgdeletemain">이미지 삭제</button>
 					</div>
 					<br>
@@ -366,7 +372,7 @@ $(function(){
 				<div class="img_plus">
 					<c:forEach var="pimg" items="${proimg }">
 						<div class="img">
-							<img src="${pageContext.request.contextPath}/images/${pimg.img }">
+							<img src="${pageContext.request.contextPath}/upload/${pimg.img }">
 							<button class="imgdelete">이미지 삭제</button>
 						</div>
 					</c:forEach>
