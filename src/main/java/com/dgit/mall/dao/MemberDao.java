@@ -28,5 +28,5 @@ public interface MemberDao {
 
 	int modifyMember(Member member);
 
-	int leaveMember(Member member);
+	int leaveMember(int no);
 }

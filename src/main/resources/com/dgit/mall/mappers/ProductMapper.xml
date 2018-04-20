@@ -9,10 +9,30 @@
 		<result property="cost" column="prd_cost" />
 		<result property="sellingPrice" column="prd_selling_price" />
 		<result property="discountPer" column="prd_discount_per" />
-		<result property="content" column="prd_content" />
 		<result property="useOption" column="prd_use_option" />
-		<result property="stock" column="stock" />
-		<result property="mainImg" column="mainImg" />
+		<result property="stock" column="prd_stock" />
+		<result property="mainImg" column="prd_main_img" />
+		<result property="use" column="prd_use"/>
+		<result property="prdNum" column="prd_num"/>
+	</resultMap>
+	
+	<resultMap type="Proimg" id="proimgResult">
+		<id property="imgNo" column="img_no"/>
+		<result property="prdNo" column="prd_no"/>
+		<result property="img" column="img"/>
+	</resultMap>
+	
+	<resultMap type="Option" id="optionResult">
+		<id property="poNo" column="po_no"/>
+		<result property="poName" column="po_name"/>
+		<result property="prdNo" column="prd_no"/>
+	</resultMap>
+	
+	<resultMap type="OptionDetail" id="optionDetailResult">
+		<id property="podNo" column="pod_no"/>
+		<result property="poNo" column="po_no"/>
+		<result property="podValue" column="pod_value"/>
+		<result property="podCost" column="pod_cost"/>
 	</resultMap>
 	
 	<insert id="insertProduct" parameterType="product">
@@ -36,19 +56,56 @@
 		value(#{poName},#{prdNo})
 	</insert>
 	<insert id="insertOptionDetail">
-		insert into option_detail(po_no, prd_no, pod_value, pod_cost)
-		value(#{poNo},#{prdNo}, #{podValue},#{podCost})
+		insert into option_detail(po_no, pod_value, pod_cost)
+		value(#{poNo}, #{podValue},#{podCost})
 	</insert>
 	<select id="selectAllProduct" resultMap="productResult">
-		select * from product;
+		select * from product order by prd_no desc
 	</select>
 	<select id="selectCateProduct" resultMap="productResult">
-		select * from product where prd_category=#{category};
+		select * from product where prd_category=#{category} order by prd_no desc
 	</select>
 	<select id="selectNameProduct" resultMap="productResult">
-		select * from product where prd_name like %#{name}%;
+		select * from product where prd_name like CONCAT("%",#{name},"%")
 	</select>
 	<select id="selectNCProduct" resultMap="productResult">
-		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%")
+		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%") 
+		order by prd_no desc
+	</select>
+	<select id="SelectProductByno" resultMap="productResult">
+		select * from product where prd_no=#{prdNo}
+	</select>
+	<select id="SelectProimgByno" resultMap="proimgResult">
+		select * from proimg where prd_no=#{prdNo}
+	</select>
+	<select id="SelectOptionByno" resultMap="optionResult">
+		select * from pro_option where prd_no=#{prdNo}
+	</select>
+	<select id="SelectOpDeByno" resultMap="optionDetailResult">
+		select * from option_detail where po_no=#{poNo}
+	</select>
+	
+	<update id="updateProduct">
+		update product set prd_category=#{category}, prd_name=#{name}, prd_sub_desc=#{subDesc}, prd_cost=#{cost}, 
+		prd_selling_price=#{sellingPrice}, prd_discount_per=#{discountPer}, prd_use_option=#{useOption}, prd_stock=#{stock}, 
+		prd_main_img=#{mainImg}
+		where prd_no=#{prdNo}
+	</update>
+	<delete id="deleteOption">
+		delete from pro_option where prd_no=#{prdNo}
+	</delete>
+	<delete id="deleteOptionDetail">
+		delete from option_detail where po_no=#{poNo}
+	</delete>
+	<delete id="deleteProimg">
+		delete from proimg where prd_no=#{prdNo} and img=#{img}
+	</delete>
+	
+	<select id="selectBestAllProduct" resultMap="productResult">
+		select * from product order by prd_num desc;
+	</select>
+	<select id="selectBestCateProduct" resultMap="productResult">
+		select * from product where prd_category=#{category}
+		order by prd_num desc;
 	</select>
 </mapper>

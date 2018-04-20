@@ -17,16 +17,22 @@ public class QandABoardListHandler extends ShopCommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		SqlSession sqlSession = null;
+		try {
+			request.setAttribute("contentPage", "board/BoardQandA.jsp");
+			request.setAttribute("sub_menu", "list");
 
-		request.setAttribute("contentPage", "board/BoardQandA.jsp");
-		request.setAttribute("sub_menu", "list");
+			sqlSession = MySqlSessionFactory.openSession();
+			BoardDao Dao = sqlSession.getMapper(BoardDao.class);
 
-		sqlSession = MySqlSessionFactory.openSession();
-		BoardDao Dao = sqlSession.getMapper(BoardDao.class);
+			List<Board> list = Dao.selectByAllQandABoard();
+			request.setAttribute("list", list);
 
-		List<Board> list = Dao.selectByAllQandABoard();
-		request.setAttribute("list", list);
-
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
 		return VIEW_FRONT_PATH + "board/BoardQandA.jsp";
 	}
 

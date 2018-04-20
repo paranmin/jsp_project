@@ -10,16 +10,16 @@
 		<result property="brddepth" column="brd_depth" /> <!-- 글 깊이 -->
 		<result property="brduseattachment" column="brd_use_attachment" /> <!-- 첨부파일유무 -->
 		<result property="prdno" column="prd_no" /> <!-- 상품번호 -->
-		<result property="brdregdate" column="brd_regdate" /> <!-- 작성일 -->
+		<result property="brdregdate" column="regdate" /> <!-- 작성일 -->
 		<result property="brdwriter" column="brd_writer" /> <!--글 작성자 -->
+		<result property="brdpassword" column="brd_password" /> <!--글 작성자 비밀번호 -->
 		<result property="brdch" column="brd_ch" /><!--조회수 -->
 	</resultMap>
 	<select id="selectByAllReviewBoard" parameterType="Board"
 		resultMap="BoardResult">
-		select brd_no, brd_code, brd_title, brd_content, brd_parent,
-		brd_depth, brd_use_attachment, prd_no,brd_ch
+		select brd_no , prd_no, brd_code,brd_title,brd_writer,brd_ch,regdate
 		from board
-		where brd_code = #{brdcode}
+		where brd_code = "ReviewBoard"
 	</select>
 
 	<select id="selectByAllQandABoard" parameterType="Board"
@@ -28,16 +28,43 @@
 		brd_depth, brd_use_attachment, prd_no,brd_ch
 		from board
 		where brd_code =
-		#{brdcode}
+		#{QandABoard}
 	</select>
 
 	<select id="selectNoticeBoardAll" parameterType="Board"
 		resultMap="BoardResult">
-		select brd_no, brd_code, brd_title, brd_content, brd_parent,
-		brd_depth, brd_use_attachment, prd_no,brd_ch
+		select brd_no , prd_no, brd_code,brd_title,brd_writer,brd_ch,regdate
 		from board
 		where brd_code =
-		#{brdcode}
+		"NoticeBoard"
 	</select>
+
+	<select id="selectlistBoardReviewByid" parameterType="int"
+	resultMap="BoardResult">
+		select brd_no,brd_writer, brd_title, brd_content,brd_password, brd_parent,
+		brd_depth, brd_use_attachment, prd_no,brd_ch,regdate
+		from board
+		where brd_no =
+		#{number}
+	</select>
+	
+	<select id="selectCheckPass" parameterType="int"
+	resultMap="BoardResult">
+		select brd_no, brd_password
+		from board
+		where brd_no = #{number};
+	</select>
+	
+	<insert id="insertBoard" parameterType="Board">
+		insert into board
+		(brd_writer,brd_password,brd_title,brd_content,brd_code,brd_parent,brd_depth,regdate)
+		value(#{brdwriter},#{brdpassword},#{brdtitle},#{brdcontent},#{brdcode},#{brdparent},#{brddepth},#{brdregdate})
+	</insert>
+	
+	<update id="updateBoardReview" parameterType="Board">
+		date board set brd_password=#{brdpassword},brd_title=#{brdtitle},brd_content=#{brdcontent},regdate=#{brdregdate}
+	where brd_no = #{brdno};
+		
+	</update>
 
 </mapper>

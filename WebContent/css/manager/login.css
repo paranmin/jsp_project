@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+#loginWrapper {
+	width: 400px;
+	margin: 100px auto;
+	border: 1px solid #eaeaea;
+}
+
+#loginWrapper h1 {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+#loginWrapper p {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#loginWrapper input {
+	width: 200px;
+	height: 30px;
+	outline: none;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+#loginWrapper input[type='submit'] {
+	background-color: #333;
+	color: #fff;
+	border: none;
+	width: 214px;
+	height: 33px;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+#loginWrapper input[type='submit']:active {
+	background-color: #888;
+}

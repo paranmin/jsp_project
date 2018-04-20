@@ -37,6 +37,7 @@
 	</environments>
 	
 	<mappers>
+		<mapper resource="com/dgit/mall/mappers/AdminMapper.xml" />
 		<mapper resource="com/dgit/mall/mappers/MemberMapper.xml" />
 		<mapper resource="com/dgit/mall/mappers/AddressMapper.xml" />
 		<mapper resource="com/dgit/mall/mappers/ProductMapper.xml" />

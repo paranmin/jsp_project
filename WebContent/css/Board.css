@@ -17,3 +17,7 @@ tr {
 	vertical-align: inherit;
 	border-color: inherit;
 }
+
+.hidden{
+	display:none;
+}

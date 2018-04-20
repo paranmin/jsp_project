@@ -7,8 +7,9 @@ public class Board {
 	private String brdcode;
 	private String brdtitle;
 	private String brdwriter;
-	private String brdparent;
-	private String brddepth;
+	private String brdpassword;
+	private int brdparent;
+	private int brddepth;
 	private String brduseattachment;
 	private String brdcontent;
 	private int prdno;
@@ -21,13 +22,15 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Board(int brdNo, String brdcode, String brdtitle, String brdwriter, String brdparent, String brddepth,
-			String brduseattachment, String brdcontent, int prdno, Date brdregdate, String select, int brdch) {
+	public Board(int brdNo, String brdcode, String brdtitle, String brdwriter, String brdpassword, int brdparent,
+			int brddepth, String brduseattachment, String brdcontent, int prdno, Date brdregdate, String select,
+			int brdch) {
 		super();
 		this.brdNo = brdNo;
 		this.brdcode = brdcode;
 		this.brdtitle = brdtitle;
 		this.brdwriter = brdwriter;
+		this.brdpassword = brdpassword;
 		this.brdparent = brdparent;
 		this.brddepth = brddepth;
 		this.brduseattachment = brduseattachment;
@@ -70,19 +73,27 @@ public class Board {
 		this.brdwriter = brdwriter;
 	}
 
-	public String getBrdparent() {
+	public String getBrdpassword() {
+		return brdpassword;
+	}
+
+	public void setBrdpassword(String brdpassword) {
+		this.brdpassword = brdpassword;
+	}
+
+	public int getBrdparent() {
 		return brdparent;
 	}
 
-	public void setBrdparent(String brdparent) {
+	public void setBrdparent(int brdparent) {
 		this.brdparent = brdparent;
 	}
 
-	public String getBrddepth() {
+	public int getBrddepth() {
 		return brddepth;
 	}
 
-	public void setBrddepth(String brddepth) {
+	public void setBrddepth(int brddepth) {
 		this.brddepth = brddepth;
 	}
 
@@ -137,9 +148,9 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [brdNo=" + brdNo + ", brdcode=" + brdcode + ", brdtitle=" + brdtitle + ", brdwriter=" + brdwriter
-				+ ", brdparent=" + brdparent + ", brddepth=" + brddepth + ", brduseattachment=" + brduseattachment
-				+ ", brdcontent=" + brdcontent + ", prdno=" + prdno + ", brdregdate=" + brdregdate + ", select="
-				+ select + ", brdch=" + brdch + "]";
+				+ ", brdpassword=" + brdpassword + ", brdparent=" + brdparent + ", brddepth=" + brddepth
+				+ ", brduseattachment=" + brduseattachment + ", brdcontent=" + brdcontent + ", prdno=" + prdno
+				+ ", brdregdate=" + brdregdate + ", select=" + select + ", brdch=" + brdch + "]";
 	}
 
 }

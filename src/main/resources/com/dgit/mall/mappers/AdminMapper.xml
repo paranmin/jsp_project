@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mall.dao.AdminDao">
+	<resultMap type="Admin" id="adminResult">
+		<id property="no" column="am_no" />
+		<result property="id" column="am_id" />
+		<result property="name" column="am_name" />
+		<result property="password" column="am_pass" />
+		<result property="regdate" column="am_regdate" />
+	</resultMap>
+
+	<select id="selectByLogin" parameterType="Admin" resultMap="adminResult">
+		select am_no, am_id, am_name, am_pass, am_regdate from admin where am_id = #{id} and am_pass = password(#{password})
+	</select>
+</mapper>

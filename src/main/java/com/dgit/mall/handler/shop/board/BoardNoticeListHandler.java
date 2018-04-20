@@ -17,16 +17,20 @@ public class BoardNoticeListHandler extends ShopCommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		SqlSession sqlSession = null;
-		
-		request.setAttribute("contentPage", "board/BoardNotice.jsp");
-		request.setAttribute("sub_menu", "list");
+		try {
+			request.setAttribute("contentPage", "board/BoardNotice.jsp");
 
-		sqlSession = MySqlSessionFactory.openSession();
-		BoardDao Dao = sqlSession.getMapper(BoardDao.class);
+			sqlSession = MySqlSessionFactory.openSession();
+			BoardDao Dao = sqlSession.getMapper(BoardDao.class);
 
-		List<Board> list = Dao.selectNoticeBoardAll();
-		request.setAttribute("list", list);
-
+			List<Board> list = Dao.selectNoticeBoardAll();
+			request.setAttribute("list", list);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
 
 		return VIEW_FRONT_PATH + "board/BoardNotice.jsp";
 	}
