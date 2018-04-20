@@ -16,9 +16,17 @@ public class Product {
 	private String use;
 	private int prdNum;
 
-	public Product() {
-	}
 	
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Product(int prdNo) {
+		super();
+		this.prdNo = prdNo;
+	}
+
 	public int getPrdNum() {
 		return prdNum;
 	}

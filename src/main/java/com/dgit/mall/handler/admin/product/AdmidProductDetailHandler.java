@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.dgit.mall.dao.CartDao;
 import com.dgit.mall.dao.ProductDao;
+import com.dgit.mall.dto.Cart;
+import com.dgit.mall.dto.Member;
 import com.dgit.mall.dto.Option;
 import com.dgit.mall.dto.OptionDetail;
 import com.dgit.mall.dto.Product;
@@ -22,7 +26,7 @@ public class AdmidProductDetailHandler extends AdminCommandHandler {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		SqlSession sqlsession = null;
 		int no = Integer.parseInt(request.getParameter("no"));
-		try{
+		try {
 			sqlsession = MySqlSessionFactory.openSession();
 			ProductDao dao = sqlsession.getMapper(ProductDao.class);
 			Product pro = dao.SelectProductByno(no);
@@ -30,8 +34,8 @@ public class AdmidProductDetailHandler extends AdminCommandHandler {
 			List<Option> option = dao.SelectOptionByno(no);
 			ArrayList<Integer> rownum = new ArrayList<>();
 			ArrayList<OptionDetail> result = new ArrayList<>();
-			
-			for(int i=0; i<option.size(); i++){
+
+			for (int i = 0; i < option.size(); i++) {
 				int num = option.get(i).getPoNo();
 				List<OptionDetail> detail = dao.SelectOpDeByno(num);
 				result.addAll(detail);
@@ -42,14 +46,15 @@ public class AdmidProductDetailHandler extends AdminCommandHandler {
 			request.setAttribute("opt", option);
 			request.setAttribute("proimg", proimg);
 			request.setAttribute("pro", pro);
-			
+
 			request.setAttribute("contentPage", "product/productDetail.jsp");
 			request.setAttribute("sub_menu", "list");
 			request.setAttribute("menu", "product");
 			request.setAttribute("css", "product.css");
 			return TEMPLATE_PAGE;
-		}finally{
+		} finally {
 			sqlsession.close();
 		}
+
 	}
 }

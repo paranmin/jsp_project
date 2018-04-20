@@ -446,7 +446,7 @@ $(function(){
 		<c:import url="../modules/header.jsp" />
 		<c:import url="../modules/leftSide.jsp" />
 		<c:import url="../modules/rightSide.jsp" />
-		<form action="${pageContext.request.contextPath}/shop/cart/cart.do" method="post">
+		<form action="detailProductShow.do" method="post">
 		<input type="hidden" name="chkAll" value="${pro.prdNo }">   
 		<section id="detail_product">
 			<div class="detail_left">    
@@ -509,13 +509,34 @@ $(function(){
 					</c:forEach>
 				</table>
 				<hr>
-				<div id="selectedItem">
-					<ul></ul>
+				<c:if test="${pro.useOption == 0 }">
+					<div id="selectedItem">
+						<ul>
+							<li>
+								${pro.name }
+								<button class="plusNum">+</button>
+								<input type="text" class="productNum" name="cartnum" value="1">
+								<button class="minusNum">-</button>
+								<span>${pro.sellingPrice }원</span>
+								<input type="hidden" name="optionName">
+								<input type="hidden" name="opPrice" value="${pro.sellingPrice }">
+							</li>
+						</ul>
+					</div>
+					<hr>
+					<div id="resultPrice" style="display:block">
+					<p>총 상품 금액 <span>${pro.sellingPrice }</span>원</p>
 				</div>
+				</c:if>
+				<c:if test="${pro.useOption == 1 }">
+					<div id="selectedItem">
+						<ul></ul>
+					</div>
 				<hr>
 				<div id="resultPrice">
 					<p>총 상품 금액 <span></span>원</p>
 				</div>
+				</c:if>	
 				<input type="submit" value="Add Cart"><br>
 			</div>
 			<div class="datail_board">
