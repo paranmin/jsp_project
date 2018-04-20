@@ -74,7 +74,8 @@ $(function() {
 	
 });
 function viewOrder(orderNo) {
-	window.open('<%= request.getContextPath() + "/shop/mypage/vieworder.do?no=" %>'+orderNo, '주문상세내역', 'width=1200,height=1000,menubar=no,status=no,toolbar=no,scrollbars=yes,resizable=no,top=100,left=100');
+	var url = "<%= request.getContextPath() + "/shop/mypage/vieworder.do?no=" %>";
+	window.open(url+orderNo, 'viewOrderPop', 'width=1200,height=1000,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes,top=100,left=100');
 }
 </script>
 </body>

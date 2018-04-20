@@ -256,3 +256,52 @@
 	background-color: #e8e8e8;
 	color: #333;
 }
+
+/* mypage order page */ 
+#orderContainer {
+	min-width: 1200px;
+	min-height: 1000px;
+	margin:10px;
+	font-size: 14px;
+}
+#orderContainer p.order_title {
+	border: 5px solid #eaeaea;
+	padding: 5px 20px;
+}
+#orderContainer p.order_title span.name {
+	color: #0178d3;
+	font-weight: bold;
+}
+
+/* 테이블 가변 TD 고정 시키는 방법 */
+#orderContainer table {
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+	word-break: break-all;
+}
+
+#orderContainer table th, #orderContainer table td {
+	border: 1px solid #CDCDCD;
+	padding:5px;
+}
+
+#orderContainer table th {
+	background-color: #EDEDED;
+}
+
+#orderContainer table td.center {
+	text-align: center;
+}
+
+#orderContainer div.infoArea {
+	margin-top: 20px;
+}
+
+#orderContainer div.infoArea h3 {
+	color: #3D77BD;
+	margin-bottom: 10px;
+}
+#orderContainer div.infoArea table {
+	
+}
