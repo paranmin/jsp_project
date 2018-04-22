@@ -32,9 +32,8 @@ public class ShopJoinHandler extends ShopCommandHandler {
 
 			if (serviceAgree == null || !serviceAgree.equalsIgnoreCase("y") || privacyAgree == null
 					|| !privacyAgree.equalsIgnoreCase("y")) {
-				request.setAttribute("error_msg", "이용약관 및 개인정보 수집에 동의하지 않았습니다.");
-				setTermsForJoinPage(request, serviceAgree, privacyAgree, ademail, adsms, adpush);
-				return VIEW_FRONT_PATH + "member/join.jsp";
+				return returnJoinPageWithTermsAndMsg(request, serviceAgree, privacyAgree, ademail, adsms, adpush,
+						"이용약관 및 개인정보 수집에 동의하지 않았습니다.");
 			}
 
 			String id = request.getParameter("id");
@@ -46,21 +45,23 @@ public class ShopJoinHandler extends ShopCommandHandler {
 			String chkfourteen = request.getParameter("chkfourteen");
 
 			if (chkfourteen == null || chkfourteen.equals("")) {
-				request.setAttribute("error_msg", "14세 이상 회원 가입이 가능합니다.");
-				setTermsForJoinPage(request, serviceAgree, privacyAgree, ademail, adsms, adpush);
-				return VIEW_FRONT_PATH + "member/join.jsp";
+				return returnJoinPageWithTermsAndMsg(request, serviceAgree, privacyAgree, ademail, adsms, adpush,
+						"14세 이상 회원 가입이 가능합니다.");
 			}
 
 			if (password.equals("")) {
-				request.setAttribute("error_msg", "비밀번호를 입력해주십시오.");
-				setTermsForJoinPage(request, serviceAgree, privacyAgree, ademail, adsms, adpush);
-				return VIEW_FRONT_PATH + "member/join.jsp";
+				return returnJoinPageWithTermsAndMsg(request, serviceAgree, privacyAgree, ademail, adsms, adpush,
+						"비밀번호를 입력해주십시오.");
 			}
 
 			if (!password.equals(chkpassword)) {
-				request.setAttribute("error_msg", "비밀번호가 틀립니다.");
-				setTermsForJoinPage(request, serviceAgree, privacyAgree, ademail, adsms, adpush);
-				return VIEW_FRONT_PATH + "member/join.jsp";
+				return returnJoinPageWithTermsAndMsg(request, serviceAgree, privacyAgree, ademail, adsms, adpush,
+						"비밀번호가 틀립니다.");
+			}
+
+			if (MemberService.getInstance().checkDuplId(id) > 0) {
+				return returnJoinPageWithTermsAndMsg(request, serviceAgree, privacyAgree, ademail, adsms, adpush,
+						"사용중인 아이디입니다.");
 			}
 
 			Member joinMember = new Member();
@@ -89,9 +90,8 @@ public class ShopJoinHandler extends ShopCommandHandler {
 
 			int result = MemberService.getInstance().registerMember(joinMember);
 			if (result == 0) {
-				request.setAttribute("error_msg", "회원 가입을 하지 못했습니다.");
-				setTermsForJoinPage(request, serviceAgree, privacyAgree, ademail, adsms, adpush);
-				return VIEW_FRONT_PATH + "member/join.jsp";
+				return returnJoinPageWithTermsAndMsg(request, serviceAgree, privacyAgree, ademail, adsms, adpush,
+						"회원 가입을 하지 못했습니다.");
 			}
 			HttpSession session = request.getSession(false);
 			Member loginMember = MemberService.getInstance().selectByLogin(joinMember);
@@ -101,13 +101,15 @@ public class ShopJoinHandler extends ShopCommandHandler {
 		return null;
 	}
 
-	private void setTermsForJoinPage(HttpServletRequest request, String serviceAgree, String privacyAgree,
-			String ademail, String adsms, String adpush) {
+	private String returnJoinPageWithTermsAndMsg(HttpServletRequest request, String serviceAgree, String privacyAgree,
+			String ademail, String adsms, String adpush, String msg) {
 		request.setAttribute("serviceAgree", serviceAgree);
 		request.setAttribute("privacyAgree", privacyAgree);
 		request.setAttribute("ademail", ademail);
 		request.setAttribute("adsms", adsms);
 		request.setAttribute("adpush", adpush);
+		request.setAttribute("error_msg", msg);
+		return VIEW_FRONT_PATH + "member/join.jsp";
 	}
 
 }

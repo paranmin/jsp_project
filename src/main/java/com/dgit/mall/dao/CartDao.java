@@ -8,9 +8,14 @@ import com.dgit.mall.dto.Cart;
 
 public interface CartDao {
 	public List<Cart> selectAllCart(int mno) throws SQLException;
-	public void insertCart(Cart cart) throws SQLException;
-	public int deleteByClickBtn(Map<String, Object> map) throws SQLException;
-	public int deleByAll(int mno) throws SQLException;
-	public List<Cart> selectByselectedCart(Map<String, Object> map) throws SQLException;
 
+	public int countSelectAllCartByMember(int mno);
+
+	public void insertCart(Cart cart) throws SQLException;
+
+	public int deleteByClickBtn(Map<String, Object> map) throws SQLException;
+
+	public int deleByAll(int mno) throws SQLException;
+
+	public List<Cart> selectByselectedCart(Map<String, Object> map) throws SQLException;
 }

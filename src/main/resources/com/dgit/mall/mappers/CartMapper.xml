@@ -2,42 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dgit.mall.dao.CartDao">
 	<resultMap type="Cart" id="cartResult">
-		<result property="ctNo" column="ct_no"/>
-		<result property="ctPrdQuantity" column="ct_prd_quantity"/>
-		<result property="ctPrdOpname" column="ct_prd_op_name"/>
-		<result property="mNo.no" column="m_no"/>
-		<result property="prd.prdNo" column="prd_no"/>
-		<result property="prd.name" column="prd_name"/>
-		<result property="prd.cost" column="prd_cost"/><!-- 할인전 가격 -->
-		<result property="prd.sellingPrice" column="prd_selling_price"/><!-- 할인후 가격 -->
-		<result property="prd.useOption" column="prd_use_option"/><!-- 옵션유무  -->
-		<result property="prd.mainImg" column="prd_main_img"/><!-- 상품메인이미지 -->
-		<result property="prd.stock" column="prd_stock"/>
+		<result property="no" column="ct_no"/>
+		<result property="prdQuantity" column="ct_prd_quantity"/>
+		<result property="prdOpName" column="ct_prd_op_name"/>
+		<result property="prdOpPrice" column="ct_prd_op_price"/>
+		<result property="member.no" column="m_no"/>
+		<result property="product.prdNo" column="prd_no"/>
+		<result property="product.name" column="prd_name"/>
+		<result property="product.cost" column="prd_cost"/><!-- 할인전 가격 -->
+		<result property="product.sellingPrice" column="prd_selling_price"/><!-- 할인후 가격 -->
+		<result property="product.useOption" column="prd_use_option"/><!-- 옵션유무  -->
+		<result property="product.mainImg" column="prd_main_img"/><!-- 상품메인이미지 -->
+		<result property="product.stock" column="prd_stock"/>
 	</resultMap>
-	
-	<select id="selectAllCart" resultMap="cartResult">
-		select c.ct_no,c.ct_prd_quantity,c.ct_prd_op_name,c.m_no,c.prd_no,p.prd_selling_price,p.prd_name,p.prd_main_img,p.prd_stock from cart c join product p on c.prd_no = p.prd_no where m_no=#{mNo}
+
+	<select id="selectAllCart" parameterType="int" resultMap="cartResult">
+		select c.ct_no,c.ct_prd_quantity,c.ct_prd_op_name,c.m_no,c.prd_no,p.prd_selling_price,p.prd_name,p.prd_main_img,p.prd_stock from cart c join product p on c.prd_no = p.prd_no where m_no=#{mno}
 	</select>
+
+	<select id="countSelectAllCartByMember" parameterType="int" resultType="int">
+		select count(ct_no) as cnt from cart where m_no=#{mno}
+	</select>
+
 	<delete id="deleteByClickBtn" parameterType="Map">
 		delete from cart where ct_no = #{ctNo} and m_no = #{no}
 	</delete>
-	
 
-	<insert id="insertCart">
-		insert into cart(ct_prd_quantity, ct_prd_op_name, m_no, prd_no)
-		values(#{ctPrdQuantity},#{ctPrdOpname},#{mNo.no},#{prd.prdNo})
+	<insert id="insertCart" parameterType="Cart">
+		insert into cart(ct_prd_quantity, ct_prd_op_name, ct_prd_op_price, m_no, prd_no)
+		values(#{prdQuantity}, #{prdOpName}, #{prdOpPrice}, #{member.no},#{product.prdNo})
 	</insert>
-	
 
 	<delete id="deleByAll" parameterType="Cart">
-		delete from cart where m_no=#{mNo.no}
+		delete from cart where m_no=#{member.no}
 	</delete>
+
 	<select id="selectByselectedCart" parameterType="Map" resultMap="cartResult">
 		select c.ct_no,c.ct_prd_quantity,c.ct_prd_op_name,c.m_no,c.prd_no,p.prd_selling_price,p.prd_name,p.prd_main_img,p.prd_stock from cart c join product p on c.prd_no = p.prd_no 
 		where m_no=#{mNo} and ct_no in
-		  <foreach collection="ctNo" item="item" index="idx" separator="," open="(" close=")">
-                    #{item[idx]}
-          </foreach>
+		<foreach collection="ctNo" item="item" index="idx" separator="," open="(" close=")">
+			#{item[idx]}
+		</foreach>
 	</select>
 
 	

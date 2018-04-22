@@ -32,13 +32,9 @@ public class ShopOrderHandler extends ShopCommandHandler {
 				sql = MySqlSessionFactory.openSession();
 				CartDao dao = sql.getMapper(CartDao.class);
 				HttpSession session = request.getSession(false);
+				// ctNo 가 없이 order.do에 접근할 때 체크해서 cart로 보내든지 메인으로 보내든지 해야 함.
 				String[] ctno = (String[]) session.getAttribute("ctNo");
 				Member loginMember = (Member) session.getAttribute("auth");
-				
-				if(loginMember==null){
-					response.sendRedirect(request.getContextPath()+"/shop/login.do");
-					return null;
-				}
 				Map<String, Object> map = new HashMap<>();
 				map.put("mNo", loginMember.getNo());
 				map.put("ctNo", ctno);

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 - SJ JEWELRY</title>
 <style>
 fieldset.productAdd{
 	width:60%;
@@ -227,11 +227,7 @@ $(function(){
 </script>
 </head>
 <body>
-<<<<<<< HEAD
-	<form action="add.do" enctype="multipart/form-data" method="post" id="form">      
-=======
-	<form action="add.do" enctype="multipart/form-data"  method="post" id="form">
->>>>>>> refs/remotes/origin/master
+	<form action="add.do" enctype="multipart/form-data" method="post" id="form">
 		<fieldset class="productAdd">
 			<legend>상품 등록</legend>
 			<p>

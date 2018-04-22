@@ -4,9 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dgit.mall.dao.service.CartService;
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Member;
-import com.dgit.mall.dto.type.MemberLeave;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 
 public class ShopLoginHandler extends ShopCommandHandler {
@@ -31,7 +31,9 @@ public class ShopLoginHandler extends ShopCommandHandler {
 				response.sendRedirect("login.do");
 				return null;
 			}
+			int cntCart = CartService.getInstance().countSelectAllCartByMember(loginMember.getNo());
 			session.setAttribute("auth", loginMember);
+			session.setAttribute("cntCart", cntCart);
 			response.sendRedirect(request.getContextPath() + "/shop/main.do");
 		}
 		return null;

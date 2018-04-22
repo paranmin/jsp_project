@@ -46,11 +46,15 @@
 					<li><a href="${pageContext.request.contextPath}/shop/board/board.do">BOARD</a>
 						<ul class="sub_nav">
 							<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">후기 - Review</a></li>
-							<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">질문 - Q&A</a></li>
+							<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">질문 - Q&amp;A</a></li>
 							<li><a href="${pageContext.request.contextPath}/shop/NoticeBoard.do">공지사항 - Notice</a></li>
 						</ul>
 					</li>
-					<li><a href="${pageContext.request.contextPath}/shop/cart/cart.do"><i class="fa fa-cart-plus"></i>(0)</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/cart/cart.do"><i class="fa fa-cart-plus"></i>(
+					<c:choose>
+							<c:when test="${cntCart > 0}"> ${cntCart}</c:when>
+							<c:otherwise>0</c:otherwise>
+					</c:choose>)</a></li>
 				</ul>
 			</div>
 			<div class="btn_menu btn_left_menu"><i class="fa fa-bars"></i></div>

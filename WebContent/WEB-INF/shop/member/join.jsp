@@ -29,12 +29,12 @@
 				<form action="join.do" method="post">
 					<input type="hidden" name="serviceAgree" value="${serviceAgree}" />
 					<input type="hidden" name="privacyAgree" value="${serviceAgree}" />
-					<input type="hidden" name=ademail value="${ademail}" /> <input
-						type="hidden" name="adsms" value="${adsms}" /> <input
-						type="hidden" name="adpush" value="${adpush}" />
+					<input type="hidden" name="ademail" value="${ademail}" />
+					<input type="hidden" name="adsms" value="${adsms}" />
+					<input type="hidden" name="adpush" value="${adpush}" />
 					<ul>
 						<li class="input"><label>이름</label><input type="text" name="name" data-title="이름" 
-							class="required_form" style="opacity:1" /></li>
+							class="required_form" /></li>
 						<li class="input"><label>아이디</label><input type="text" name="id" data-title="아이디" 
 							class="required_form" /></li>
 						<li class="input"><label>비밀번호</label><input type="password" name="password" data-title="비밀번호" class="required_form" /></li>

@@ -152,9 +152,9 @@
 			<tr>
 				<td><span class="required">*</span> 이메일</td>
 				<td>
-				<input type="text" name="email1" class="checkEmail" data-checkDupl="N" /> @ 
-					<select name="email2" class="checkEmail">
-						<option value="">선택</option>
+					<input type="text" name="email1" class="checkEmail" data-checkDupl="N" /> @ <input type="text" name="email2"  class="checkEmail" />
+					<select name="email_type" class="checkEmail">
+						<option value="input">직접입력</option>
 						<option value="naver.com">naver.com</option>
 						<option value="hotmail.com">hotmail.com</option>
 						<option value="hanmail.net">hanmail.net</option>
@@ -205,8 +205,19 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 $(function() {
+	$("input[name='id']").on("change", function() {
+		$(this).data("checkduplid", "N");
+	});
 	$(".checkEmail").on("change", function() {
 		$("input[name='email1']").data("checkdupl", "N");
+	});
+	$("select[name='email_type']").on("change", function() {
+		if ($(this).val() == "input") {
+			$("input[name='email2']").val("");
+			$("input[name='email2']").focus();
+		} else {
+			$("input[name='email2']").val($(this).val());
+		}
 	});
 	$("p.btn a.ok").on("click", function() {
 		var isCheck = true;

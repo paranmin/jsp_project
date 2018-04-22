@@ -91,7 +91,11 @@ public class AdminMemberRegisterHandler extends AdminCommandHandler {
 			registerMember.setId(id);
 			registerMember.setName(name);
 			registerMember.setPwd(password);
-			registerMember.setBirth(String.format("%s-%s-%s", year, month, day));
+			if (year == null || year.equals("") || month == null || month.equals("") || day == null || day.equals("")) {
+				registerMember.setBirth(null);
+			} else {
+				registerMember.setBirth(String.format("%d-%02d-%02d", Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)));
+			}
 			if (gender == null || gender.equalsIgnoreCase("female")) {
 				registerMember.setGender(Gender.FEMALE);
 			} else {

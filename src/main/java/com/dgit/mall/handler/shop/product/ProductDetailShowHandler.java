@@ -19,85 +19,87 @@ import com.dgit.mall.dto.Product;
 import com.dgit.mall.dto.Proimg;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
-import com.mysql.fabric.xmlrpc.base.Array;
 
 public class ProductDetailShowHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if(request.getMethod().equalsIgnoreCase("get")){
+		if (request.getMethod().equalsIgnoreCase("get")) {
 			int no = Integer.parseInt(request.getParameter("no"));
 			SqlSession sqlsession = null;
-			try{
+			try {
 				sqlsession = MySqlSessionFactory.openSession();
 				ProductDao dao = sqlsession.getMapper(ProductDao.class);
-				
+
 				Product pro = dao.SelectProductByno(no);
 				List<Proimg> proimg = dao.SelectProimgByno(no);
 				List<Option> option = dao.SelectOptionByno(no);
 				ArrayList<Integer> rownum = new ArrayList<>();
 				ArrayList<OptionDetail> result = new ArrayList<>();
-	
+
 				for (int i = 0; i < option.size(); i++) {
 					int num = option.get(i).getPoNo();
 					List<OptionDetail> detail = dao.SelectOpDeByno(num);
 					result.addAll(detail);
 					rownum.add(detail.size());
 				}
-				request.setAttribute("rownum", rownum); 
-				request.setAttribute("res", result);			
+				request.setAttribute("rownum", rownum);
+				request.setAttribute("res", result);
 				request.setAttribute("opt", option);
 				request.setAttribute("pro", pro);
 				request.setAttribute("img", proimg);
 				return VIEW_FRONT_PATH + "product/detailProduct.jsp";
-			}finally{
+			} finally {
 				sqlsession.close();
 			}
-		}else if(request.getMethod().equalsIgnoreCase("post")){
-			int prdNo = Integer.parseInt(request.getParameter("chkAll"));//상품번호
-			String[] optionPrice = request.getParameterValues("opPrice"); //상품 옵션적용가
-			String[] num = request.getParameterValues("cartnum");//상품 수량
-			List<Integer> count = new ArrayList<>();
-			System.out.println("num.length :"+num.length);
-			
-			for(int i=0; i<num.length; i++){
-				System.out.println("num :"+num[i]);
-				count.add(i, Integer.parseInt(num[i]));
-			}
-			
-			String[] opname = request.getParameterValues("optionName");//상품 옵션이름
+		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			HttpSession session = request.getSession(false);
 			Member loginMember = (Member) session.getAttribute("auth");
-			System.out.println("loginMember : "+loginMember);
-			
+			if (loginMember == null) {
+				response.sendRedirect(request.getContextPath() + "/shop/login.do");
+				return null;
+			}
+
+			int prdNo = Integer.parseInt(request.getParameter("chkAll"));// 상품번호
+			String[] optionPrice = request.getParameterValues("opPrice"); // 상품 옵션적용가
+			String[] num = request.getParameterValues("cartnum");// 상품 수량
+			List<Integer> count = new ArrayList<>();
+
+			for (int i = 0; i < num.length; i++) {
+				count.add(i, Integer.parseInt(num[i]));
+			}
+
+			String[] opname = request.getParameterValues("optionName");// 상품 옵션이름
 			SqlSession sqlsession = null;
-			
-			try{
+
+			try {
 				sqlsession = MySqlSessionFactory.openSession();
 				CartDao dao = sqlsession.getMapper(CartDao.class);
 				Cart cart = new Cart();
 				Product pro = new Product(prdNo);
-				cart.setPrd(pro);
-				cart.setMNo(loginMember);
-				
-				for(int i=0; i<optionPrice.length; i++){
-					cart.setCtPrdOpname(opname[i]);
-					cart.setCtPrdQuantity(count.get(i));     
+				cart.setProduct(pro);
+				cart.setMember(loginMember);
+
+				for (int i = 0; i < optionPrice.length; i++) {
+					cart.setPrdOpName(opname[i]);
+					cart.setPrdQuantity(count.get(i));
+					cart.setPrdOpPrice(Integer.parseInt(optionPrice[i]));
+					System.out.println(cart);
 					dao.insertCart(cart);
-				}    
-				
+				}
 				sqlsession.commit();
-				
+
+				/* sendRedirect 땐 request 안 먹힘
 				request.setAttribute("opName", opname);
 				request.setAttribute("opPrice", optionPrice);
 				request.setAttribute("count", count);
-				request.setAttribute("prdno", prdNo);
-				
-				response.sendRedirect(request.getContextPath()+"/shop/cart/cart.do");
-			}catch(Exception e){
+				request.setAttribute("prdno", prdNo);*/
+
+				response.sendRedirect(request.getContextPath() + "/shop/cart/cart.do");
+			} catch (Exception e) {
 				e.printStackTrace();
 				sqlsession.rollback();
-			}finally{
+			} finally {
 				sqlsession.close();
 			}
 		}

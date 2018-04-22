@@ -16,7 +16,6 @@ public class ShopCheckIdHandler extends ShopCommandHandler {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 
-		System.out.println(id);
 		if (id == null || id.equals("")) {
 			returnResultJSON(response, "아이디를 입력해주세요.", "no");
 			return null;

@@ -38,13 +38,15 @@
 				<th>이메일</th>
 				<td colspan="3">
 				<%
+				if (modifyMem.getEmail() != null && !modifyMem.getEmail().equals("")) {
 					String[] email = modifyMem.getEmail().split("@");
 					pageContext.setAttribute("emailId", email[0]);
 					pageContext.setAttribute("emailBody", email[1]);
+				}
 				%>
 				<input type="text" name="email1" value="${emailId}" class="checkEmail" data-checkdupl="Y" /> @ <input type="text" name="email2" value="${emailBody}" class="checkEmail" />
 					<select name="email_type" class="checkEmail">
-						<option value="">직접입력</option>
+						<option value="input">직접입력</option>
 						<option value="naver.com"<c:if test="${emailBody == 'naver.com'}"> selected </c:if>>naver.com</option>
 						<option value="hotmail.com"<c:if test="${emailBody == 'hotmail.com'}"> selected </c:if>>hotmail.com</option>
 						<option value="hanmail.net"<c:if test="${emailBody == 'hanmail.net'}"> selected </c:if>>hanmail.net</option>
@@ -71,10 +73,12 @@
 				<th>휴대폰번호</th>
 				<td colspan="3">
 				<%
+				if (modifyMem.getPhone() != null && !modifyMem.getPhone().equals("")) {
 					String[] phone = modifyMem.getPhone().split("-");
 					for (int i = 0; i < phone.length; i++) {
 						pageContext.setAttribute("phone"+(i+1), phone[i]);
 					}
+				}
 				%>
 					<select name="phone1" class="checkPhone">
 						<option value="">선택</option>
@@ -128,10 +132,12 @@
 				<th>전화번호</th>
 				<td>
 				<%
-					String[] tel = modifyMem.getPhone().split("-");
+				if (modifyMem.getTel() != null && !modifyMem.getTel().equals("")) {
+					String[] tel = modifyMem.getTel().split("-");
 					for (int i = 0; i < tel.length; i++) {
 						pageContext.setAttribute("tel"+(i+1), tel[i]);
 					}
+				}
 				%>
 					<select name="tel1" class="checkTel">
 						<option value="">선택</option>
@@ -194,9 +200,9 @@
 						String[] birth = new String[] {"0", "0", "0"};
 						if (modifyMem.getBirth() != null && !modifyMem.getBirth().equals("")) {
 							birth = modifyMem.getBirth().split("-");
+							pageContext.setAttribute("birthMonth", birth[1]);
+							pageContext.setAttribute("birthDay", birth[2]);
 						}
-						pageContext.setAttribute("birthMonth", birth[1]);
-						pageContext.setAttribute("birthDay", birth[2]);
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 						String sYear = sdf.format(new Date());
 						int year = Integer.parseInt(sYear);
@@ -228,15 +234,18 @@
 		</p>
 	</form>
 </div>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 $(function() {
 	$(".checkEmail").on("change", function() {
 		$("input[name='email1']").data("checkdupl", "N");
 	});
 	$("select[name='email_type']").on("change", function() {
-		$("input[name='email2']").val($(this).val());
-		if ($(this).val() == "") {
+		if ($(this).val() == "input") {
+			$("input[name='email2']").val("");
 			$("input[name='email2']").focus();
+		} else {
+			$("input[name='email2']").val($(this).val());
 		}
 	});
 	$("p.btn a.leave").on("click", function() {

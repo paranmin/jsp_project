@@ -28,15 +28,15 @@
 					</div>
 					<div class="unitAgree">
 						<ul>
-							<li><label for="serviceAgree" class="bold"><input type="checkbox" name="serviceAgree" id="serviceAgree" value="Y" /> 이용약관</label> <a href="#service_terms">내용보기</a></li>
-							<li><label for="privacyAgree" class="bold"><input type="checkbox" name="privacyAgree" id="privacyAgree" value="Y" /> 개인정보 수집 및 이용 안내</label> <a href="#privacy_terms">내용보기</a></li>
+							<li><label for="serviceAgree" class="bold"><input type="checkbox" name="serviceAgree" id="serviceAgree" class="chkTerms" value="Y" /> 이용약관</label> <a href="#service_terms">내용보기</a></li>
+							<li><label for="privacyAgree" class="bold"><input type="checkbox" name="privacyAgree" id="privacyAgree" class="chkTerms" value="Y" /> 개인정보 수집 및 이용 안내</label> <a href="#privacy_terms">내용보기</a></li>
 						</ul>
 						<div class="marketingArea">
 							<p>
-								<label for="adall" class="bold"><input type="checkbox" name="adall" id="adall" value="Y" /> 마케팅 수신동의</label>
-								(<label for="ademail" class="bold"><input type="checkbox" name="ademail" id="ademail" value="Y" /> 이메일</label>&nbsp;&nbsp;&nbsp;
-								<label for="adsms" class="bold"><input type="checkbox" name="adsms" id="adsms" value="Y" /> SMS</label>&nbsp;&nbsp;&nbsp;
-								<label for="adpush" class="bold"><input type="checkbox" name="adpush" id="adpush" value="Y" /> 앱Push알림</label>)
+								<label for="adall" class="bold"><input type="checkbox" name="adall" id="adall" class="chkTerms" value="Y" /> 마케팅 수신동의</label>
+								(<label for="ademail" class="bold"><input type="checkbox" name="ademail" id="ademail" class="chkTerms pushTerms" value="Y" /> 이메일</label>&nbsp;&nbsp;&nbsp;
+								<label for="adsms" class="bold"><input type="checkbox" name="adsms" id="adsms" class="chkTerms pushTerms" value="Y" /> SMS</label>&nbsp;&nbsp;&nbsp;
+								<label for="adpush" class="bold"><input type="checkbox" name="adpush" id="adpush" class="chkTerms pushTerms" value="Y" /> 앱Push알림</label>)
 							</p>
 							<p>쇼핑몰에서 제공하는 신상품 소식 / 할인쿠폰을 무상으로 보내드립니다.<br>
 							단, 상품 구매 정보는 수신동의 여부 관계없이 발송됩니다.<br>
@@ -80,6 +80,20 @@
 	</div>
 <script>
 $(function() {
+	$("#all_agree").on("click", function() {
+		if ($(this).is(":checked")) {
+			$(".chkTerms").prop("checked", true);
+		} else {
+			$(".chkTerms").prop("checked", false);
+		}
+	});
+	$("#adall").on("click", function() {
+		if ($(this).is(":checked")) {
+			$(".pushTerms").prop("checked", true);
+		} else {
+			$(".pushTerms").prop("checked", false);
+		}
+	});
 	$("form").on("submit", function() {
 		if (!$("#serviceAgree").is(":checked")) {
 			alert("이용약관을 읽고 동의해주셔야 합니다.");

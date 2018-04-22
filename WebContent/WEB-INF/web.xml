@@ -39,6 +39,8 @@
 	<filter-mapping>
 		<filter-name>LoginCheckFilter</filter-name>
 		<url-pattern>/shop/mypage/*</url-pattern>
+		<url-pattern>/shop/cart/cart.do</url-pattern>
+		<url-pattern>/shop/order/order.do</url-pattern>
 	</filter-mapping>
 	<filter>
 		<filter-name>AdminLoginCheckFilter</filter-name>

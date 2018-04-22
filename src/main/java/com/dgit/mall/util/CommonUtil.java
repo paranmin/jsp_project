@@ -37,6 +37,10 @@ public class CommonUtil {
 		String formatNum = "";
 		num = num.replaceAll("-", "");
 
+		if (num.length() < 8) {
+			return null;
+		}
+
 		if (num.length() == 11) {
 			if (mask) {
 				formatNum = num.replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3");
@@ -130,28 +134,18 @@ public class CommonUtil {
 		mailContent.put("subject", "[SJ JEWELRY] 임시 비밀번호 발송 메일!");
 
 		StringBuilder mail = new StringBuilder();
-		mail.append("<!DOCTYPE html>\r\n")
-			.append("<html>\r\n")
-			.append("<head>\r\n")
-			.append("<meta charset=\"UTF-8\">\r\n")
-			.append("<title>[SJ JEWELRY] 임시 비밀번호 발송 메일!</title>\r\n")
-			.append("</head>\r\n")
-			.append("<body>\r\n")
-			.append("<div style=\"width:90%; margin:0 auto;\">\r\n")
-			.append("    <header style=\"background-color: #333;\">\r\n")
-			.append("        <h1 style=\"height: 80px;line-height: 80px;text-align: center;color: #fff;\">SJ JEWELRY</h1>\r\n")
-			.append("    </header>\r\n")
-			.append("    <section style=\"min-height: 300px;\">\r\n")
-			.append("        <div style=\"border: 1px solid #eaeaea;width: 60%;margin: 50px auto;padding: 20px;\">\r\n")
-			.append(String.format("            고객님의 비밀번호는 [%s]로 변경되었습니다.\r\n", member.getPwd()))
-			.append("        </div>\r\n")
-			.append("    </section>\r\n")
-			.append("    <footer style=\"background-color: #e8e8e8;\">\r\n")
-			.append("        <p style=\"height: 50px;line-height: 50px;text-align: center;\">copyright&copy; 2018</p>\r\n")
-			.append("    </footer>\r\n")
-			.append("</div>\r\n")
-			.append("</body>\r\n")
-			.append("</html>");
+		mail.append("<!DOCTYPE html>\r\n").append("<html>\r\n").append("<head>\r\n")
+				.append("<meta charset=\"UTF-8\">\r\n").append("<title>[SJ JEWELRY] 임시 비밀번호 발송 메일!</title>\r\n")
+				.append("</head>\r\n").append("<body>\r\n").append("<div style=\"width:90%; margin:0 auto;\">\r\n")
+				.append("    <header style=\"background-color: #333;\">\r\n")
+				.append("        <h1 style=\"height: 80px;line-height: 80px;text-align: center;color: #fff;\">SJ JEWELRY</h1>\r\n")
+				.append("    </header>\r\n").append("    <section style=\"min-height: 300px;\">\r\n")
+				.append("        <div style=\"border: 1px solid #eaeaea;width: 60%;margin: 50px auto;padding: 20px;\">\r\n")
+				.append(String.format("            고객님의 비밀번호는 [%s]로 변경되었습니다.\r\n", member.getPwd()))
+				.append("        </div>\r\n").append("    </section>\r\n")
+				.append("    <footer style=\"background-color: #e8e8e8;\">\r\n")
+				.append("        <p style=\"height: 50px;line-height: 50px;text-align: center;\">copyright&copy; 2018</p>\r\n")
+				.append("    </footer>\r\n").append("</div>\r\n").append("</body>\r\n").append("</html>");
 		mailContent.put("content", mail.toString());
 
 		if (!sendMailBySSL(mailContent)) {

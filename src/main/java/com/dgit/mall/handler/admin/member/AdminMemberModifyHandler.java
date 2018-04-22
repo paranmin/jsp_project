@@ -1,7 +1,6 @@
 package com.dgit.mall.handler.admin.member;
 
 import java.util.Date;
-import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,13 +63,6 @@ public class AdminMemberModifyHandler extends AdminCommandHandler {
 			String month = request.getParameter("month");
 			String day = request.getParameter("day");
 
-			Enumeration<String> names = request.getParameterNames();
-			while (names.hasMoreElements()) {
-				String n = names.nextElement();
-				String value = request.getParameter(n);
-				System.out.println(String.format("[%s] = %s%n", n, value));
-			}
-
 			if (!password.equals(chkPassword)) {
 				session.setAttribute("error_msg", "비밀번호가 다릅니다.");
 				response.sendRedirect("modify.do?no="+sNo);
@@ -81,7 +73,11 @@ public class AdminMemberModifyHandler extends AdminCommandHandler {
 			modifyMember.setNo(no);
 			modifyMember.setName(name);
 			modifyMember.setPwd(password);
-			modifyMember.setBirth(String.format("%s-%s-%s", year, month, day));
+			if (year == null || year.equals("") || month == null || month.equals("") || day == null || day.equals("")) {
+				modifyMember.setBirth(null);
+			} else {
+				modifyMember.setBirth(String.format("%d-%02d-%02d", Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)));
+			}
 			if (gender == null || gender.equalsIgnoreCase("female")) {
 				modifyMember.setGender(Gender.FEMALE);
 			} else {

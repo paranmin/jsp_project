@@ -68,7 +68,11 @@ public class ShopMypageMyInfoHandler extends ShopCommandHandler {
 			modifyMember.setNo(auth.getNo());
 			modifyMember.setName(name);
 			modifyMember.setPwd(password);
-			modifyMember.setBirth(String.format("%s-%s-%s", year, month, day));
+			if (year == null || year.equals("") || month == null || month.equals("") || day == null || day.equals("")) {
+				modifyMember.setBirth(null);
+			} else {
+				modifyMember.setBirth(String.format("%d-%02d-%02d", Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)));
+			}
 			if (gender == null || gender.equalsIgnoreCase("female")) {
 				modifyMember.setGender(Gender.FEMALE);
 			} else {

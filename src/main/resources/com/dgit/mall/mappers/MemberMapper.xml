@@ -102,6 +102,9 @@
 	<update id="modifyMember" parameterType="Member">
 		update member 
 		<set>
+			<if test="name != null and name != ''">
+				m_name = #{name},
+			</if>
 			<if test="pwd != null and pwd != ''">
 				m_pass = password(#{pwd}),
 			</if>

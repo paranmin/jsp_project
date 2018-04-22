@@ -74,18 +74,18 @@ td.emptycart p {
 									<c:forEach var="items" items="${list }">
 										<tr class="proContent">
 											<td><input type="checkbox" name="chkAll"
-												value="${items.ctNo }">
-												<input type="hidden" name="buyingMem" value="${items.mNo.no }"></td>
-											<td><img src="../../images/${items.prd.mainImg }"
+												value="${items.no }">
+												<input type="hidden" name="buyingMem" value="${items.member.no }"></td>
+											<td><img src="../../images/${items.product.mainImg }"
 												class="proImg"></td>
 											<input type="hidden" name="proImg">
 											<td class="proNameTable">
 												<table>
 													<tr>
-														<td class="prdName">${items.prd.name }</td>
+														<td class="prdName">${items.product.name }</td>
 													</tr>
 													<tr>
-														<td class="proNamehr">옵션:<span class="optionname">${items.ctPrdOpname }</span></td>
+														<td class="proNamehr">옵션:<span class="optionname">${items.prdOpName }</span></td>
 
 													</tr>
 												</table> <input type="hidden" name="prdName"> <input
@@ -95,10 +95,10 @@ td.emptycart p {
 												<button class="plus">+</button> <input type="text"
 												class="cartnum" value="1" name="cartnum">
 												<button class="minus">-</button> <input type="hidden"
-												name="stock" value="${items.prd.stock }">
+												name="stock" value="${items.product.stock }">
 											</td>
 											<td><span class="productPrice"
-												data-price="${items.prd.sellingPrice }">${items.prd.sellingPrice }</span>원</td>
+												data-price="${items.product.sellingPrice }">${items.product.sellingPrice }</span>원</td>
 											<input type="hidden" name="productPrice" class="prdPr">
 											<td>
 												<button class="delete">삭제하기</button>
