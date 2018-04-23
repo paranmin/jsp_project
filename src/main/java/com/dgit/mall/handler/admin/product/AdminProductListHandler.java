@@ -31,11 +31,18 @@ public class AdminProductListHandler extends AdminCommandHandler {
 		}else if(request.getMethod().equalsIgnoreCase("post")){
 			String cate = request.getParameter("cate");
 			String name = request.getParameter("selectName");
+			int view = Integer.parseInt(request.getParameter("view"));
 			try{
 				sqlsession=MySqlSessionFactory.openSession();
 				ProductDao dao = sqlsession.getMapper(ProductDao.class);
 				List<Product> listPro = null;
 				Product pro = new Product();
+				
+				if(view==1){
+					pro.setUse("1");
+				}else if(view==0){
+					pro.setUse("0");
+				}
 				
 				if(cate.equals("All")&&name==null){
 					listPro = dao.selectAllProduct();
@@ -51,6 +58,7 @@ public class AdminProductListHandler extends AdminCommandHandler {
 				}
 				request.setAttribute("name", name);
 				request.setAttribute("cate", cate);
+				request.setAttribute("view", view);
 				request.setAttribute("list", listPro);
 			}finally{
 				sqlsession.close();

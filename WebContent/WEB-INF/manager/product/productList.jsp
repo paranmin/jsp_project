@@ -52,6 +52,12 @@ a{
 	color:black;
 	text-decoration: none;
 }
+span#radio{
+	float: right;
+}
+input[type='radio']{
+	margin-right:5px;
+}
 </style>
 </head>
 <body>
@@ -75,6 +81,11 @@ a{
 		상품명
 		<input type="text" name="selectName" <c:if test="${name!=null }"> value="${name}" </c:if>>   
 		<button class="selectBtn">검색</button>
+		<span id="radio">
+			<input type="radio" name="view" value="2" checked="checked"<c:if test="${view==2 }"> checked="checked" </c:if>>모두 보기
+			<input type="radio" name="view" value="1" <c:if test="${view==1 }"> checked="checked" </c:if>>게시 상품
+			<input type="radio" name="view" value="0" <c:if test="${view==0 }"> checked="checked" </c:if>>게시 안하는 상품
+		</span>
 	</form>
 	<table>
 		<tr>	
