@@ -96,7 +96,7 @@ td.emptycart p {
 												class="cartnum" value="${items.prdQuantity }" name="cartnum">
 												
 												<button class="minus">-</button> <input type="hidden"
-												name="stock" value="${items.product.stock }">
+												name="stock" value="${items.optiondetail.podStock }">
 											</td>
 											<td><span class="productPrice"
 												data-price="${items.prdOpPrice }">${items.prdOpPrice*items.prdQuantity }</span>원</td>

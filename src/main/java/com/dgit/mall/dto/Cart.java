@@ -10,7 +10,7 @@ public class Cart {
 	private Member member;
 	private Product product;
 	private CartToOrder type;
-	
+	private OptionDetail optiondetail;
 	public int getNo() {
 		return no;
 	}
@@ -53,13 +53,14 @@ public class Cart {
 	public void setType(CartToOrder type) {
 		this.type = type;
 	}
-	@Override
-	public String toString() {
-		return "Cart [no=" + no + ", prdQuantity=" + prdQuantity + ", prdOpName=" + prdOpName + ", prdOpPrice="
-				+ prdOpPrice + ", member=" + member + ", product=" + product + ", type=" + type + "]";
+	public OptionDetail getOptiondetail() {
+		return optiondetail;
+	}
+	public void setOptiondetail(OptionDetail optiondetail) {
+		this.optiondetail = optiondetail;
 	}
 	public Cart(int no, int prdQuantity, String prdOpName, int prdOpPrice, Member member, Product product,
-			CartToOrder type) {
+			CartToOrder type, OptionDetail optiondetail) {
 		super();
 		this.no = no;
 		this.prdQuantity = prdQuantity;
@@ -68,10 +69,18 @@ public class Cart {
 		this.member = member;
 		this.product = product;
 		this.type = type;
+		this.optiondetail = optiondetail;
 	}
 	public Cart() {
 	}
-
+	@Override
+	public String toString() {
+		return "Cart [no=" + no + ", prdQuantity=" + prdQuantity + ", prdOpName=" + prdOpName + ", prdOpPrice="
+				+ prdOpPrice + ", member=" + member + ", product=" + product + ", type=" + type + ", optiondetail="
+				+ optiondetail + "]";
+	}
+	
+	
 	
 	
 }
