@@ -14,7 +14,6 @@ public class Product {
 	private String useOption; // 옵션유무
 	private String category;
 	private String use;
-
 	
 	public Product() {
 		super();

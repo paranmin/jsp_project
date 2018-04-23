@@ -35,7 +35,7 @@ td.emptycart p {
 	href="${pageContext.request.contextPath}/css/cartPage.css">
 <script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
-<script src="${pageContext.request.contextPath}/js/cart.js?a=11"></script>
+<script src="${pageContext.request.contextPath}/js/cart.js?a=12"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
@@ -76,7 +76,7 @@ td.emptycart p {
 											<td><input type="checkbox" name="chkAll"
 												value="${items.no }">
 												<input type="hidden" name="buyingMem" value="${items.member.no }"></td>
-											<td><img src="../../images/${items.product.mainImg }"
+											<td><img src="${pageContext.request.contextPath}/upload/${items.product.mainImg }"
 												class="proImg"></td>
 											<input type="hidden" name="proImg">
 											<td class="proNameTable">
@@ -93,12 +93,13 @@ td.emptycart p {
 											</td>
 											<td class="numcount">
 												<button class="plus">+</button> <input type="text"
-												class="cartnum" value="1" name="cartnum">
+												class="cartnum" value="${items.prdQuantity }" name="cartnum">
+												
 												<button class="minus">-</button> <input type="hidden"
-												name="stock" value="${items.product.stock }">
+												name="stock" value="${items.optiondetail.podStock }">
 											</td>
 											<td><span class="productPrice"
-												data-price="${items.product.sellingPrice }">${items.product.sellingPrice }</span>원</td>
+												data-price="${items.prdOpPrice }">${items.prdOpPrice*items.prdQuantity }</span>원</td>
 											<input type="hidden" name="productPrice" class="prdPr">
 											<td>
 												<button class="delete">삭제하기</button>

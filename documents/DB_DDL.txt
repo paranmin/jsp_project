@@ -136,6 +136,7 @@ CREATE TABLE `mall`.`cart` (
   `m_no` int(11) NOT NULL COMMENT '회원번호',
   `prd_no` int(11) NOT NULL COMMENT '상품번호',
   `type` enum('ORDER','CART') DEFAULT 'CART' COMMENT '타입',
+  pod_no int(11) null COMMENT '옵션디테일번호',
   PRIMARY KEY (`ct_no`),
   KEY `FK_member_TO_cart` (`m_no`),
   KEY `FK_product_TO_cart` (`prd_no`),
