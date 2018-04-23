@@ -1,21 +1,10 @@
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>주문 상세 내역 - SJ JEWELRY</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css" media="all" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
-<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/base.js"></script>
-</head>
-<body>
-	<div id="orderContainer">
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<div id="container">
+	<h2>주문 상세 내역</h2>
+	<div class="orderContainer">
 		<p class="order_title"><span class="name">[어쩌구]</span>님께서 2018년 04월 19일에 주문하신 내역입니다.</p>
 		<div class="orderInfo infoArea">
 			<h3>주문자정보</h3>
@@ -77,8 +66,23 @@
 		</div>
 		<div class="infoArea">
 			<h3>주문상품정보</h3>
+			<form action="viewOrder.do?no=${no}" method="post">
+			<p class="orderMenu">
+				선택한 상품을
+				<select name="orderStatueTop">
+					<option value="">상품상태</option>
+					<option value="o1">입금대기</option>
+					<option value="o2">결제완료</option>
+					<option value="d1">상품준비중</option>
+					<option value="d2">배송중</option>
+					<option value="d3">배송완료</option>
+					<option value="e1">구매확정</option>
+				</select>
+				<a href="#">일괄적용</a>
+			</p>
 			<table>
 				<colgroup>
+				<col width="40">
 				<col width="80">
 				<col width="*">
 				<col width="120">
@@ -89,6 +93,7 @@
 				<col width="120">
 				</colgroup>
 				<tr>
+					<th><input type="checkbox" id="chkAll" /></th>
 					<th colspan="2">주문상품정보</th>
 					<th>상품별주문번호</th>
 					<th>수량</th>
@@ -98,6 +103,17 @@
 					<th>배송번호</th>
 				</tr>
 				<tr>
+					<td class="center"><input type="checkbox" name="chkItem[]" /></td>
+					<td colspan="2">슬림 도형 &amp; 볼 세트 귀걸이<br>색상 : 실버/오각형[ED-16-13]-모델착용</td>
+					<td class="center">20180419182553-00700237205_[1]</td>
+					<td class="center">1</td>
+					<td class="center">8,000원</td>
+					<td class="center">80</td>
+					<td class="center">결제대기</td>
+					<td class="center">3452334324</td>
+				</tr>
+				<tr>
+					<td class="center"><input type="checkbox" name="chkItem[]" /></td>
 					<td colspan="2">슬림 도형 &amp; 볼 세트 귀걸이<br>색상 : 실버/오각형[ED-16-13]-모델착용</td>
 					<td class="center">20180419182553-00700237205_[1]</td>
 					<td class="center">1</td>
@@ -107,6 +123,20 @@
 					<td class="center">3452334324</td>
 				</tr>
 			</table>
+			<p class="orderMenu">
+				선택한 상품을
+				<select name="orderStatueBottom">
+					<option value="">상품상태</option>
+					<option value="o1">입금대기</option>
+					<option value="o2">결제완료</option>
+					<option value="d1">상품준비중</option>
+					<option value="d2">배송중</option>
+					<option value="d3">배송완료</option>
+					<option value="e1">구매확정</option>
+				</select>
+				<a href="#">일괄적용</a>
+			</p>
+			</form>
 		</div>
 		<div class="infoArea">
 			<h3>결제정보</h3>
@@ -129,10 +159,33 @@
 			</table>
 		</div>
 	</div>
+</div>
 <script>
 $(function() {
-	
+	$("#chkAll").on("click", function() {
+		if ($(this).is(":checked")) {
+			$("input[name='chkItem[]']").prop("checked", true);
+		} else {
+			$("input[name='chkItem[]']").prop("checked", false);
+		}
+	});
+	$("input[name='chkItem[]']").on("change", function() {
+		var chkCount = $("input[name='chkItem[]']").length,
+			checkedCount = $("input[name='chkItem[]']:checked").length;
+		if ($("input[name='chkItem[]']:checked").length == 0) {
+			$("#chkAll").prop("checked", false);
+		}
+		if (chkCount == checkedCount) {
+			$("#chkAll").prop("checked", true);
+		}
+	});
 });
 </script>
-</body>
-</html>
+<c:if test="${error_msg != null && error_msg != ''}">
+	<script>
+		alert("${error_msg}");
+	</script>
+	<%
+		session.removeAttribute("error_msg");
+	%>
+</c:if>

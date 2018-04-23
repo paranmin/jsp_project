@@ -76,7 +76,7 @@ public class ShopJoinHandler extends ShopCommandHandler {
 
 			joinMember.setPushEmail(PushEmail.N);
 			if (ademail != null && ademail.equalsIgnoreCase("y")) {
-				joinMember.setPushEmail(PushEmail.N);
+				joinMember.setPushEmail(PushEmail.Y);
 			}
 			joinMember.setPushSMS(PushSMS.N);
 			if (adsms != null && adsms.equalsIgnoreCase("y")) {

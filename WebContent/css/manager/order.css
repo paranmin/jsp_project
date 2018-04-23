@@ -1,0 +1,157 @@
+@charset "UTF-8";
+
+section #container {
+	width: 95%;
+	margin: 10px auto;
+	min-height: 500px;
+}
+
+section #container h2 {
+	margin-bottom: 20px;
+}
+
+section #container .searchArea {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+section #container .searchArea a {
+	color: #ccc;
+}
+
+section #container .searchArea i {
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+section #container .searchArea i:hover {
+	color: #00adf7;
+	cursor: pointer;
+}
+
+section #container table {
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+	word-break: break-all;
+	min-width: 1200px;
+}
+
+section #container table th, section #container table td {
+	border: 1px solid #eaeaea;
+	padding: 5px;
+}
+
+section #container table th {
+	background-color: #f1f1f1;
+	height: 30px;
+}
+
+section #container table td.td-center {
+	text-align: center;
+}
+
+section #container .searchArea select, section #container .searchArea input {
+	outline: none;
+	vertical-align: top;
+}
+
+section #container .searchArea select {
+	height: 28px;
+}
+
+section #container .searchArea input[type='text'] {
+	height: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+section #container .searchArea p {
+	text-align: center;
+	margin-top: 10px;
+}
+
+section #container .searchArea p > input[type='submit'] {
+	width: 60px;
+	height: 30px;
+	background-color: #333;
+	color: #fff;
+	border: none;
+}
+
+section #container .searchArea p > input[type='submit']:hover {
+	cursor: pointer;
+}
+
+section #container table.orderlist {
+	margin-top: 40px;
+	font-size: 0.9em;
+}
+
+section #container .orderContainer {
+	min-width: 1200px;
+	min-height: 1000px;
+	margin:10px;
+	font-size: 14px;
+}
+section #container .orderContainer p.order_title {
+	border: 5px solid #eaeaea;
+	padding: 5px 20px;
+}
+section #container .orderContainer p.order_title span.name {
+	color: #0178d3;
+	font-weight: bold;
+}
+
+/* 테이블 가변 TD 고정 시키는 방법 */
+section #container .orderContainer table {
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+	word-break: break-all;
+}
+
+section #container .orderContainer table th, #orderContainer table td {
+	border: 1px solid #CDCDCD;
+	padding:5px;
+}
+
+section #container .orderContainer table th {
+	background-color: #EDEDED;
+}
+
+section #container .orderContainer table td.center {
+	text-align: center;
+}
+
+section #container .orderContainer div.infoArea {
+	margin-top: 20px;
+}
+
+section #container .orderContainer div.infoArea h3 {
+	color: #3D77BD;
+	margin-bottom: 10px;
+}
+
+section #container .orderContainer div.infoArea p.orderMenu {
+	height: 30px;
+	line-height: 30px;
+	background-color: #f6f6f6;
+	padding: 10px;
+}
+
+section #container .orderContainer div.infoArea p.orderMenu select {
+	outline: none;
+	vertical-align: middle;
+	height: 30px;
+}
+
+section #container .orderContainer div.infoArea p.orderMenu a {
+	display: inline-block;
+	background-color: red;
+	color: #fff;
+	width: 70px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+}
