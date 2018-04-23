@@ -28,7 +28,11 @@ pageEncoding="UTF-8"%>
 <title>Insert title here</title>
 <style type="text/css">
 .titleArea h2 {
-	font-size: 17px; # submit { padding : 8px;
+	font-size: 17px;
+}
+
+#submit {
+	padding: 8px;
 	border: 0;
 }
 }
@@ -38,7 +42,7 @@ pageEncoding="UTF-8"%>
 	<c:import url="../modules/header.jsp" />
 	<c:import url="../modules/leftSide.jsp" />
 	<c:import url="../modules/rightSide.jsp" />
-	<section>	
+	<section>
 		<div class="titleArea">
 			<h2>Q&amp;A</h2>
 		</div>
@@ -58,10 +62,10 @@ pageEncoding="UTF-8"%>
 
 
 
-				<form action="BoardQandA.do" method="post"
+				<form action="BoardQandAForm.do" method="post"
 					enctype="multipart/form-data" style="position: relative;"
 					autocomplete="off">
-				
+
 					<div class="bbs-table-write">
 						<fieldset>
 							<legend>일반게시판 쓰기</legend>
@@ -78,13 +82,14 @@ pageEncoding="UTF-8"%>
 										<th class=""><div class="title">작성자</div></th>
 										<td><div>
 												<input id="bw_input_writer" type="text" name="brdwriter"
-													class="MS_input_txt input_style">
+													class="MS_input_txt input_style"> <input
+													type="hidden" name="brdcode" value="QandABoard">
 											</div></td>
 										<th><div class="title">비밀번호</div></th>
 										<td>
 											<div>
-												<input id="bw_input_passwd" type="password" name="brdpassword"
-													class="MS_input_txt input_style">
+												<input id="bw_input_passwd" type="password"
+													name="brdpassword" class="MS_input_txt input_style">
 											</div>
 										</td>
 									</tr>
@@ -93,7 +98,7 @@ pageEncoding="UTF-8"%>
 
 										<td colspan="3">
 											<div class="title">
-												<select name="subhead" class="MS_select"><option
+												<select name="selected" class="MS_select"><option
 														value="select">선택</option>
 													<option value="상품">상품</option>
 													<option value="배송">배송</option>
@@ -103,7 +108,9 @@ pageEncoding="UTF-8"%>
 													<option value="기타">기타</option>
 												</select><br> <input id="bw_input_subject"
 													class="MS_input_txt input_style2" type="text"
-													name="select" value="">
+													name="brdtitle">
+													<input id="bw_input_file" type="hidden" name="brdch"
+													value="0">
 											</div>
 										</td>
 									</tr>
@@ -111,7 +118,7 @@ pageEncoding="UTF-8"%>
 										<th><div class="title">내용</div></th>
 										<td colspan="3">
 											<div>
-												<textarea rows="120" cols="500" name="brdtitle"></textarea>
+												<textarea rows="120" cols="500" name="brdcontent"></textarea>
 											</div>
 										</td>
 									</tr>
@@ -119,9 +126,9 @@ pageEncoding="UTF-8"%>
 										<th><div class="title">파일</div></th>
 										<td colspan="3">
 											<div>
-												<input id="bw_input_file" type="file" name="brduseattachment"
-													value="첨부">
-
+												<input id="bw_input_file" type="file"
+													name="brduseattachment" value="첨부"> 
+													
 											</div>
 										</td>
 									</tr>
@@ -133,8 +140,8 @@ pageEncoding="UTF-8"%>
 					<dl class="bbs-link bbs-link-btm">
 						<dt></dt>
 						<dd>
-							<input type="submit" value="글등록" id="submit"> <a
-								href="${pageContext.request.contextPath}/shop/BoardQandA.do"
+							<input type="submit" value="글등록" id="submit"> 
+							<a href="${pageContext.request.contextPath}/shop/BoardQandA.do"
 								class="btn_light btn_box_01">목록</a>
 						</dd>
 					</dl>

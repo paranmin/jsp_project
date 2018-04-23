@@ -10,7 +10,6 @@ import com.dgit.mall.dto.Board;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
 
-
 public class BoardNoticeReadHandler extends ShopCommandHandler {
 
 	@Override
@@ -19,14 +18,16 @@ public class BoardNoticeReadHandler extends ShopCommandHandler {
 		int number = Integer.parseInt(num);
 		System.out.println(num);
 		SqlSession sqlSession = null;
+
 		try {
 			request.setAttribute("contentPage", "board/BoardNotice.jsp");
-			
+
 			sqlSession = MySqlSessionFactory.openSession();
 			BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
-
+			int ChBoard = BoardREAD.updatecheck(number);
+			sqlSession.commit();
 			Board readBoard = BoardREAD.selectlistBoardReviewByid(number);
-
+			
 			request.setAttribute("readBoard", readBoard);
 
 			return VIEW_FRONT_PATH + "board/BoardNoticeRead.jsp";

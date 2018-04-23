@@ -1,6 +1,7 @@
 package com.dgit.mall.handler.shop.board;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +56,9 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				sqlSession = MySqlSessionFactory.openSession();
 				BoardDao Dao = sqlSession.getMapper(BoardDao.class);
 				Date now = new Date();		
-				Board board = new Board(0,brdcode,brdtitle,brdwriter, brdpassword,1,0 ,null, brdcontent,0,now,"",0);
+				SimpleDateFormat formatType = new SimpleDateFormat("yyyy-mm-dd");
+				formatType.format(now);
+				Board board = new Board(0,brdcode,brdtitle,brdwriter, brdpassword,1,0 ,null, brdcontent,0,now,0,0);
 
 				System.out.println(brdwriter);
 				System.out.println(brdpassword);

@@ -24,5 +24,7 @@ public interface BoardDao {
 
 	public int deleteReview(int number);
 
+	public int updatecheck(int ChBoard);
+
 
 }

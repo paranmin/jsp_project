@@ -21,8 +21,7 @@ public class BoardModifyCheckPasswordHandler extends ShopCommandHandler {
 			String brdwriter = request.getParameter("brdwriter");
 			String brdtitle = request.getParameter("brdtitle");
 			String brdcontent = request.getParameter("brdcontent");
-			
-			
+
 			request.setAttribute("number", number);
 			request.setAttribute("brdwriter", brdwriter);
 			return VIEW_FRONT_PATH + "board/BoardModifyCheckpassword.jsp";
@@ -43,25 +42,12 @@ public class BoardModifyCheckPasswordHandler extends ShopCommandHandler {
 				request.setAttribute("readBoard", readBoard);
 				System.out.println(readBoard);
 				if (readBoard.getBrdpassword().equals(pw)) {
+
 					return VIEW_FRONT_PATH + "board/BoardModify.jsp";
 
-				} else {
-					int dialogButton2 = JOptionPane.YES_NO_OPTION;
-					int dialogResult2  =JOptionPane.showConfirmDialog(null, "비밀번호가 틀립니다 다시 하시겠습니까 ?.", "비번확인창", dialogButton2);
-					if(dialogResult2 == 0){
-						return VIEW_FRONT_PATH + "board/BoardModifyCheckpassword.jsp";
-					}else{
-						if(readBoard.getBrdcode().equals("ReviewBoard")){
-							return "ReviewBoard.do";
-						}else if(readBoard.getBrdcode().equals("NoticeBoard")){
-							return "NoticeBoard.do";
-						}else{
-							return "QandABoardRead.do";
-						}
-							
-						
-					}
-					
+				} else if(readBoard.getBrdpassword().equals(pw)==false){
+					request.setAttribute("notsamepassword","비밀번호가 일치하지 않습니다.");
+					return VIEW_FRONT_PATH + "board/BoardModifyCheckpassword.jsp";
 				}
 
 			} catch (Exception e) {

@@ -57,7 +57,7 @@
 		<div id="bbsData">
 			<div class="page-body">
 				<form action="ReviewForm.do" method="post"
-					enctype="multipart/form-data" >
+					enctype="multipart/form-data">
 					<div class="bbs-table-write">
 						<fieldset>
 							<legend>일반게시판 쓰기</legend>
@@ -81,7 +81,7 @@
 											<div>
 												<input id="bw_input_passwd" type="password"
 													name="brdpassword" class="MS_input_txt input_style">
-													<input type="hidden" name ="brdcode" value="ReviewBoard">
+												<input type="hidden" name="brdcode" value="ReviewBoard">
 											</div>
 										</td>
 
@@ -92,7 +92,8 @@
 											<div class="title">
 												<input id="bw_input_subject"
 													class="MS_input_txt input_style2" type="text"
-													name="brdtitle" value="">
+													name="brdtitle" value=""> <input id="bw_input_file"
+													type="hidden" name="brdch" value="0">
 											</div>
 										</td>
 									</tr>

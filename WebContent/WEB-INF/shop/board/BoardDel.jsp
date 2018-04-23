@@ -95,29 +95,7 @@ input, select, textarea {
 	display: none;
 }
 </style>
-<script type="text/javascript">
-	$(function(){
-		
-		var con_test = confirm("삭제하실건가요?");
-		if(con_test == true){
-			alert("삭제하셨습니다.");
-		}
-		else if(con_test == false){
-			 return;
-		}
-		
-		$("#submit").on("click",function(){
-			if (!confirm("삭제하시겠습니까?")) {
-				return false;
-			} else {
-				document.list.action = "D"
-			}
-		})
-		)
-		
 
-	}
-</script>
 </head>
 <body>
 	<c:import url="../modules/header.jsp" />
@@ -145,7 +123,8 @@ input, select, textarea {
 				<div class="page-body">
 
 					<div class="bbs-table-pwd">
-						<form action="BoardDel.do" method="post" autocomplete="off">
+						<form action="BoardDel.do" method="post" autocomplete="off"
+							id="delform">
 							<input type="hidden" name="brdno" value="${number }">
 							<fieldset>
 								<legend>비밀번호 찾기</legend>
@@ -184,6 +163,28 @@ input, select, textarea {
 			<!-- #bbsData -->
 		</div>
 	</section>
+
+	<script type="text/javascript">
+		$(function() {
+
+			$("#submit").click(function() {
+				var con_test = confirm("삭제하실건가요?");
+				if (con_test == true) {
+					
+					alert('삭제하겠습니다.');
+				} else if (con_test == false) {
+					alert('취소하셨습니다.');
+					return false;
+				}
+			})
+		})
+	</script>
 	<c:import url="../modules/footer.jsp" />
+	<c:if test="${notsamepassword !=null }">
+
+		<script type="text/javascript">
+			alert('비밀번호가 틀렸습니다.')
+		</script>
+	</c:if>
 </body>
 </html>

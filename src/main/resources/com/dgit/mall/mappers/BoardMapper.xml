@@ -14,6 +14,7 @@
 		<result property="brdwriter" column="brd_writer" /> <!--글 작성자 -->
 		<result property="brdpassword" column="brd_password" /> <!--글 작성자 비밀번호 -->
 		<result property="brdch" column="brd_ch" /><!--조회수 -->
+		<result property="selected" column="selected"/><!--글 종류 선택-->
 	</resultMap>
 	<select id="selectByAllReviewBoard" parameterType="Board"
 		resultMap="BoardResult">
@@ -27,7 +28,7 @@
 	<select id="selectByAllQandABoard" parameterType="Board"
 		resultMap="BoardResult">
 		select brd_no, brd_code, brd_title, brd_content, brd_parent,
-		brd_depth, brd_use_attachment, prd_no,brd_ch
+		brd_depth, brd_use_attachment, prd_no,brd_ch,regdate,brd_writer
 		from board
 		where brd_code =
 		"QandABoard"
@@ -47,7 +48,7 @@
 		select brd_no,brd_writer, brd_title,
 		brd_content,brd_password, brd_parent,
 		brd_depth, brd_use_attachment,
-		prd_no,brd_ch,regdate
+		prd_no,brd_ch,regdate,selected
 		from board
 		where brd_no = #{number}
 	</select>
@@ -61,8 +62,8 @@
 
 	<insert id="insertBoard" parameterType="Board">
 		insert into board
-		(brd_writer,brd_password,brd_title,brd_content,brd_code,brd_parent,brd_depth,regdate)
-		value(#{brdwriter},#{brdpassword},#{brdtitle},#{brdcontent},#{brdcode},#{brdparent},#{brddepth},#{brdregdate})
+		(brd_writer,brd_password,brd_title,brd_content,brd_code,brd_parent,brd_depth,regdate,selected)
+		value(#{brdwriter},#{brdpassword},#{brdtitle},#{brdcontent},#{brdcode},#{brdparent},#{brddepth},#{brdregdate},#{selected})
 	</insert>
 
 	<update id="updateBoardReview" parameterType="Board">
@@ -70,6 +71,9 @@
 		brd_password=#{brdpassword},brd_title=#{brdtitle},brd_content=#{brdcontent},regdate=#{brdregdate}
 		where brd_no = #{brdNo} and brd_password=#{brdpassword};
 
+	</update>
+	<update id="updatecheck">
+		update board set brd_ch = brd_ch+1 where brd_no = #{brdNo}
 	</update>
 
 	<delete id="deleteReview">

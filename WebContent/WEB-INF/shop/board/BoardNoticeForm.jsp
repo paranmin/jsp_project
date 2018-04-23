@@ -75,15 +75,14 @@
 										<th class=""><div class="title">작성자</div></th>
 										<td><div>
 												<input id="bw_input_writer" type="text" name="brdwriter"
-													class="MS_input_txt input_style" 
-													>
-														<input type="hidden" name ="brdcode" value="NoticeBoard">
+													class="MS_input_txt input_style"> <input
+													type="hidden" name="brdcode" value="NoticeBoard">
 											</div></td>
 										<th><div class="title">비밀번호</div></th>
 										<td>
 											<div>
-												<input id="bw_input_passwd" type="password" name="brdpassword"
-													class="MS_input_txt input_style">
+												<input id="bw_input_passwd" type="password"
+													name="brdpassword" class="MS_input_txt input_style">
 											</div>
 										</td>
 									</tr>
@@ -93,7 +92,8 @@
 											<div class="title">
 												<input id="bw_input_subject"
 													class="MS_input_txt input_style2" type="text"
-													name="brdtitle" value="">
+													name="brdtitle" value=""> <input id="bw_input_file"
+													type="hidden" name="brdch" value="0">
 											</div>
 										</td>
 									</tr>

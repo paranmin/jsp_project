@@ -40,19 +40,23 @@ public class BoardDelHandler extends ShopCommandHandler {
 				Board readBoard = BoardREAD.selectCheckPass(number);
 
 				request.setAttribute("readBoard", readBoard);
-
-				if (readBoard.getBrdcode().equals("ReviewBoard")) {
-					BoardREAD.deleteReview(number);
-					sqlSession.commit();
-					return "ReviewBoard.do";
-				} else if (readBoard.getBrdcode().equals("NoticeBoard")) {
-					BoardREAD.deleteReview(number);
-					sqlSession.commit();
-					return "NoticeBoard.do";
-				} else {
-					BoardREAD.deleteReview(number);
-					sqlSession.commit();
-					return "QandABoardRead.do";
+				if (readBoard.getBrdpassword().equals(pw)) {
+					if (readBoard.getBrdcode().equals("ReviewBoard")) {
+						BoardREAD.deleteReview(number);
+						sqlSession.commit();
+						return "ReviewBoard.do";
+					} else if (readBoard.getBrdcode().equals("NoticeBoard")) {
+						BoardREAD.deleteReview(number);
+						sqlSession.commit();
+						return "NoticeBoard.do";
+					} else {
+						BoardREAD.deleteReview(number);
+						sqlSession.commit();
+						return "QandABoardRead.do";
+					}
+				}else if(readBoard.getBrdpassword().equals(pw)==false){
+					request.setAttribute("notsamepassword","비밀번호가 일치하지 않습니다.");
+					return VIEW_FRONT_PATH + "board/BoardDel.jsp";
 				}
 			} catch (Exception e) {
 				// TODO: handle exception

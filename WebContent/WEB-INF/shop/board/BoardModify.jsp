@@ -46,7 +46,7 @@
 	<c:import url="../modules/rightSide.jsp" />
 	<section>
 		<div class="titleArea">
-			<h2>REVIEWModify(수정)</h2>
+			<h2>Modify(수정)</h2>
 		</div>
 		<div class="top_box">
 			<ul>
@@ -63,13 +63,14 @@
 				<form action="BoardModify.do" method="post"
 					enctype="multipart/form-data" style="position: relative;"
 					autocomplete="off">
-						<input type="hidden" name="brdNo" value="${readBoard.brdNo }">
+					<input type="hidden" name="brdNo" value="${readBoard.brdNo }">
+					<input type="hidden" name="brdcode" value="${readBoard.brdcode }">
 					<div class="bbs-table-write">
 						<fieldset>
 							<legend>일반게시판 쓰기</legend>
 							<table summary="">
 								<caption>게시판 글쓰기</caption>
-							
+
 								<colgroup>
 									<col width="95">
 									<col width="190">
@@ -100,8 +101,20 @@
 										<td colspan="3">
 											<div class="title">
 												<input id="bw_input_subject"
-													class="MS_input_txt input_style2" type="text"
+										   			class="MS_input_txt input_style2" type="text"
 													name="brdtitle" value="${readBoard.brdtitle }">
+												<div class="hidden">
+													<select name=selected class="MS_select"><option
+															value="select">선택</option>
+														<option value="상품">상품</option>
+														<option value="배송">배송</option>
+														<option value="교환/반품">교환/반품</option>
+														<option value="입금">입금</option>
+														<option value="재입고">재입고</option>
+														<option value="기타">기타</option>
+													</select>
+												</div>
+												<br>
 											</div>
 										</td>
 									</tr>

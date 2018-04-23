@@ -122,12 +122,13 @@ input, select, textarea {
 				<div class="page-body">
 
 					<div class="bbs-table-pwd">
-						<form action="BoardModifyCheckPassword.do" method="post" autocomplete="off">
-							<input  type="hidden" name="brdno" value="${number }">
-								<input  type="hidden" name="brdwriter" value="${brdwriter }">
-									<input  type="hidden" name="brdtitle" value="${brdtitle }">
-										<input  type="hidden" name="brdcode" value="${brdcode}">
-											<input  type="hidden" name="brdcontent" value="${brdcontent}">
+						<form action="BoardModifyCheckPassword.do" method="post"
+							autocomplete="off">
+							<input type="hidden" name="brdno" value="${number }"> <input
+								type="hidden" name="brdwriter" value="${brdwriter }"> <input
+								type="hidden" name="brdtitle" value="${brdtitle }"> <input
+								type="hidden" name="brdcode" value="${brdcode}"> <input
+								type="hidden" name="brdcontent" value="${brdcontent}">
 							<fieldset>
 								<legend>비밀번호 찾기</legend>
 								<table summary="비밀번호찾기테이블">
@@ -166,5 +167,14 @@ input, select, textarea {
 		</div>
 	</section>
 	<c:import url="../modules/footer.jsp" />
+	<c:if test="${notsamepassword !=null }">
+
+		<script type="text/javascript">
+		
+		alert('비밀번호가 틀렸습니다.')
+			
+		
+	</script>
+	</c:if>
 </body>
 </html>

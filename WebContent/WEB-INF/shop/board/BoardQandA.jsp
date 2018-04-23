@@ -92,7 +92,7 @@ text-align: center;
 											<td>${item.brdNo }</td>
 											<td></td>
 											<td>${item.prdno }</td>
-											<td><a href="ReviewBoardRead.do?brdno=${item.brdNo }">${item.brdtitle }</a></td>
+											<td><a href="QandABoardRead.do?brdno=${item.brdNo }">${item.brdtitle }</a></td>
 											<td>${item.brdwriter }</td>
 											<td>${item.brdregdate }</td>
 											<td>${item.brdch }</td>

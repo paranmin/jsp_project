@@ -23,7 +23,6 @@ public class BoardModifyHandler extends ShopCommandHandler {
 			String num = request.getParameter("brdno");
 			int number = Integer.parseInt(num);
 			SqlSession sqlSession = null;
-			
 
 			try {
 				request.setAttribute("contentPage", "board/BoardModify.jsp");
@@ -46,11 +45,10 @@ public class BoardModifyHandler extends ShopCommandHandler {
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String ReviewformPath = request.getRealPath("Reviewform");
 			Date now = new Date();
-			
-		
+
 			SqlSession sqlSession = null;
 			int size = 1024 * 1024 * 10;// 10M
-			
+
 			MultipartRequest multi = new MultipartRequest(request, // upload할
 
 					// 파일정보
@@ -58,37 +56,63 @@ public class BoardModifyHandler extends ShopCommandHandler {
 					size, // 한번에 업로드할 사이즈
 					"utf-8", // 한글 파일명 깨짐 방지
 					new DefaultFileRenamePolicy());
-			
-			
+			String select = multi.getParameter("selected");
+			int selected = 0;
+			String brdcode = multi.getParameter("brdcode");
 			String brdwriter = multi.getParameter("brdwriter");
 			String brdpassword = multi.getParameter("brdpassword");
 			String brdtitle = multi.getParameter("brdtitle");
 			String brdcontent = multi.getParameter("brdcontent");
 			String num = multi.getParameter("brdNo");
 			int number = Integer.parseInt(num);
-			//String brduseattachment =multi.getParameter("brduseattachment");
-			 
+			// String brduseattachment =multi.getParameter("brduseattachment");
+
 			System.out.println(number);
-			
+
 			try {
-				
-				
-				
+
 				sqlSession = MySqlSessionFactory.openSession();
 				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
 
-				Board board = new Board(number,"ReviewBoard",brdtitle,brdwriter, brdpassword,1,0 ,null, brdcontent,0,now,"",0);
+				Board board = new Board(number, brdcode, brdtitle, brdwriter, brdpassword, 1, 0, null, brdcontent, 0,
+						now, selected, 0);
 
-				BoardREAD.updateBoardReview(board);
+				int readBoard = BoardREAD.updateBoardReview(board);
+
+				if (select.equals("선택")) {
+					selected = 0;
+				} else if (select.equals("상품")) {
+					selected = 1;
+				} else if (select.equals("배송")) {
+					selected = 2;
+				} else if (select.equals("교환/반품")) {
+					selected = 3;
+				} else if (select.equals("입금")) {
+					selected = 4;
+				} else if (select.equals("재입고")) {
+					selected = 5;
+				} else if (select.equals("기타")) {
+					selected = 6;
+				}
+
 				sqlSession.commit();
 				request.setAttribute("brdno", number);
-				request.setAttribute("brdcode", "ReviewBoard");
+				request.setAttribute("brdcode", brdcode);
 				request.setAttribute("brdwriter", brdwriter);
 				request.setAttribute("brdpassword", brdpassword);
 				request.setAttribute("brdtitle", brdtitle);
 				request.setAttribute("brdcontent", brdcontent);
-				//request.setAttribute("brduseattachment", brduseattachment);
-				
+				request.setAttribute("brdcontent", brdcontent);
+				request.setAttribute("selected",selected);
+				// request.setAttribute("brduseattachment", brduseattachment);
+
+				if (board.getBrdcode().equals("ReviewBoard")) {
+					return "ReviewBoard.do";
+				} else if (board.getBrdcode().equals("QandABoard")) {
+					return "BoardQandA.do";
+				} else {
+					return "NoticeBoard.do";
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -97,7 +121,8 @@ public class BoardModifyHandler extends ShopCommandHandler {
 			}
 
 		}
-		return "ReviewBoard.do";
+		return null;
+
 	}
 
 }

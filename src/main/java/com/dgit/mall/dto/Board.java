@@ -15,7 +15,7 @@ public class Board {
 	private String brdcontent;
 	private int prdno;
 	private Date brdregdate;
-	private String select;
+	private int selected;
 	private int brdch;
 
 	public Board() {
@@ -24,7 +24,7 @@ public class Board {
 	}
 
 	public Board(int brdNo, String brdcode, String brdtitle, String brdwriter, String brdpassword, int brdparent,
-			int brddepth, String brduseattachment, String brdcontent, int prdno, Date brdregdate, String select,
+			int brddepth, String brduseattachment, String brdcontent, int prdno, Date brdregdate, int selected,
 			int brdch) {
 		super();
 		this.brdNo = brdNo;
@@ -38,7 +38,7 @@ public class Board {
 		this.brdcontent = brdcontent;
 		this.prdno = prdno;
 		this.brdregdate = brdregdate;
-		this.select = select;
+		this.selected = selected;
 		this.brdch = brdch;
 	}
 
@@ -130,12 +130,12 @@ public class Board {
 		this.brdregdate = brdregdate;
 	}
 
-	public String getSelect() {
-		return select;
+	public int getSelected() {
+		return selected;
 	}
 
-	public void setSelect(String select) {
-		this.select = select;
+	public void setSelected(int selected) {
+		this.selected = selected;
 	}
 
 	public int getBrdch() {
@@ -148,11 +148,14 @@ public class Board {
 
 	@Override
 	public String toString() {
+		Date now = new Date();
+		SimpleDateFormat formatType = new SimpleDateFormat("yyyy-mm-dd");
+		formatType.format(now);
 
 		return "Board [brdNo=" + brdNo + ", brdcode=" + brdcode + ", brdtitle=" + brdtitle + ", brdwriter=" + brdwriter
 				+ ", brdpassword=" + brdpassword + ", brdparent=" + brdparent + ", brddepth=" + brddepth
 				+ ", brduseattachment=" + brduseattachment + ", brdcontent=" + brdcontent + ", prdno=" + prdno
-				+ ", brdregdate=" + brdregdate + ", select=" + select + ", brdch=" + brdch + "]";
+				+ ", brdregdate=" + brdregdate + ", selected=" + selected + ", brdch=" + brdch + "]";
 	}
 
 }

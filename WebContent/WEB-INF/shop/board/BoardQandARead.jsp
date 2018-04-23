@@ -414,8 +414,7 @@ a {
 							<dd>
 								<a class="write btn_dark btn_box_01"
 									href="${pageContext.request.contextPath}/shop/ReviewForm.do">글쓰기</a>
-								<a
-									href="${pageContext.request.contextPath}/shop/ReviewBoard.do"
+								<a href="${pageContext.request.contextPath}/shop/BoardQandA.do"
 									class="btn_light btn_box_01"> 목록</a>
 							</dd>
 						</dl>

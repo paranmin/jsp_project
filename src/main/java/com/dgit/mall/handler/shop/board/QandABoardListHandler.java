@@ -19,19 +19,23 @@ public class QandABoardListHandler extends ShopCommandHandler {
 		SqlSession sqlSession = null;
 		try {
 			request.setAttribute("contentPage", "board/BoardQandA.jsp");
-			request.setAttribute("sub_menu", "list");
-
+			System.out.println("l1");
 			sqlSession = MySqlSessionFactory.openSession();
 			BoardDao Dao = sqlSession.getMapper(BoardDao.class);
-
+			System.out.println("l2");
 			List<Board> list = Dao.selectByAllQandABoard();
+			System.out.println("l3");
 			request.setAttribute("list", list);
+			System.out.println("l4");
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("l5");
 			e.printStackTrace();
+			
 		} finally {
 			sqlSession.close();
+			System.out.println("l6");
 		}
 		return VIEW_FRONT_PATH + "board/BoardQandA.jsp";
 	}
