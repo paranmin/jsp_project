@@ -11,10 +11,10 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="/jsp_project/css/base.css" media="all" />
-<link rel="stylesheet" href="/jsp_project/css/main.css" media="all" />
-<script src="../js/jquery-1.12.4.min.js"></script>
-<script src="../js/base.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css" media="all" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" media="all" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/base.js"></script>
 <title>SJ JEWELRY</title>
 <style>
 * {
@@ -225,7 +225,6 @@ div#resultPrice p{
     right: 20px;
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <%
 	Product pro = (Product)request.getAttribute("pro");
 	List<Option> opt = (List<Option>)request.getAttribute("opt");
@@ -455,7 +454,7 @@ $(function(){
 					<ul>
 						<li><a href="#detail" id="detail">Detail</a></li>
 						<li><a href="#review">Review</a></li>
-						<li><a href="#qa">Q&A</a></li>
+						<li><a href="#qa">Q&amp;A</a></li>
 					</ul>    
 				</div>
 				<c:forEach var="imglist" items="${img }">
@@ -488,15 +487,10 @@ $(function(){
 						<tr>
 							<td>${option.poName }</td>
 							<td>
-								<c:if test="${status.first }">
-								<select id="select${status.index }">
-								</c:if>
-								<c:if test="${!status.first }">
-								<select id="select${status.index }" disabled="disabled">
-								</c:if>
+								<select id="select${status.index }" <c:if test="${!status.first }"> disabled="disabled" </c:if>>
 									<option>==선택하세요==</option>
 									<c:forEach var="result" items="${res }" begin="${fir}" end="${end}">
-										<option value="${result.podValue}" data-cost="${result.podCost}">${result.podValue}
+										<option value="${result.podValue}" data-cost="${result.podCost}" data-podno="${result.podNo}">${result.podValue}
 										<c:if test="${result.podCost !=0}">
 										 / <fmt:formatNumber value="${result.podCost}" pattern="#,###원"/>
 										</c:if>
@@ -574,7 +568,7 @@ $(function(){
 					<ul>
 						<li><a href="#detail">Detail</a></li>
 						<li><a href="#review">Review</a></li>
-						<li><a href="#qa" id="qa">Q&A</a></li>
+						<li><a href="#qa" id="qa">Q&amp;A</a></li>
 					</ul>
 				</div>
 				<div class="detail_menu">

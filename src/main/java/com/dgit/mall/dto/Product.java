@@ -14,23 +14,30 @@ public class Product {
 	private String useOption; // 옵션유무
 	private String category;
 	private String use;
-	
+
 	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Product(int prdNo) {
-		super();
 		this.prdNo = prdNo;
 	}
 
-	public String getUse() {
-		return use;
-	}
-	public void setUse(String use) {
+	public Product(int prdNo, String name, String subDesc, String mainImg, String content, int cost, String discountPer,
+			int sellingPrice, int stock, String useOption, String category, String use) {
+		this.prdNo = prdNo;
+		this.name = name;
+		this.subDesc = subDesc;
+		this.mainImg = mainImg;
+		this.content = content;
+		this.cost = cost;
+		this.discountPer = discountPer;
+		this.sellingPrice = sellingPrice;
+		this.stock = stock;
+		this.useOption = useOption;
+		this.category = category;
 		this.use = use;
 	}
+
 	public int getPrdNo() {
 		return prdNo;
 	}
@@ -119,6 +126,14 @@ public class Product {
 		this.category = category;
 	}
 
+	public String getUse() {
+		return use;
+	}
+
+	public void setUse(String use) {
+		this.use = use;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
@@ -126,5 +141,5 @@ public class Product {
 				prdNo, name, subDesc, mainImg, content, cost, discountPer, sellingPrice, stock, useOption, category,
 				use);
 	}
-	
+
 }

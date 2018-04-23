@@ -31,7 +31,9 @@ public class ProductListHandler extends ShopCommandHandler {
 				req.setAttribute("list", prolist);
 				req.setAttribute("best", bestlist);
 			} else {
-				prolist = dao.selectCateProduct(cate);
+				Product product = new Product();
+				product.setCategory(cate);
+				prolist = dao.selectCateProduct(product);
 				bestlist = dao.selectBestCateProduct(cate);
 				req.setAttribute("list", prolist);
 				req.setAttribute("best", bestlist);
