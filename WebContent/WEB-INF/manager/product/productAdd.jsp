@@ -273,37 +273,81 @@ $(function(){
  			$("p.submit").append($hidden);
  		});
  		
- 		if($("input#name").val()==""){
+ 		if($("input#name").val()=="") {
 			$("input#name").next().css("display","block");
 			return false;
-		}else if($("input#cost").val()==""){
+		} else if($("input#cost").val()=="") {
 			$("input#cost").next().css("display","block");
 			return false;
-		}else if(!numberCheck.test($("input#cost").val())){
+		} else if(!numberCheck.test($("input#cost").val())) {
 			$("input#cost").next().next().css("display","block");
 			return false;
-		}else if($("input#price").val()==""){
+		} else if($("input#price").val()=="") {
 			$("input#price").next().css("display","block");
 			return false;
-		}else if(!numberCheck.test($("input#price").val())){
+		} else if(!numberCheck.test($("input#price").val())) {
 			$("input#price").next().next().css("display","block");
 			return false;
-		}else if($("input#stock").val()==""){
+		} else if($("input#stock").val()=="") {
 			$("input#stock").next().css("display","block");
 			return false;
-		}else if(!numberCheck.test($("input#stock").val())){
+		} else if(!numberCheck.test($("input#stock").val())) {
 			$("input#stock").next().next().css("display","block");
 			return false;
-		}else if($("input[name='mainimg']").val()==""){
+		} else if($("input[name='mainimg']").val()=="") {
 			$("input[name='mainimg']").next().css("display","block");
 			return false;
-		}else if($("input[name='files']").val()==""){
+		} else if($("input[name='files']").val()=="") {
 			$("input[name='files']").next().next().css("display","block");
 			return false;
 		}
- 		
- 		var count = 0;
- 		if($("input[type='radio']:checked").val()==1){
+
+		var count = 0;
+		if ($("input[type='radio']:checked").val() == 1) {
+			$("table#proOption").find("td").each(function(i, obj) {
+				var $op_name = $(this).find("input.op_name"),
+					$op_desc = $(this).find("input.op_desc"),
+					$op_cost = $(this).find("input.op_cost"),
+					$op_stock = $(this).find("input.op_stock");
+
+				if ($op_name.length == 1) {
+					if($op_name.val().trim() == ""){
+						$op_name.next().css("display","block");
+						count++;
+					}
+				}
+				if ($op_desc.length == 1) {
+					if($op_desc.val().trim() == ""){
+						$op_desc.next().css("display","block");
+						count++;
+					}
+				}
+				if ($op_cost.length == 1) {
+					if ($op_cost.val().trim() == "") {
+						$op_cost.next().css("display","block");
+						count++;
+					} else if(!numberCheck.test($op_cost.val())){
+						$op_cost.next().next().css("display","block");
+						count++;
+					}
+				}
+				if ($op_stock.length == 1) {
+					if ($op_stock.val().trim() == "") {
+						$op_stock.next().css("display","block");
+						count++;
+					} else if(!numberCheck.test($op_stock.val())){
+						$op_stock.next().next().css("display","block");
+						count++;
+					}
+				}
+			});
+		}
+		if (count > 0) {
+			return false;
+		}
+		return false;
+		/* var count = 0;
+ 		if($("input[type='radio']:checked").val() == 1) {
  			$("table#proOption").find("td").each(function(i,obj){
  				if($(this).find("input.op_name")!=null){
  					if($(this).find("input.op_name").val()==""){
@@ -332,10 +376,9 @@ $(function(){
  		 				count++; 	
  		 			}
  				}
- 			}
- 	 	});
+ 			});
  			
-			sumStock=0;
+ 			sumStock=0;
  	 		$("input.op_stock").each(function(i,obj){
  	 			var eq4 = Number($(obj).val());
  	 			sumStock += eq4;   
@@ -352,8 +395,8 @@ $(function(){
 	 		 	alert("상품이 등록되었습니다.");
 	 		 	return false;
 			}
- 		}
- 		
+ 	 	} */
+
  		$("form").submit();
 	 	alert("상품이 등록되었습니다.");
 	 	return false;
