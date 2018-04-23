@@ -19,9 +19,15 @@ fieldset.productAdd input[type='text']{
 	width:400px;
 }
 fieldset.productAdd input#price{
+	text-align:right;
+	width:100px;
+}
+fieldset.productAdd input#stock{
+	text-align:right;
 	width:100px;
 }
 fieldset.productAdd input#cost{
+	text-align:right;
 	width:100px;
 }
 p.submit{
@@ -210,18 +216,34 @@ $(function(){
  		removeTarget.remove();
  		return false;
  	});
+ 	var sumStock=0;
  	$("input[type='submit']").click(function(){
  		$("table#proOption").find(".parent").each(function(i,obj){
  			var span = $(obj).children("td").eq(0).prop("rowspan");
- 			console.log(span);
  			var $hidden = $("<input type='hidden' name='span'>");
  			$($hidden).val(span);
  			$("p.submit").append($hidden);
  		});
- 		$("form").submit();
- 		alert("상품이 등록되었습니다.")
+ 		
+ 		sumStock=0;
+ 		$("input.op_stock").each(function(i,obj){
+ 			var eq4 = Number($(obj).val());
+ 			sumStock += eq4;   
+ 		});
+ 		if(sumStock == $("input#stock").val()){
+ 			$("form").submit();
+ 	 		alert("상품이 등록되었습니다.");
+ 		}else{
+ 			alert("재고를 확인해주세요.");
+ 		}
  		return false;
- 		//$.post("add.do", $("#form").serialize());
+ 	});
+ 	$("select#discount").change(function(){
+ 		var cost = $("input#cost").val();
+ 		var sel = $(this).children("option:selected").text();
+ 		var select = sel.split("%");
+ 		var selingPrice = cost-(cost*select[0]/100);
+ 		$("input#price").val(selingPrice);
  	});
 });
 </script>
@@ -262,7 +284,7 @@ $(function(){
 			</p>
 			<p>
 				<label>할인</label>
-				<select name="discount">
+				<select name="discount" id="discount">
 					<option>0%</option>
 					<option>7%</option>
 					<option>10%</option>
@@ -277,7 +299,7 @@ $(function(){
 			</p>
 			<p>
 				<label>재고</label>
-				<input type="text" name="stock">
+				<input type="text" name="stock" id="stock">개
 			</p>
 			<p>
 				<label>상품 메인 이미지</label>

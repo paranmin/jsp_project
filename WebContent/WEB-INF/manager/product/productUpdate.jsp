@@ -77,6 +77,9 @@ table#proOption input.op_name{
 table#proOption input.op_cost{
 	width:150px;
 }
+table#proOption input.op_stock{
+	width:150px;
+}
 table#proOption tr:first-child td{
 	text-align: left;
 	border:none;
@@ -238,6 +241,7 @@ $(function(){
  		removeTarget.remove();
  		return false;
  	});
+ 	var sumStock=0;
  	$("input[type='submit']").click(function(){
  		$("table#proOption").find(".parent").each(function(i,obj){
  			var span = $(obj).children("td").eq(0).prop("rowspan");
@@ -246,8 +250,17 @@ $(function(){
  			$($hidden).val(span);
  			$("p.submit").append($hidden);
  		});
- 		$("form").submit();
- 		alert("상품 정보가 수정되었습니다.");
+ 		sumStock=0;
+ 		$("input.op_stock").each(function(i,obj){
+ 			var eq4 = Number($(obj).val());
+ 			sumStock += eq4;   
+ 		});
+ 		if(sumStock == $("input#stock").val()){
+ 			$("form").submit();
+ 	 		alert("상품정보가 수정되었습니다.");
+ 		}else{
+ 			alert("재고를 확인해주세요.");
+ 		}
  		return false;
  	});
  	
@@ -288,6 +301,13 @@ $(function(){
  		console.log("val : "+$("input#deleteDetailImage").val()); 
  		$(this).parent().remove();
  		return false;   
+ 	});
+ 	$("select#discount").change(function(){
+ 		var cost = $("input#cost").val();
+ 		var sel = $(this).children("option:selected").text();
+ 		var select = sel.split("%");
+ 		var selingPrice = cost-(cost*select[0]/100);
+ 		$("input#price").val(selingPrice);
  	});
 });
 	window.onload = function(){
@@ -339,7 +359,7 @@ $(function(){
 			</p>
 			<p>
 				<label>할인</label>
-				<select name="discount">
+				<select name="discount" id="discount">
 					<option <c:if test="${pro.discountPer=='0%' }"> selected="selected" </c:if>>0%</option>
 					<option <c:if test="${pro.discountPer=='7%' }"> selected="selected" </c:if>>7%</option>
 					<option <c:if test="${pro.discountPer=='10%' }"> selected="selected" </c:if>>10%</option>
@@ -395,6 +415,7 @@ $(function(){
 						<th id="opname">옵션명</th>
 						<th id="opvalue">옵션값</th>
 						<th id="opprice">옵션가</th>
+						<th id="opstock">재고</th>
 						<th id="empty"></th>
 					</tr>
 					<c:set value="0" var="fir"/>
@@ -410,6 +431,7 @@ $(function(){
 							<c:forEach var="result" items="${res }" begin="${fir}" end="${end}" varStatus="sta">
 									<td><input type="text" name="op_desc" class="op_desc" value="${result.podValue}"></td>
 									<td><input type="text" name="op_cost" class="op_cost" value="${result.podCost}"></td>
+									<td><input type="text" name="op_stock" class="op_stock" value="${result.podStock}"></td>
 									<c:if test="${sta.first }">
 										<td>
 											<button class="op_add">+추가</button>    
