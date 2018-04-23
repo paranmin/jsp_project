@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.CartDao;
+import com.dgit.mall.dao.MemberDao;
 import com.dgit.mall.dao.OrderDao;
+import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Cart;
 import com.dgit.mall.dto.Member;
 import com.dgit.mall.dto.OrderProduct;
@@ -39,16 +41,16 @@ public class ShopOrderHandler extends ShopCommandHandler {
 				map.put("mNo", loginMember.getNo());
 				map.put("ctNo", ctno);
 				List<Cart> list = dao.selectByselectedCart(map);
-				System.out.println(list);
+				Member member = MemberService.getInstance().selectByMemberNo(loginMember.getNo());
 				request.setAttribute("list", list);
+				request.setAttribute("member", member);
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
 			}
 			
 			return VIEW_FRONT_PATH + "order/orderPage.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
-			String productPr = request.getParameter("orderChargePrice");//상품가격
+			/*String productPr = request.getParameter("orderChargePrice");//상품가격
 			String delfee = request.getParameter("delfee");//배송비
 			String useCpPrice = request.getParameter("finalPrice");//총가격
 			String payType = request.getParameter("selorderway");//결제타입
@@ -92,7 +94,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 				sql.close();
 			}
 			
-			
+			*/
 			
 			
 			

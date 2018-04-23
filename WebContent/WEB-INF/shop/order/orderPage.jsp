@@ -1,8 +1,12 @@
+<%@page import="com.dgit.mall.dto.Member"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%
+    	Member member = (Member)request.getAttribute("member");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,6 +88,12 @@
 	width: 195px;
 	}
 	span.toalpriceorder{
+		color:red;
+		font-weight: bold;
+		font-size: 17px;
+	}
+	span.orderChargePrice{
+		color:red;
 		font-weight: bold;
 		font-size: 15px;
 	}
@@ -91,14 +101,26 @@
 	    font-size:  18px;
 	    color: red;
 	}
+	img.sizeImg{
+	    width:  100px;
+	    /* height:  100px; */
+	}
+	td p.productname{
+   	 font-weight:  bold;
+	}
+	.unusedelFee{
+		display: none;
+	}
+	
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="../../css/base.css" media="all" />
-<link rel="stylesheet" href="../../css/orderPage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderPage.css">   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="${pageContext.request.contextPath}/js/order.js"></script>
 <script type="text/javascript">
 
 	    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -142,50 +164,7 @@
 
 </script>
 <script type="text/javascript">
-$(function(){
-	$(".checksameus").click(function(){
-		var flag = $(".checksameus:checked").val();
-		
-		if($(this).val()==flag){
-			var name = $(".username").val();
-			var middleNum = $(".middleNum").val();
-			var lastNum = $(".lastNum").val();
-			
-			$("#orderusername").val(name);
-			$("#phoneNum1").val(middleNum);
-			$("#phoneNum2").val(lastNum);
-		}else{
-			$("#orderusername").val("");
-			$("#phoneNum1").val("");
-			$("#phoneNum2").val("");
-		}
-		
-	});
-	
-	var value1 = parseInt($(".orderChargePrice").text());
-	var value2 =  parseInt($(".delfee").text());
-	
-	var price = $(".toalpriceorder").text(value1+value2);
-	
-	$(".btnCoupon").click(function(){
-		var price = $(".toalpriceorder").text();
-		 window.open('coupon.do?price='+price, '쿠폰 적용', 'width=650, height=550');
-		 return false;
-	})
-	if($(".optionYN").text()!=""){     
-		$("input:hidden[name='optionValue']").val("1");
-	}else if($(".optionYN").text()==""){
-		$("input:hidden[name='optionValue']").val("0");
-	}
-	var optionName = $(".optionYN").text();
-	$("input:hidden[name='optionYN']").val(optionName);
-	
-	
-	var price1 = $(".productPrice").text();
-	$("input:hidden[name='productPrice']").val(price1);
-	var count1 = $(".productCount").text();
-	$("input:hidden[name='productCount']").val(count1);
-})
+
 function getReturnValue(returnValue) {
 	 var p = $.parseJSON(returnValue);
 	 $(".inputCoupon").val(p.key1);
@@ -222,43 +201,69 @@ function getReturnValue(returnValue) {
 									<th class="count">수량</th>
 									<th class="count">가격</th>
 								</tr>
-								<c:if test=""></c:if>
+								<c:if test="${list.size()==0 }">
 									<tr class="proContent">
-										<td><img src="../../images/J1.jpg" class="proImg"
-											name="proImg"></td>
-										<td class="proNameTable">
-											<table>
-												<tr>
-													<td><p name="productname">${prdName }</p></td>
-												</tr>
-												<tr>
-													<td class="proNamehr">옵션:<span class="optionYN">[EX---]</span></td>
-												</tr>
-											</table> <input type="hidden" name="proNo" value="2"> <!-- 상품번호 -->
-											<input type="hidden" name="optionYN"> <input
-											type="hidden" name="optionValue" class="ttt">
-										</td>
-										<td>
-											<p>
-												<span class="productCount">1</span>개
-											</p> <input type="hidden" name="productCount">
-										</td>
+										<td colspan="4">장바구니에 담긴 상품이 없습니다.상품을 담아주세요.</td>
+									</tr>
+								</c:if>
+								<c:if test="${list.size()>0 }">
+									<c:forEach items="${list }" var="items">
+										<tr class="proContent">
+											<td><img src="${pageContext.request.contextPath}/upload/${items.product.mainImg }" class="sizeImg">
+												<input type="hidden" name="chkAll" value="${items.no }"><!-- 카트번호 -->
+											</td>
+											<td class="proNameTable">
+												<table>
+													<tr>
+														<td><p class="productname">${items.product.name }</p></td>
+													</tr>
+													<c:if test="${items.prdOpName==null || items.prdOpName==''}">
+														<tr>
+															<td></td>
+														</tr>
+													</c:if>
+													<c:if test="${items.prdOpName!=null && items.prdOpName!=''}">
+														<tr>
+															<td class="proNamehr">옵션:<span class="optionname">${items.prdOpName }</span></td>
+														</tr>
+													</c:if>
+												</table> <input type="hidden" name="proNo" value="${items.product.prdNo }"> <!-- 상품번호 -->
+												<input type="hidden" name="optionYN"> <input
+												type="hidden" name="optionValue" class="ttt">
+											</td>
+											<td>
+												<p>
+													<span class="productCount">${items.prdQuantity }</span>개
+												</p> <input type="hidden" name="productCount">
+											</td>
 
-										<td>
+											<td>
+												<p>
+													<span class="productPrice" data-price="${items.prdOpPrice }">${items.prdOpPrice*items.prdQuantity }</span>원
+													<input type="hidden" name="productPrice" value="${items.prdOpPrice*items.prdQuantity }">
+												</p> 
+											</td>
+										</tr>
+									</c:forEach>
+									<tr class="allProPrice">
+										<td colspan="5" class="usedelFee">
 											<p>
-												<span class="productPrice">1500</span>원
-											</p> <input type="hidden" name="productPrice">
+												결제 금액 : <span class="orderChargePrice"></span>원+배송료 <span
+													class="delfee">2500</span>원 = <span class="toalpriceorder"
+													name="toalpriceorder"></span>원 <input type="hidden" name="orderChargePrice">
+												<!-- 결제금액  -->
+												<input type="hidden" value="2500" name="delfee">
+												<!--배송비 -->
+											</p>
+										</td>
+										<td colspan="5" class="unusedelFee">
+											<p>
+												결제 금액 : <span class="orderChargePrice"></span>원<input type="hidden" name="orderChargePrice">
+											</p>
 										</td>
 									</tr>
-								<tr class="allProPrice">
-									<td colspan="5"><p>
-											결제 금액 : <span class="orderChargePrice">25000</span>원+배송료 <span
-												class="delfee">2500</span>원 = <span class="toalpriceorder"
-												name="toalpriceorder"></span>원
-												<input type="hidden" value="25000" name="orderChargePrice"> <!-- 결제금액  -->
-												<input type="hidden" value="2500" name="delfee"><!--배송비 -->
-										</p></td>
-								</tr>
+								</c:if>
+
 							</table>
 						</div>
 					</div>
@@ -269,11 +274,15 @@ function getReturnValue(returnValue) {
 								<tr>
 									<td class="grayBox">이름</td>
 									<td class="paddingInput"><input type="text" name="name"
-										readonly="readonly" value="이소정" class="username"></td>
+									
+										readonly="readonly" value="${member.name }" class="username"></td>
 									<td class="grayBox">연락처</td>
-									<td class="paddingInput"><input type="text"
-										name="gongIlgong" readonly="readonly" value="010"> - <input
-										type="tel" name="middleNum" class="middleNum" value="2222">
+									<%
+										//if(member.getPhone() != null && )
+									%>
+									<td class="paddingInput">
+										<input type="text" name="gongIlgong" readonly="readonly" value="010"> - 
+										<input type="tel" name="middleNum" class="middleNum" value="2222">
 										- <input type="tel" name="lastNum" class="lastNum"
 										value="2222"></td>
 								</tr>
@@ -288,6 +297,7 @@ function getReturnValue(returnValue) {
 								</tr>
 							</table>
 						</div>
+						
 						<div class="addressInfo">
 							<p class="adrInfo">배송지 정보</p>
 							<input type="checkbox" name="checksamecus" class="checksameus">주문자

@@ -61,16 +61,31 @@
 		value(#{poNo}, #{podValue},#{podCost},${podStock})
 	</insert>
 	<select id="selectAllProduct" resultMap="productResult">
-		select * from product order by prd_no desc
+		select * from product 
+		<if test="use!=null">
+			where prd_use=${use}
+		</if>
+		order by prd_no desc
 	</select>
 	<select id="selectCateProduct" resultMap="productResult">
-		select * from product where prd_category=#{category} order by prd_no desc
+		select * from product where prd_category=#{category}
+		<if test="use!=null">
+			and prd_use=${use}
+		</if>
+		order by prd_no desc
 	</select>
 	<select id="selectNameProduct" resultMap="productResult">
 		select * from product where prd_name like CONCAT("%",#{name},"%")
+		<if test="use!=null">
+			and prd_use=${use}
+		</if>
+		order by prd_no desc
 	</select>
 	<select id="selectNCProduct" resultMap="productResult">
-		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%") 
+		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%")
+		<if test="use!=null">
+			and prd_use=${use}
+		</if>
 		order by prd_no desc
 	</select>
 	<select id="SelectProductByno" resultMap="productResult">

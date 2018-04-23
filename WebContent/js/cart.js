@@ -57,6 +57,15 @@ $(function(){
 				$("input:hidden[name='prdsPrice2']").val(priceSum2);//상품 합 금액 인풋
 				var deliveryFee = parseInt($(".deliveryfee").text());
 				$(".prdplusdel").text(priceSum2+deliveryFee); //상품+배송비
+				
+				var sumprice2 = $("input:hidden[name='prdsPrice']").val();
+				if(sumprice2>35000){
+					$(".firstTd").css("display","none");
+					$(".secondTd").css("display","table-cell");
+				}else if(sumprice2 < 35000){
+					$(".firstTd").css("display","table-cell");
+					$(".secondTd").css("display","none");   
+				}
 		})
 		
 		//수량 카운트 작업
@@ -72,7 +81,7 @@ $(function(){
 				if(count>stock){
 					alert("이 상품은 "+stock+"까지 주문할 수 있습니다.");
 					count = stock;
-					$(this).next().val(count);
+					$(this).next().val(count);					
 					return false;   
 				}
 				var PrdtotalPrice = countPr+prSum;
@@ -87,6 +96,14 @@ $(function(){
 				$("input:hidden[name='prdsPrice2']").val(total);
 				var delivery = parseInt($(".deliveryfee").text());
 				$(".prdplusdel").text(total+delivery);
+				var sumprice2 = $("input:hidden[name='prdsPrice']").val();
+				if(sumprice2>35000){
+					$(".firstTd").css("display","none");
+					$(".secondTd").css("display","table-cell");
+				}else if(sumprice2 < 35000){
+					$(".firstTd").css("display","table-cell");
+					$(".secondTd").css("display","none");   
+				}
 				return false;
 			})
 			
@@ -116,9 +133,18 @@ $(function(){
 			$("input:hidden[name='prdsPrice2']").val(total);
 			var delivery = parseInt($(".deliveryfee").text());
 			$(".prdplusdel").text(total+delivery);
+			var sumprice2 = $("input:hidden[name='prdsPrice']").val();
+			if(sumprice2>35000){
+				$(".firstTd").css("display","none");
+				$(".secondTd").css("display","table-cell");
+			}else if(sumprice2 < 35000){
+				$(".firstTd").css("display","table-cell");
+				$(".secondTd").css("display","none");   
+			}
 			return false;
 		})
 		//배송비 작업
+			
 			var sumprice1 = $("input:hidden[name='prdsPrice2']").val();
 			if(sumprice1 > 35000){
 				$(".firstTd").css("display","none");
@@ -146,8 +172,9 @@ $(function(){
 			})
 			return false;
 		})
-	
 		
+		//갯수 업데이트
+	
 		
 		//장바구니 비우기
 		$("#clean_cart").click(function(){

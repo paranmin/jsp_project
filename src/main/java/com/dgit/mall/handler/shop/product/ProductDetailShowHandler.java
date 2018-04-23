@@ -84,7 +84,6 @@ public class ProductDetailShowHandler extends ShopCommandHandler {
 					cart.setPrdOpName(opname[i]);
 					cart.setPrdQuantity(count.get(i));
 					cart.setPrdOpPrice(Integer.parseInt(optionPrice[i]));
-					System.out.println(cart);
 					dao.insertCart(cart);
 				}
 				sqlsession.commit();

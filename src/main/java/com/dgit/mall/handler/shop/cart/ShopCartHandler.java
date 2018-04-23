@@ -1,6 +1,8 @@
 package com.dgit.mall.handler.shop.cart;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,27 +34,43 @@ public class ShopCartHandler extends ShopCommandHandler {
 				member.setNo(loginMember.getNo());
 				cart.setMember(member);
 				//System.out.println("[no =======================]"+loginMember.getNo());
-				List<Cart> list = dao.selectAllCart(loginMember.getNo()); 
+				List<Cart> list = dao.selectAllCart(loginMember.getNo());
 				request.setAttribute("list", list);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}finally {
 				sql.close();
 			}
-			
+
 			return VIEW_FRONT_PATH + "product/cartPage.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
-
-			String[] ctNo = request.getParameterValues("chkAll");
-			for(int i=0; i<ctNo.length; i++){
-				System.out.println(ctNo[i]);
+			// 갯수 업데이트
+			SqlSession sql = null;
+			String[] cartNo = request.getParameterValues("chkAll");
+			String mno = request.getParameter("buyingMem");
+			String[] count = request.getParameterValues("cartnum");
+			int mNo = Integer.parseInt(mno);
+			try {
+				sql = MySqlSessionFactory.openSession();
+				CartDao dao = sql.getMapper(CartDao.class);
+				HttpSession session = request.getSession(false);
+				for (int i = 0; i < cartNo.length; i++) {
+					for (int n = 0; n < count.length; n++) {
+						Map<String, Object> map = new HashMap<>();
+						map.put("prdCount", count[i]);
+						map.put("ctNo", Integer.parseInt(cartNo[i]));
+						map.put("no", mNo);
+						dao.updateCartPrdCount(map);
+						sql.commit();
+					}
+				}
+				session.setAttribute("ctNo", cartNo);
+				response.sendRedirect(request.getContextPath() + "/shop/order/order.do");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				sql.close();
 			}
-			HttpSession session = request.getSession(false);
-			//장바구니 테이블 값 넣기
-		
-			session.setAttribute("ctNo", ctNo);
-			response.sendRedirect(request.getContextPath()+"/shop/order/order.do");
-			return null;
 		}
 		return null;
 	}
