@@ -42,7 +42,10 @@ p.submit input{
 p.submit input[type='submit']{
 	background: wheat;
 }
-fieldset.productAdd p{
+/* fieldset.productAdd p{
+	margin:20px;
+} */
+fieldset.productAdd div{
 	margin:20px;
 }
 fieldset.productAdd button{
@@ -104,6 +107,10 @@ table#proOption td{
 }
 p.error{
 	color:red;
+	display:none;
+}
+td#smallfont{
+	font-size: small;
 }
 </style>    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -149,22 +156,40 @@ $(function(){
 		var td1 = $("<td>");
 		var td1in = $("<input type='text' name='op_name' class='op_name'>");
 		var td1inbtn = $("<button class='op_nameDel'>");
+		var td1error = $("<p class='error'>");
 		var td2 = $("<td>");
 		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
+		var td2error = $("<p class='error'>");
 		var td3 = $("<td>");
 		var td3in = $("<input type='text' name='op_cost' class='op_cost'>");
+		var td3error = $("<p class='error'>");
+		var td3error2 = $("<p class='error'>");
 		var td4 = $("<td>");
 		var td4in = $("<input type='text' name='op_stock' class='op_stock'>");
+		var td4error = $("<p class='error'>");
+		var td4error2 = $("<p class='error'>");
 		var td5 = $("<td>");
 		var td5in = $("<button class='op_add'>");
 		
 		$(td1inbtn).text("삭제");
+		$(td1error).text("*옵션명을 입력하세요.");
+		$(td2error).text("*옵션내용을 입력하세요.");
+		$(td3error).text("*옵션가를 입력하세요.");
+		$(td3error2).text("*숫자만 입력하세요.");
+		$(td4error).text("*옵션재고를 입력하세요.");
+		$(td4error2).text("*숫자만 입력하세요.");
 		$(td5in).text("+추가");
 		$(td1).append(td1in);
+		$(td1).append(td1error);
 		$(td1).append(td1inbtn);
 		$(td2).append(td2in);
+		$(td2).append(td2error);
 		$(td3).append(td3in);
+		$(td3).append(td3error);
+		$(td3).append(td3error2);
 		$(td4).append(td4in);
+		$(td4).append(td4error);
+		$(td4).append(td4error2);
 		$(td5).append(td5in);
 		$($tr).append(td1);
 		$($tr).append(td2);
@@ -188,16 +213,31 @@ $(function(){
  		var $tr = $("<tr>");
 		var td2 = $("<td>");
 		var td2in = $("<input type='text' name='op_desc' class='op_desc'>");
+		var td2error = $("<p class='error'>");
 		var td3 = $("<td>");
 		var td3in = $("<input type='text' name='op_cost' class='op_cost'>");
+		var td3error = $("<p class='error'>");
+		var td3error2 = $("<p class='error'>");
 		var td4 = $("<td>");
 		var td4in = $("<input type='text' name='op_stock' class='op_stock'>");
+		var td4error = $("<p class='error'>");
+		var td4error2 = $("<p class='error'>");
 		var td5 = $("<td>");
 		var td5in = $("<button type='button' class='op_del'>");
 		$(td5in).text("-삭제");
+		$(td2error).text("*옵션내용을 입력하세요.");
+		$(td3error).text("*옵션가를 입력하세요.");
+		$(td3error2).text("*숫자만 입력하세요.");
+		$(td4error).text("*옵션재고를 입력하세요.");
+		$(td4error2).text("*숫자만 입력하세요.");
 		$(td2).append(td2in);
+		$(td2).append(td2error);
 		$(td3).append(td3in);
+		$(td3).append(td3error);
+		$(td3).append(td3error2);
 		$(td4).append(td4in);
+		$(td4).append(td4error);
+		$(td4).append(td4error2);
 		$(td5).append(td5in);
 		$($tr).append(td2);
 		$($tr).append(td3);
@@ -223,6 +263,9 @@ $(function(){
  	
  	var sumStock=0;
  	$("input[type='submit']").click(function(){
+ 		var numberCheck = /^[-]?[0-9]*$/;
+ 		$(".error").css("display", "none");
+ 		
  		$("table#proOption").find(".parent").each(function(i,obj){
  			var span = $(obj).children("td").eq(0).prop("rowspan");
  			var $hidden = $("<input type='hidden' name='span'>");
@@ -230,44 +273,92 @@ $(function(){
  			$("p.submit").append($hidden);
  		});
  		
- 		if($("input#option").val()==1){
- 			sumStock=0;
- 	 		$("input.op_stock").each(function(i,obj){
- 	 			var eq4 = Number($(obj).val());
- 	 			sumStock += eq4;   
- 	 		});
- 	 		if(sumStock != $("input#stock").val()){
- 	 			alert("재고를 확인해주세요.");
- 	 		}
- 	 		if($("input.op_name").val()==""){
- 				$("input.op_name").next().css("display","block");
- 			}else if($("input.op_desc").val()==""){
- 				$("input.op_desc").next().css("display","block");
- 			}else if($("input.op_cost").val()==""){
- 				$("input.op_cost").next().css("display","block");
- 			}else if($("input.op_stock").val()==""){
- 				$("input.op_stock").next().css("display","block");
- 			}
- 		}
- 		
  		if($("input#name").val()==""){
 			$("input#name").next().css("display","block");
 			return false;
 		}else if($("input#cost").val()==""){
 			$("input#cost").next().css("display","block");
 			return false;
+		}else if(!numberCheck.test($("input#cost").val())){
+			$("input#cost").next().next().css("display","block");
+			return false;
 		}else if($("input#price").val()==""){
 			$("input#price").next().css("display","block");
 			return false;
+		}else if(!numberCheck.test($("input#price").val())){
+			$("input#price").next().next().css("display","block");
+			return false;
 		}else if($("input#stock").val()==""){
-			$("input#price").next().css("display","block");
+			$("input#stock").next().css("display","block");
+			return false;
+		}else if(!numberCheck.test($("input#stock").val())){
+			$("input#stock").next().next().css("display","block");
+			return false;
+		}else if($("input[name='mainimg']").val()==""){
+			$("input[name='mainimg']").next().css("display","block");
+			return false;
+		}else if($("input[name='files']").val()==""){
+			$("input[name='files']").next().next().css("display","block");
 			return false;
 		}
  		
- 		/* $("form").submit(); */
+ 		var count = 0;
+ 		if($("input[type='radio']:checked").val()==1){
+ 			$("table#proOption").find("td").each(function(i,obj){
+ 				if($(this).find("input.op_name")!=null){
+ 					if($(this).find("input.op_name").val()==""){
+ 		 	 			$(this).find("input.op_name").next().css("display","block");
+ 		 				count++;
+ 					}
+ 				}else if($(this).find("input.op_desc")!=null){
+ 					if($(this).find("input.op_desc").val()==""){
+		 				$(this).find("input.op_desc").next().css("display","block");
+		 				count++;
+ 					}
+ 				}else if($(this).find("input.op_cost")!=null){
+ 					if($(this).find("input.op_cost").val()==""){
+	 					$(this).find("input.op_cost").next().css("display","block");
+		 				count++;
+ 					}else if(!numberCheck.test($(this).find("input.op_cost").val())){
+ 		 				$(this).find("input.op_cost").next().next().css("display","block");
+ 		 				count++;
+ 		 			}
+ 				}else if($(this).find("input.op_stock")!=null){
+ 					if($(this).find("input.op_stock").val()==""){
+ 		 				$(this).find("input.op_stock").next().css("display","block");
+ 		 				count++; 
+ 		 			}else if(!numberCheck.test($(this).find("input.op_stock").val())){    
+ 		 				$(this).find("input.op_stock").next().next().css("display","block");
+ 		 				count++; 	
+ 		 			}
+ 				}
+ 			}
+ 	 	});
+ 			
+			sumStock=0;
+ 	 		$("input.op_stock").each(function(i,obj){
+ 	 			var eq4 = Number($(obj).val());
+ 	 			sumStock += eq4;   
+ 	 		});
+ 	 		if(sumStock != $("input#stock").val()){
+ 	 			alert("재고를 확인해주세요.");
+ 	 			return false;
+ 			} 	
+ 	 		
+ 	 		if(count > 0){
+				return false;
+			}else{
+				$("form").submit();
+	 		 	alert("상품이 등록되었습니다.");
+	 		 	return false;
+			}
+ 		}
+ 		
+ 		$("form").submit();
 	 	alert("상품이 등록되었습니다.");
- 		return false;
+	 	return false;
  	});
+ 	
  	$("select#discount").change(function(){
  		var cost = $("input#cost").val();
  		var sel = $(this).children("option:selected").text();
@@ -282,7 +373,7 @@ $(function(){
 	<form action="add.do" enctype="multipart/form-data" method="post" id="form">
 		<fieldset class="productAdd">
 			<legend>상품 등록</legend>
-			<p>
+			<div>
 				<label>상품 카테고리</label>
 				<select name="cate">
 					<option>귀걸이</option>
@@ -297,22 +388,23 @@ $(function(){
 					<option>폰 ACC</option>
 					<option>기타</option>
 				</select>
-			</p>
-			<p>
+			</div>
+			<div>
 				<label>상품 이름</label>
 				<input type="text" name="name" id="name">
 				<p class="error">*상품 이름을 입력하세요.</p>    
-			</p>
-			<p>
+			</div>
+			<div>
 				<label>상품 부가설명</label>
 				<input type="text" name="sub_desc">
-			</p>
-			<p>
+			</div>
+			<div>
 				<label>원가</label>
 				<input type="text" name="cost" id="cost">원
 				<p class="error">*원가 입력하세요.</p>
-			</p>
-			<p>
+				<p class="error">*숫자만 입력하세요.</p>
+			</div>
+			<div>
 				<label>할인</label>
 				<select name="discount" id="discount">
 					<option>0%</option>
@@ -322,41 +414,45 @@ $(function(){
 					<option>30%</option>
 					<option>50%</option>
 				</select>
-			</p>
-			<p>
+			</div>
+			<div>
 				<label>판매가</label>
 				<input type="text" name="price" id="price">원
 				<p class="error">*판매가를 입력하세요.</p>
-			</p>
-			<p>
+				<p class="error">*숫자만 입력하세요.</p>
+			</div>
+			<div>
 				<label>재고</label>
 				<input type="text" name="stock" id="stock">개
 				<p class="error">*재고를 입력하세요.</p>
-			</p>
-			<p>
+				<p class="error">*숫자만 입력하세요.</p>
+			</div>
+			<div>
 				<label>상품 메인 이미지</label>
 				<div class="img_main_plus">
 					<input type="file" name="mainimg" accept="image/*">
 					<p class="error">*메인 이미지를 입력하세요.</p>
 				</div>
-			</p>
-			<p>
+			</div>
+			<div>
 				<label>상품 상세 이미지</label>
 				<div class="img_plus">
 				<input type="file" name="files" accept="image/*">
 				<button class="img_plus">추가</button>
 				<p class="error">*상세 이미지를 입력하세요.</p>
 				</div>
-			</p>
+			</div>
 
-			<p>
+			<div>
 				<label>옵션 유무</label>
-				<input type="radio" id="option" name="use_option" value="1">사용 
-				<input type="radio" id="option" name="use_option" value="0" checked="checked">사용안함
-			</p>
+				<input type="radio" name="use_option" value="1">사용 
+				<input type="radio" name="use_option" value="0" checked="checked">사용안함
+			</div>
 			<table id="proOption">
 				<tr>
-					<td><button id="op_nameadd">+옵션명추가</button></td>
+					<td colspan="5" id="smallfont"><button id="op_nameadd">+옵션명추가</button>
+						*옵션가 : 플러스 옵션일 경우 숫자만 입력, 마이너스 옵션일 경우 숫자 앞에 음수(-)붙여 입력하세요.
+					</td>
 				</tr>
 				<tr>
 					<th id="opname">옵션명</th>
@@ -376,11 +472,13 @@ $(function(){
 					</td>
 					<td>
 						<input type="text" name="op_cost" class="op_cost">
-						<p class="error">*옵션가를<br> 입력하세요.</p>
+						<p class="error">*옵션가를 입력하세요.</p>
+						<p class="error">*숫자만 입력하세요.</p>
 					</td>
 					<td>
 						<input type="text" name="op_stock" class="op_stock">
-						<p class="error">*옵션재고를<br> 입력하세요.</p>
+						<p class="error">*옵션재고를 입력하세요.</p>
+						<p class="error">*숫자만 입력하세요.</p>
 					</td>
 					<td>
 						<button class="op_add">+추가</button>    

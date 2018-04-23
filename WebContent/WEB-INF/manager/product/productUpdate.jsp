@@ -250,17 +250,18 @@ $(function(){
  			$($hidden).val(span);
  			$("p.submit").append($hidden);
  		});
- 		sumStock=0;
- 		$("input.op_stock").each(function(i,obj){
- 			var eq4 = Number($(obj).val());
- 			sumStock += eq4;   
- 		});
- 		if(sumStock == $("input#stock").val()){
- 			$("form").submit();
- 	 		alert("상품정보가 수정되었습니다.");
- 		}else{
- 			alert("재고를 확인해주세요.");
- 		}
+ 		if($("input[type='radio']:checked").val()==1){
+	 		sumStock=0;
+	 		$("input.op_stock").each(function(i,obj){
+	 			var eq4 = Number($(obj).val());
+	 			sumStock += eq4;   
+	 		});
+	 		if(sumStock != $("input#stock").val()){
+ 	 			alert("재고를 확인해주세요.");
+ 	 		}
+ 		};
+ 		$("form").submit();
+	 	alert("상품정보가 수정되었습니다.");
  		return false;
  	});
  	
