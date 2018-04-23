@@ -10,7 +10,7 @@ public class Order {
 	private int deliveryFee;
 	private String ordMessage;
 	private PayType type;
-	private Member memberNo;
+	private Member member;
 	public Order(OrderProduct ordNo, int ordPrice, int ordCouponPrice, String ordOption, int deliveryFee,
 			String ordMessage, PayType type, Member memberNo) {
 		super();
@@ -21,7 +21,7 @@ public class Order {
 		this.deliveryFee = deliveryFee;
 		this.ordMessage = ordMessage;
 		this.type = type;
-		this.memberNo = memberNo;
+		this.member = memberNo;
 	}
 	public Order() {
 	}
@@ -68,16 +68,16 @@ public class Order {
 		this.type = type;
 	}
 	public Member getMemberNo() {
-		return memberNo;
+		return member;
 	}
 	public void setMemberNo(Member memberNo) {
-		this.memberNo = memberNo;
+		this.member = memberNo;
 	}
 	@Override
 	public String toString() {
 		return "Order [ordNo=" + ordNo + ", ordPrice=" + ordPrice + ", ordCouponPrice=" + ordCouponPrice
 				+ ", ordOption=" + ordOption + ", deliveryFee=" + deliveryFee + ", ordMessage=" + ordMessage + ", type="
-				+ type + ", memberNo=" + memberNo + "]";
+				+ type + ", memberNo=" + member + "]";
 	}
 	
 

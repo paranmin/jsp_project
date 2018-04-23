@@ -84,10 +84,17 @@ td.emptycart p {
 													<tr>
 														<td class="prdName">${items.product.name }</td>
 													</tr>
-													<tr>
-														<td class="proNamehr">옵션:<span class="optionname">${items.prdOpName }</span></td>
-
-													</tr>
+													<c:if test="${items.prdOpName==null || items.prdOpName==''}">
+														<tr>
+															<td></td>
+														</tr>
+													</c:if>
+													<c:if test="${items.prdOpName!=null && items.prdOpName!=''}">
+														<tr>
+															<td class="proNamehr">옵션:<span class="optionname">${items.prdOpName }</span></td>
+														</tr>
+													</c:if>
+													
 												</table> <input type="hidden" name="prdName"> <input
 												type="hidden" name="proNamehr">
 											</td>

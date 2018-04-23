@@ -35,7 +35,6 @@ public class ShopCartHandler extends ShopCommandHandler {
 				cart.setMember(member);
 				//System.out.println("[no =======================]"+loginMember.getNo());
 				List<Cart> list = dao.selectAllCart(loginMember.getNo());
-				
 				request.setAttribute("list", list);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -64,9 +63,9 @@ public class ShopCartHandler extends ShopCommandHandler {
 						dao.updateCartPrdCount(map);
 						sql.commit();
 					}
-					session.setAttribute("ctNo", cartNo);
-					response.sendRedirect(request.getContextPath() + "/shop/order/order.do");
 				}
+				session.setAttribute("ctNo", cartNo);
+				response.sendRedirect(request.getContextPath() + "/shop/order/order.do");
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {

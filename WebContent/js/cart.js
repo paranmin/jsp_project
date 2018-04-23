@@ -57,6 +57,15 @@ $(function(){
 				$("input:hidden[name='prdsPrice2']").val(priceSum2);//상품 합 금액 인풋
 				var deliveryFee = parseInt($(".deliveryfee").text());
 				$(".prdplusdel").text(priceSum2+deliveryFee); //상품+배송비
+				
+				var sumprice2 = $("input:hidden[name='prdsPrice']").val();
+				if(sumprice2>35000){
+					$(".firstTd").css("display","none");
+					$(".secondTd").css("display","table-cell");
+				}else if(sumprice2 < 35000){
+					$(".firstTd").css("display","table-cell");
+					$(".secondTd").css("display","none");   
+				}
 		})
 		
 		//수량 카운트 작업
