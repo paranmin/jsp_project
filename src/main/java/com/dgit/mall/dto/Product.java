@@ -14,7 +14,6 @@ public class Product {
 	private String useOption; // 옵션유무
 	private String category;
 	private String use;
-	private int prdNum;
 
 	
 	public Product() {
@@ -25,14 +24,6 @@ public class Product {
 	public Product(int prdNo) {
 		super();
 		this.prdNo = prdNo;
-	}
-
-	public int getPrdNum() {
-		return prdNum;
-	}
-
-	public void setPrdNum(int prdNum) {
-		this.prdNum = prdNum;
 	}
 
 	public String getUse() {
@@ -132,9 +123,9 @@ public class Product {
 	@Override
 	public String toString() {
 		return String.format(
-				"Product [prdNo=%s, name=%s, subDesc=%s, mainImg=%s, content=%s, cost=%s, discountPer=%s, sellingPrice=%s, stock=%s, useOption=%s, category=%s, use=%s, prdNum=%s]",
+				"Product [prdNo=%s, name=%s, subDesc=%s, mainImg=%s, content=%s, cost=%s, discountPer=%s, sellingPrice=%s, stock=%s, useOption=%s, category=%s, use=%s]",
 				prdNo, name, subDesc, mainImg, content, cost, discountPer, sellingPrice, stock, useOption, category,
-				use, prdNum);
+				use);
 	}
 	
 }
