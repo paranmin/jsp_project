@@ -17,7 +17,7 @@
 	</resultMap>
 
 	<select id="selectAllCart" parameterType="int" resultMap="cartResult">
-		select c.ct_no,c.ct_prd_quantity,c.ct_prd_op_name,c.m_no,c.prd_no,p.prd_selling_price,p.prd_name,p.prd_main_img,p.prd_stock from cart c join product p on c.prd_no = p.prd_no where m_no=#{mno}
+		select c.ct_no,c.ct_prd_quantity,c.ct_prd_op_price,c.ct_prd_op_name,c.m_no,c.type,c.prd_no,p.prd_selling_price,p.prd_name,p.prd_main_img,p.prd_stock,op.pod_stock from cart c join product p on c.prd_no = p.prd_no where m_no=#{mno}
 	</select>
 
 	<select id="countSelectAllCartByMember" parameterType="int" resultType="int">
@@ -36,9 +36,13 @@
 	<delete id="deleByAll" parameterType="Cart">
 		delete from cart where m_no=#{member.no}
 	</delete>
+	
+	<update id="updateCartPrdCount" parameterType="Map">
+		update cart set ct_prd_quantity=#{prdCount} where m_no=#{no} and ct_no=#{ctNo};
+	</update>
 
 	<select id="selectByselectedCart" parameterType="Map" resultMap="cartResult">
-		select c.ct_no,c.ct_prd_quantity,c.ct_prd_op_name,c.m_no,c.prd_no,p.prd_selling_price,p.prd_name,p.prd_main_img,p.prd_stock from cart c join product p on c.prd_no = p.prd_no 
+		select c.ct_no,c.ct_prd_quantity,c.ct_prd_op_name,c.ct_prd_op_price,c.m_no,c.type,c.prd_no,p.prd_selling_price,p.prd_name,p.prd_main_img,p.prd_stock from cart c join product p on c.prd_no = p.prd_no 
 		where m_no=#{mNo} and ct_no in
 		<foreach collection="ctNo" item="item" index='idx' separator="," open="(" close=")">
 			#{item}

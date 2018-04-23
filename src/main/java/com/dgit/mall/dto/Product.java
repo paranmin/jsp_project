@@ -15,7 +15,6 @@ public class Product {
 	private String category;
 	private String use;
 	private int prdNum;
-
 	
 	public Product() {
 		super();

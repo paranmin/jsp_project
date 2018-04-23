@@ -14,6 +14,8 @@ public interface CartDao {
 	public void insertCart(Cart cart) throws SQLException;
 
 	public int deleteByClickBtn(Map<String, Object> map) throws SQLException;
+	
+	public int updateCartPrdCount(Map<String, Object> map) throws SQLException;
 
 	public int deleByAll(int mno) throws SQLException;
 

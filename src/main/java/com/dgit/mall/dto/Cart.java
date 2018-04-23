@@ -1,5 +1,7 @@
 package com.dgit.mall.dto;
 
+import com.dgit.mall.dto.type.CartToOrder;
+
 public class Cart {
 	private int no;
 	private int prdQuantity;
@@ -7,71 +9,69 @@ public class Cart {
 	private int prdOpPrice;
 	private Member member;
 	private Product product;
-
-	public Cart() {
-	}
-
-	public Cart(int no, int prdQuantity, String prdOpName, int prdOpPrice, Member member, Product product) {
-		this.no = no;
-		this.prdQuantity = prdQuantity;
-		this.prdOpName = prdOpName;
-		this.prdOpPrice = prdOpPrice;
-		this.member = member;
-		this.product = product;
-	}
-
+	private CartToOrder type;
+	
 	public int getNo() {
 		return no;
 	}
-
 	public void setNo(int no) {
 		this.no = no;
 	}
-
 	public int getPrdQuantity() {
 		return prdQuantity;
 	}
-
 	public void setPrdQuantity(int prdQuantity) {
 		this.prdQuantity = prdQuantity;
 	}
-
 	public String getPrdOpName() {
 		return prdOpName;
 	}
-
 	public void setPrdOpName(String prdOpName) {
 		this.prdOpName = prdOpName;
 	}
-
 	public int getPrdOpPrice() {
 		return prdOpPrice;
 	}
-
 	public void setPrdOpPrice(int prdOpPrice) {
 		this.prdOpPrice = prdOpPrice;
 	}
-
 	public Member getMember() {
 		return member;
 	}
-
 	public void setMember(Member member) {
 		this.member = member;
 	}
-
 	public Product getProduct() {
 		return product;
 	}
-
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
+	public CartToOrder getType() {
+		return type;
+	}
+	public void setType(CartToOrder type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
-		return String.format("Cart [no=%s, prdQuantity=%s, prdOpName=%s, prdOpPrice=%s, member=%s, product=%s]", no,
-				prdQuantity, prdOpName, prdOpPrice, member, product);
+		return "Cart [no=" + no + ", prdQuantity=" + prdQuantity + ", prdOpName=" + prdOpName + ", prdOpPrice="
+				+ prdOpPrice + ", member=" + member + ", product=" + product + ", type=" + type + "]";
+	}
+	public Cart(int no, int prdQuantity, String prdOpName, int prdOpPrice, Member member, Product product,
+			CartToOrder type) {
+		super();
+		this.no = no;
+		this.prdQuantity = prdQuantity;
+		this.prdOpName = prdOpName;
+		this.prdOpPrice = prdOpPrice;
+		this.member = member;
+		this.product = product;
+		this.type = type;
+	}
+	public Cart() {
 	}
 
+	
+	
 }

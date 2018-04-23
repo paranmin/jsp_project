@@ -222,43 +222,55 @@ function getReturnValue(returnValue) {
 									<th class="count">수량</th>
 									<th class="count">가격</th>
 								</tr>
-								<c:if test=""></c:if>
+								<c:if test="${list.size()==0 }">
 									<tr class="proContent">
-										<td><img src="../../images/J1.jpg" class="proImg"
-											name="proImg"></td>
-										<td class="proNameTable">
-											<table>
-												<tr>
-													<td><p name="productname">${prdName }</p></td>
-												</tr>
-												<tr>
-													<td class="proNamehr">옵션:<span class="optionYN">[EX---]</span></td>
-												</tr>
-											</table> <input type="hidden" name="proNo" value="2"> <!-- 상품번호 -->
-											<input type="hidden" name="optionYN"> <input
-											type="hidden" name="optionValue" class="ttt">
-										</td>
-										<td>
-											<p>
-												<span class="productCount">1</span>개
-											</p> <input type="hidden" name="productCount">
-										</td>
-
-										<td>
-											<p>
-												<span class="productPrice">1500</span>원
-											</p> <input type="hidden" name="productPrice">
-										</td>
+										<td colspan="4">장바구니에 담긴 상품이 없습니다.상품을 담아주세요.</td>
 									</tr>
-								<tr class="allProPrice">
-									<td colspan="5"><p>
-											결제 금액 : <span class="orderChargePrice">25000</span>원+배송료 <span
-												class="delfee">2500</span>원 = <span class="toalpriceorder"
-												name="toalpriceorder"></span>원
-												<input type="hidden" value="25000" name="orderChargePrice"> <!-- 결제금액  -->
-												<input type="hidden" value="2500" name="delfee"><!--배송비 -->
-										</p></td>
-								</tr>
+								</c:if>
+								<c:if test="${list.size()>0 }">
+									<c:forEach items="${list }" var="items">
+										<tr class="proContent">
+											<td><img src="${pageContext.request.contextPath}/upload/${items.product.mainImg }">
+												<input type="hidden" name="chkAll" value="${items.no }"><!-- 카트번호 -->
+											</td>
+											<td class="proNameTable">
+												<table>
+													<tr>
+														<td><p name="productname">${items.product.name }</p></td>
+													</tr>
+													<tr>
+														<td class="proNamehr">옵션:<span class="optionYN">${items.prdOpName }</span></td>
+													</tr>
+												</table> <input type="hidden" name="proNo" value="${items.product.prdNo }"> <!-- 상품번호 -->
+												<input type="hidden" name="optionYN"> <input
+												type="hidden" name="optionValue" class="ttt">
+											</td>
+											<td>
+												<p>
+													<span class="productCount">${items.prdQuantity }</span>개
+												</p> <input type="hidden" name="productCount">
+											</td>
+
+											<td>
+												<p>
+													<span class="productPrice" data-price="${items.prdOpPrice }">${items.prdOpPrice*items.prdQuantity }</span>원
+												</p> <input type="hidden" name="productPrice">
+											</td>
+										</tr>
+									</c:forEach>
+									<tr class="allProPrice">
+											<td colspan="5"><p>
+													결제 금액 : <span class="orderChargePrice">25000</span>원+배송료 <span
+														class="delfee">2500</span>원 = <span class="toalpriceorder"
+														name="toalpriceorder"></span>원 <input type="hidden"
+														value="25000" name="orderChargePrice">
+													<!-- 결제금액  -->
+													<input type="hidden" value="2500" name="delfee">
+													<!--배송비 -->
+												</p></td>
+										</tr>
+								</c:if>
+
 							</table>
 						</div>
 					</div>
