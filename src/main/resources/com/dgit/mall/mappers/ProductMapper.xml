@@ -13,7 +13,6 @@
 		<result property="stock" column="prd_stock" />
 		<result property="mainImg" column="prd_main_img" />
 		<result property="use" column="prd_use"/>
-		<result property="prdNum" column="prd_num"/>
 	</resultMap>
 	
 	<resultMap type="Proimg" id="proimgResult">
