@@ -102,11 +102,15 @@ table#proOption th#opstock{
 table#proOption td{
 	border-bottom:1px solid gainsboro;      
 }
+p.error{
+	color:red;
+}
 </style>    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
 $(function(){
     $("table#proOption").css("display","none");    
+    $(".error").css("display", "none");
 	$("button.img_main_plus").click(function(){
 		var $input = $("<input type='file' multiple='multiple' name='mainimg'>");
 		$("div.img_main_plus").append($("<br>"));
@@ -216,6 +220,7 @@ $(function(){
  		removeTarget.remove();
  		return false;
  	});
+ 	
  	var sumStock=0;
  	$("input[type='submit']").click(function(){
  		$("table#proOption").find(".parent").each(function(i,obj){
@@ -225,17 +230,42 @@ $(function(){
  			$("p.submit").append($hidden);
  		});
  		
- 		sumStock=0;
- 		$("input.op_stock").each(function(i,obj){
- 			var eq4 = Number($(obj).val());
- 			sumStock += eq4;   
- 		});
- 		if(sumStock == $("input#stock").val()){
- 			$("form").submit();
- 	 		alert("상품이 등록되었습니다.");
- 		}else{
- 			alert("재고를 확인해주세요.");
+ 		if($("input#option").val()==1){
+ 			sumStock=0;
+ 	 		$("input.op_stock").each(function(i,obj){
+ 	 			var eq4 = Number($(obj).val());
+ 	 			sumStock += eq4;   
+ 	 		});
+ 	 		if(sumStock != $("input#stock").val()){
+ 	 			alert("재고를 확인해주세요.");
+ 	 		}
+ 	 		if($("input.op_name").val()==""){
+ 				$("input.op_name").next().css("display","block");
+ 			}else if($("input.op_desc").val()==""){
+ 				$("input.op_desc").next().css("display","block");
+ 			}else if($("input.op_cost").val()==""){
+ 				$("input.op_cost").next().css("display","block");
+ 			}else if($("input.op_stock").val()==""){
+ 				$("input.op_stock").next().css("display","block");
+ 			}
  		}
+ 		
+ 		if($("input#name").val()==""){
+			$("input#name").next().css("display","block");
+			return false;
+		}else if($("input#cost").val()==""){
+			$("input#cost").next().css("display","block");
+			return false;
+		}else if($("input#price").val()==""){
+			$("input#price").next().css("display","block");
+			return false;
+		}else if($("input#stock").val()==""){
+			$("input#price").next().css("display","block");
+			return false;
+		}
+ 		
+ 		/* $("form").submit(); */
+	 	alert("상품이 등록되었습니다.");
  		return false;
  	});
  	$("select#discount").change(function(){
@@ -270,17 +300,17 @@ $(function(){
 			</p>
 			<p>
 				<label>상품 이름</label>
-				<input type="text" name="name">
-				<!-- <p class="error">제목을 입력하세요.</p> -->
+				<input type="text" name="name" id="name">
+				<p class="error">*상품 이름을 입력하세요.</p>    
 			</p>
 			<p>
 				<label>상품 부가설명</label>
 				<input type="text" name="sub_desc">
-				<!-- <p class="error">제목을 입력하세요.</p> -->
 			</p>
 			<p>
 				<label>원가</label>
 				<input type="text" name="cost" id="cost">원
+				<p class="error">*원가 입력하세요.</p>
 			</p>
 			<p>
 				<label>할인</label>
@@ -296,23 +326,26 @@ $(function(){
 			<p>
 				<label>판매가</label>
 				<input type="text" name="price" id="price">원
+				<p class="error">*판매가를 입력하세요.</p>
 			</p>
 			<p>
 				<label>재고</label>
 				<input type="text" name="stock" id="stock">개
+				<p class="error">*재고를 입력하세요.</p>
 			</p>
 			<p>
 				<label>상품 메인 이미지</label>
 				<div class="img_main_plus">
-					<input type="file" name="mainimg" value="이미지 불러오기" accept="image/*">
-					<!-- <button class="img_main_plus">추가</button> -->
+					<input type="file" name="mainimg" accept="image/*">
+					<p class="error">*메인 이미지를 입력하세요.</p>
 				</div>
 			</p>
 			<p>
 				<label>상품 상세 이미지</label>
 				<div class="img_plus">
-				<input type="file" name="files" value="이미지 불러오기" accept="image/*">
+				<input type="file" name="files" accept="image/*">
 				<button class="img_plus">추가</button>
+				<p class="error">*상세 이미지를 입력하세요.</p>
 				</div>
 			</p>
 
@@ -327,7 +360,7 @@ $(function(){
 				</tr>
 				<tr>
 					<th id="opname">옵션명</th>
-					<th id="opvalue">옵션값</th>
+					<th id="opvalue">옵션내용</th>
 					<th id="opprice">옵션가</th>
 					<th id="opstock">재고</th>
 					<th id="empty"></th>
@@ -335,15 +368,19 @@ $(function(){
 				<tr class="parent" id="first">
 					<td rowspan="1">
 						<input type="text" name="op_name" class="op_name">
+						<p class="error">*옵션명을 입력하세요.</p>
 					</td>
 					<td>
 						<input type="text" name="op_desc" class="op_desc">
+						<p class="error">*옵션내용을 입력하세요.</p>
 					</td>
 					<td>
 						<input type="text" name="op_cost" class="op_cost">
+						<p class="error">*옵션가를<br> 입력하세요.</p>
 					</td>
 					<td>
 						<input type="text" name="op_stock" class="op_stock">
+						<p class="error">*옵션재고를<br> 입력하세요.</p>
 					</td>
 					<td>
 						<button class="op_add">+추가</button>    
