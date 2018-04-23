@@ -92,7 +92,7 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 				int prdno = dao.selectLastInsert();
 
 				Proimg img = new Proimg();
-				for (int i = 0; i < files.size(); i++) {
+				for (int i = files.size()-1; i >= 0; i--) {
 					if(!files.get(i).isEmpty()){
 						img.setPrdNo(prdno);
 						img.setImg(files.get(i));
