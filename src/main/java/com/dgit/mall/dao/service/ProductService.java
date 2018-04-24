@@ -2,6 +2,7 @@ package com.dgit.mall.dao.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -56,6 +57,12 @@ public class ProductService {
 	public List<Product> selectBestCateProduct(String cate) throws SQLException {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + "selectBestCateProduct", cate);
+		}
+	}
+
+	public List<Product> selectProductByPagination(Map<String, Object> map) throws SQLException {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectProductByPagination", map);
 		}
 	}
 }
