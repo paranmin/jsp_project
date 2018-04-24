@@ -54,7 +54,7 @@ CREATE TABLE `mall`.`member_address` (
   CONSTRAINT `FK_member_TO_member_address` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원배송주소';
 
-CREATE TABLE `mall`.`product` (
+CREATE TABLE `product` (
   `prd_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '상품번호',
   `prd_name` varchar(50) NOT NULL COMMENT '상품명',
   `prd_sub_desc` varchar(255) DEFAULT NULL COMMENT '상품부가설명',
@@ -66,8 +66,11 @@ CREATE TABLE `mall`.`product` (
   `prd_main_img` text,
   `prd_category` varchar(11) NOT NULL,
   `prd_use` char(1) DEFAULT '1',
+  `prd_num` int(5) DEFAULT '0',
+  `prd_selling_count` int(11) DEFAULT '0' COMMENT '판매갯수',
   PRIMARY KEY (`prd_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `mall`.`proimg` (
   `img_no` int(11) NOT NULL AUTO_INCREMENT,

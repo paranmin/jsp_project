@@ -13,6 +13,7 @@
 		<result property="stock" column="prd_stock" />
 		<result property="mainImg" column="prd_main_img" />
 		<result property="use" column="prd_use"/>
+		<result property="sellingCount" column="prd_selling_count"/>
 	</resultMap>
 	
 	<resultMap type="Proimg" id="proimgResult">
@@ -101,9 +102,42 @@
 	</select>
 	
 	<update id="updateProduct">
-		update product set prd_category=#{category}, prd_name=#{name}, prd_sub_desc=#{subDesc}, prd_cost=#{cost}, 
-		prd_selling_price=#{sellingPrice}, prd_discount_per=#{discountPer}, prd_use_option=#{useOption}, prd_stock=#{stock}, 
-		prd_main_img=#{mainImg}, prd_use=${use}
+		update product
+		<set>
+			<if test="category != null">
+				prd_category=#{category},
+			</if>
+			<if test="name != null">
+				prd_name=#{name},
+			</if>
+			<if test="subDesc != null">
+				prd_sub_desc=#{subDesc},
+			</if>
+			<if test="cost != null">
+				prd_cost=#{cost},
+			</if>
+			<if test="sellingPrice != null">
+				prd_selling_price=#{sellingPrice},
+			</if>
+			<if test="discountPer != null">
+				prd_discount_per=#{discountPer},
+			</if>
+			<if test="useOption != null">
+				prd_use_option=#{useOption},
+			</if>
+			<if test="stock != null">
+				prd_stock=#{stock},
+			</if>
+			<if test="mainImg != null">
+				prd_main_img=#{mainImg},
+			</if>
+			<if test="use != null">
+				prd_use=${use},
+			</if>
+			<if test="sellingCount != null">
+				prd_selling_count = #{sellingCount}
+			</if>
+		</set> 
 		where prd_no=#{prdNo}
 	</update>
 	<delete id="deleteOption">
@@ -122,5 +156,43 @@
 	<select id="selectBestCateProduct" resultMap="productResult">
 		select * from product where prd_category=#{category}
 		order by prd_no desc;
+	</select>
+	
+	<select id="selectProductByPagination" parameterType="Map" resultMap="productResult">
+		select * from product
+		<where>
+			<if test="no != null and no > 0">
+				prd_no = #{no}
+			</if>
+			<if test="name != null and name != ''">
+				and prd_name like CONCAT("%",#{name},"%")
+			</if>
+			<if test="category != null and category != ''">
+				and prd_category = #{category}
+			</if>
+		</where>
+		order by
+		<if test="orderbytarget != null and orderbytarget != ''">
+			#{orderbytarget}
+			<choose>
+				<when test="orderby != null">
+					#{orderby}
+				</when>
+				<otherwise>
+					desc
+				</otherwise>
+			</choose>
+			,
+		</if>
+		prd_no desc
+		<if test="start != null || offset != null">
+			limit 
+			<if test="start != null and start > 0">
+				#{start},
+			</if>
+			<if test="offset != null and offset > 0">
+				#{offset}
+			</if>
+		</if>
 	</select>
 </mapper>
