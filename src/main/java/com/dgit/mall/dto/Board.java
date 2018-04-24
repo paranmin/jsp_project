@@ -8,7 +8,7 @@ public class Board {
 	private String brdcode;
 	private String brdtitle;
 	private String brdwriter;
-	private String brdpassword;
+	private String brdpassword; 
 	private int brdparent;
 	private int brddepth;
 	private String brduseattachment;
