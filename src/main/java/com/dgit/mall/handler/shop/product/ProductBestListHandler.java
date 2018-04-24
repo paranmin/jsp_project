@@ -1,7 +1,9 @@
 package com.dgit.mall.handler.shop.product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +24,11 @@ public class ProductBestListHandler extends ShopCommandHandler {
 			sqlsession = MySqlSessionFactory.openSession();
 			ProductDao dao = sqlsession.getMapper(ProductDao.class);
 			List<Product> bestlist = new ArrayList<>();
-			bestlist = dao.selectBestAllProduct();
+			Map<String, Object> bestMap = new HashMap<>();
+			bestMap.put("orderbytarget", "prd_selling_count");
+			bestMap.put("orderby", "desc");
+			bestMap.put("offset", 8);        
+			bestlist = dao.selectProductByPagination(bestMap);
 			req.setAttribute("best", bestlist);
 		
 
