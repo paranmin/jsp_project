@@ -2,16 +2,20 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <%
-    	Member member = (Member)request.getAttribute("member");
-    %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+	Member member = (Member)request.getAttribute("member");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset=UTF-8>
-<title>Insert title here</title>
+<title>주문하기 - SJ JEWELRY</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css" media="all" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderPage.css">
 <style>
 	tr.allProPrice td{
 		
@@ -112,57 +116,11 @@
 		display: none;
 	}
 	
-</style>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="../../css/base.css" media="all" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderPage.css">   
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</style>   
+<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="${pageContext.request.contextPath}/js/base.js"></script>
 <script src="${pageContext.request.contextPath}/js/order.js"></script>
-<script type="text/javascript">
-
-	    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-	    function sample4_execDaumPostcode() {
-	        new daum.Postcode({
-	            oncomplete: function(data) {
-	            	 var fullAddr = ''; // 최종 주소 변수
-	                 var extraAddr = ''; // 조합형 주소 변수
-	                 var zipcode = '';
-	      
-	                 // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-	                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-	                     fullAddr = data.roadAddress;
-	                     zipcode = data.zonecode;
-	      
-	                     //법정동명이 있을 경우 추가한다.
-	                     if(data.bname !== ''){
-	                            extraAddr += data.bname;
-	                       }
-	                         // 건물명이 있을 경우 추가한다.
-	                         if(data.buildingName !== ''){
-	                             extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	                        }
-	                         // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-	                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-	      
-	                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
-	      
-	                     fullAddr = data.jibunAddress;
-	                     zipcode = data.postcode;
-	                 }
-	      
-	      
-	                 $('.post1').val(zipcode);
-	                 $('#inputheight2').val(fullAddr);
-	                 $('#inputheight1').focus();
-	                 
-	            }
-	        }).open();
-	    }
-
-</script>
 <script type="text/javascript">
 
 function getReturnValue(returnValue) {
@@ -171,6 +129,21 @@ function getReturnValue(returnValue) {
 	 $(".finalPrice").text(p.key2);
 	 $("input:hidden[name='finalPrice']").val(p.key2);
 }
+$(function() {
+	$('textarea[name="orderMsg"]').keyup(function() {
+		// 텍스트영역의 길이를 체크
+		var textLength = $(this).val().length,
+			textCountLimit = parseInt($(".sizeContent").data("wordlimit"));
+
+		// 제한된 길이보다 입력된 길이가 큰 경우 제한 길이만큼만 자르고 텍스트영역에 넣음
+		if (textLength > textCountLimit) {
+			$(this).val($(this).val().substr(0, textCountLimit));
+		}
+		// 입력된 텍스트 길이를 #textCount 에 업데이트 해줌
+		$('.sizeContent .msgCount').text(textLength);
+	});
+});
+
 </script>
 </head>
 <body>
@@ -355,8 +328,7 @@ function getReturnValue(returnValue) {
 										<td class="grayBox">주문메세지(100자 내외)</td>
 										<td colspan="5" class="paddingInput"><textarea rows="4"
 												cols="100" name="orderMsg"></textarea>
-											<p class="sizeContent">0/70 bytes (* 영문/숫자 기준 70자, 한글 기준
-												35자까지 입력 가능합니다.)</p></td>
+											<p class="sizeContent" data-wordlimit="100"><span class="msgCount">0</span>/100 자</p></td>
 									</tr>
 								</table>
 							</div>
