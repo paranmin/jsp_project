@@ -1,6 +1,7 @@
 package com.dgit.mall.dao.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -10,6 +11,7 @@ import com.dgit.mall.util.MySqlSessionFactory;
 
 public class ProductService {
 	private static final ProductService instance = new ProductService();
+	private final String namespace = "com.dgit.mall.dao.ProductDao.";
 
 	public static ProductService getInstance() {
 		return instance;
@@ -23,13 +25,37 @@ public class ProductService {
 		int res = 0;
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			ProductDao dao = sqlSession.getMapper(ProductDao.class);
-			
+
 			System.out.println(sqlSession.toString());
 			res = dao.insertProduct(pro);
 			sqlSession.commit();
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	public List<Product> selectAllProduct() throws SQLException {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectAllProduct");
+		}
+	}
+
+	public List<Product> selectBestAllProduct() throws SQLException {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectBestAllProduct");
+		}
+	}
+
+	public List<Product> selectCateProduct(Product pro) throws SQLException {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectCateProduct", pro);
+		}
+	}
+
+	public List<Product> selectBestCateProduct(String cate) throws SQLException {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectBestCateProduct", cate);
+		}
 	}
 }

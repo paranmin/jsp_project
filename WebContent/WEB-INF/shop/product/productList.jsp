@@ -13,18 +13,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList.css" media="all" />
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$("div.item_white").css("display","none");
-		$("div.category_best_white").css("display","none");
-		$("div.item").mouseover(function(){
-			$(this).children("div").css("display","block");
-		});
-		$("div.item").mouseout(function(){
-			$(this).children("div").css("display","none");
-		});
-	});
-</script>
 </head>
 <body>
 	<div id="container">
