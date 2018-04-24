@@ -60,7 +60,6 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 			}
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String uploadPath = request.getRealPath("upload");
-			System.out.println("uploadPath = "+ uploadPath);
 			
 			File dir = new File(uploadPath);
 			if(dir.exists() == false){
@@ -122,8 +121,6 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				pro.setUseOption(option);
 				Product selectPro = dao.SelectProductByno(no);
 				
-				System.out.println(mainImg + "fghffgd");
-				System.out.println("sadfsadsafs");
 				
 				if(mainImg == null){
 					
