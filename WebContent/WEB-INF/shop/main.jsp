@@ -21,8 +21,29 @@
 		<c:import url="modules/rightSide.jsp" />
 		<section id="mainContent">
 			<div class="header_back_img_area"></div>
-			<div class="category_item">
-				<section id="product_list">
+			<section id="product_list">
+				<p class="list_title">JEWELRY BEST</p>
+				<c:if test="${best.size() == 0 }">  
+					<p>아이템이 없습니다.</p>
+				</c:if>
+				<div class="category_best">
+					<c:forEach var="prolist" items="${best }">
+						<div class="item">
+							<img src="${pageContext.request.contextPath}/upload/${prolist.mainImg }">
+							<div class="item_white">
+								<a href="${pageContext.request.contextPath}/shop/detailProductShow.do?no=${prolist.prdNo }">
+									<p>
+										<b>${prolist.name }</b>
+										<br> ${prolist.subDesc }
+										<br><fmt:formatNumber value="${prolist.sellingPrice }" pattern="￦#,###"/>
+									</p>
+								</a>
+							</div>
+						</div>    
+					</c:forEach>
+				</div>
+				<p class="list_title">JEWELRY NEW</p>
+				<div class="category_item">
 					<c:if test="${list.size() == 0 }">  
 						<p>아이템이 없습니다.</p>
 					</c:if>
@@ -40,8 +61,8 @@
 							</div>
 						</div>    
 					</c:forEach>
-				</section>
-			</div>
+				</div>
+			</section>
 		</section>
 		<c:import url="modules/footer.jsp" />
 	</div>
