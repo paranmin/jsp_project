@@ -278,13 +278,17 @@ function getReturnValue(returnValue) {
 										readonly="readonly" value="${member.name }" class="username"></td>
 									<td class="grayBox">연락처</td>
 									<%
-										//if(member.getPhone() != null && )
+										if(member.getPhone() != null && !member.getPhone().equals("")){
+											String[] phone = member.getPhone().split("-");
+											pageContext.setAttribute("middleNum", phone[1]);
+											pageContext.setAttribute("lastNum", phone[2]);
+										}
 									%>
 									<td class="paddingInput">
 										<input type="text" name="gongIlgong" readonly="readonly" value="010"> - 
-										<input type="tel" name="middleNum" class="middleNum" value="2222">
+										<input type="tel" name="middleNum" class="middleNum" value="${middleNum }">
 										- <input type="tel" name="lastNum" class="lastNum"
-										value="2222"></td>
+										value="${lastNum }"></td>
 								</tr>
 								<tr>
 									<td class="grayBox">E-mail</td>
