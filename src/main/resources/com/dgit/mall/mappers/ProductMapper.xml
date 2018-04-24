@@ -175,15 +175,15 @@
 			</if>
 		</where>
 		order by 
-		<if test="orderbytarget != null and orderbytarget != ''">
+		<if test="sort != null and sort != ''">
 			<choose>
-				<when test="orderbytarget == 'name'">
+				<when test="sort == 'name'">
 					prd_name
 				</when>
-				<when test="orderbytarget == 'low' or orderbytarget == 'high'">
+				<when test="sort == 'low' or sort == 'high'">
 					prd_selling_price
 				</when>
-				<when test="orderbytarget == 'rank'">
+				<when test="sort == 'rank'">
 					prd_selling_count
 				</when>
 				<otherwise>prd_no</otherwise>
@@ -204,5 +204,14 @@
 				#{offset}
 			</if>
 		</if>
+	</select>
+	
+	<select id="countTotalProductByCategory" parameterType="Product" resultType="int">
+		select count(prd_no) from product
+		<where>
+			<if test="category != null and category != ''">
+				prd_category = #{category}
+			</if>
+		</where>
 	</select>
 </mapper>

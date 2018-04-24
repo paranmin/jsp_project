@@ -25,12 +25,11 @@ public class ProductBestListHandler extends ShopCommandHandler {
 			ProductDao dao = sqlsession.getMapper(ProductDao.class);
 			List<Product> bestlist = new ArrayList<>();
 			Map<String, Object> bestMap = new HashMap<>();
-			bestMap.put("orderbytarget", "prd_selling_count");
+			bestMap.put("orderbytarget", "rank");
 			bestMap.put("orderby", "desc");
-			bestMap.put("offset", 8);        
+			bestMap.put("offset", 8);
 			bestlist = dao.selectProductByPagination(bestMap);
 			req.setAttribute("best", bestlist);
-		
 
 			return VIEW_FRONT_PATH + "product/BestList.jsp";
 		} finally {

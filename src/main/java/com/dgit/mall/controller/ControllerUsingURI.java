@@ -54,13 +54,11 @@ public class ControllerUsingURI extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ControllerUsingURI, GET");
 		process(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ControllerUsingURI, POST");
 		process(request, response);
 	}
 
@@ -70,8 +68,6 @@ public class ControllerUsingURI extends HttpServlet {
 		if (command.indexOf(request.getContextPath()) == 0) {
 			command = command.substring(request.getContextPath().length());
 		}
-		
-		System.out.println("ControllerUsingURI, command =" + command);
 
 		CommandHandler handler = commandHandlerMap.get(command);
 		if (handler == null) {
@@ -80,7 +76,6 @@ public class ControllerUsingURI extends HttpServlet {
 
 		String viewPage = null;
 		try {
-			System.out.println("ControllerUsingURI, handler =" + handler);
 			viewPage = handler.process(request, response);
 		} catch (Throwable e) {
 			e.printStackTrace();
