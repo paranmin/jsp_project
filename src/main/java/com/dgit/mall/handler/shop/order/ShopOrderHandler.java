@@ -50,6 +50,12 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			
 			return VIEW_FRONT_PATH + "order/orderPage.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
+			
+			String productPr = request.getParameter("orderChargePrice"); //상품가격
+			String delfee = request.getParameter("delfee"); //배송비 35000원 넘어가명 if로 빼야됨
+			System.out.println(productPr+"//"+delfee);
+			
+			
 			/*String productPr = request.getParameter("orderChargePrice");//상품가격
 			String delfee = request.getParameter("delfee");//배송비
 			String useCpPrice = request.getParameter("finalPrice");//총가격

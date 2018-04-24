@@ -9,10 +9,11 @@
 		<result property="addr2" column="ma_addr2" />
 		<result property="addrType" column="ma_addr_type" />
 		<result property="regdate" column="ma_regdate" />
+		<result property="addrName" column="ma_name" />
 	</resultMap>
 	
 	<select id="selectByMemberNo" parameterType="Member" resultMap="addressResult">
-		select ma_no, m_no, ma_zipcode, ma_addr1, ma_addr2, ma_addr_type, ma_regdate
+		select ma_no, m_no, ma_zipcode, ma_addr1, ma_addr2, ma_addr_type, ma_regdate, ma_name
 		from member_address
 		where m_no = #{no}
 	</select>
@@ -56,4 +57,9 @@
 			</if>
 		</where>
 	</update>
+	
+	
+	<delete id="deleteAddressByaddrNo" parameterType="Address">
+		delete from member_address where ma_no=#{addrNo};
+	</delete>
 </mapper>

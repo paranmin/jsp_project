@@ -155,7 +155,7 @@
 				success:function(data){
 					if(data.result=="send"){
 						console.log(couponlist,memberlist);
-						alert("aaa");
+						alert("쿠폰이 등록되었습니다.");
 					};
 				}
 			})
