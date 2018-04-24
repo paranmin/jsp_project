@@ -98,3 +98,13 @@ section#product_list div.item_white{
 section#product_list div.category_best_white{
 	display: none;
 }
+
+
+
+
+div.category_best{
+	min-height: 300px;	
+}
+div.category_item{
+	min-height: 300px;	
+}

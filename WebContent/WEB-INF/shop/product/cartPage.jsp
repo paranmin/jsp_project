@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset=UTF-8>
-<title>Insert title here</title>
+<title>SJ JEWELRY</title>
 <style>
 .prdplusdel {
 	font-size: 18px;

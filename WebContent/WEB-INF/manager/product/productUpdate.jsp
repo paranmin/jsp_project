@@ -48,7 +48,7 @@ p.submit input{
 p.submit input[type='submit']{
 	background: wheat;
 }
-fieldset.productDetail p{
+fieldset.productDetail div{
 	margin:20px;
 }
 fieldset.productDetail button{
@@ -136,6 +136,13 @@ fieldset.productDetail button.imgdelete{
 	top:10px;
 	right:0;
 	width:100px;
+}
+p.error{
+	color:red;
+	display:none;
+}
+td#smallfont{
+	font-size: small;
 }
 </style>    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -243,6 +250,9 @@ $(function(){
  	});
  	var sumStock=0;
  	$("input[type='submit']").click(function(){
+ 		var numberCheck = /^[-]?[0-9]*$/;
+ 		$(".error").css("display", "none");
+ 		
  		$("table#proOption").find(".parent").each(function(i,obj){
  			var span = $(obj).children("td").eq(0).prop("rowspan");
  			console.log(span);
@@ -250,21 +260,77 @@ $(function(){
  			$($hidden).val(span);
  			$("p.submit").append($hidden);
  		});
- 		if($("input[type='radio']:checked").val()==1){
-	 		sumStock=0;
-	 		$("input.op_stock").each(function(i,obj){
-	 			var eq4 = Number($(obj).val());
-	 			sumStock += eq4;   
-	 		});
-	 		if(sumStock != $("input#stock").val()){
- 	 			alert("재고를 확인해주세요.");
- 	 		}
- 		};
- 		$("form").submit();
-	 	alert("상품정보가 수정되었습니다.");
- 		return false;
+ 		
+ 		/* $("input#name").val($("input#name").val()); */
+ 		
+ 		if($("input[name='name']").val()=="") {
+			$("input[name='name']").next().css("display","block");
+			return false;
+		} else if($("input[name='cost']").val()=="") {
+			$("input[name='cost']").next().css("display","block");
+			return false;
+		} else if(!numberCheck.test($("input[name='cost']").val())) {
+			$("input[name='cost']").next().next().css("display","block");
+			return false;
+		} else if($("input[name='price']").val()=="") {
+			$("input[name='price']").next().css("display","block");
+			return false;
+		} else if(!numberCheck.test($("input[name='price']").val())) {
+			$("input[name='price']").next().next().css("display","block");
+			return false;
+		} else if($("input[name='stock']").val()=="") {
+			$("input[name='stock']").next().css("display","block");
+			return false;
+		} else if(!numberCheck.test($("input[name='stock']").val())) {
+			$("input[name='stock']").next().next().css("display","block");
+			return false;
+		} else if(($(".img_main_plus").find("img").length==0) && ($("input[name='mainimg']").val()=="")) {
+			$("input[name='mainimg']").next().css("display","block");
+			return false;
+		} else if(($(".img_plus").find("img").length==0) && ($("input[name='files']").val()=="")) {
+			$("input[name='files']").next().next().css("display","block");
+			return false;
+		}
+
+		var count = 0;
+		if ($("input[type='radio']:checked").val() == 1) {
+			$("table#proOption").find("td").each(function(i, obj) {
+				var $op_name = $(this).find("input.op_name"),
+					$op_desc = $(this).find("input.op_desc"),
+					$op_cost = $(this).find("input.op_cost");
+
+				if ($op_name.length == 1) {
+					if($op_name.val().trim() == ""){
+						$op_name.next().css("display","block");
+						count++;
+					}
+				}
+				if ($op_desc.length == 1) {
+					if($op_desc.val().trim() == ""){
+						$op_desc.next().css("display","block");
+						count++;
+					}
+				}
+				if ($op_cost.length == 1) {
+					if ($op_cost.val().trim() == "") {
+						$op_cost.next().css("display","block");
+						count++;
+					} else if(!numberCheck.test($op_cost.val())){
+						$op_cost.next().next().css("display","block");
+						count++;
+					}
+				}
+				
+			});
+		}
+		if (count > 0) {
+			return false;
+		}
+ 	 	$("form").submit();
+	 	alert("상품이 등록되었습니다.");
+	 	return false;
  	});
- 	
+ 		
  	$("input[type='reset']").click(function(){
  		location.href="list.do";
  		return false;
@@ -324,12 +390,12 @@ $(function(){
 	<form action="update.do" enctype="multipart/form-data" method="post">      
 		<fieldset class="productDetail">
 			<legend>상품 정보</legend>
-			<p>
+			<div>
 				<label>게시 여부</label>
 				<input type="radio" id="view" name="view" value="1" <c:if test="${pro.use=='1' }"> checked="checked" </c:if>>게시
 				<input type="radio" id="view" name="view" value="0" <c:if test="${pro.use=='0' }"> checked="checked" </c:if>>게시 안함
-			</p>
-			<p>
+			</div>
+			<div>
 				<label>상품 카테고리</label>
 				<select name="cate">
 					<option value="All" <c:if test="${pro.category=='All' }"> selected="selected" </c:if>>All</option>
@@ -345,20 +411,23 @@ $(function(){
 					<option value="폰 ACC" <c:if test="${pro.category=='폰 ACC' }"> selected="selected" </c:if>>폰 ACC</option>
 					<option value="기타" <c:if test="${pro.category=='기타' }"> selected="selected" </c:if>>기타</option>
 				</select>
-			</p>
-			<p>
+			</div>
+			<div>
 				<label>상품 이름</label>
 				<input type="text" name="name" value="${pro.name }">
-			</p>
-			<p>
+				<p class="error">*상품 이름을 입력하세요.</p>  
+			</div>
+			<div>
 				<label>상품 부가설명</label>
 				<input type="text" name="desc" value="${pro.subDesc }">
-			</p>
-			<p>
+			</div>
+			<div>
 				<label>원가</label>
 				<input type="text" name="cost" value="${pro.cost }" id="cost">원
-			</p>
-			<p>
+				<p class="error">*원가 입력하세요.</p>
+				<p class="error">*숫자만 입력하세요.</p>
+			</div>
+			<div>
 				<label>할인</label>
 				<select name="discount" id="discount">
 					<option <c:if test="${pro.discountPer=='0%' }"> selected="selected" </c:if>>0%</option>
@@ -368,16 +437,20 @@ $(function(){
 					<option <c:if test="${pro.discountPer=='30%' }"> selected="selected" </c:if>>30%</option>
 					<option <c:if test="${pro.discountPer=='50%' }"> selected="selected" </c:if>>50%</option>
 				</select>
-			</p>
-			<p>
+			</div>
+			<div>
 				<label>판매가</label>
 				<input type="text" value="${pro.sellingPrice }" id="price" name="price">원  
-			</p>
-			<p>
+				<p class="error">*판매가를 입력하세요.</p>
+				<p class="error">*숫자만 입력하세요.</p>
+			</div>
+			<div>
 				<label>재고</label>
 				<input type="text" value="${pro.stock }" id="stock" name="stock">개   
-			</p>
-			<p>
+				<p class="error">*재고를 입력하세요.</p>
+				<p class="error">*숫자만 입력하세요.</p>
+			</div>
+			<div>
 				<label>상품 메인 이미지</label>
 				<div class="img_main_plus">
 					<div class="img">
@@ -386,9 +459,10 @@ $(function(){
 					</div>
 					<br>
 					<input type="file" name="mainimg" accept="image/*">
+					<p class="error">*메인 이미지를 입력하세요.</p>
 				</div>
-			</p>
-			<p>
+			</div>
+			<div>
 				<label>상품 상세 이미지</label>
 				<div class="img_plus">
 					<c:forEach var="pimg" items="${proimg }">
@@ -400,8 +474,9 @@ $(function(){
 					<br>
 					<input type="file" name="files" accept="image/*">
 					<button class="img_plus">추가</button>
+					<p class="error">*상세 이미지를 입력하세요.</p>
 				</div>
-			</p>
+			</div>
 			<p>
 				<label>옵션 유무</label>
 				<input type="radio" id="option" name="use_option" value="1" <c:if test="${pro.useOption=='1' }"> checked="checked" </c:if>>사용
@@ -410,13 +485,15 @@ $(function(){
 			
 				<table id="proOption">
 					<tr>
-						<td><button id="op_nameadd">+옵션명추가</button></td>
+						<td colspan="4" id="smallfont"><button id="op_nameadd">+옵션명추가</button>
+							*옵션가 : 플러스 옵션일 경우 숫자만 입력, 마이너스 옵션일 경우 숫자 앞에 음수(-)붙여 입력하세요.
+						</td>
 					</tr>
 					<tr>
 						<th id="opname">옵션명</th>
 						<th id="opvalue">옵션값</th>
 						<th id="opprice">옵션가</th>
-						<th id="opstock">재고</th>
+						<!-- <th id="opstock">재고</th> -->
 						<th id="empty"></th>
 					</tr>
 					<c:set value="0" var="fir"/>
@@ -425,15 +502,21 @@ $(function(){
 						<tr class="parent">
 							<td rowspan="${rownum[status.index] }">  
 								<input type="text" name="op_name" class="op_name" value="${option.poName }"> 
+								<p class="error">*옵션명을 입력하세요.</p>
 								<c:if test="${!status.first }">
 									<button class='op_nameDel'>삭제</button>
 								</c:if>
 							</td>
 							<c:forEach var="result" items="${res }" begin="${fir}" end="${end}" varStatus="sta">
-									<td><input type="text" name="op_desc" class="op_desc" value="${result.podValue}"></td>
-									<td><input type="text" name="op_cost" class="op_cost" value="${result.podCost}"></td>
-									<td><input type="text" name="op_stock" class="op_stock" value="${result.podStock}"></td>
-									<c:if test="${sta.first }">
+									<td><input type="text" name="op_desc" class="op_desc" value="${result.podValue}">
+										<p class="error">*옵션내용을 입력하세요.</p>
+									</td>
+									<td><input type="text" name="op_cost" class="op_cost" value="${result.podCost}">
+										<p class="error">*옵션가를 입력하세요.</p>
+										<p class="error">*숫자만 입력하세요.</p>
+									</td>
+									<%-- <td><input type="text" name="op_stock" class="op_stock" value="${result.podStock}"></td> --%>
+									<c:if test="${sta.first }">    
 										<td>
 											<button class="op_add">+추가</button>    
 										</td>

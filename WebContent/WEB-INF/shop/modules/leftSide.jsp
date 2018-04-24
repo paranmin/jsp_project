@@ -24,7 +24,7 @@
 		<h2><a href="">SILVER</a></h2>
 		<h2><a href="">GOLD</a></h2> 
 		-->
-		<h2><a href="">BEST</a></h2>
-		<h2><a href="">SALE</a></h2>
+		<h2><a href="${pageContext.request.contextPath}/shop/showBestList.do">BEST</a></h2>
+		<h2><a href="${pageContext.request.contextPath}/shop/showSaleList.do">SALE</a></h2>
 	</div>
 </div>

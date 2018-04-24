@@ -13,3 +13,9 @@
 		fixed;
 	background-size: cover;
 }
+#mainContent .category_item p.list_title {
+	font-family: 'Playfair Display', serif;
+	font-size: 30px;
+	margin-top: 40px;
+	text-align: center;
+}
