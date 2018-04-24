@@ -80,7 +80,7 @@ CREATE TABLE `mall`.`proimg` (
 
 CREATE TABLE `mall`.`pro_option` (
   `po_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '옵션번호',
-  `po_name` varchar(50) NOT NULL COMMENT '옵션명',
+  `po_name` varchar(100) NOT NULL COMMENT '옵션명',
   `prd_no` int(11) NOT NULL COMMENT '상품번호',
   PRIMARY KEY (`po_no`),
   KEY `FK_product_TO_product_option` (`prd_no`),
@@ -90,7 +90,7 @@ CREATE TABLE `mall`.`pro_option` (
 CREATE TABLE `mall`.`option_detail` (
   `po_no` int(11) NOT NULL COMMENT '옵션번호',
   `pod_no` int(11) NOT NULL AUTO_INCREMENT,
-  `pod_value` varchar(10) NOT NULL,
+  `pod_value` varchar(100) NOT NULL,
   `pod_cost` int(11) DEFAULT '0',
   `pod_stock` int(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`pod_no`),
