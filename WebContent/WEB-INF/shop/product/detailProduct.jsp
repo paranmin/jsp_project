@@ -234,6 +234,14 @@ $(function(){
 		}
 	});
 	
+	$("input[type='submit']").click(function(){
+		if($("#selectedItem").find("li").length==0){
+			alert("옵션을 선택해주세요");
+			return false;
+		}
+		$("form").submit();
+	 	return false;
+	});
 });	
 </script>
 </head>
