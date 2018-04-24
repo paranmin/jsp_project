@@ -250,7 +250,7 @@ $(function(){
  			$($hidden).val(span);
  			$("p.submit").append($hidden);
  		});
- 		if($("input[type='radio']:checked").val()==1){
+ 		/* if($("input[type='radio']:checked").val()==1){
 	 		sumStock=0;
 	 		$("input.op_stock").each(function(i,obj){
 	 			var eq4 = Number($(obj).val());
@@ -259,7 +259,7 @@ $(function(){
 	 		if(sumStock != $("input#stock").val()){
  	 			alert("재고를 확인해주세요.");
  	 		}
- 		};
+ 		}; */
  		$("form").submit();
 	 	alert("상품정보가 수정되었습니다.");
  		return false;
@@ -416,7 +416,7 @@ $(function(){
 						<th id="opname">옵션명</th>
 						<th id="opvalue">옵션값</th>
 						<th id="opprice">옵션가</th>
-						<th id="opstock">재고</th>
+						<!-- <th id="opstock">재고</th> -->
 						<th id="empty"></th>
 					</tr>
 					<c:set value="0" var="fir"/>
@@ -432,8 +432,8 @@ $(function(){
 							<c:forEach var="result" items="${res }" begin="${fir}" end="${end}" varStatus="sta">
 									<td><input type="text" name="op_desc" class="op_desc" value="${result.podValue}"></td>
 									<td><input type="text" name="op_cost" class="op_cost" value="${result.podCost}"></td>
-									<td><input type="text" name="op_stock" class="op_stock" value="${result.podStock}"></td>
-									<c:if test="${sta.first }">
+									<%-- <td><input type="text" name="op_stock" class="op_stock" value="${result.podStock}"></td> --%>
+									<c:if test="${sta.first }">    
 										<td>
 											<button class="op_add">+추가</button>    
 										</td>

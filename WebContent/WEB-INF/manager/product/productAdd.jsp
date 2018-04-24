@@ -176,8 +176,8 @@ $(function(){
 		$(td2error).text("*옵션내용을 입력하세요.");
 		$(td3error).text("*옵션가를 입력하세요.");
 		$(td3error2).text("*숫자만 입력하세요.");
-		$(td4error).text("*옵션재고를 입력하세요.");
-		$(td4error2).text("*숫자만 입력하세요.");
+		/* $(td4error).text("*옵션재고를 입력하세요.");
+		$(td4error2).text("*숫자만 입력하세요."); */
 		$(td5in).text("+추가");
 		$(td1).append(td1in);
 		$(td1).append(td1error);
@@ -187,14 +187,14 @@ $(function(){
 		$(td3).append(td3in);
 		$(td3).append(td3error);
 		$(td3).append(td3error2);
-		$(td4).append(td4in);
+		/* $(td4).append(td4in);
 		$(td4).append(td4error);
-		$(td4).append(td4error2);
+		$(td4).append(td4error2); */
 		$(td5).append(td5in);
 		$($tr).append(td1);
 		$($tr).append(td2);
 		$($tr).append(td3);
-		$($tr).append(td4);
+		/* $($tr).append(td4); */
 		$($tr).append(td5);
 		$("table#proOption").append($tr);     
 		return false;
@@ -235,13 +235,13 @@ $(function(){
 		$(td3).append(td3in);
 		$(td3).append(td3error);
 		$(td3).append(td3error2);
-		$(td4).append(td4in);
-		$(td4).append(td4error);
-		$(td4).append(td4error2);
+		/* $(td4).append(td4in); */
+		/* $(td4).append(td4error);
+		$(td4).append(td4error2); */
 		$(td5).append(td5in);
 		$($tr).append(td2);
 		$($tr).append(td3);
-		$($tr).append(td4);
+		/* $($tr).append(td4); */
 		$($tr).append(td5);
 		$($tr).insertAfter($(this).parent().parent());
  		var rowspan = $(this).parent().siblings().eq(0).prop("rowspan");
@@ -307,8 +307,8 @@ $(function(){
 			$("table#proOption").find("td").each(function(i, obj) {
 				var $op_name = $(this).find("input.op_name"),
 					$op_desc = $(this).find("input.op_desc"),
-					$op_cost = $(this).find("input.op_cost"),
-					$op_stock = $(this).find("input.op_stock");
+					$op_cost = $(this).find("input.op_cost");
+					/* $op_stock = $(this).find("input.op_stock"); */
 
 				if ($op_name.length == 1) {
 					if($op_name.val().trim() == ""){
@@ -331,7 +331,7 @@ $(function(){
 						count++;
 					}
 				}
-				if ($op_stock.length == 1) {
+				/* if ($op_stock.length == 1) {
 					if ($op_stock.val().trim() == "") {
 						$op_stock.next().css("display","block");
 						count++;
@@ -339,7 +339,7 @@ $(function(){
 						$op_stock.next().next().css("display","block");
 						count++;
 					}
-				}
+				}*/
 			});
 		}
 		if (count > 0) {
@@ -349,39 +349,7 @@ $(function(){
  		 	alert("상품이 등록되었습니다.");
 		}
 		return false;
-		/* var count = 0;
- 		if($("input[type='radio']:checked").val() == 1) {
- 			$("table#proOption").find("td").each(function(i,obj){
- 				if($(this).find("input.op_name")!=null){
- 					if($(this).find("input.op_name").val()==""){
- 		 	 			$(this).find("input.op_name").next().css("display","block");
- 		 				count++;
- 					}
- 				}else if($(this).find("input.op_desc")!=null){
- 					if($(this).find("input.op_desc").val()==""){
-		 				$(this).find("input.op_desc").next().css("display","block");
-		 				count++;
- 					}
- 				}else if($(this).find("input.op_cost")!=null){
- 					if($(this).find("input.op_cost").val()==""){
-	 					$(this).find("input.op_cost").next().css("display","block");
-		 				count++;
- 					}else if(!numberCheck.test($(this).find("input.op_cost").val())){
- 		 				$(this).find("input.op_cost").next().next().css("display","block");
- 		 				count++;
- 		 			}
- 				}else if($(this).find("input.op_stock")!=null){
- 					if($(this).find("input.op_stock").val()==""){
- 		 				$(this).find("input.op_stock").next().css("display","block");
- 		 				count++; 
- 		 			}else if(!numberCheck.test($(this).find("input.op_stock").val())){    
- 		 				$(this).find("input.op_stock").next().next().css("display","block");
- 		 				count++; 	
- 		 			}
- 				}
- 			});
- 			
- 			sumStock=0;
+		/*  sumStock=0;
  	 		$("input.op_stock").each(function(i,obj){
  	 			var eq4 = Number($(obj).val());
  	 			sumStock += eq4;   
@@ -398,7 +366,7 @@ $(function(){
 	 		 	alert("상품이 등록되었습니다.");
 	 		 	return false;
 			}
- 	 	} */
+ 	 	}*/
 
  		$("form").submit();
 	 	alert("상품이 등록되었습니다.");
@@ -504,7 +472,7 @@ $(function(){
 					<th id="opname">옵션명</th>
 					<th id="opvalue">옵션내용</th>
 					<th id="opprice">옵션가</th>
-					<th id="opstock">재고</th>
+					<!-- <th id="opstock">재고</th> -->
 					<th id="empty"></th>
 				</tr>
 				<tr class="parent" id="first">
@@ -521,11 +489,11 @@ $(function(){
 						<p class="error">*옵션가를 입력하세요.</p>
 						<p class="error">*숫자만 입력하세요.</p>
 					</td>
-					<td>
+					<!-- <td>
 						<input type="text" name="op_stock" class="op_stock">
 						<p class="error">*옵션재고를 입력하세요.</p>
 						<p class="error">*숫자만 입력하세요.</p>
-					</td>
+					</td> -->
 					<td>
 						<button class="op_add">+추가</button>    
 					</td>

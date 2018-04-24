@@ -71,7 +71,8 @@ public class ProductDetailShowHandler extends ShopCommandHandler {
 
 			String[] opname = request.getParameterValues("optionName");// 상품 옵션이름
 			SqlSession sqlsession = null;
-
+			/*String podNum = request.getParameter("podNo"); //상품디테일 번호
+			String[] podNo = podNum.split(",");*/
 			try {
 				sqlsession = MySqlSessionFactory.openSession();
 				CartDao dao = sqlsession.getMapper(CartDao.class);
@@ -79,11 +80,17 @@ public class ProductDetailShowHandler extends ShopCommandHandler {
 				Product pro = new Product(prdNo);
 				cart.setProduct(pro);
 				cart.setMember(loginMember);
-
+				
+				
 				for (int i = 0; i < optionPrice.length; i++) {
 					cart.setPrdOpName(opname[i]);
 					cart.setPrdQuantity(count.get(i));
 					cart.setPrdOpPrice(Integer.parseInt(optionPrice[i]));
+					/*for(int j=0; j< podNo.length; j++){
+						cart.setPodNo(podNo[j]);
+						System.out.println("podNo[j] : "+podNo[j]);
+						
+					}*/
 					dao.insertCart(cart);
 				}
 				sqlsession.commit();

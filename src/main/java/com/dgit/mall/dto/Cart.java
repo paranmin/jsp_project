@@ -11,6 +11,14 @@ public class Cart {
 	private Product product;
 	private CartToOrder type;
 	private OptionDetail optiondetail;
+	private String podNo;
+	
+	public String getPodNo() {
+		return podNo;
+	}
+	public void setPodNo(String podNo) {
+		this.podNo = podNo;
+	}
 	public int getNo() {
 		return no;
 	}
