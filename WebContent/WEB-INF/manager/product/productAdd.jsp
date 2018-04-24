@@ -344,6 +344,9 @@ $(function(){
 		}
 		if (count > 0) {
 			return false;
+		} else {
+			$("form").submit();
+ 		 	alert("상품이 등록되었습니다.");
 		}
 		return false;
 		/* var count = 0;

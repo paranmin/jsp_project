@@ -32,26 +32,23 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 
 			return TEMPLATE_PAGE;
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
-			String uploadPath = request.getRealPath("upload");
-			System.out.println("uploadPath = "+ uploadPath);
-			
+			String uploadPath = request.getSession().getServletContext().getRealPath("upload");
+
 			File dir = new File(uploadPath);
-			if(dir.exists() == false){
+			if (dir.exists() == false) {
 				dir.mkdirs();
 			}
-			int size = 1024*1024*10; //10Mbyte
-			
-			
+			int size = 1024 * 1024 * 10; // 10Mbyte
+
 			SqlSession sqlsession = null;
-			
+
 			try {
-				MultipartRequest multi = 
-						new MultipartRequest(request,//업로드할 파일정보
-									uploadPath,//서버 경로
-									size,//한번에 업로드할 사이즈
-									"utf-8",//한글 파일명 깨짐 처리
-									new DefaultFileRenamePolicy());//rename처리
-				
+				MultipartRequest multi = new MultipartRequest(request, // 업로드할 파일정보
+						uploadPath, // 서버 경로
+						size, // 한번에 업로드할 사이즈
+						"utf-8", // 한글 파일명 깨짐 처리
+						new DefaultFileRenamePolicy());// rename처리
+
 				String cate = multi.getParameter("cate");
 				String name = multi.getParameter("name");
 				String sub_desc = multi.getParameter("sub_desc");
@@ -62,19 +59,19 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 				String main = multi.getFilesystemName("mainimg");
 				String originalFilename = multi.getOriginalFileName("mainimg");
 				List<String> files = new ArrayList<>();
-				
+
 				Enumeration serfiles = multi.getFileNames();
-				while(serfiles.hasMoreElements()) {
+				while (serfiles.hasMoreElements()) {
 					String filename1 = (String) serfiles.nextElement();
-					if(!filename1.equals("mainimg")){
+					if (!filename1.equals("mainimg")) {
 						String detailimg = multi.getFilesystemName(filename1);
 						String originaldetailimg = multi.getOriginalFileName(filename1);
 						files.add(detailimg);
 					}
 				}
-				
+
 				String option = multi.getParameter("use_option");
-				
+
 				sqlsession = MySqlSessionFactory.openSession();
 				ProductDao dao = sqlsession.getMapper(ProductDao.class);
 				Product pro = new Product();
@@ -92,8 +89,8 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 				int prdno = dao.selectLastInsert();
 
 				Proimg img = new Proimg();
-				for (int i = files.size()-1; i >= 0; i--) {
-					if(!files.get(i).isEmpty()){
+				for (int i = files.size() - 1; i >= 0; i--) {
+					if (!files.get(i).isEmpty()) {
 						img.setPrdNo(prdno);
 						img.setImg(files.get(i));
 						dao.insertProImg(img);
@@ -116,28 +113,26 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 						int pono = dao.selectLastInsertOption();
 						int rowspan = Integer.parseInt(rspan[i]);
 						for (int n = 0; n < rowspan; n++) {
-							/*if (i > 0) {*/
-								det.setPodCost(opCost[n + afterspan]);
-								det.setPodValue(opValue[n + afterspan]);
-								det.setPodStock(Integer.parseInt(opStock[n + afterspan]));
-								det.setPoNo(pono);
-								dao.insertOptionDetail(det);
-							/*} else {
-								det.setPodCost(opCost[n + afterspan]);
-								det.setPodValue(opValue[n + afterspan]);
-								det.setPodStock(Integer.parseInt(opStock[n + afterspan]));
-								det.setPoNo(pono);
-								dao.insertOptionDetail(det);
-							}*/
+							/* if (i > 0) { */
+							det.setPodCost(opCost[n + afterspan]);
+							det.setPodValue(opValue[n + afterspan]);
+							det.setPodStock(Integer.parseInt(opStock[n + afterspan]));
+							det.setPoNo(pono);
+							dao.insertOptionDetail(det);
+							/*
+							 * } else { det.setPodCost(opCost[n + afterspan]); det.setPodValue(opValue[n +
+							 * afterspan]); det.setPodStock(Integer.parseInt(opStock[n + afterspan]));
+							 * det.setPoNo(pono); dao.insertOptionDetail(det); }
+							 */
 						}
 						afterspan += rowspan;
 					}
 				}
 				sqlsession.commit();
-				
+
 				response.sendRedirect("/jsp_project/manager/product/list.do");
 			} catch (Exception e) {
-				e.printStackTrace();  
+				e.printStackTrace();
 				sqlsession.rollback();
 			} finally {
 				sqlsession.close();
