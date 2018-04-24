@@ -14,8 +14,11 @@
 		<result property="brdwriter" column="brd_writer" /> <!--글 작성자 -->
 		<result property="brdpassword" column="brd_password" /> <!--글 작성자 비밀번호 -->
 		<result property="brdch" column="brd_ch" /><!--조회수 -->
-		<result property="selected" column="selected"/><!--글 종류 선택-->
+		<result property="selected" column="selected" /><!--글 종류 선택 -->
 	</resultMap>
+
+
+
 	<select id="selectByAllReviewBoard" parameterType="Board"
 		resultMap="BoardResult">
 		select brd_no , prd_no,
@@ -29,7 +32,8 @@
 		resultMap="BoardResult">
 		select brd_no, brd_code, brd_title, brd_content, brd_parent,
 		brd_depth, brd_use_attachment, prd_no,brd_ch,regdate,brd_writer
-		from board
+		from
+		board
 		where brd_code =
 		"QandABoard"
 	</select>
@@ -41,6 +45,12 @@
 		from board
 		where brd_code =
 		"NoticeBoard"
+	</select>
+
+	<select id="selectByAllReply" parameterType="Board" resultMap="BoardResult">
+	select brd_password,brd_writer,brd_content,brd_parent,brd_depth,regdate,brd_no
+	from board
+	where brd_no=brd_parent and brd_no=#{brdNo};
 	</select>
 
 	<select id="selectlistBoardReviewByid" parameterType="int"
@@ -60,10 +70,22 @@
 		where brd_no = #{number};
 	</select>
 
+	<select id="selectBylastno" resultType="int">
+		select max(brd_no)+1 from
+		board
+	</select>
+
 	<insert id="insertBoard" parameterType="Board">
 		insert into board
 		(brd_writer,brd_password,brd_title,brd_content,brd_code,brd_parent,brd_depth,regdate,selected)
 		value(#{brdwriter},#{brdpassword},#{brdtitle},#{brdcontent},#{brdcode},#{brdparent},#{brddepth},#{brdregdate},#{selected})
+	</insert>
+
+	<insert id="insertBoardReply" parameterType="board">
+		insert into board
+		(brd_writer,brd_password,brd_content,brd_parent,brd_depth,regdate)
+		value(#{brdwriter},#{brdpassword},#{brdcontent},#{brdparent},#{brddepth},#{brdregdate})
+		where
 	</insert>
 
 	<update id="updateBoardReview" parameterType="Board">
@@ -73,7 +95,8 @@
 
 	</update>
 	<update id="updatecheck">
-		update board set brd_ch = brd_ch+1 where brd_no = #{brdNo}
+		update board set brd_ch = brd_ch+1 where brd_no =
+		#{brdNo}
 	</update>
 
 	<delete id="deleteReview">

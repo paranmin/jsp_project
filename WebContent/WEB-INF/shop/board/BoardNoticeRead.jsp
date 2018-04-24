@@ -277,6 +277,13 @@ a {
 .readBoardcontent {
 	text-align: left;
 }
+
+.titleArea {
+	padding: 0 0 50px;
+	clear: both;
+	text-align: center;
+	padding-top: 115px;
+}
 </style>
 
 </head>
@@ -345,20 +352,9 @@ a {
 						</tbody>
 					</table>
 					<div class="view-link">
-						<dl class="bbs-link con-link">
-							<dt></dt>
-							<dd>
-								<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
-									class="none btn_light_border btn_box_01">수정</a> <a
-									href="BoardDel.do?brdno=${readBoard.brdNo }"
-									class="btn_light_border btn_box_01">삭제</a>
-							</dd>
-						</dl>
 						<dl class="bbs-link">
 							<dt></dt>
 							<dd>
-								<a class="write btn_dark btn_box_01"
-									href="${pageContext.request.contextPath}/shop/BoardNoticeForm.do">글쓰기</a>
 								<a href="${pageContext.request.contextPath}/shop/NoticeBoard.do"
 									class="btn_light btn_box_01"> 목록</a>
 							</dd>
