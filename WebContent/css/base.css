@@ -334,3 +334,7 @@ section {
 .required {
 	color: red;
 }
+
+#line{
+	text-decoration: line-through;
+}

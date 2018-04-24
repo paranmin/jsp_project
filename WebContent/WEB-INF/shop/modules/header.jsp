@@ -24,8 +24,8 @@
 							<li><a href="${pageContext.request.contextPath}/shop/showList.do?cate=기타">기타 - Etc</a></li>
 						</ul>
 					</li>
-					<li><a href="#">BEST</a></li>
-					<li><a href="#">SALE</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/showBestList.do">BEST</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/showSaleList.do">SALE</a></li>
 				</ul>
 				<ul class="nav user_nav">
 				<c:choose>
