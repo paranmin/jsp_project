@@ -22,9 +22,8 @@ public class ProductSaleListHandler extends ShopCommandHandler {
 			sqlsession = MySqlSessionFactory.openSession();
 			ProductDao dao = sqlsession.getMapper(ProductDao.class);
 			List<Product> salelist = new ArrayList<>();
-			salelist = dao.selectBestAllProduct(); /*sale 찾는 sql 짜기*/
+			salelist = dao.selectSaleProduct();
 			request.setAttribute("sale", salelist);
-		
 
 			return VIEW_FRONT_PATH + "product/saleList.jsp";
 		} finally {

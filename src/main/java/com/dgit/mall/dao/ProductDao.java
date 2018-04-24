@@ -20,6 +20,7 @@ public interface ProductDao {
 	public List<Product> selectCateProduct(Product pro) throws SQLException;
 	public List<Product> selectNameProduct(Product pro) throws SQLException;
 	public List<Product> selectNCProduct(Product pro) throws SQLException;
+	public List<Product> selectSaleProduct() throws SQLException;
 	
 	public Product SelectProductByno(int no) throws SQLException;
 	public List<Proimg> SelectProimgByno(int no) throws SQLException;

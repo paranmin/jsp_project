@@ -87,6 +87,9 @@
 		</if>
 		order by prd_no desc
 	</select>
+	<select id="selectSaleProduct" resultMap="productResult">
+		select * from product where not prd_discount_per='0%'
+	</select>
 	<select id="SelectProductByno" resultMap="productResult">
 		select * from product where prd_no=#{prdNo}
 	</select>
