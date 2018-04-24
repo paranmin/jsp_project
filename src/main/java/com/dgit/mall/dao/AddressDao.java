@@ -13,4 +13,6 @@ public interface AddressDao {
 	int insertByMemberNo(Address address);
 
 	int modifyByMemberNo(Address address);
+	
+	int deleteAddressByaddrNo(int addrNo);
 }

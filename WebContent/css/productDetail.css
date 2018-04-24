@@ -202,3 +202,6 @@ div#resultPrice p{
     position: absolute;
     right: 20px;
 }
+div.detail_left{
+	min-height: 300px;	
+}

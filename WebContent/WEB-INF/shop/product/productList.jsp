@@ -27,7 +27,7 @@
 				<p class="list_title">${cate } BEST</p>
 			</c:if>
 			<div class="category_best">
-				<c:forEach var="bestItem" items="${best }" begin="0" end="7">
+				<c:forEach var="bestItem" items="${best }">
 						<div class="item">
 							<img src="${pageContext.request.contextPath}/upload/${bestItem.mainImg }">
 							<div class="category_best_white">
@@ -35,12 +35,17 @@
 									<p>
 										<b>${bestItem.name }</b>
 										<br> ${bestItem.subDesc }
+										<c:if test="${bestItem.discountPer != '0%'}">
+										<br><span id="line"><fmt:formatNumber value="${bestItem.cost }" pattern="￦#,###"/></span>
+										</c:if>
 										<br><fmt:formatNumber value="${bestItem.sellingPrice }" pattern="￦#,###"/>
+										<c:if test="${bestItem.discountPer != '0%'}">
+										<br>(${bestItem.discountPer } 할인)
+										</c:if>
 									</p>
 								</a>
 							</div>
 						</div>
-					
 				</c:forEach>
 			</div>
 			<hr>
@@ -79,13 +84,22 @@
 					</div>    
 				</c:forEach>
 			</div>
-			<br>
-			<br>
-			<br>
-			<p>페이징 처리해야함</p>
-			<br>
-			<br>
-			<br>
+			<ul class="pagination">
+				<li><a href="#"><img src="${pageContext.request.contextPath}/images/first_btn.gif" alt="처음" title="처음" /></a></li>
+				<li><a href="#"><img src="${pageContext.request.contextPath}/images/prev_btn.gif" alt="이전" title="이전" /></a></li>
+				<li class="page">1</li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li><a href="#">6</a></li>
+				<li><a href="#">7</a></li>
+				<li><a href="#">8</a></li>
+				<li><a href="#">9</a></li>
+				<li><a href="#">10</a></li>
+				<li><a href="#"><img src="${pageContext.request.contextPath}/images/next_btn.gif" alt="다음" title="다음" /></a></li>
+				<li><a href="#"><img src="${pageContext.request.contextPath}/images/last_btn.gif" alt="마지막" title="마지막" /></a></li>
+			</ul>
 		</section>
 		<c:import url="../modules/footer.jsp" />
 	</div>

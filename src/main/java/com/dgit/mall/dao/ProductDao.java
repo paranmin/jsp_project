@@ -2,6 +2,7 @@ package com.dgit.mall.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.dgit.mall.dto.Option;
 import com.dgit.mall.dto.OptionDetail;
@@ -20,6 +21,7 @@ public interface ProductDao {
 	public List<Product> selectCateProduct(Product pro) throws SQLException;
 	public List<Product> selectNameProduct(Product pro) throws SQLException;
 	public List<Product> selectNCProduct(Product pro) throws SQLException;
+	public List<Product> selectSaleProduct() throws SQLException;
 	
 	public Product SelectProductByno(int no) throws SQLException;
 	public List<Proimg> SelectProimgByno(int no) throws SQLException;
@@ -36,4 +38,6 @@ public interface ProductDao {
 	
 	public List<Product> selectBestAllProduct() throws SQLException;
 	public List<Product> selectBestCateProduct(String cate) throws SQLException;
+
+	public List<Product> selectProductByPagination(Map<String, Object> map) throws SQLException;
 } 

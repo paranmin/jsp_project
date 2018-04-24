@@ -7,6 +7,7 @@
 		<result property="prdOpName" column="ct_prd_op_name"/>
 		<result property="prdOpPrice" column="ct_prd_op_price"/>
 		<result property="optiondetail.podStock" column="pod_stock"/>
+		<result property="podNo" column="pod_no"/> <!-- 옵션번호 -->
 		<result property="member.no" column="m_no"/>
 		<result property="member.name" column="m_name"/>
 		<result property="member.id" column="m_id"/>
@@ -38,9 +39,9 @@
 		delete from cart where ct_no = #{ctNo} and m_no = #{no}
 	</delete>
 
-	<insert id="insertCart" parameterType="Cart">
-		insert into cart(ct_prd_quantity, ct_prd_op_name, ct_prd_op_price, m_no, prd_no)
-		values(#{prdQuantity}, #{prdOpName}, #{prdOpPrice}, #{member.no},#{product.prdNo})
+	<insert id="insertCart">
+		insert into cart(ct_prd_quantity, ct_prd_op_name, ct_prd_op_price, m_no, prd_no <!-- ,pod_no -->)
+		values(#{prdQuantity}, #{prdOpName}, #{prdOpPrice}, #{member.no},#{product.prdNo}<!-- ,#{podNo} -->)
 	</insert>
 
 	<delete id="deleByAll" parameterType="Cart">

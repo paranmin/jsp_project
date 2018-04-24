@@ -207,7 +207,7 @@ div#left_side img.close_left {
 div#right_sub_menu {
 	margin: 0;
 	width: 201px;
-	height: 1050px;
+	height: 100%;
 	border-left: 1px solid black;
 	background-color: white;
 	position: fixed;
@@ -258,20 +258,42 @@ div#right_sub_menu .insta {
 	margin-top: 10px;
 }
 /* 오른쪽 사이드 메뉴 */
+
+section {
+	margin-top: 83px;
+	overflow: hidden;
+}
+
+ul.pagination {
+	overflow: hidden;
+	width: 350px;
+	margin: 50px auto;
+}
+ul.pagination li {
+	float: left;
+	display: inline-block;
+	width: 25px;
+	height: 30px;
+	line-height: 30px;
+}
+
+ul.pagination a {
+	text-align: center;
+	vertical-align: middle;
+}
+ul.pagination li.page {
+	border-bottom: 2px solid #000;
+}
+
 .footer {
 	clear: both;
 	width: 100%;
 	height: auto;
 	overflow: hidden;
 	background: #282828;
-	margin: 200px auto 0;
+	margin: 50px auto 0;
 	color: #e3e3e3;
 	font-size: 10px;
-}
-
-section {
-	margin-top: 83px;
-	overflow: hidden;
 }
 
 .footer_in {
@@ -333,4 +355,8 @@ section {
 
 .required {
 	color: red;
+}
+
+#line{
+	text-decoration: line-through;
 }
