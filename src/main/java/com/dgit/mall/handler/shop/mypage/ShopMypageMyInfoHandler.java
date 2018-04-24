@@ -99,7 +99,7 @@ public class ShopMypageMyInfoHandler extends ShopCommandHandler {
 
 			Address addr = AddressService.getInstance().selectHomeByMemberNo(modifyMember);
 			if (addr == null) {
-				addr = new Address(auth.getNo(), zipcode, addr1, addr2, AddressType.HOME, new Date());
+				addr = new Address(0,auth.getNo(), zipcode, addr1, addr2, AddressType.HOME, new Date(),auth.getName());
 				res = AddressService.getInstance().insertByMemberNo(addr);
 			} else {
 				addr.setZipcode(zipcode);

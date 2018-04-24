@@ -10,7 +10,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/base.css" media="all" /> 
+	href="${pageContext.request.contextPath}/css/base.css" media="all" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Boardcss/Board.css"
 	media="all" />
@@ -34,8 +34,16 @@ table {
 .bbs-table-list tbody td {
 	border-top: 1px solid rgb(232, 232, 232);
 }
-td{
-text-align: center;
+
+td {
+	text-align: center;
+}
+
+.titleArea {
+	padding: 0 0 50px;
+	clear: both;
+	text-align: center;
+	padding-top: 115px;
 }
 </style>
 </head>
@@ -102,7 +110,6 @@ text-align: center;
 							</tbody>
 						</table>
 					</div>
-
 
 					<!-- .bbs-sch -->
 					<div class="bbs-sch">

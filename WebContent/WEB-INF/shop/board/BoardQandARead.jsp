@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	System.out.println("BoardQandARead.jsp===========================");
+%>
 <html>
 <head>
 <meta charset=UTF-8">
@@ -303,135 +306,136 @@ a {
 			</div>
 		</div>
 		<section>
-			<div class="page-body">
-				<dl class="prd-tinfo">
-					<dt>
-						<a href="#"><img src="#"></a>
-					</dt>
-					<dd>
-						<ul>
-							<li class="name"><span class="tit">상 품 명:</span><a href="#">타이니
-									크로스 바벨</a> <span class="MK-product-icons"></span> <!--/coupon_icon/--></li>
-							<li class="price"><span class="tit">상품가격:</span><strong>3,000원</strong></li>
-						</ul>
-					</dd>
-				</dl>
-				<div class="bbs-table-view">
-					<table summary="게시글 보기">
-						<caption>게시글 보기</caption>
-						<thead>
-							<tr>
-								<th><div class="tb-center">
-										<em>제목 :</em>${readBoard.brdtitle }</div></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="line">
-									<div class="cont-sub-des">
-										<div>
-											<span><em>작성일 :</em> ${readBoard.brdregdate }</span>
-										</div>
-										<div>
-											<span><em>작성자 :</em>${readBoard.brdwriter }</span> <span><em>파일
-													:</em> <a href="#"></a></span>
-										</div>
-										<div class="hit">
-											<span><em>조회 :</em>${readBoard.brdch }</span>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="data-bd-cont">
-										<div class="attach">
-											<img width="999" src="#">
-											<div class="readBoardcontent">
-												<em>${readBoard.brdcontent }</em>
-											</div>
-										</div>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<div id="comment_list_0"></div>
-					<form id="comment_form" name="comment"
-						action="board.html?code=curiouswiz_board3&amp;page=2&amp;type=v&amp;board_cate=&amp;num1=942911&amp;num2=00000&amp;number=102643&amp;lock=N"
-						method="post" autocomplete="off">
-						<fieldset>
-							<legend>코멘트 쓰기</legend>
-							<table summary="코멘트 쓰기" class="comment-box">
-								<caption>코멘트 쓰기</caption>
-								<colgroup>
-									<col width="120">
-									<col>
-									<col width="150">
-								</colgroup>
-								<tbody>
-									<tr>
-										<td colspan="3" class="com-wrt-box">
-											<div>
-												<div class="wrt">
-													<label>작성자</label><span><input type="text"
-														name="cname" class="MS_input_txt input-style input-style2"
-														value="${readBoard.brdwriter }" onclick="CheckLogin()"
-														onkeypress="CheckLogin()" placeholder="이름"></span> <label>비밀번호</label><span><input
-														type="password" name="cpass"
-														class="MS_input_txt input-style input-style2"
-														onclick="CheckLogin()" onkeypress="CheckLogin()"
-														placeholder="패스워드"> </span>
-												</div>
-												<div class="wrt">
-													<textarea name="comment" onchange="Checklength(this);"
-														onkeyup="Checklength(this);" onclick="CheckLogin()"
-														placeholder="내용"></textarea>
-													<a href="javascript:comment_save('');"
-														class="btn_light btn_box_02">확인</a>
-												</div>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</fieldset>
-					</form>
-					<div class="view-link">
-						<dl class="bbs-link con-link">
-							<dt></dt>
-							<dd>
-								<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
-									class="none btn_light_border btn_box_01">수정</a> <a
-									href="BoardDel.do?brdno=${readBoard.brdNo }"
-									class="btn_light_border btn_box_01">삭제</a> <a
-									href="/board/board.html?code=curiouswiz_board3&amp;page=2&amp;board_cate=&amp;num1=942911&amp;num2=00000&amp;type=r&amp;lock_re=N"
-									class="btn_light btn_box_01">답변</a>
-							</dd>
-						</dl>
-						<dl class="bbs-link">
-							<dt></dt>
-							<dd>
-								<a class="write btn_dark btn_box_01"
-									href="${pageContext.request.contextPath}/shop/ReviewForm.do">글쓰기</a>
-								<a href="${pageContext.request.contextPath}/shop/BoardQandA.do"
-									class="btn_light btn_box_01"> 목록</a>
-							</dd>
-						</dl>
-					</div>
-					<ul class="list-link">
-						<li><span class="arrow prev">이전글 :</span> <a
-							href="/shop/shopdetail.html?branduid=979417">[베이직 초승달 바벨]</a> <a
-							href="/board/board.html?code=curiouswiz_board3&amp;board_cate=&amp;num1=942910&amp;num2=10000&amp;type=v&amp;&amp;s_id=&amp;stext=&amp;ssubject=&amp;shname=&amp;scontent=&amp;sbrand=&amp;sgid=&amp;datekey=&amp;branduid=&amp;lock=N">Re:
-								실버 오른쪽 아웃컨츠</a></li>
-						<li><span class="arrow next">다음글 :</span> <a
-							href="/shop/shopdetail.html?branduid=976526">[타이니 크로스 바벨]</a> <a
-							href="/board/board.html?code=curiouswiz_board3&amp;board_cate=&amp;num1=942911&amp;num2=10000&amp;type=v&amp;&amp;s_id=&amp;stext=&amp;ssubject=&amp;shname=&amp;scontent=&amp;sbrand=&amp;sgid=&amp;datekey=&amp;branduid=&amp;lock=N">Re:
-								왼쪽귓볼</a></li>
+
+			<dl class="prd-tinfo">
+				<dt>
+					<a href="#"><img src=""></a>
+				</dt>
+				<dd>
+					<ul>
+						<li class="name"><span class="tit">상 품 명:</span><a href="#">타이니
+								크로스 바벨</a> <span class="MK-product-icons"></span> /coupon_icon/</li>
+						<li class="price"><span class="tit">상품가격:</span><strong>3,000원</strong></li>
 					</ul>
+				</dd>
+			</dl>
+			<div class="bbs-table-view">
+				<table summary="게시글 보기">
+					<caption>게시글 보기</caption>
+					<thead>
+						<tr>
+							<th><div class="tb-center">
+									<em>제목 :</em>${readBoard.brdtitle }</div></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="line">
+								<div class="cont-sub-des">
+									<div>
+										<span><em>작성일 :</em> ${readBoard.brdregdate }</span>
+									</div>
+									<div>
+										<span><em>작성자 :</em>${readBoard.brdwriter }</span> <span><em>파일
+												:</em> <a href="#"></a></span>
+									</div>
+									<div class="hit">
+										<span><em>조회 :</em>${readBoard.brdch }</span>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="data-bd-cont">
+									<div class="attach">
+										<img width="999" src="">
+										<div class="readBoardcontent">
+											<em>${readBoard.brdcontent }</em>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="comment_list_0"></div>
+				<form id="comment_form" name="comment"
+					action="#"
+					method="post">
+					<fieldset>
+						<legend>코멘트 쓰기</legend>
+						<table summary="코멘트 쓰기" class="comment-box">
+							<caption>코멘트 쓰기</caption>
+							<colgroup>
+								<col width="120">
+								<col>
+								<col width="150">
+							</colgroup>
+							<tbody>
+								<tr>
+									<td colspan="3" class="com-wrt-box">
+										<div>
+											<div class="wrt">
+												<label>작성자</label><span><input type="text"
+													name="cname" class="MS_input_txt input-style input-style2"
+													value="${readBoard.brdwriter }" onclick="CheckLogin()"
+													onkeypress="CheckLogin()" placeholder="이름"></span> <label>비밀번호</label><span><input
+													type="password" name="cpass"
+													class="MS_input_txt input-style input-style2"
+													onclick="CheckLogin()" onkeypress="CheckLogin()"
+													placeholder="패스워드"> </span>
+											</div>
+											<div class="wrt">
+												<textarea name="comment" onchange="Checklength(this);"
+													onkeyup="Checklength(this);" onclick="CheckLogin()"
+													placeholder="내용"></textarea>
+												<a href="javascript:comment_save('');"
+													class="btn_light btn_box_02">확인</a>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+				</form>
+				<div class="view-link">
+					<dl class="bbs-link con-link">
+						<dt></dt>
+						<dd>
+							<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
+								class="none btn_light_border btn_box_01">수정</a> <a
+								href="BoardDel.do?brdno=${readBoard.brdNo }"
+								class="btn_light_border btn_box_01">삭제</a> <a
+								href="#"
+								class="btn_light btn_box_01">답변</a>
+						</dd>
+					</dl>
+					<dl class="bbs-link">
+						<dt></dt>
+						<dd>
+							<a class="write btn_dark btn_box_01"
+								href="${pageContext.request.contextPath}/shop/ReviewForm.do">글쓰기</a>
+							<a href="${pageContext.request.contextPath}/shop/BoardQandA.do"
+								class="btn_light btn_box_01"> 목록</a>
+						</dd>
+					</dl>
 				</div>
+				<ul class="list-link">
+					<li><span class="arrow prev">이전글 :</span> <a
+						href="#">[베이직 초승달 바벨]</a> <a
+						href="#">Re:
+							실버 오른쪽 아웃컨츠</a></li>
+					<li><span class="arrow next">다음글 :</span> <a
+						href="#">[타이니 크로스 바벨]</a> <a
+						href="#">Re:
+							왼쪽귓볼</a></li>
+				</ul>
 			</div>
+
 		</section>
-		<c:import url="../modules/footer.jsp" />
+	</div>
+	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

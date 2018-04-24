@@ -60,7 +60,6 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 			}
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String uploadPath = request.getRealPath("upload");
-			System.out.println("uploadPath = "+ uploadPath);
 			
 			File dir = new File(uploadPath);
 			if(dir.exists() == false){
@@ -122,8 +121,6 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				pro.setUseOption(option);
 				Product selectPro = dao.SelectProductByno(no);
 				
-				System.out.println(mainImg + "fghffgd");
-				System.out.println("sadfsadsafs");
 				
 				if(mainImg == null){
 					
@@ -174,7 +171,7 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 					String[] opValue = multi.getParameterValues("op_desc");
 					String[] opCost = multi.getParameterValues("op_cost");
 					String[] rspan = multi.getParameterValues("span");
-					String[] opStock = multi.getParameterValues("op_stock");
+					/*String[] opStock = multi.getParameterValues("op_stock");*/
 					int afterspan = 0;
 					for (int i = 0; i < opName.length; i++) {
 						opt.setPoName(opName[i]);
@@ -192,7 +189,7 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 							} else {*/
 								det.setPodCost(opCost[n + afterspan]);
 								det.setPodValue(opValue[n + afterspan]);
-								det.setPodStock(Integer.parseInt(opStock[n + afterspan]));
+								/*det.setPodStock(Integer.parseInt(opStock[n + afterspan]));*/
 								det.setPoNo(pono);
 								dao.insertOptionDetail(det);
 							/*}*/

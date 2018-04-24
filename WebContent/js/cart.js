@@ -78,12 +78,15 @@ $(function(){
 				count++;
 				$(this).next().val(count);
 				var stock = $(this).next().next().next().val();
+				stock--;
 				if(count>stock){
 					alert("이 상품은 "+stock+"까지 주문할 수 있습니다.");
 					count = stock;
-					$(this).next().val(count);					
+					$(this).next().val(count);			
 					return false;   
 				}
+				$(this).next().next().next().val(stock);
+				console.log($(this).next().next().next().val());
 				var PrdtotalPrice = countPr+prSum;
 				totalPrdPrice += countPr;
 				$(this).parent().next().find(".productPrice").text(PrdtotalPrice);
@@ -113,6 +116,8 @@ $(function(){
 			var prSum = parseInt($(this).parent().next().find(".productPrice").text());
 			var totalPrdPrice = parseInt($(".prdsPrice").text());
 			var totalPrdPrice = parseInt($(".prdsPrice2").text());
+			var stock = $(this).next().next().val();
+			stock++;
 			var count = $(this).prev().val();
 			count--;
 			var PrdtotalPrice =countPr;

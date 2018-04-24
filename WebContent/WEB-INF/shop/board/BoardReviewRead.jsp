@@ -154,7 +154,7 @@ th {
 	color: #222;
 }
 
-.com-wrt-box .input-style {
+.input-style {
 	margin: 0 10px 0 7px;
 	padding: 2px;
 	height: 20px;
@@ -178,6 +178,7 @@ textarea {
 	height: 47px;
 	padding: 2px;
 	border: 1px solid #dedede;
+	vertical-align: middle;
 }
 
 .btn_box_02 {
@@ -277,6 +278,13 @@ a {
 .readBoardcontent {
 	text-align: left;
 }
+
+.titleArea {
+	padding: 0 0 50px;
+	clear: both;
+	text-align: center;
+	padding-top: 115px;
+}
 </style>
 
 </head>
@@ -306,7 +314,7 @@ a {
 			<div class="page-body">
 				<dl class="prd-tinfo">
 					<dt>
-						<a href="#"><img src="#"></a>
+						<a href="#"><img src=""></a>
 					</dt>
 					<dd>
 						<ul>
@@ -346,7 +354,7 @@ a {
 								<td>
 									<div class="data-bd-cont">
 										<div class="attach">
-											<img width="999" src="#">
+											<img width="999" src="">
 											<div class="readBoardcontent">
 												<em>${readBoard.brdcontent }</em>
 											</div>
@@ -356,10 +364,30 @@ a {
 							</tr>
 						</tbody>
 					</table>
-					<div id="comment_list_0"></div>
-					<form id="comment_form" name="comment"
-						action="board.html?code=curiouswiz_board3&amp;page=2&amp;type=v&amp;board_cate=&amp;num1=942911&amp;num2=00000&amp;number=102643&amp;lock=N"
-						method="post" autocomplete="off">
+					<div id="comment_list_0">
+						<table summary="코멘트 목록" class="comment-box">
+							<caption>코멘트 목록</caption>
+							<colgroup>
+								<col width="120">
+								<col>
+								<col width="150">
+							</colgroup>
+							<tbody>
+								<c:if test="${list.size()>0 }">
+									<c:forEach var="item" items="${list }">
+										<tr>
+				
+											<td>${item.brdwriter }</td>
+											<td>${item.brdcontent }</td>
+											<td>${item.brdregdate }</td>
+											
+										</tr>
+									</c:forEach>
+								</c:if>
+							</tbody>
+						</table>
+					</div>
+					<form id="comment_form" name="comment" action="BoardReplyinsert.do" method="post">
 						<fieldset>
 							<legend>코멘트 쓰기</legend>
 							<table summary="코멘트 쓰기" class="comment-box">
@@ -374,21 +402,21 @@ a {
 										<td colspan="3" class="com-wrt-box">
 											<div>
 												<div class="wrt">
-													<label>작성자</label><span><input type="text"
-														name="cname" class="MS_input_txt input-style input-style2"
-														value="${readBoard.brdwriter }" onclick="CheckLogin()"
-														onkeypress="CheckLogin()" placeholder="이름"></span> <label>비밀번호</label><span><input
-														type="password" name="cpass"
+													<label>작성자</label> <span> <input type="text"
+														name="brdwriter"
 														class="MS_input_txt input-style input-style2"
-														onclick="CheckLogin()" onkeypress="CheckLogin()"
-														placeholder="패스워드"> </span>
+														value="${readBoard.brdwriter }"></span> <label>비밀번호</label><span>
+														<input type="password" name="brdpassword"
+														class="MS_input_txt input-style input-style2"
+														placeholder="패스워드">
+														<input type="hidden" name="brdno"
+														class="MS_input_txt input-style input-style2" value="${readBoard.brdNo }">
+													</span> <input type="hidden" name="brdparent"
+														value="${readBoard.brdNo }">
 												</div>
 												<div class="wrt">
-													<textarea name="comment" onchange="Checklength(this);"
-														onkeyup="Checklength(this);" onclick="CheckLogin()"
-														placeholder="내용"></textarea>
-													<a href="javascript:comment_save('');"
-														class="btn_light btn_box_02">확인</a>
+													<textarea name="brdcontent" placeholder="내용"></textarea>
+												<input type="submit" value="확인">
 												</div>
 											</div>
 										</td>
@@ -414,8 +442,7 @@ a {
 							<dd>
 								<a class="write btn_dark btn_box_01"
 									href="${pageContext.request.contextPath}/shop/ReviewForm.do">글쓰기</a>
-								<a
-									href="${pageContext.request.contextPath}/shop/ReviewBoard.do"
+								<a href="${pageContext.request.contextPath}/shop/ReviewBoard.do"
 									class="btn_light btn_box_01"> 목록</a>
 							</dd>
 						</dl>

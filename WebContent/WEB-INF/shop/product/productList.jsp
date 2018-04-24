@@ -27,7 +27,7 @@
 				<p class="list_title">${cate } BEST</p>
 			</c:if>
 			<div class="category_best">
-				<c:forEach var="bestItem" items="${best }" begin="0" end="7">
+				<c:forEach var="bestItem" items="${best }">
 						<div class="item">
 							<img src="${pageContext.request.contextPath}/upload/${bestItem.mainImg }">
 							<div class="category_best_white">
@@ -35,12 +35,17 @@
 									<p>
 										<b>${bestItem.name }</b>
 										<br> ${bestItem.subDesc }
+										<c:if test="${bestItem.discountPer != '0%'}">
+										<br><span id="line"><fmt:formatNumber value="${bestItem.cost }" pattern="￦#,###"/></span>
+										</c:if>
 										<br><fmt:formatNumber value="${bestItem.sellingPrice }" pattern="￦#,###"/>
+										<c:if test="${bestItem.discountPer != '0%'}">
+										<br>(${bestItem.discountPer } 할인)
+										</c:if>
 									</p>
 								</a>
 							</div>
 						</div>
-					
 				</c:forEach>
 			</div>
 			<hr>

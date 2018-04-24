@@ -121,7 +121,6 @@ $(function(){
 				alert("이미 추가된 상품입니다.");
 			}else{
 				appendLi();
-				
 			}
 		}
 	}
@@ -139,9 +138,11 @@ $(function(){
 		var span = $("<span>");
 		
 		var cost = new Array();
+		/* var podNo = new Array(); */
 		Sumcost = 0;
 		$('option:selected').each(function(i, obj){
 			cost[i]= Number($(obj).attr("data-cost"));
+			/* podNo[i]= Number($(obj).attr("data-podno")); */
 			Sumcost += cost[i];
 		});
 		
@@ -164,6 +165,11 @@ $(function(){
 		$(hidden2).val(text[0]+")");
 		$(li).append(hidden);
 		$(li).append(hidden2);  
+		
+		
+		/* var hidden3 = $("<input type='hidden' name='podNo'>");
+		$(hidden3).val(podNo);
+		$(li).append(hidden3);   */
 		$("div#selectedItem").children("ul").append(li);
 	}
 	
@@ -228,6 +234,14 @@ $(function(){
 		}
 	});
 	
+	$("input[type='submit']").click(function(){
+		if($("#selectedItem").find("li").length==0){
+			alert("옵션을 선택해주세요");
+			return false;
+		}
+		$("form").submit();
+	 	return false;
+	});
 });	
 </script>
 </head>

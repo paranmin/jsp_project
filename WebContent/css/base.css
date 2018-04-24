@@ -356,3 +356,7 @@ ul.pagination li.page {
 .required {
 	color: red;
 }
+
+#line{
+	text-decoration: line-through;
+}
