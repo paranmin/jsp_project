@@ -464,7 +464,7 @@ $(function(){
 			</div>
 			<table id="proOption">
 				<tr>
-					<td colspan="5" id="smallfont"><button id="op_nameadd">+옵션명추가</button>
+					<td colspan="4" id="smallfont"><button id="op_nameadd">+옵션명추가</button>
 						*옵션가 : 플러스 옵션일 경우 숫자만 입력, 마이너스 옵션일 경우 숫자 앞에 음수(-)붙여 입력하세요.
 					</td>
 				</tr>
