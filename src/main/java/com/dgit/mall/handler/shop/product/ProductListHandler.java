@@ -65,7 +65,6 @@ public class ProductListHandler extends ShopCommandHandler {
 				cateMap.put("orderby", "desc");
 			}
 		}
-		System.out.println("cateMap :"+cateMap);
 		// 카테고리별 전체 상품 갯수 (카테고리 없으면 전체 상품 갯수)
 		int total = ProductService.getInstance().countTotalProductByCategory(new Product(cate));
 

@@ -81,6 +81,12 @@
 		</if>
 		order by prd_no desc
 	</select>
+	<select id="selectNameProductCount" resultType="int">
+		select count(*) from product where prd_name like CONCAT("%",#{name},"%")
+		<if test="use!=null">
+			and prd_use=${use}
+		</if>
+	</select>
 	<select id="selectNCProduct" resultMap="productResult">
 		select * from product where prd_category=#{category} and prd_name like CONCAT("%",#{name},"%")
 		<if test="use!=null">
