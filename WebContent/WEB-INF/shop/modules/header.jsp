@@ -4,7 +4,9 @@
 <header id="header">
 	<div class="main_header">
 		<h1 class="title"><a href="${pageContext.request.contextPath}/shop/main.do">SJ JEWELRY</a></h1>
-		<div class="btn_search"><input type="text" name="main_search" /> <i class="fa fa-search"></i></div>
+		<form action="showSelectList.do">
+			<div class="btn_search"><input type="text" name="main_search" /> <i class="fa fa-search"></i></div>
+		</form>
 		<nav>
 			<div class="main_nav">
 				<ul class="nav category_nav">
