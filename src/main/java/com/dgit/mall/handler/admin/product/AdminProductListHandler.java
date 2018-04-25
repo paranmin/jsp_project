@@ -53,7 +53,7 @@ public class AdminProductListHandler extends AdminCommandHandler {
 			params = makeParams(params, "view", sView);
 		}
 
-		int total = ProductService.getInstance().countTotalProductByCategory(new Product(pagingCate));
+		int total = ProductService.getInstance().countTotalProductByProduct(new Product(pagingCate));
 		List<Product> listPro = ProductService.getInstance().selectProductByPagination(map);
 
 		int cnt = (int) Math.ceil((double)total / row);

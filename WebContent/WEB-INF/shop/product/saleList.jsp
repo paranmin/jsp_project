@@ -22,23 +22,27 @@
 		<section id="sale_list">
 			<p class="list_title">JEWELRY SALE</p>
 			<c:forEach var="saleItem" items="${sale }">
-						<div class="item">
-							<img src="${pageContext.request.contextPath}/upload/${saleItem.mainImg }">
-							<div class="category_best_white">
-								<a href="${pageContext.request.contextPath}/shop/detailProductShow.do?no=${saleItem.prdNo }">
-									<p>
-										<b>${saleItem.name }</b>
-										<br> ${saleItem.subDesc }
-										<br><span id="line"><fmt:formatNumber value="${saleItem.cost }" pattern="￦#,###"/></span>
-										<br><fmt:formatNumber value="${saleItem.sellingPrice }" pattern="￦#,###"/>
-										<br>(${saleItem.discountPer } 할인)
-									</p>
-								</a>
-							</div>
-						</div>
-				</c:forEach>
+				<div class="item">
+					<img src="${pageContext.request.contextPath}/upload/${saleItem.mainImg }">
+					<div class="category_best_white">
+						<a href="${pageContext.request.contextPath}/shop/detailProductShow.do?no=${saleItem.prdNo }">
+							<p>
+								<b>${saleItem.name }</b>
+								<br> ${saleItem.subDesc }
+								<br><span id="line"><fmt:formatNumber value="${saleItem.cost }" pattern="￦#,###"/></span>
+								<br><fmt:formatNumber value="${saleItem.sellingPrice }" pattern="￦#,###"/>
+								<br>(${saleItem.discountPer } 할인)
+							</p>
+						</a>
+					</div>
+				</div>
+			</c:forEach>
+			<div class="pagingArea">
+			<c:if test="${paging != null}">
+				${paging}
+			</c:if>
+			</div>
 		</section>
-		<p>페이징</p>
 		<c:import url="../modules/footer.jsp" />
 	</div>
 </body>

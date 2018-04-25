@@ -102,9 +102,11 @@ $(function(){
 					</div>    
 				</c:forEach>
 			</div>
+			<div class="pagingArea">
 			<c:if test="${paging != null}">
 				${paging}
 			</c:if>
+			</div>
 		</section>
 		<c:import url="../modules/footer.jsp" />
 	</div>

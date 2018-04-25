@@ -215,11 +215,14 @@
 		</if>
 	</select>
 	
-	<select id="countTotalProductByCategory" parameterType="Product" resultType="int">
+	<select id="countTotalProductByProduct" parameterType="Product" resultType="int">
 		select count(prd_no) from product
 		<where>
 			<if test="category != null and category != ''">
 				prd_category = #{category}
+			</if>
+			<if test="name != null and name != ''">
+				and prd_name like CONCAT("%",#{name},"%")
 			</if>
 		</where>
 	</select>
