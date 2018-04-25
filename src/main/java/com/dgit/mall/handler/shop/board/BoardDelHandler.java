@@ -40,7 +40,7 @@ public class BoardDelHandler extends ShopCommandHandler {
 				Board readBoard = BoardREAD.selectCheckPass(number);
 
 				request.setAttribute("readBoard", readBoard);
-				if (readBoard.getBrdpassword().equals(pw)) {
+				if (readBoard.getBrdpassword().equals(pw)) { 
 					if (readBoard.getBrdcode().equals("ReviewBoard")) {
 						BoardREAD.deleteReview(number);
 						sqlSession.commit();

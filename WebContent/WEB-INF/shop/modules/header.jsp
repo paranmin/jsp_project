@@ -45,7 +45,7 @@
 							<li><a href="${pageContext.request.contextPath}/shop/mypage/order.do">주문내역 - ORDER</a></li>
 						</ul>
 					</li>
-					<li><a href="${pageContext.request.contextPath}/shop/board/board.do">BOARD</a>
+					<li><a href="#">BOARD</a>
 						<ul class="sub_nav">
 							<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">후기 - Review</a></li>
 							<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">질문 - Q&amp;A</a></li>

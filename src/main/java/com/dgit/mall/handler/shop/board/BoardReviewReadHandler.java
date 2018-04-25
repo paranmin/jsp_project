@@ -24,14 +24,13 @@ public class BoardReviewReadHandler extends ShopCommandHandler {
 
 			sqlSession = MySqlSessionFactory.openSession();
 			BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
+
+	
 			int ChBoard = BoardREAD.updatecheck(number);
 			sqlSession.commit();
 
-			List<Board> list = BoardREAD.selectByAllReply();
-			request.setAttribute("list", list);
-			
-			
 			Board readBoard = BoardREAD.selectlistBoardReviewByid(number);
+			System.out.println(readBoard);
 			request.setAttribute("readBoard", readBoard);
 
 			return VIEW_FRONT_PATH + "board/BoardReviewRead.jsp";
