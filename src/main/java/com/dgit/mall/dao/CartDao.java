@@ -20,4 +20,6 @@ public interface CartDao {
 	public int deleByAll(int mno) throws SQLException;
 
 	public List<Cart> selectByselectedCart(Map<String, Object> map) throws SQLException;
+	
+	public int deleteCartByNo(Map<String, Object> map) throws SQLException;
 }

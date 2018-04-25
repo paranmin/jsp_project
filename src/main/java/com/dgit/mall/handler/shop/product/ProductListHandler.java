@@ -1,5 +1,6 @@
 package com.dgit.mall.handler.shop.product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +27,9 @@ public class ProductListHandler extends ShopCommandHandler {
 		}
 
 		// 상품 리스트는 특이한 경우라 게시판 페이징이랑 조금 다름.
-		int item = 4;	// 한줄에 아이템 몇개
-		int width = 5;	// 페이징 숫자 몇개
-		int row = 2;	// 보여질 줄수
+		int item = 4; // 한줄에 아이템 몇개
+		int width = 5; // 페이징 숫자 몇개
+		int row = 3; // 보여질 줄수
 		int offset = row * item;
 		int start = (page - 1) * offset;
 
@@ -39,12 +40,13 @@ public class ProductListHandler extends ShopCommandHandler {
 
 		Map<String, Object> bestMap = new HashMap<>();
 		bestMap.put("offset", item);
-		bestMap.put("sort", "rank");	// 팔린거 고정
+		bestMap.put("sort", "rank"); // 팔린거 고정
 		bestMap.put("orderby", "desc"); // 팔린거 역순
 
 		Map<String, Object> cateMap = new HashMap<>();
 		cateMap.put("start", start);
 		cateMap.put("offset", offset);
+
 		if (cate != null && !cate.equals("")) {
 			cateMap.put("category", cate);
 			bestMap.put("category", cate);
@@ -66,7 +68,7 @@ public class ProductListHandler extends ShopCommandHandler {
 		// 카테고리별 전체 상품 갯수 (카테고리 없으면 전체 상품 갯수)
 		int total = ProductService.getInstance().countTotalProductByCategory(new Product(cate));
 
-		int cnt = (int) Math.ceil((double)total / offset);
+		int cnt = (int) Math.ceil((double) total / offset);
 
 		String imgUrl = req.getHeader("host") + req.getContextPath() + "/images";
 		Pagination.getInstance().initPagination(imgUrl);
@@ -80,6 +82,7 @@ public class ProductListHandler extends ShopCommandHandler {
 		req.setAttribute("best", bestlist);
 		req.setAttribute("page", page);
 		req.setAttribute("cate", cate);
+		req.setAttribute("sort", sort);
 		req.setAttribute("total", total);
 		req.setAttribute("paging", paging);
 		return VIEW_FRONT_PATH + "product/productList.jsp";

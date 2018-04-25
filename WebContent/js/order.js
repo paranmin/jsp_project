@@ -75,12 +75,41 @@ $(function(){
 
 	 }
 	 
-	 //수량 input
+	 //각 수량 input
 	$(".productCount").each(function(i,obj){
-		$("input:hidden[name='productCount']").eq(i).val($(obj));
+		var countValue = $(".productCount").eq(i).text();
+		$("input:hidden[name='productCount']").eq(i).val(countValue);
 		
 	})
-	console.log($("input:hidden[name='productCount']").val());
+	
+	//각상품 옵션
+	$(".proContent").each(function(i,obj){
+		var optionName = $(".optionname").eq(i).text();
+		$("input:hidden[name='optionname']").eq(i).val(optionName);
+		
+	})
+	//각 상품옵션 유무
+	$(".proContent").each(function(i,obj){
+		var optionName = $(".optionname").eq(i).text();
+		if(optionName == ""){
+			$("input:hidden[name='optionYN']").eq(i).val("N");
+		}else{
+			$("input:hidden[name='optionYN']").eq(i).val("Y");
+		}
+		/*var optionYN = $("input:hidden[name='optionYN']").eq(i).val();
+		console.log(optionYN);*/
+	})
+	
+	//각 상품 가격
+	//옵션빈거 집어넣기
+	$(".proNameTable").each(function(i,obj){
+		var on = $(obj).find("input:hidden[name='optionname']");
+		if(on.val()==""){
+			on.val("N");
+		}
+	})
+	
+	
 	
 	/*var ordertotalPrice = $(".orderChargePrice").text();
 	var deliveryFee = $(".delfee").text();
@@ -106,8 +135,9 @@ $(function(){
 			$(".eamilAddress").val($(this).val());
 		}
 	})
-	
+	//배송관련
 	$("#newaddr").click(function(){
+		$("input:hidden[name='addrNo']").val("");
 		$("input:text[name='post1']").val("");
 		$("input:text[name='basicaddr']").val("");
 		$("input:text[name='detailaddr']").val("");
@@ -121,6 +151,7 @@ $(function(){
 			success:function(data){
 				if(data.rel == "ok"){
 					console.log(data.result);
+					$("input:hidden[name='addrNo']").val(data.result.addrNo);
 					$("input:text[name='post1']").val(data.result.zipcode);
 					$("input:text[name='basicaddr']").val(data.result.addr1);
 					$("input:text[name='detailaddr']").val(data.result.addr2);
@@ -131,7 +162,12 @@ $(function(){
 	$("#recentaddr").click(function(){
 		shipList();
 	})
-	
+	$(".adrlist").click(function(){
+		
+		$("#recentaddr").prop("checked",true);
+		shipList();
+		return false;
+	})
 	
 })
 function getPostCode(){

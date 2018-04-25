@@ -107,7 +107,7 @@ public class AdminMemberModifyHandler extends AdminCommandHandler {
 			if ((zipcode != null && !zipcode.equals("")) && (addr1 != null && !addr1.equals(""))) {
 				Address addr = AddressService.getInstance().selectHomeByMemberNo(modifyMember);
 				if (addr == null) {
-					addr = new Address(0, no, zipcode, addr1, addr2, AddressType.HOME, new Date(), modifyMember.getName());
+					addr = new Address(0, no, zipcode, addr1, addr2, AddressType.HOME, new Date(),modifyMember.getName());
 					res = AddressService.getInstance().insertByMemberNo(addr);
 				} else {
 					addr.setZipcode(zipcode);

@@ -120,7 +120,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
-<script src="${pageContext.request.contextPath}/js/order.js"></script>
+<script src="${pageContext.request.contextPath}/js/order.js?a=2"></script>
 <script type="text/javascript">
 $(function() {
 	$('textarea[name="orderMsg"]').keyup(function() {
@@ -194,12 +194,12 @@ function getReturnValue(returnaddrValue) {
 													</tr>
 													<c:if test="${items.prdOpName==null || items.prdOpName==''}">
 														<tr>
-															<td></td>
+															<td><input type="hidden" name="optionname"></td>
 														</tr>
 													</c:if>
 													<c:if test="${items.prdOpName!=null && items.prdOpName!=''}">
 														<tr>
-															<td class="proNamehr">옵션:<span class="optionname">${items.prdOpName }</span></td>
+															<td class="proNamehr">옵션:<span class="optionname">${items.prdOpName }</span><input type="hidden" name="optionname"></td>
 														</tr>
 													</c:if>
 												</table> <input type="hidden" name="proNo" value="${items.product.prdNo }"> <!-- 상품번호 -->
@@ -216,6 +216,7 @@ function getReturnValue(returnaddrValue) {
 												<p>
 													<span class="productPrice" data-price="${items.prdOpPrice }">${items.prdOpPrice*items.prdQuantity }</span>원
 													<input type="hidden" name="productPrice" value="${items.prdOpPrice*items.prdQuantity }">
+													<input type="hidden" name="prdeachPrice" value="${items.prdOpPrice }">
 												</p> 
 											</td>
 										</tr>
@@ -315,8 +316,8 @@ function getReturnValue(returnaddrValue) {
 										<td class="paddingInput"><input type="text"
 											name="gongIlgong" readonly="readonly" value="010"
 											class="sizeInput"> - <input type="tel"
-											name="middleNum" class="sizeInput"> - <input
-											type="tel" name="lastNum" class="sizeInput"></td>
+											name="middleNum1" class="sizeInput"> - <input
+											type="tel" name="lastNum1" class="sizeInput"></td>
 										<td class="grayBox">연락처2</td>
 										<td class="paddingInput"><input type="text"
 											name="gongIlgong" readonly="readonly" value="010"
@@ -334,9 +335,7 @@ function getReturnValue(returnaddrValue) {
 													class="radiosize"> 자택 <input type="radio"
 													name="seladdress" value="recentadr" class="radiosize" id="recentaddr">
 												최근 배송지
-												<button class="adrlist"
-													onclick="shipList()">배송지
-													목록</button>
+												<button class="adrlist">배송지 목록</button>
 												<input type="radio" name="seladdress" value="newadr"
 													class="radiosize" id="newaddr"> 신규 배송지
 											</p>

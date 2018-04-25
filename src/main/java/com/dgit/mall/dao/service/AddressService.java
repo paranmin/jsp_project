@@ -18,6 +18,12 @@ public class AddressService {
 
 	private AddressService() {
 	}
+	
+	public List<Address> selectByMemberNoandName(Member member) { //주소 다+name
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectByMemberNoandName", member);
+		}
+	}
 
 	public List<Address> selectByMemberNo(Member member) { //주소 다
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
@@ -30,8 +36,22 @@ public class AddressService {
 			return sqlSession.selectOne(namespace + "selectHomeByMemberNo", member);
 		}
 	}
+	
+	public int selectLastInsert() {//자택
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectLastInsert");
+		}
+	}
 
 	public int insertByMemberNo(Address address) {//주소넣는거
+		int res = 0;
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "insertByMemberNo", address);
+			sqlSession.commit();
+		}
+		return res;
+	}
+	public int insertByMemberNomaName(Address address) {//주소넣는거
 		int res = 0;
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			res = sqlSession.insert(namespace + "insertByMemberNo", address);
@@ -48,4 +68,6 @@ public class AddressService {
 		}
 		return res;
 	}
+	
+	
 }

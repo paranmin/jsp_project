@@ -64,6 +64,14 @@
 			#{item}
 		</foreach>
 	</select>
+	
+	<delete id="deleteCartByNo" parameterType="Map">
+		delete from cart
+		where m_no=#{mNo} and ct_no in
+		<foreach collection="ctNo" item="item" index='idx' separator="," open="(" close=")">
+			#{item}
+		</foreach>
+	</delete>
 
 	
 </mapper>

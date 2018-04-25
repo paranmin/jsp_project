@@ -9,7 +9,9 @@ public interface AddressDao {
 	List<Address> selectByMemberNo(Member member);
 
 	Address selectHomeByMemberNo(Member member);
-
+	int selectLastInsert();
+	
+	List<Address> selectByMemberNoandName(Member member);
 	int insertByMemberNo(Address address);
 
 	int modifyByMemberNo(Address address);
