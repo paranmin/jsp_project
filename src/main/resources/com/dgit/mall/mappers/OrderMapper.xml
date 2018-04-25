@@ -18,7 +18,7 @@
 		<result property="phone" column="m_phone" />
 		<result property="regdate" column="m_regdate" />
 	</resultMap>
-	<resultMap type="MemberAddress" id="memberwithaddressResult" extends="orderWithMemberResult">
+	<resultMap type="Address" id="memberwithaddressResult" extends="orderWithMemberResult">
 		<result property="mdZipcode" column="md_zipcode"/>
 		<result property="mdAddress" column="md_address"/>
 	</resultMap>

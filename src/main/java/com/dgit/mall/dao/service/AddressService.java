@@ -18,6 +18,12 @@ public class AddressService {
 
 	private AddressService() {
 	}
+	
+	public List<Address> selectByMemberNoandName(Member member) { //주소 다+name
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectByMemberNoandName", member);
+		}
+	}
 
 	public List<Address> selectByMemberNo(Member member) { //주소 다
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
