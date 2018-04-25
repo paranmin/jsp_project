@@ -112,6 +112,12 @@ p.error{
 td#smallfont{
 	font-size: small;
 }
+div.img_plus div{
+	margin-left:130px;
+}
+div.img_plus button.img_del{
+	margin-left:6px;   
+}
 </style>    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
@@ -397,7 +403,7 @@ $(function(){
 					<option>발찌</option>
 					<option>반지</option>
 					<option>발가락지/토링</option>
-					<option>헤어 CSS</option>
+					<option>헤어 ACC</option>
 					<option>시계</option>
 					<option>폰 ACC</option>
 					<option>기타</option>
@@ -498,7 +504,19 @@ $(function(){
 						<button class="op_add">+추가</button>    
 					</td>
 				</tr>
-			</table>		
+			</table>	
+			<!-- <table id="stockTable">
+				<tr>
+					<th id="opname">옵션명</th>
+					<th id="opvalue">옵션내용</th>
+					<th id="opprice">옵션가</th>
+					<th id="empty"></th>
+				</tr>
+				<tr>
+				
+				</tr>
+			</table>	 -->
+			
 			<p class="submit">
 				<input type="submit" value="등록">
 				<input type="reset" value="취소">

@@ -59,6 +59,14 @@ input[type='radio']{
 	margin-right:5px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+/* $(function(){
+	$("input[type='radio']").select(function(){
+		alert("dfsf"); 
+	});
+}); */
+</script>
 </head>
 <body>
 	<h1>상품 리스트 보기</h1>

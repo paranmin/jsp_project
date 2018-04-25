@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css" media="all" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList.css" media="all" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/selectList.css" media="all" />
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
-<% String sortname = (String)request.getAttribute("sort");%>   
+<% String sortname = (String)request.getAttribute("sort");%> 
 <script type="text/javascript">
 $(function(){
 	var sort = "<%=sortname%>"
@@ -30,67 +30,33 @@ $(function(){
 		$("div.item_sort").find("li").eq(4).css("font-weight","bold");    
 	}
 });
-</script>
+</script>  
 </head>
 <body>
 	<div id="container">
 		<c:import url="../modules/header.jsp" />
 		<c:import url="../modules/leftSide.jsp" />
 		<c:import url="../modules/rightSide.jsp" />
-		<section id="product_list">
-			<c:if test="${cate==null || cate=='' }">
-				<p class="list_title">JEWELRY BEST</p>
-			</c:if>
-			<c:if test="${cate!=null && cate != ''}">
-				<p class="list_title">${cate } BEST</p>
-			</c:if>
-			<div class="category_best">
-				<c:forEach var="bestItem" items="${best }">
-						<div class="item">
-							<img src="${pageContext.request.contextPath}/upload/${bestItem.mainImg }">
-							<div class="category_best_white">
-								<a href="${pageContext.request.contextPath}/shop/detailProductShow.do?no=${bestItem.prdNo }">
-									<p>
-										<b>${bestItem.name }</b>
-										<br> ${bestItem.subDesc }
-										<c:if test="${bestItem.discountPer != '0%'}">
-										<br><span id="line"><fmt:formatNumber value="${bestItem.cost }" pattern="￦#,###"/></span>
-										</c:if>
-										<br><fmt:formatNumber value="${bestItem.sellingPrice }" pattern="￦#,###"/>
-										<c:if test="${bestItem.discountPer != '0%'}">
-										<br>(${bestItem.discountPer } 할인)
-										</c:if>
-									</p>
-								</a>
-							</div>
-						</div>
-				</c:forEach>
-			</div>
-			<hr>      
-			<c:if test="${cate==null || cate==''}">
-			<p class="list_title">JEWELRY ITEM</p>
-			</c:if>
-			<c:if test="${cate!=null && cate !=''}">
-				<p class="list_title">${cate } ITEM</p>
-			</c:if>
+		<section id="select_list">
+			<p class="list_title">SELECT ITEM</p>
 			<div class="item_sort">
 				<ul>
-					<li><a href="showList.do?cate=${cate}&sort=new">NEW</a></li>
-					<li><a href="showList.do?cate=${cate}&sort=name">NAME</a></li>
-					<li><a href="showList.do?cate=${cate}&sort=low">LOW PRICE</a></li>
-					<li><a href="showList.do?cate=${cate}&sort=high">HIGH PRICE</a></li>
-					<li><a href="showList.do?cate=${cate}&sort=rank">RANK</a></li>
+					<li><a href="showSelectList.do?sort=new&main_search=${name }">NEW</a></li>
+					<li><a href="showSelectList.do?sort=name&main_search=${name }">NAME</a></li>
+					<li><a href="showSelectList.do?sort=low&main_search=${name }">LOW PRICE</a></li>
+					<li><a href="showSelectList.do?sort=high&main_search=${name }">HIGH PRICE</a></li>
+					<li><a href="showSelectList.do?sort=rank&main_search=${name }">RANK</a></li>    
 				</ul>
-				<p class="item_num">total ${total} items</p>
+				<p class="item_num">total ${total} items</p>   
 			</div>   
-			<div class="category_item">
+			<div class="select_item">
 				<c:if test="${list.size() == 0 }">  
 					<p>아이템이 없습니다.</p>
 				</c:if>
 				<c:forEach var="prolist" items="${list }">
 					<div class="item">
 						<img src="${pageContext.request.contextPath}/upload/${prolist.mainImg }">
-						<div class="item_white">
+						<div class="item_white">   
 							<a href="${pageContext.request.contextPath}/shop/detailProductShow.do?no=${prolist.prdNo }">
 								<p>
 									<b>${prolist.name }</b>

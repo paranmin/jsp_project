@@ -41,4 +41,6 @@ public interface ProductDao {
 
 	public List<Product> selectProductByPagination(Map<String, Object> map) throws SQLException;
 	public int countTotalProductByCategory(Product product) throws SQLException;
+	
+	public int selectNameProductCount(Product pro) throws SQLException;
 } 

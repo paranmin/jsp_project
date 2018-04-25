@@ -45,6 +45,7 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				request.setAttribute("rownum", rownum);
 				request.setAttribute("res", result);
 				request.setAttribute("opt", option);
+				System.out.println(option);   
 				request.setAttribute("proimg", proimg);
 				request.setAttribute("pro", pro);
 
