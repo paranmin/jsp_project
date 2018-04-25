@@ -45,39 +45,36 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				request.setAttribute("rownum", rownum);
 				request.setAttribute("res", result);
 				request.setAttribute("opt", option);
-				System.out.println(option);   
 				request.setAttribute("proimg", proimg);
 				request.setAttribute("pro", pro);
 
 				request.setAttribute("contentPage", "product/productUpdate.jsp");
 				request.setAttribute("sub_menu", "list");
 				request.setAttribute("menu", "product");
-				/*request.setAttribute("css", "product.css");*/
+				/* request.setAttribute("css", "product.css"); */
 
 				return TEMPLATE_PAGE;
-				
+
 			} finally {
 				sqlsession.close();
 			}
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
-			String uploadPath = request.getRealPath("upload");
-			
+			String uploadPath = request.getSession().getServletContext().getRealPath("upload");
+
 			File dir = new File(uploadPath);
-			if(dir.exists() == false){
+			if (dir.exists() == false) {
 				dir.mkdirs();
 			}
-			int size = 1024*1024*10; //10Mbyte
-			
-			
+			int size = 1024 * 1024 * 10; // 10Mbyte
+
 			SqlSession sqlsession = null;
-			try{
-				MultipartRequest multi = 
-						new MultipartRequest(request,//업로드할 파일정보
-									uploadPath,//서버 경로
-									size,//한번에 업로드할 사이즈
-									"utf-8",//한글 파일명 깨짐 처리
-									new DefaultFileRenamePolicy());//rename처리
-				
+			try {
+				MultipartRequest multi = new MultipartRequest(request, // 업로드할 파일정보
+						uploadPath, // 서버 경로
+						size, // 한번에 업로드할 사이즈
+						"utf-8", // 한글 파일명 깨짐 처리
+						new DefaultFileRenamePolicy());// rename처리
+
 				int no = Integer.parseInt(multi.getParameter("no"));
 				String view = multi.getParameter("view");
 				String cate = multi.getParameter("cate");
@@ -88,25 +85,25 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				int price = Integer.parseInt(multi.getParameter("price"));
 				int stock = Integer.parseInt(multi.getParameter("stock"));
 				String option = multi.getParameter("use_option");
-				/*String mainImg = multi.getParameter("mainimg");*/
+				/* String mainImg = multi.getParameter("mainimg"); */
 				String mainImg = multi.getFilesystemName("mainimg");
-				
+
 				String originalFilename = multi.getOriginalFileName("mainimg");
 				String deleteDetailImage = multi.getParameter("deleteDetailImage");
 				String deleteImage[] = deleteDetailImage.split(",");
-				/*String[] files = multi.getParameterValues("files");*/
+				/* String[] files = multi.getParameterValues("files"); */
 				List<String> files = new ArrayList<>();
-				
+
 				Enumeration serfiles = multi.getFileNames();
-				while(serfiles.hasMoreElements()) {
+				while (serfiles.hasMoreElements()) {
 					String filename1 = (String) serfiles.nextElement();
-					if(!filename1.equals("mainimg")){
+					if (!filename1.equals("mainimg")) {
 						String detailimg = multi.getFilesystemName(filename1);
 						String originaldetailimg = multi.getOriginalFileName(filename1);
 						files.add(detailimg);
 					}
 				}
-				
+
 				sqlsession = MySqlSessionFactory.openSession();
 				ProductDao dao = sqlsession.getMapper(ProductDao.class);
 				Product pro = new Product();
@@ -121,58 +118,54 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 				pro.setStock(stock);
 				pro.setUseOption(option);
 				Product selectPro = dao.SelectProductByno(no);
-				
-				
-				if(mainImg == null){
-					
-					pro.setMainImg(selectPro.getMainImg());   
-				}else{
-					pro.setMainImg(mainImg);   
+
+				if (mainImg == null) {
+
+					pro.setMainImg(selectPro.getMainImg());
+				} else {
+					pro.setMainImg(mainImg);
 				}
-				
+
 				dao.updateProduct(pro);
-				
+
 				Proimg proimg = new Proimg();
-				for(int i=0; i<deleteImage.length; i++){
+				for (int i = 0; i < deleteImage.length; i++) {
 					proimg.setPrdNo(no);
 					proimg.setImg(deleteImage[i]);
 					dao.deleteProimg(proimg);
 				}
-			
-				/*for (int i = 0; i < files.length; i++) {
-					if(!files[i].isEmpty()){
-						proimg.setPrdNo(no);
-						proimg.setImg(files[i]);
-						dao.insertProImg(proimg);
-					}	
-				}*/
-				
+
+				/*
+				 * for (int i = 0; i < files.length; i++) { if(!files[i].isEmpty()){
+				 * proimg.setPrdNo(no); proimg.setImg(files[i]); dao.insertProImg(proimg); } }
+				 */
+
 				Proimg img = new Proimg();
-				if(files.size()>0){
+				if (files.size() > 0) {
 					for (int i = 0; i < files.size(); i++) {
-						if(!(files.get(i) == null)){
+						if (!(files.get(i) == null)) {
 							img.setPrdNo(no);
 							img.setImg(files.get(i));
 							dao.insertProImg(img);
 						}
 					}
 				}
-				
+
 				if (option.equals("1")) {
 					List<Option> selectOpt = dao.SelectOptionByno(no);
-					
-					for(int i=0; i<selectOpt.size(); i++){
+
+					for (int i = 0; i < selectOpt.size(); i++) {
 						dao.deleteOptionDetail(selectOpt.get(i).getPoNo());
 					}
 					dao.deleteOption(no);
-					
+
 					Option opt = new Option();
 					OptionDetail det = new OptionDetail();
 					String[] opName = multi.getParameterValues("op_name");
 					String[] opValue = multi.getParameterValues("op_desc");
 					String[] opCost = multi.getParameterValues("op_cost");
 					String[] rspan = multi.getParameterValues("span");
-					/*String[] opStock = multi.getParameterValues("op_stock");*/
+					/* String[] opStock = multi.getParameterValues("op_stock"); */
 					int afterspan = 0;
 					for (int i = 0; i < opName.length; i++) {
 						opt.setPoName(opName[i]);
@@ -181,32 +174,30 @@ public class AdmidProductUpdateHandler extends AdminCommandHandler {
 						int pono = dao.selectLastInsertOption();
 						int rowspan = Integer.parseInt(rspan[i]);
 						for (int n = 0; n < rowspan; n++) {
-							/*if (i > 0) {
-								det.setPodCost(opCost[n + afterspan]);
-								det.setPodValue(opValue[n + afterspan]);
-								det.setPodStock(Integer.parseInt(opStock[n + afterspan]));
-								det.setPoNo(pono);
-								dao.insertOptionDetail(det);
-							} else {*/
-								det.setPodCost(opCost[n + afterspan]);
-								det.setPodValue(opValue[n + afterspan]);
-								/*det.setPodStock(Integer.parseInt(opStock[n + afterspan]));*/
-								det.setPoNo(pono);
-								dao.insertOptionDetail(det);
-							/*}*/
+							/*
+							 * if (i > 0) { det.setPodCost(opCost[n + afterspan]); det.setPodValue(opValue[n
+							 * + afterspan]); det.setPodStock(Integer.parseInt(opStock[n + afterspan]));
+							 * det.setPoNo(pono); dao.insertOptionDetail(det); } else {
+							 */
+							det.setPodCost(opCost[n + afterspan]);
+							det.setPodValue(opValue[n + afterspan]);
+							/* det.setPodStock(Integer.parseInt(opStock[n + afterspan])); */
+							det.setPoNo(pono);
+							dao.insertOptionDetail(det);
+							/* } */
 						}
 						afterspan += rowspan;
 					}
 				}
 				sqlsession.commit();
 				response.sendRedirect("/jsp_project/manager/product/list.do");
-				
-			}catch(Exception e){
+
+			} catch (Exception e) {
 				e.printStackTrace();
 				sqlsession.rollback();
-			}finally{
+			} finally {
 				sqlsession.close();
-			}			
+			}
 		}
 		return null;
 	}

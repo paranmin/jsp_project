@@ -13,7 +13,7 @@
 <c:if test="${css != null && !css.isEmpty()}">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/manager/${css}" media="all" />
 </c:if>
-<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
 </head>
 <body>
