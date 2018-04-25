@@ -13,6 +13,25 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList.css" media="all" />
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
+<% int sortnum = (int)request.getAttribute("sortNum"); 
+	out.print(sortnum); %>   
+<script type="text/javascript">
+$(function(){
+	var sort = <%=sortnum%>
+	$("div.item_sort").find("li").css("font-weight", "normal");
+	if(sort == 1){
+		$("div.item_sort").find("li").eq(0).css("font-weight","bold");
+	}else if(sort == 2){
+		$("div.item_sort").find("li").eq(1).css("font-weight","bold");
+	}else if(sort == 3){
+		$("div.item_sort").find("li").eq(2).css("font-weight","bold");
+	}else if(sort == 4){
+		$("div.item_sort").find("li").eq(3).css("font-weight","bold");
+	}else if(sort == 5){
+		$("div.item_sort").find("li").eq(4).css("font-weight","bold");
+	}
+});
+</script>
 </head>
 <body>
 	<div id="container">
@@ -20,10 +39,10 @@
 		<c:import url="../modules/leftSide.jsp" />
 		<c:import url="../modules/rightSide.jsp" />
 		<section id="product_list">
-			<c:if test="${cate==null }">
+			<c:if test="${cate==null || cate=='all' }">
 				<p class="list_title">JEWELRY BEST</p>
 			</c:if>
-			<c:if test="${cate!=null }">
+			<c:if test="${cate!=null && cate != 'all'}">
 				<p class="list_title">${cate } BEST</p>
 			</c:if>
 			<div class="category_best">
@@ -48,20 +67,21 @@
 						</div>
 				</c:forEach>
 			</div>
-			<hr>
-			<c:if test="${cate==null }">
+			<hr>      
+			<c:if test="${cate==null || cate=='all'}">
 				<p class="list_title">JEWELRY ITEM</p>
 			</c:if>
-			<c:if test="${cate!=null }">
+			<c:if test="${cate!=null && cate !='all'}">
 				<p class="list_title">${cate } ITEM</p>
 			</c:if>
 			<div class="item_sort">
 				<ul>
-					<li><a href="#">NEW</a></li>
-					<li><a href="#">NAME</a></li>
-					<li><a href="#">LOW PRICE</a></li>
-					<li><a href="#">HIGH PRICE</a></li>
-					<li><a href="#">RANK</a></li>
+					<c:set var="category" value="${cate }"></c:set>
+					<li><a href="${pageContext.request.contextPath}/shop/showList.do?sort=new&cate=${category}">NEW</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/showList.do?sort=name&cate=${category}">NAME</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/showList.do?sort=lowPrice&cate=${category}">LOW PRICE</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/showList.do?sort=highPrice&cate=${category}">HIGH PRICE</a></li>
+					<li><a href="${pageContext.request.contextPath}/shop/showList.do?sort=rank&cate=${category}">RANK</a></li>
 				</ul>
 				<p class="item_num">total ${list.size() } items</p>
 			</div>   

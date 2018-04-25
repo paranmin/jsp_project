@@ -27,7 +27,7 @@ public class ProductBestListHandler extends ShopCommandHandler {
 			Map<String, Object> bestMap = new HashMap<>();
 			bestMap.put("orderbytarget", "prd_selling_count");
 			bestMap.put("orderby", "desc");
-			bestMap.put("offset", 8);        
+			bestMap.put("offset", 12);        
 			bestlist = dao.selectProductByPagination(bestMap);
 			req.setAttribute("best", bestlist);
 		
