@@ -179,6 +179,9 @@
 			<if test="category != null and category != ''">
 				and prd_category = #{category}
 			</if>
+			<if test="view != null">
+				and prd_use = #{view}
+			</if>
 		</where>
 		order by 
 		<if test="sort != null and sort != ''">

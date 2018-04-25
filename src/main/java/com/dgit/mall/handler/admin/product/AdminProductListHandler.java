@@ -1,77 +1,87 @@
 package com.dgit.mall.handler.admin.product;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.session.SqlSession;
-
-import com.dgit.mall.dao.ProductDao;
+import com.dgit.mall.dao.service.ProductService;
 import com.dgit.mall.dto.Product;
 import com.dgit.mall.handler.admin.AdminCommandHandler;
-import com.dgit.mall.util.MySqlSessionFactory;
+
+import com.dgit.mall.util.Pagination;
 
 public class AdminProductListHandler extends AdminCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		SqlSession sqlsession = null;
-		if(request.getMethod().equalsIgnoreCase("get")){
-			sqlsession=MySqlSessionFactory.openSession();
-			ProductDao dao = sqlsession.getMapper(ProductDao.class);
-			List<Product> listPro = dao.selectAllProduct();
-			request.setAttribute("list", listPro);
-			request.setAttribute("contentPage", "product/productList.jsp");
-			request.setAttribute("sub_menu", "list");
-			request.setAttribute("menu", "product");
-			request.setAttribute("css", "product.css");
+		String sPage = request.getParameter("page");
+		String cate = request.getParameter("cate");
+		String name = request.getParameter("selectName");
+		String sView = request.getParameter("view");
 
-			return TEMPLATE_PAGE;
-		}else if(request.getMethod().equalsIgnoreCase("post")){
-			String cate = request.getParameter("cate");
-			String name = request.getParameter("selectName");
-			int view = Integer.parseInt(request.getParameter("view"));
-			try{
-				sqlsession=MySqlSessionFactory.openSession();
-				ProductDao dao = sqlsession.getMapper(ProductDao.class);
-				List<Product> listPro = null;
-				Product pro = new Product();
-				
-				if(view==1){
-					pro.setUse("1");
-				}else if(view==0){
-					pro.setUse("0");
-				}
-				
-				if(cate.equals("All")&&name==null){
-					listPro = dao.selectAllProduct();
-				}else if(!(cate.equals("All"))&&name==null){
-					pro.setCategory(cate);
-					listPro = dao.selectCateProduct(pro);
-				}else if((cate.equals("All"))&&(name!=null)){
-					pro.setName(name);
-					listPro = dao.selectNameProduct(pro);
-				}else if(!(cate.equals("All"))&&name!=null){
-					pro.setCategory(cate);
-					pro.setName(name);
-					listPro = dao.selectNCProduct(pro);
-				}
-				request.setAttribute("name", name);
-				request.setAttribute("cate", cate);
-				request.setAttribute("view", view);
-				request.setAttribute("list", listPro);
-			}finally{
-				sqlsession.close();
-			}
-			request.setAttribute("contentPage", "product/productList.jsp");
-			request.setAttribute("sub_menu", "list");
-			request.setAttribute("menu", "product");
-			request.setAttribute("css", "product.css");
-
-			return TEMPLATE_PAGE;
+		int page = 1;
+		if (sPage != null && !sPage.isEmpty()) {
+			page = Integer.parseInt(sPage);
 		}
-		return null;
+
+		int width = 5;	// 페이징 숫자 몇개
+		int row = 20;	// 보여질 줄수
+		int start = (page - 1) * row;
+
+		String params = "";
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("offset", row);
+
+		String pagingCate = null;
+		if (cate != null && !cate.equals("All") && !cate.equals("")) {
+			map.put("category", cate);
+			params = makeParams(params, "category", cate);
+			pagingCate = cate;
+		}
+		if (name != null && !name.equals("")) {
+			map.put("name", name);
+			params = makeParams(params, "name", name);
+		}
+		if (sView != null && !sView.equals("2")) {
+			map.put("view", sView);
+			params = makeParams(params, "view", sView);
+		}
+
+		int total = ProductService.getInstance().countTotalProductByCategory(new Product(pagingCate));
+		List<Product> listPro = ProductService.getInstance().selectProductByPagination(map);
+
+		int cnt = (int) Math.ceil((double)total / row);
+
+		String imgUrl = request.getHeader("host") + request.getContextPath() + "/images";
+		Pagination.getInstance().initPagination(imgUrl);
+		String paging = Pagination.getInstance().makePaging(cnt, page, width, row, "list.do", params);
+
+		request.setAttribute("name", name);
+		request.setAttribute("cate", cate);
+		request.setAttribute("view", sView);
+		request.setAttribute("total", total);
+		request.setAttribute("list", listPro);
+		request.setAttribute("paging", paging);
+
+		request.setAttribute("contentPage", "product/productList.jsp");
+		request.setAttribute("sub_menu", "list");
+		request.setAttribute("menu", "product");
+		request.setAttribute("css", String.format("%s?v=%s", "productlist.css", new Date().getTime()));
+
+		return TEMPLATE_PAGE;
+	}
+
+	private String makeParams(String params, String key, String value) {
+		if (!params.equals("")) {
+			params +=  "&";
+		}
+		return String.format("%s%s=%s", params, key, value);
 	}
 
 }

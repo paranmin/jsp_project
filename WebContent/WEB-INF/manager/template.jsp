@@ -9,7 +9,7 @@
 <c:if test="${useAwesome != null && useAwesome == 'use'}">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 </c:if>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/manager/manager.css" media="all" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/manager/manager.css?v=1" media="all" />
 <c:if test="${css != null && !css.isEmpty()}">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/manager/${css}" media="all" />
 </c:if>
