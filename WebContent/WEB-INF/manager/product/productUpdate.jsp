@@ -491,7 +491,7 @@ $(function(){
 					</tr>
 					<tr>
 						<th id="opname">옵션명</th>
-						<th id="opvalue">옵션값</th>
+						<th id="opvalue">옵션내용</th>
 						<th id="opprice">옵션가</th>
 						<!-- <th id="opstock">재고</th> -->
 						<th id="empty"></th>
