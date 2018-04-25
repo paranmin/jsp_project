@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Member;
 import com.dgit.mall.handler.admin.AdminCommandHandler;
+import com.dgit.mall.util.CommonUtil;
 import com.dgit.mall.util.Pagination;
 
 public class AdminMemberListHandler extends AdminCommandHandler {
@@ -37,6 +38,9 @@ public class AdminMemberListHandler extends AdminCommandHandler {
 		map.put("start", start);
 		map.put("offset", row);
 		if (query != null && !query.equals("")) {
+			if (where.equals("phone")) {
+				query = CommonUtil.getInstance().phoneNumberHyphenAdd(query, false);
+			}
 			map.put("where", where);
 			map.put("query", query);
 
