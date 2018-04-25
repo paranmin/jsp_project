@@ -39,10 +39,10 @@ $(function(){
 		<c:import url="../modules/leftSide.jsp" />
 		<c:import url="../modules/rightSide.jsp" />
 		<section id="product_list">
-			<c:if test="${cate==null || cate=='all' }">
+			<c:if test="${cate==null || cate=='' }">
 				<p class="list_title">JEWELRY BEST</p>
 			</c:if>
-			<c:if test="${cate!=null && cate != 'all'}">
+			<c:if test="${cate!=null && cate != ''}">
 				<p class="list_title">${cate } BEST</p>
 			</c:if>
 			<div class="category_best">
@@ -68,22 +68,22 @@ $(function(){
 				</c:forEach>
 			</div>
 			<hr>      
-			<c:if test="${cate==null || cate=='all'}">
-				<p class="list_title">JEWELRY ITEM</p>
+			<c:if test="${cate==null || cate==''}">
+			<hr>
+			<p class="list_title">JEWELRY ITEM</p>
 			</c:if>
-			<c:if test="${cate!=null && cate !='all'}">
+			<c:if test="${cate!=null && cate !=''}">
 				<p class="list_title">${cate } ITEM</p>
 			</c:if>
 			<div class="item_sort">
 				<ul>
-					<c:set var="category" value="${cate }"></c:set>
-					<li><a href="${pageContext.request.contextPath}/shop/showList.do?sort=new&cate=${category}">NEW</a></li>
-					<li><a href="${pageContext.request.contextPath}/shop/showList.do?sort=name&cate=${category}">NAME</a></li>
-					<li><a href="${pageContext.request.contextPath}/shop/showList.do?sort=lowPrice&cate=${category}">LOW PRICE</a></li>
-					<li><a href="${pageContext.request.contextPath}/shop/showList.do?sort=highPrice&cate=${category}">HIGH PRICE</a></li>
-					<li><a href="${pageContext.request.contextPath}/shop/showList.do?sort=rank&cate=${category}">RANK</a></li>
+					<li><a href="showList.do?cate=${cate}&sort=new">NEW</a></li>
+					<li><a href="showList.do?cate=${cate}&sort=name">NAME</a></li>
+					<li><a href="showList.do?cate=${cate}&sort=low">LOW PRICE</a></li>
+					<li><a href="showList.do?cate=${cate}&sort=high">HIGH PRICE</a></li>
+					<li><a href="showList.do?cate=${cate}&sort=rank">RANK</a></li>
 				</ul>
-				<p class="item_num">total ${list.size() } items</p>
+				<p class="item_num">total ${total} items</p>
 			</div>   
 			<div class="category_item">
 				<c:if test="${list.size() == 0 }">  
@@ -104,22 +104,9 @@ $(function(){
 					</div>    
 				</c:forEach>
 			</div>
-			<ul class="pagination">
-				<li><a href="#"><img src="${pageContext.request.contextPath}/images/first_btn.gif" alt="처음" title="처음" /></a></li>
-				<li><a href="#"><img src="${pageContext.request.contextPath}/images/prev_btn.gif" alt="이전" title="이전" /></a></li>
-				<li class="page">1</li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">6</a></li>
-				<li><a href="#">7</a></li>
-				<li><a href="#">8</a></li>
-				<li><a href="#">9</a></li>
-				<li><a href="#">10</a></li>
-				<li><a href="#"><img src="${pageContext.request.contextPath}/images/next_btn.gif" alt="다음" title="다음" /></a></li>
-				<li><a href="#"><img src="${pageContext.request.contextPath}/images/last_btn.gif" alt="마지막" title="마지막" /></a></li>
-			</ul>
+			<c:if test="${paging != null}">
+				${paging}
+			</c:if>
 		</section>
 		<c:import url="../modules/footer.jsp" />
 	</div>

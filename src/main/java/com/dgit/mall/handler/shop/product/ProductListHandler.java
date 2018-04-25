@@ -8,12 +8,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.session.SqlSession;
-
-import com.dgit.mall.dao.ProductDao;
+import com.dgit.mall.dao.service.ProductService;
 import com.dgit.mall.dto.Product;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
-import com.dgit.mall.util.MySqlSessionFactory;
+import com.dgit.mall.util.Pagination;
 
 public class ProductListHandler extends ShopCommandHandler {
 
@@ -21,98 +19,71 @@ public class ProductListHandler extends ShopCommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String cate = req.getParameter("cate");
 		String sort = req.getParameter("sort");
-		int sortNum = 0;
-		SqlSession sqlsession = null;
-		try {
-			sqlsession = MySqlSessionFactory.openSession();
-			ProductDao dao = sqlsession.getMapper(ProductDao.class);
-			List<Product> prolist = new ArrayList<>();
-			List<Product> bestlist = new ArrayList<>();
-			
-			if (cate == null || cate.equals("all")) {
-				Map<String, Object> newMap = new HashMap<>();
-				
-				if(sort==null){
-				
-				} 
-				else if(sort.equals("new")){
-					newMap.put("orderbytarget", "prd_no");
-					newMap.put("orderby", "desc");
-					sortNum = 1;
-				}else if(sort.equals("name")){
-					newMap.put("orderbytarget", "prd_name");
-					newMap.put("orderby", "asc");
-					sortNum = 2;
-				}else if(sort.equals("lowPrice")){
-					newMap.put("orderbytarget", "prd_selling_price");
-					newMap.put("orderby", "asc");
-					sortNum = 3;
-				}else if(sort.equals("highPrice")){
-					newMap.put("orderbytarget", "prd_selling_price");
-					newMap.put("orderby", "desc");
-					sortNum = 4;
-				}else if(sort.equals("rank")){
-					newMap.put("orderbytarget", "prd_selling_count");
-					newMap.put("orderby", "desc");
-					sortNum = 5;
-				}
-				
-				newMap.put("offset", 12);
-				prolist = dao.selectProductByPagination(newMap);
-				
-				Map<String, Object> bestMap = new HashMap<>();
-				bestMap.put("orderbytarget", "prd_selling_count");
-				bestMap.put("orderby", "desc");
-				bestMap.put("offset", 4);
-				bestlist = dao.selectProductByPagination(bestMap);
-				
-				cate = "all";
-				req.setAttribute("list", prolist);
-				req.setAttribute("best", bestlist);
-			} else {
-				Map<String, Object> newMap = new HashMap<>();
-				
-				if(sort==null){
-					
-				}else if(sort.equals("new")){
-					newMap.put("orderbytarget", "prd_no");
-					newMap.put("orderby", "desc");
-					sortNum = 1;
-				}else if(sort.equals("name")){
-					newMap.put("orderbytarget", "prd_name");
-					newMap.put("orderby", "asc");
-					sortNum = 2;
-				}else if(sort.equals("lowPrice")){
-					newMap.put("orderbytarget", "prd_selling_price");
-					newMap.put("orderby", "asc");
-					sortNum = 3;
-				}else if(sort.equals("highPrice")){
-					newMap.put("orderbytarget", "prd_selling_price");
-					newMap.put("orderby", "desc");
-					sortNum = 4;
-				}else if(sort.equals("rank")){
-					newMap.put("orderbytarget", "prd_selling_count");
-					newMap.put("orderby", "desc");
-					sortNum = 5;
-				}
-				newMap.put("offset", 12);
-				newMap.put("category", cate);
-				prolist = dao.selectProductByPagination(newMap);
-				
-				Map<String, Object> bestMap = new HashMap<>();
-				bestMap.put("offset", 4);
-				bestMap.put("category", cate);
-				bestlist = dao.selectProductByPagination(bestMap);
-				
-				req.setAttribute("list", prolist);
-				req.setAttribute("best", bestlist);
-				
-			}
-			req.setAttribute("sortNum", sortNum);
-			req.setAttribute("cate", cate);
-			return VIEW_FRONT_PATH + "product/productList.jsp";
-		} finally {
-			sqlsession.close();
+		String sPage = req.getParameter("page");
+
+		int page = 1;
+		if (sPage != null && !sPage.isEmpty()) {
+			page = Integer.parseInt(sPage);
 		}
+
+		// 상품 리스트는 특이한 경우라 게시판 페이징이랑 조금 다름.
+		int item = 4; // 한줄에 아이템 몇개
+		int width = 5; // 페이징 숫자 몇개
+		int row = 3; // 보여질 줄수
+		int offset = row * item;
+		int start = (page - 1) * offset;
+
+		String params = "";
+
+		List<Product> prolist = null;
+		List<Product> bestlist = null;
+
+		Map<String, Object> bestMap = new HashMap<>();
+		bestMap.put("offset", item);
+		bestMap.put("sort", "rank"); // 팔린거 고정
+		bestMap.put("orderby", "desc"); // 팔린거 역순
+
+		Map<String, Object> cateMap = new HashMap<>();
+		cateMap.put("start", start);
+		cateMap.put("offset", offset);
+		
+		if (cate != null && !cate.equals("")) {
+			cateMap.put("category", cate);
+			bestMap.put("category", cate);
+			params = String.format("cate=%s", cate);
+		}
+		if (sort != null && !sort.equals("")) {
+			cateMap.put("sort", sort);
+
+			if (!params.equals("")) {
+				params = String.format("%s&sort=%s", params, sort);
+				params = String.format("sort=%s", sort);
+				if (sort.equals("high") || sort.equals("rank")) {
+					cateMap.put("orderby", "desc");
+				}
+			}
+			// 카테고리별 전체 상품 갯수 (카테고리 없으면 전체 상품 갯수)
+			int total = ProductService.getInstance().countTotalProductByCategory(new Product(cate));
+
+			int cnt = (int) Math.ceil((double) total / offset);
+
+			String imgUrl = req.getHeader("host") + req.getContextPath() + "/images";
+			Pagination.getInstance().initPagination(imgUrl);
+
+			String paging = Pagination.getInstance().makePaging(cnt, page, width, row, "showList.do", params);
+
+			prolist = ProductService.getInstance().selectProductByPagination(cateMap);
+			bestlist = ProductService.getInstance().selectProductByPagination(bestMap);
+
+			req.setAttribute("list", prolist);
+			req.setAttribute("best", bestlist);
+			req.setAttribute("page", page);
+			req.setAttribute("cate", cate);
+			req.setAttribute("total", total);
+			req.setAttribute("paging", paging);
+			return VIEW_FRONT_PATH + "product/productList.jsp";
+
+		}
+		return null;
 	}
 }

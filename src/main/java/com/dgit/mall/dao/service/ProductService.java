@@ -65,4 +65,10 @@ public class ProductService {
 			return sqlSession.selectList(namespace + "selectProductByPagination", map);
 		}
 	}
+
+	public int countTotalProductByCategory(Product product) throws SQLException {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "countTotalProductByCategory", product);
+		}
+	}
 }

@@ -124,7 +124,7 @@ public class AdminMemberRegisterHandler extends AdminCommandHandler {
 			}
 
 			registerMember = MemberService.getInstance().selectByFindMember(registerMember);
-			Address addr = new Address(registerMember.getNo(), zipcode, addr1, addr2, AddressType.HOME, new Date());
+			Address addr = new Address(0,registerMember.getNo(), zipcode, addr1, addr2, AddressType.HOME, new Date(),registerMember.getName());
 			res = AddressService.getInstance().insertByMemberNo(addr);
 			if (res == 0) {
 				session.setAttribute("error_msg", "회원정보를 등록하지 못했습니다.");

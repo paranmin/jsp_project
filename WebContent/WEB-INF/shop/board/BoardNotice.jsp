@@ -123,19 +123,13 @@ td {
 						</form>
 						<!-- .검색 폼 끝 -->
 					</div>
-					<dl class="bbs-link bbs-link-btm">
-						<dd>
-							<a class="write  btn_dark btn_box_01"
-								href="${pageContext.request.contextPath}/shop/BoardNoticeForm.do">글쓰기</a>
-						</dd>
-					</dl>
 					<!-- .page-body -->
 					<div class="paging">
 						<ol class="paging">
 							<li class="next"><a href="#"><img
-									src="BoardImg/next_btn.gif" alt="다음"></a></li>
+									src="" alt="다음"></a></li>
 							<li class="last"><a href="#"><img
-									src="BoardImg/last_btn.gif" alt="끝"></a></li>
+									src="" alt="끝"></a></li>
 						</ol>
 					</div>
 				</div>

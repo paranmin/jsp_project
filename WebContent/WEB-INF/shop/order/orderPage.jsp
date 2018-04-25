@@ -2,16 +2,20 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <%
-    	Member member = (Member)request.getAttribute("member");
-    %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+	Member member = (Member)request.getAttribute("member");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset=UTF-8>
-<title>Insert title here</title>
+<title>주문하기 - SJ JEWELRY</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css" media="all" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderPage.css">
 <style>
 	tr.allProPrice td{
 		
@@ -112,65 +116,36 @@
 		display: none;
 	}
 	
-</style>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>" media="all" />
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="../../css/base.css" media="all" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderPage.css">   
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</style>   
+<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="${pageContext.request.contextPath}/js/base.js"></script>
 <script src="${pageContext.request.contextPath}/js/order.js"></script>
 <script type="text/javascript">
+$(function() {
+	$('textarea[name="orderMsg"]').keyup(function() {
+		// 텍스트영역의 길이를 체크
+		var textLength = $(this).val().length,
+			textCountLimit = parseInt($(".sizeContent").data("wordlimit"));
 
-	    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-	    function sample4_execDaumPostcode() {
-	        new daum.Postcode({
-	            oncomplete: function(data) {
-	            	 var fullAddr = ''; // 최종 주소 변수
-	                 var extraAddr = ''; // 조합형 주소 변수
-	                 var zipcode = '';
-	      
-	                 // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-	                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-	                     fullAddr = data.roadAddress;
-	                     zipcode = data.zonecode;
-	      
-	                     //법정동명이 있을 경우 추가한다.
-	                     if(data.bname !== ''){
-	                            extraAddr += data.bname;
-	                       }
-	                         // 건물명이 있을 경우 추가한다.
-	                         if(data.buildingName !== ''){
-	                             extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	                        }
-	                         // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-	                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-	      
-	                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
-	      
-	                     fullAddr = data.jibunAddress;
-	                     zipcode = data.postcode;
-	                 }
-	      
-	      
-	                 $('.post1').val(zipcode);
-	                 $('#inputheight2').val(fullAddr);
-	                 $('#inputheight1').focus();
-	                 
-	            }
-	        }).open();
-	    }
+		// 제한된 길이보다 입력된 길이가 큰 경우 제한 길이만큼만 자르고 텍스트영역에 넣음
+		if (textLength > textCountLimit) {
+			$(this).val($(this).val().substr(0, textCountLimit));
+		}
+		// 입력된 텍스트 길이를 #textCount 에 업데이트 해줌
+		$('.sizeContent .msgCount').text(textLength);
+	});
+});
 
-</script>
-<script type="text/javascript">
-
-function getReturnValue(returnValue) {
-	 var p = $.parseJSON(returnValue);
-	 $(".inputCoupon").val(p.key1);
-	 $(".finalPrice").text(p.key2);
-	 $("input:hidden[name='finalPrice']").val(p.key2);
+function getReturnValue(returnaddrValue) {
+	 var p = $.parseJSON(returnaddrValue);
+	 $("input:hidden[name='addrNo']").val(p.addrNo);
+	 var str = p.addr.split(" / ");
+	 $("input:text[name='basicaddr']").val(str[0]);
+	 $("input:text[name='detailaddr']").val(str[1]);
+	 $("input:text[name='post1']").val(p.zipcode);
 }
+
 </script>
 </head>
 <body>
@@ -250,7 +225,7 @@ function getReturnValue(returnValue) {
 											<p>
 												결제 금액 : <span class="orderChargePrice"></span>원+배송료 <span
 													class="delfee">2500</span>원 = <span class="toalpriceorder"
-													name="toalpriceorder"></span>원 <input type="hidden" name="orderChargePrice">
+													name="toalpriceorder"></span>원 
 												<!-- 결제금액  -->
 												<input type="hidden" value="2500" name="delfee">
 												<!--배송비 -->
@@ -258,9 +233,10 @@ function getReturnValue(returnValue) {
 										</td>
 										<td colspan="5" class="unusedelFee">
 											<p>
-												결제 금액 : <span class="orderChargePrice"></span>원<input type="hidden" name="orderChargePrice">
+												결제 금액 : <span class="orderChargePrice"></span>원
 											</p>
 										</td>
+										<input type="hidden" name="orderChargePrice">
 									</tr>
 								</c:if>
 
@@ -278,22 +254,49 @@ function getReturnValue(returnValue) {
 										readonly="readonly" value="${member.name }" class="username"></td>
 									<td class="grayBox">연락처</td>
 									<%
-										//if(member.getPhone() != null && )
+										if(member.getPhone() != null && !member.getPhone().equals("")){
+											String[] phone = member.getPhone().split("-");
+											pageContext.setAttribute("middleNum", phone[1]);
+											pageContext.setAttribute("lastNum", phone[2]);
+										}
 									%>
 									<td class="paddingInput">
 										<input type="text" name="gongIlgong" readonly="readonly" value="010"> - 
-										<input type="tel" name="middleNum" class="middleNum" value="2222">
+										<input type="tel" name="middleNum" class="middleNum" value="${middleNum }">
 										- <input type="tel" name="lastNum" class="lastNum"
-										value="2222"></td>
+										value="${lastNum }"></td>
 								</tr>
+								<%
+									if (member.getEmail() != null && !member.getEmail().equals("")) {
+										String[] email = member.getEmail().split("@");
+										pageContext.setAttribute("emailId", email[0]);
+										pageContext.setAttribute("emailBody", email[1]);
+									}
+								%>
 								<tr>
 									<td class="grayBox">E-mail</td>
-									<td colspan="3" class="paddingInput"><input type="email"
-										name="email"> @ <select>
-											<option>naver.com</option>
-											<option>gmail.com</option>
-											<option>hanmail.com</option>
-									</select></td>
+									<td colspan="3" class="paddingInput">
+										<input type="text"	name="email" value="${emailId }"> @ <input type="text" name="eamilAddress" class="eamilAddress"> 
+										<select name="email_type" class="checkEmail">
+											<option value="input">직접입력</option>
+											<option value="naver.com"<c:if test="${emailBody == 'naver.com'}"> selected </c:if>>naver.com</option>
+											<option value="hotmail.com"<c:if test="${emailBody == 'hotmail.com'}"> selected </c:if>>hotmail.com</option>
+											<option value="hanmail.net"<c:if test="${emailBody == 'hanmail.net'}"> selected </c:if>>hanmail.net</option>
+											<option value="yahoo.co.kr"<c:if test="${emailBody == 'yahoo.co.kr'}"> selected </c:if>>yahoo.co.kr</option>
+											<option value="paran.com"<c:if test="${emailBody == 'paran.com'}"> selected </c:if>>paran.com</option>
+											<option value="nate.com"<c:if test="${emailBody == 'nate.com'}"> selected </c:if>>nate.com</option>
+											<option value="empal.com"<c:if test="${emailBody == 'empal.com'}"> selected </c:if>>empal.com</option>
+											<option value="dreamwiz.com"<c:if test="${emailBody == 'dreamwiz.com'}"> selected </c:if>>dreamwiz.com</option>
+											<option value="hanafos.com"<c:if test="${emailBody == 'hanafos.com'}"> selected </c:if>>hanafos.com</option>
+											<option value="korea.com"<c:if test="${emailBody == 'korea.com'}"> selected </c:if>>korea.com</option>
+											<option value="chol.com"<c:if test="${emailBody == 'chol.com'}"> selected </c:if>>chol.com</option>
+											<option value="gmail.com"<c:if test="${emailBody == 'gmail.com'}"> selected </c:if>>gmail.com</option>
+											<option value="lycos.co.kr"<c:if test="${emailBody == 'lycos.co.kr'}"> selected </c:if>>lycos.co.kr</option>
+											<option value="netian.com"<c:if test="${emailBody == 'netian.com'}"> selected </c:if>>netian.com</option>
+											<option value="hanmir.com"<c:if test="${emailBody == 'hanmir.com'}"> selected </c:if>>hanmir.com</option>
+											<option value="sayclub.com"<c:if test="${emailBody == 'sayclub.com'}"> selected </c:if>>sayclub.com</option>
+										</select>
+									</td>
 								</tr>
 							</table>
 						</div>
@@ -307,7 +310,7 @@ function getReturnValue(returnValue) {
 									<tr>
 										<td class="grayBox">이름</td>
 										<td class="paddingInput"><input type="text" name="name"
-											readonly="readonly" class="inputheight" id="orderusername"></td>
+											 class="inputheight" id="orderusername"></td>
 										<td class="grayBox">연락처1</td>
 										<td class="paddingInput"><input type="text"
 											name="gongIlgong" readonly="readonly" value="010"
@@ -326,27 +329,28 @@ function getReturnValue(returnValue) {
 										<td class="grayBox">주소</td>
 										<td colspan="5" class="paddingInput">
 											<p>
-												<input type="radio" name="seladdress" value="homeadr"
+												<input type="hidden" name="addrNo">
+												<input type="radio" name="seladdress" value="homeadr" id="homeaddr"
 													class="radiosize"> 자택 <input type="radio"
-													name="seladdress" value="recentadr" class="radiosize">
+													name="seladdress" value="recentadr" class="radiosize" id="recentaddr">
 												최근 배송지
 												<button class="adrlist"
-													onclick="window.open('shipping.do', '배송지 목록', 'width=500, height=400');return false">배송지
+													onclick="shipList()">배송지
 													목록</button>
 												<input type="radio" name="seladdress" value="newadr"
-													class="radiosize"> 신규 배송지
+													class="radiosize" id="newaddr"> 신규 배송지
 											</p>
 											<p>
 												<input type="text" name="post1" class="post1">
 												<button class="postlist"
-													onclick="sample4_execDaumPostcode() ; return false">우편번호</button>
+													onclick="getPostCode(); return false">우편번호</button>
 											</p>
 											<p>
-												<input type="text" name="basicadr" class="inputheight"
+												<input type="text" name="basicaddr" class="inputheight"
 													id="inputheight2"> [기본주소]
 											</p>
 											<p>
-												<input type="text" name="detail" class="inputheight"
+												<input type="text" name="detailaddr" class="inputheight"
 													id="inputheight1"> [나머지주소]
 											</p>
 										</td>
@@ -355,8 +359,7 @@ function getReturnValue(returnValue) {
 										<td class="grayBox">주문메세지(100자 내외)</td>
 										<td colspan="5" class="paddingInput"><textarea rows="4"
 												cols="100" name="orderMsg"></textarea>
-											<p class="sizeContent">0/70 bytes (* 영문/숫자 기준 70자, 한글 기준
-												35자까지 입력 가능합니다.)</p></td>
+											<p class="sizeContent" data-wordlimit="100"><span class="msgCount">0</span>/100 자</p></td>
 									</tr>
 								</table>
 							</div>

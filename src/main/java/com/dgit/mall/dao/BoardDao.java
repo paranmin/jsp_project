@@ -26,5 +26,13 @@ public interface BoardDao {
 
 	public int updatecheck(int ChBoard);
 
+	List<Board> selectByAllReply();
+
+	public int selectBylastno();
+
+	public int insertBoardReply(Board board);
+
+	List<Board> selectbrdcode();
+
 
 }

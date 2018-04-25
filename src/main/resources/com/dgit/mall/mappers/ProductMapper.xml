@@ -161,7 +161,7 @@
 		order by prd_no desc;
 	</select>
 	
-	<select id="selectProductByPagination" parameterType="Map" resultMap="productResult">
+	<select id="selectProductByPagination" parameterType="map" resultMap="productResult">
 		select * from product
 		<where>
 			<if test="no != null and no > 0">
@@ -174,16 +174,23 @@
 				and prd_category = #{category}
 			</if>
 		</where>
-		order by
-		<if test="orderbytarget != null and orderbytarget != ''">
-			#{orderbytarget}
+		order by 
+		<if test="sort != null and sort != ''">
 			<choose>
-				<when test="orderby != null">
-					#{orderby}
+				<when test="sort == 'name'">
+					prd_name
 				</when>
-				<otherwise>
-					desc
-				</otherwise>
+				<when test="sort == 'low' or sort == 'high'">
+					prd_selling_price
+				</when>
+				<when test="sort == 'rank'">
+					prd_selling_count
+				</when>
+				<otherwise>prd_no</otherwise>
+			</choose>
+			<choose>
+				<when test="orderby == 'desc'">DESC</when>
+				<otherwise>ASC</otherwise>
 			</choose>
 			,
 		</if>
@@ -197,5 +204,14 @@
 				#{offset}
 			</if>
 		</if>
+	</select>
+	
+	<select id="countTotalProductByCategory" parameterType="Product" resultType="int">
+		select count(prd_no) from product
+		<where>
+			<if test="category != null and category != ''">
+				prd_category = #{category}
+			</if>
+		</where>
 	</select>
 </mapper>

@@ -40,4 +40,5 @@ public interface ProductDao {
 	public List<Product> selectBestCateProduct(String cate) throws SQLException;
 
 	public List<Product> selectProductByPagination(Map<String, Object> map) throws SQLException;
+	public int countTotalProductByCategory(Product product) throws SQLException;
 } 

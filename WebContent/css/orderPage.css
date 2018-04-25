@@ -129,7 +129,7 @@ div.custable input{
 	border:1px solid #EAEAEA;
 	height: 30px;
 	width: 120px;
-	text-align: center;
+	/*text-align: center;*/
 }
 div.adrtable .grayBox{
 	background-color: #EAEAEA;
@@ -167,10 +167,10 @@ div.adrtable .paddingInput{
 }
 div.adrtable input{
 	border:1px solid #EAEAEA;
-	text-align: center;
 }
 div.adrtable input.sizeInput{
 	width: 50px;
+	text-align: center;
 }
 td.paddingInput select{
 	height: 30px;
@@ -296,4 +296,8 @@ div.OrderReac .orderReset{
 	border-color: #EAEAEA;
 }
 
+
+input.eamilAddress{
+	display: none;
+}
 

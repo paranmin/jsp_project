@@ -35,7 +35,7 @@ td.emptycart p {
 	href="${pageContext.request.contextPath}/css/cartPage.css">
 <script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
-<script src="${pageContext.request.contextPath}/js/cart.js?a=12"></script>
+<script src="${pageContext.request.contextPath}/js/cart.js?a=15"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
@@ -100,10 +100,11 @@ td.emptycart p {
 											</td>
 											<td class="numcount">
 												<button class="plus">+</button> <input type="text"
-												class="cartnum" value="${items.prdQuantity }" name="cartnum">
+												class="cartnum" value="${items.prdQuantity }" name="cartnum" data-stockValue="${items.product.stock }">
 												
-												<button class="minus">-</button> <input type="hidden"
-												name="stock" value="${items.optiondetail.podStock }">
+												<button class="minus">-</button> 
+												
+												<input type="hidden" name="stock" value="${items.product.stock }">
 											</td>
 											<td><span class="productPrice"
 												data-price="${items.prdOpPrice }">${items.prdOpPrice*items.prdQuantity }</span>원</td>

@@ -78,6 +78,7 @@ public class ControllerUsingURI extends HttpServlet {
 		try {
 			viewPage = handler.process(request, response);
 		} catch (Throwable e) {
+			e.printStackTrace();
 			throw new ServletException(e);
 		}
 		if (viewPage != null) {

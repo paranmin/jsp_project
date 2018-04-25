@@ -41,4 +41,10 @@
 	<insert id="insertMemberCoupon" parameterType="UserCoupon">
 		insert into user_coupon(c_no,m_no) values (#{cNo.cNo},#{mNo.no});
 	</insert>
+	
+	<!-- 회원쪽에서 쿠폰 불러오기 -->
+	<select id="selectByMem" resultMap="userCouponResult">
+		select uc.c_no,uc.uc_use_yn,c.c_name,c.c_use_more_price,c.c_sale_price,c.c_limit_date 
+		from user_coupon uc join coupon c on uc.c_no=c.c_no where uc.m_no=#{mNo.no}
+	</select>
 </mapper>

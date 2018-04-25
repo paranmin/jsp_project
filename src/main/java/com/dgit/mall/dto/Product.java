@@ -23,6 +23,10 @@ public class Product {
 		this.prdNo = prdNo;
 	}
 
+	public Product(String category) {
+		this.category = category;
+	}
+
 	public Product(int prdNo, String name, String subDesc, String mainImg, String content, int cost, String discountPer,
 			int sellingPrice, int stock, String useOption, String category, String use) {
 		this.prdNo = prdNo;

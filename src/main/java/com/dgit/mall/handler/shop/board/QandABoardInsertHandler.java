@@ -25,10 +25,8 @@ public class QandABoardInsertHandler extends ShopCommandHandler {
 			return VIEW_FRONT_PATH + "/board/BoardQandAForm.jsp";
 			
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
-			System.out.println("i1");
 			SqlSession sqlSession = null;
 			String ReviewformPath = request.getRealPath("Reviewform");
-			System.out.println("i2");
 			File dir = new File(ReviewformPath);
 			if (dir.exists() == false) {
 				dir.mkdirs();
@@ -37,7 +35,6 @@ public class QandABoardInsertHandler extends ShopCommandHandler {
 			int size = 1024 * 1024 * 10;// 10M
 
 			try {
-				System.out.println("i3");
 				MultipartRequest multi = new MultipartRequest(request, // upload할
 
 						// 파일정보
@@ -46,20 +43,14 @@ public class QandABoardInsertHandler extends ShopCommandHandler {
 						"utf-8", // 한글 파일명 깨짐 방지
 						new DefaultFileRenamePolicy());
 				String select = multi.getParameter("selected");
-				System.out.println("i4");
 
 				int selected = 0;
 
 				String brdcode = multi.getParameter("brdcode");
-				System.out.println("i5");
 				String brdwriter = multi.getParameter("brdwriter");
-				System.out.println("i6");
 				String brdpassword = multi.getParameter("brdpassword");
-				System.out.println("i7");
 				String brdtitle = multi.getParameter("brdtitle");
-				System.out.println("i8");
 				String brdcontent = multi.getParameter("brdcontent");
-				System.out.println("i9");
 				// String brduseattachment
 				// =multi.getParameter("brduseattachment");
 				if (select.equals("선택")) {
@@ -78,38 +69,32 @@ public class QandABoardInsertHandler extends ShopCommandHandler {
 					selected = 6;
 				}
 				sqlSession = MySqlSessionFactory.openSession();
-				System.out.println("i10");
 				BoardDao Dao = sqlSession.getMapper(BoardDao.class);
-				System.out.println("i11");
 				Date now = new Date();
-				Board board = new Board(0, brdcode, brdtitle, brdwriter, brdpassword, 1, 0, null, brdcontent, 0, now,
+				int lastno = Dao.selectBylastno();
+				Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, lastno, 0, null, brdcontent, 0, now,
 						selected, 0);
-
-				request.setAttribute("brdNo", 0);
+				
+				request.setAttribute("brdNo", lastno);
 				request.setAttribute("brdcode", brdcode);
 				request.setAttribute("brdwriter", brdwriter);
 				request.setAttribute("brdpassword", brdpassword);
 				request.setAttribute("brdtitle", brdtitle);
 				request.setAttribute("brdcontent", brdcontent);
 				request.setAttribute("selected", selected);
-				System.out.println("i12");
 				// request.setAttribute("brduseattachment", brduseattachment);
+				
 				Dao.insertBoard(board);
-				System.out.println("i13");
 				sqlSession.commit();
-				System.out.println("i14");
 			
 			} catch (Exception e) {
 				sqlSession.rollback();
 				e.printStackTrace();
-				System.out.println("i15");
 		
 			} finally {
-				System.out.println("i16");
 				sqlSession.close();
 
 			}
-			System.out.println("i7");
 			return "BoardQandA.do";
 
 		}

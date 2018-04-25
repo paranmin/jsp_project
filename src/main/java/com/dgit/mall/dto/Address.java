@@ -12,21 +12,12 @@ public class Address {
 	private String addr2;
 	private AddressType addrType;
 	private Date regdate;
-
-	public Address() {
-	}
-
-	public Address(int memNo, String zipcode, String addr1, String addr2, AddressType addrType, Date regdate) {
-		this.memNo = memNo;
-		this.zipcode = zipcode;
-		this.addr1 = addr1;
-		this.addr2 = addr2;
-		this.addrType = addrType;
-		this.regdate = regdate;
-	}
-
+	private String addrName;
+	
+	
+	
 	public Address(int addrNo, int memNo, String zipcode, String addr1, String addr2, AddressType addrType,
-			Date regdate) {
+			Date regdate, String addrName) {
 		this.addrNo = addrNo;
 		this.memNo = memNo;
 		this.zipcode = zipcode;
@@ -34,63 +25,111 @@ public class Address {
 		this.addr2 = addr2;
 		this.addrType = addrType;
 		this.regdate = regdate;
+		this.addrName = addrName;
 	}
+
+
+
+	public Address() {
+	}
+
+
 
 	public int getAddrNo() {
 		return addrNo;
 	}
 
+
+
 	public void setAddrNo(int addrNo) {
 		this.addrNo = addrNo;
 	}
+
+
 
 	public int getMemNo() {
 		return memNo;
 	}
 
+
+
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
+
+
 
 	public String getZipcode() {
 		return zipcode;
 	}
 
+
+
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
+
+
 
 	public String getAddr1() {
 		return addr1;
 	}
 
+
+
 	public void setAddr1(String addr1) {
 		this.addr1 = addr1;
 	}
+
+
 
 	public String getAddr2() {
 		return addr2;
 	}
 
+
+
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
 	}
+
+
 
 	public AddressType getAddrType() {
 		return addrType;
 	}
 
+
+
 	public void setAddrType(AddressType addrType) {
 		this.addrType = addrType;
 	}
+
+
 
 	public Date getRegdate() {
 		return regdate;
 	}
 
+
+
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+
+
+
+	public String getAddrName() {
+		return addrName;
+	}
+
+
+
+	public void setAddrName(String addrName) {
+		this.addrName = addrName;
+	}
+
+
 
 	@Override
 	public String toString() {
