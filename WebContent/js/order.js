@@ -161,9 +161,13 @@ $(function(){
 	})
 	$("#recentaddr").click(function(){
 		shipList();
+	})
+	$(".adrlist").click(function(){
+		
+		$("#recentaddr").prop("checked",true);
+		shipList();
 		return false;
 	})
-	
 	
 })
 function getPostCode(){

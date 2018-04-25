@@ -335,9 +335,7 @@ function getReturnValue(returnaddrValue) {
 													class="radiosize"> 자택 <input type="radio"
 													name="seladdress" value="recentadr" class="radiosize" id="recentaddr">
 												최근 배송지
-												<button class="adrlist"
-													onclick="shipList(); return false;">배송지
-													목록</button>
+												<button class="adrlist">배송지 목록</button>
 												<input type="radio" name="seladdress" value="newadr"
 													class="radiosize" id="newaddr"> 신규 배송지
 											</p>

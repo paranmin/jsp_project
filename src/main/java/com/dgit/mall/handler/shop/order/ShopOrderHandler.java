@@ -95,7 +95,6 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			if(addrNo!=null&&!addrNo.equals("")){
 				addrNumber =Integer.parseInt(addrNo);
 			}
-			
 			if(seladdress.equals("newadr")){
 				Address regiAddr = new Address();
 				regiAddr.setMemNo(loginMember.getNo());
@@ -161,13 +160,16 @@ public class ShopOrderHandler extends ShopCommandHandler {
 				Map<String, Object> map = new HashMap<>();
 				map.put("mNo", member.getNo());
 				map.put("ctNo", cart);
-				CartService.getInstance().deleteCartByNo(map);
+				System.out.println(map);
+				System.out.println(cart);
+				int a = CartService.getInstance().deleteCartByNo(map);
+				
 				
 				
 			request.setAttribute("payType", payType);
 			request.setAttribute("ordernum", ordernum);
 			response.sendRedirect("orderComplete.do");
-			
+
 			
 			
 			
