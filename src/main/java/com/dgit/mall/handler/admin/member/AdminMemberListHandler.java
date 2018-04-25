@@ -11,31 +11,52 @@ import javax.servlet.http.HttpServletResponse;
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Member;
 import com.dgit.mall.handler.admin.AdminCommandHandler;
+import com.dgit.mall.util.Pagination;
 
 public class AdminMemberListHandler extends AdminCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (request.getMethod().equalsIgnoreCase("get")) {
-			String where = request.getParameter("where");
-			String query = request.getParameter("search_query");
+		String sPage = request.getParameter("page");
+		String where = request.getParameter("where");
+		String query = request.getParameter("query");
 
-			List<Member> list = null;
-			if (query != null && !query.equals("")) {
-				Map<String, String> map = new HashMap<>();
-				map.put("where", where);
-				map.put("query", query);
-				list = MemberService.getInstance().selectMemberListBySearch(map);
-			} else {
-				list = MemberService.getInstance().selectMemberList();
-			}
-
-			request.setAttribute("where", where);
-			request.setAttribute("query", query);
-			request.setAttribute("memList", list);
-		} else if (request.getMethod().equalsIgnoreCase("post")) {
-
+		int page = 1;
+		if (sPage != null && !sPage.isEmpty()) {
+			page = Integer.parseInt(sPage);
 		}
+
+		int width = 5;	// 페이징 숫자 몇개
+		int row = 20;	// 보여질 줄수
+		int start = (page - 1) * row;
+
+		String params = "";
+
+		List<Member> list = null;
+		Map<String, Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("offset", row);
+		if (query != null && !query.equals("")) {
+			map.put("where", where);
+			map.put("query", query);
+
+			params = String.format("where=%s&query=%s", where, query);
+		}
+		int total = MemberService.getInstance().countTotalMemberBySearch(map);
+		list = MemberService.getInstance().selectMemberListBySearch(map);
+		
+		int cnt = (int) Math.ceil((double)total / row);
+
+		String imgUrl = request.getHeader("host") + request.getContextPath() + "/images";
+		Pagination.getInstance().initPagination(imgUrl);
+		String paging = Pagination.getInstance().makePaging(cnt, page, width, row, "list.do", params);
+
+		request.setAttribute("where", where);
+		request.setAttribute("query", query);
+		request.setAttribute("total", total);
+		request.setAttribute("paging", paging);
+		request.setAttribute("memList", list);
+
 		request.setAttribute("contentPage", "member/memberList.jsp");
 		request.setAttribute("sub_menu", "list");
 		request.setAttribute("menu", "member");

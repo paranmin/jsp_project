@@ -43,7 +43,13 @@ public class MemberService {
 		}
 	}
 
-	public List<Member> selectMemberListBySearch(Map<String, String> map) {
+	public int countTotalMemberBySearch(Map<String, Object> map) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "countTotalMemberBySearch", map);
+		}
+	}
+
+	public List<Member> selectMemberListBySearch(Map<String, Object> map) {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + "selectMemberListBySearch", map);
 		}

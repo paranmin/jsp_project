@@ -184,3 +184,30 @@ section #container table.modify td input, section #container table.modify td sel
 section #container table.modify td .checkEmail {
 	width: 120px;
 }
+
+div.pagingArea {
+	margin: 50px 0;
+	text-align: center;
+}
+ul.pagination {
+	overflow: hidden;
+	display: inline-block;
+}
+ul.pagination li {
+	float: left;
+	display: inline-block;
+	width: 25px;
+	height: 30px;
+	line-height: 30px;
+}
+
+ul.pagination a {
+	text-align: center;
+	vertical-align: middle;
+	color: #333;
+}
+ul.pagination li.page {
+	border-bottom: 2px solid #000;
+	color: red;
+	font-weight: bold;
+}

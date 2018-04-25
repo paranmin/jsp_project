@@ -14,14 +14,16 @@ public interface MemberDao {
 
 	List<Member> selectMemberList();
 
-	List<Member> selectMemberListBySearch(Map<String, String> map);
+	int countTotalMemberBySearch(Map<String, Object> map);
+
+	List<Member> selectMemberListBySearch(Map<String, Object> map);
 
 	int checkDuplId(String id);
 
 	int checkDuplEmail(String email);
 
 	int registerMember(Member member);
-	
+
 	int registerFullMember(Member member);
 
 	int updatePassword(Member member);

@@ -397,7 +397,7 @@ $(function(){
 					<option>발찌</option>
 					<option>반지</option>
 					<option>발가락지/토링</option>
-					<option>헤어 CSS</option>
+					<option>헤어 ASS</option>
 					<option>시계</option>
 					<option>폰 ACC</option>
 					<option>기타</option>
