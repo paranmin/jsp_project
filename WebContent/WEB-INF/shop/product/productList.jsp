@@ -13,22 +13,22 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList.css" media="all" />
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
-<% int sortnum = (int)request.getAttribute("sortNum"); 
-	out.print(sortnum); %>   
+<% String sortname = (String)request.getAttribute("sort"); 
+	out.print(sortname); %>   
 <script type="text/javascript">
 $(function(){
-	var sort = <%=sortnum%>
+	var sort = "<%=sortname%>"
 	$("div.item_sort").find("li").css("font-weight", "normal");
-	if(sort == 1){
+	if(sort == 'new'){
 		$("div.item_sort").find("li").eq(0).css("font-weight","bold");
-	}else if(sort == 2){
+	}else if(sort == 'name'){
 		$("div.item_sort").find("li").eq(1).css("font-weight","bold");
-	}else if(sort == 3){
+	}else if(sort == 'low'){
 		$("div.item_sort").find("li").eq(2).css("font-weight","bold");
-	}else if(sort == 4){
+	}else if(sort == 'high'){
 		$("div.item_sort").find("li").eq(3).css("font-weight","bold");
-	}else if(sort == 5){
-		$("div.item_sort").find("li").eq(4).css("font-weight","bold");
+	}else if(sort == 'rank'){
+		$("div.item_sort").find("li").eq(4).css("font-weight","bold");    
 	}
 });
 </script>
@@ -69,7 +69,6 @@ $(function(){
 			</div>
 			<hr>      
 			<c:if test="${cate==null || cate==''}">
-			<hr>
 			<p class="list_title">JEWELRY ITEM</p>
 			</c:if>
 			<c:if test="${cate!=null && cate !=''}">

@@ -46,7 +46,7 @@ public class ProductListHandler extends ShopCommandHandler {
 		Map<String, Object> cateMap = new HashMap<>();
 		cateMap.put("start", start);
 		cateMap.put("offset", offset);
-		
+
 		if (cate != null && !cate.equals("")) {
 			cateMap.put("category", cate);
 			bestMap.put("category", cate);
@@ -54,36 +54,39 @@ public class ProductListHandler extends ShopCommandHandler {
 		}
 		if (sort != null && !sort.equals("")) {
 			cateMap.put("sort", sort);
-
+			
 			if (!params.equals("")) {
 				params = String.format("%s&sort=%s", params, sort);
+			} else {
 				params = String.format("sort=%s", sort);
-				if (sort.equals("high") || sort.equals("rank")) {
-					cateMap.put("orderby", "desc");
-				}
 			}
-			// 카테고리별 전체 상품 갯수 (카테고리 없으면 전체 상품 갯수)
-			int total = ProductService.getInstance().countTotalProductByCategory(new Product(cate));
 
-			int cnt = (int) Math.ceil((double) total / offset);
-
-			String imgUrl = req.getHeader("host") + req.getContextPath() + "/images";
-			Pagination.getInstance().initPagination(imgUrl);
-
-			String paging = Pagination.getInstance().makePaging(cnt, page, width, row, "showList.do", params);
-
-			prolist = ProductService.getInstance().selectProductByPagination(cateMap);
-			bestlist = ProductService.getInstance().selectProductByPagination(bestMap);
-
-			req.setAttribute("list", prolist);
-			req.setAttribute("best", bestlist);
-			req.setAttribute("page", page);
-			req.setAttribute("cate", cate);
-			req.setAttribute("total", total);
-			req.setAttribute("paging", paging);
-			return VIEW_FRONT_PATH + "product/productList.jsp";
-
+			if (sort.equals("high") || sort.equals("rank")) {
+				cateMap.put("orderby", "desc");
+			}
 		}
-		return null;
+		System.out.println("cateMap :"+cateMap);
+		// 카테고리별 전체 상품 갯수 (카테고리 없으면 전체 상품 갯수)
+		int total = ProductService.getInstance().countTotalProductByCategory(new Product(cate));
+
+		int cnt = (int) Math.ceil((double) total / offset);
+
+		String imgUrl = req.getHeader("host") + req.getContextPath() + "/images";
+		Pagination.getInstance().initPagination(imgUrl);
+
+		String paging = Pagination.getInstance().makePaging(cnt, page, width, row, "showList.do", params);
+
+		prolist = ProductService.getInstance().selectProductByPagination(cateMap);
+		bestlist = ProductService.getInstance().selectProductByPagination(bestMap);
+
+		req.setAttribute("list", prolist);
+		req.setAttribute("best", bestlist);
+		req.setAttribute("page", page);
+		req.setAttribute("cate", cate);
+		req.setAttribute("sort", sort);
+		req.setAttribute("total", total);
+		req.setAttribute("paging", paging);
+		return VIEW_FRONT_PATH + "product/productList.jsp";
+
 	}
 }
