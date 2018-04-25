@@ -24,6 +24,10 @@
 		where m_no = #{no} and ma_addr_type = 'HOME'
 	</select>
 	
+	<select id="selectLastInsert" resultType="int">
+		SELECT Max(ma_no) from member_address
+	</select>
+	
 	<insert id="insertByMemberNo" parameterType="Address">
 		insert into member_address(m_no, ma_zipcode, ma_addr1, ma_addr2, ma_addr_type, ma_regdate)
 		values(#{memNo},#{zipcode},#{addr1},#{addr2},#{addrType}, #{regdate})
@@ -31,7 +35,7 @@
 	
 	<insert id="insertByMemberNomaName" parameterType="Address">
 		insert into member_address(m_no, ma_zipcode, ma_addr1, ma_addr2, ma_addr_type, ma_regdate,ma_name)
-		values(#{memNo},#{zipcode},#{addr1},#{addr2},#{addrType}, #{regdate},#{maName})
+		values(#{memNo},#{zipcode},#{addr1},#{addr2},#{addrType}, #{regdate},#{addrName})
 	</insert>
 	
 	<update id="modifyByMemberNo" parameterType="Address">

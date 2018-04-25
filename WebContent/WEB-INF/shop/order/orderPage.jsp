@@ -120,7 +120,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
-<script src="${pageContext.request.contextPath}/js/order.js?a=1"></script>
+<script src="${pageContext.request.contextPath}/js/order.js?a=2"></script>
 <script type="text/javascript">
 $(function() {
 	$('textarea[name="orderMsg"]').keyup(function() {
@@ -194,13 +194,12 @@ function getReturnValue(returnaddrValue) {
 													</tr>
 													<c:if test="${items.prdOpName==null || items.prdOpName==''}">
 														<tr>
-															<td></td>
+															<td><input type="hidden" name="optionname"></td>
 														</tr>
 													</c:if>
 													<c:if test="${items.prdOpName!=null && items.prdOpName!=''}">
 														<tr>
-															<td class="proNamehr">옵션:<span class="optionname">${items.prdOpName }</span></td>
-															<input type="hidden" name="optionname">
+															<td class="proNamehr">옵션:<span class="optionname">${items.prdOpName }</span><input type="hidden" name="optionname"></td>
 														</tr>
 													</c:if>
 												</table> <input type="hidden" name="proNo" value="${items.product.prdNo }"> <!-- 상품번호 -->

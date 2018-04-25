@@ -23,7 +23,6 @@
 	}
 	section li{
 		height:53px;
-		line-height:50px;
 		border-top: 1px solid #EAEAEA;
 		border-bottom: 1px solid #EAEAEA;
 		font-size: 13px;

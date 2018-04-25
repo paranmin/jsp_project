@@ -1,6 +1,8 @@
 package com.dgit.mall.dao.service;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -27,6 +29,12 @@ public class CartService {
 	public int countSelectAllCartByMember(int mno) {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession()) {
 			return sqlSession.selectOne(namespace + "countSelectAllCartByMember", mno);
+		}
+	}
+	
+	public int deleteCartByNo(Map<String, Object> map) throws SQLException {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession()) {
+			return sqlSession.selectOne(namespace + "deleteCartByNo", map);
 		}
 	}
 }
