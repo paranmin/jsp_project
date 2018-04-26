@@ -408,7 +408,7 @@ a {
 								class="none btn_light_border btn_box_01">수정</a> <a
 								href="BoardDel.do?brdno=${readBoard.brdNo }"
 								class="btn_light_border btn_box_01">삭제</a> <a
-								href="#"
+								href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
 								class="btn_light btn_box_01">답변</a>
 						</dd>
 					</dl>
