@@ -6,7 +6,7 @@
 		<result property="ordPrice" column="ord_price"/> <!-- 주문가격 -->
 		<result property="ordCouponPrice" column="ord_coupon_price"/> <!-- 쿠폰사용가격 -->
 		<result property="deliveryFee" column="ord_delivery_fee"/> <!-- 배송비 -->
-		<result property="ordMessage" column="order_text"/> <!-- 주문메세지 -->
+		<result property="ordMessage" column="ord_msg"/> <!-- 주문메세지 -->
 		<result property="type" column="ord_pay_type"/><!-- 결제타입 -->
 		<result property="receiver" column="ord_receuver"/><!-- 수령자 -->
 		<result property="rcPhone1" column="ord_rphone1"/><!-- 결제타입 -->
