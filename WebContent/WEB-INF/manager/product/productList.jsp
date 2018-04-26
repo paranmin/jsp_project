@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+$(function(){
+	$("input[type='radio']").change(function(){
+		$("form").submit();
+	});
+});   
+</script>
 <div id="container">
 	<h1>상품 리스트 보기</h1>
 	<form action="list.do" id="cate">

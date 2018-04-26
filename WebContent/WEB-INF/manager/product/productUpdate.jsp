@@ -540,11 +540,11 @@ div input[name="files"]{
 			</div>
 			<div>
 				<label>옵션 유무</label>
-				<label><input type="radio" id="option"
+				<input type="radio" id="option"
 					name="use_option" value="1"
-					<c:if test="${pro.useOption=='1' }"> checked="checked" </c:if>>사용</label>
-				<label><input type="radio" id="option" name="use_option" value="0"
-					<c:if test="${pro.useOption=='0' }"> checked="checked" </c:if>>사용안함</label>
+					<c:if test="${pro.useOption=='1' }"> checked="checked" </c:if>>사용
+				<input type="radio" id="option" name="use_option" value="0"
+					<c:if test="${pro.useOption=='0' }"> checked="checked" </c:if>>사용안함
 			</div>
 			<table id="proOption">
 				<tr>

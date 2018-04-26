@@ -28,7 +28,7 @@ public class AdminProductAddHandler extends AdminCommandHandler {
 			request.setAttribute("contentPage", "product/productAdd.jsp");
 			request.setAttribute("sub_menu", "list");
 			request.setAttribute("menu", "product");
-			request.setAttribute("css", "product.css");
+			/*request.setAttribute("css", "product.css");*/
 
 			return TEMPLATE_PAGE;
 		} else if (request.getMethod().equalsIgnoreCase("post")) {

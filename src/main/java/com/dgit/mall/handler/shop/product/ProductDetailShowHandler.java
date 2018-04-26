@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.CartDao;
 import com.dgit.mall.dao.ProductDao;
+import com.dgit.mall.dao.service.CartService;
 import com.dgit.mall.dto.Cart;
 import com.dgit.mall.dto.Member;
 import com.dgit.mall.dto.Option;
@@ -94,6 +95,9 @@ public class ProductDetailShowHandler extends ShopCommandHandler {
 					dao.insertCart(cart);
 				}
 				sqlsession.commit();
+
+				int cntCart = CartService.getInstance().countSelectAllCartByMember(loginMember.getNo());
+				session.setAttribute("cntCart", cntCart);
 
 				/* sendRedirect 땐 request 안 먹힘
 				request.setAttribute("opName", opname);
