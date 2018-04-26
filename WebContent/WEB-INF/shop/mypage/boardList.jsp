@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,20 +49,27 @@
 						</tr>
 					</thead>
 					<tbody>
+				<c:if test="${boardList ne null && boardList.size() > 0}">
+					<c:forEach var="board" items="${boardList}">
 						<tr>
-							<td>2</td>
-							<td>QNA</td>
-							<td>이거 어떻게 되요</td>
-							<td>2018-03-28</td>
-							<td>5</td>
+							<td>${board.brdNo}</td>
+							<td>
+								<c:choose>
+									<c:when test="${board.brdcode == 'ReviewBoard'}">리뷰</c:when>
+									<c:otherwise>Q&amp;A</c:otherwise>
+								</c:choose>
+							</td>
+							<td><a href="${pageContext.request.contextPath}/shop/ReviewBoardRead.do?brdno=${board.brdNo}">${board.brdtitle}</a></td>
+							<td><fmt:formatDate value="${board.brdregdate}" pattern="yyyy-MM-dd" /></td>
+							<td>${board.brdch }</td>
 						</tr>
+					</c:forEach>
+				</c:if>
+				<c:if test="${boardList eq null || boardList.size() == 0 }">
 						<tr>
-							<td>1</td>
-							<td>후기</td>
-							<td>이거 짱짱입니다.</td>
-							<td>2018-03-08</td>
-							<td>115</td>
+							<td colspan="3">등록된 글이 없습니다.</td>
 						</tr>
+				</c:if>
 					</tbody>
 				</table>
 			</div>

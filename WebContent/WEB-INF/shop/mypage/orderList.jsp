@@ -47,20 +47,15 @@
 						</tr>
 					</thead>
 					<tbody>
-				<c:if test="${orderList ne null && orderList.size() > 0}">
-					<c:forEach var="order" items="${orderList}">
+				<c:if test="${recentOrder ne null && recentOrder.size() > 0}">
+					<c:forEach var="order" items="${recentOrder}">
 						<tr>
-							<td><fmt:formatDate value="${order.regdate}" pattern="yyyy-MM-dd"/></td>
-							<td>아주 멋진 귀걸이</td>
-							<td><a href="#" class="btn" onclick="viewOrder('${order.ordNo}');return false;">조회</a></td>
+							<td><fmt:formatDate value="${order.ordDate}" pattern="yyyy-MM-dd"/></td>
+							<td>${order.ordPrdName}</td>
+							<td><a href="#" class="btn" onclick="viewOrder('${order.orderNo}');return false;">조회</a></td>
 							<td><a href="#">배송대기</a></td>
 						</tr>
 					</c:forEach>
-				</c:if>
-				<c:if test="${orderList eq null || orderList.size() == 0}">
-						<tr>
-							<td colspan="4">등록된 주문이 없습니다.</td>
-						</tr>
 				</c:if>
 					</tbody>
 				</table>

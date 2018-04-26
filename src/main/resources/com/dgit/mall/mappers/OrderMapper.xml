@@ -8,7 +8,7 @@
 		<result property="deliveryFee" column="ord_delivery_fee"/> <!-- 배송비 -->
 		<result property="ordMessage" column="ord_msg"/> <!-- 주문메세지 -->
 		<result property="type" column="ord_pay_type"/><!-- 결제타입 -->
-		<result property="receiver" column="ord_receuver"/><!-- 수령자 -->
+		<result property="receiver" column="ord_receiver"/><!-- 수령자 -->
 		<result property="rcPhone1" column="ord_rphone1"/><!-- 결제타입 -->
 		<result property="rcPhone2" column="ord_rphone2"/><!-- 결제타입 -->
 		<result property="regdate" column="ord_regdate"/><!-- 주문일 -->
@@ -49,9 +49,12 @@
 	</insert>
 	<select id="selectOrder" parameterType="String" resultMap="orderResult">
 		select od.m_no,od.ord_no,od.ord_coupon_price,od.ord_price,od.ord_pay_type,od.ord_delivery_fee,
-		od.ord_msg,od.ord_receiver,od.ord_rphone1,od.ord_rphone2,od.ord_regdate,
+		od.ord_msg,od.ord_receiver,od.ord_rphone1,od.ord_rphone2,od.ord_regdate, mb.m_name,
 		ma.ma_no,ma.ma_zipcode,ma.ma_name,ma.ma_addr1,ma.ma_addr2
-		from `order` od join member_address ma on od.ma_no = ma.ma_no where od.ord_no=#{ordNo}
+		from `order` od
+		join mall.`member` mb on od.m_no = mb.m_no  
+		join member_address ma on od.ma_no = ma.ma_no 
+		where od.ord_no=#{ordNo}
 	</select>
 	
 	<!-- 상품땡겨오는거 -->
