@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.BoardDao;
+import com.dgit.mall.dao.ProductDao;
 import com.dgit.mall.dto.Board;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
@@ -24,9 +25,23 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 		SqlSession sqlSession = null;
 		System.out.println("1234");
 		if (request.getMethod().equalsIgnoreCase("get")) {
+			/*int no = Integer.parseInt(request.getParameter("no"));
+			System.out.println(no);
+			ProductDao dao = sqlSession.getMapper(ProductDao.class);
+			int pro = dao.allProduct(no);
+			System.out.println(pro);
+			request.setAttribute("pro", pro);
+
+			*/
 			System.out.println("1235");
 			return VIEW_FRONT_PATH + "/board/Reviewform.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
+			/*int no = Integer.parseInt(request.getParameter("no"));
+			System.out.println(no);
+			ProductDao dao = sqlSession.getMapper(ProductDao.class);
+			int pro = dao.allProduct(no);
+			System.out.println(pro);
+			request.setAttribute("pro", pro);*/
 			String ReviewformPath = request.getRealPath("Reviewform");
 			System.out.println("1236");
 			File dir = new File(ReviewformPath);
@@ -51,6 +66,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				String brdpassword = multi.getParameter("brdpassword");
 				String brdtitle = multi.getParameter("brdtitle");
 				String brdcontent = multi.getParameter("brdcontent");
+				String selected = multi.getParameter("selected");
 				// String brduseattachment
 				// =multi.getParameter("brduseattachment");
   

@@ -34,6 +34,21 @@
 	padding: 8px;
 	border: 0;
 }
+
+.prd-tinfo {
+	zoom: 1;
+	overflow: hidden;
+	padding: 10px 0 10px 80px;
+	border: 1px solid #ddd;
+	margin-bottom: 40px;
+}
+
+.prd-tinfo>dd>ul {
+	padding: 15px 0 0 10px;
+	min-height: 45px;
+	_height: 45px;
+	border-left: 1px solid #ddd;
+}
 </style>
 </head>
 <body>
@@ -58,6 +73,18 @@
 			<div class="page-body">
 				<form action="ReviewForm.do" method="post"
 					enctype="multipart/form-data">
+					<input type="hidden" name="no" value="${pro.prdNo} ">
+					<dl class="prd-tinfo">
+						
+						<dd>
+							<ul>
+
+								<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
+									<span class="MK-product-icons"> <!--/coupon_icon/--></li>
+								<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
+							</ul>
+						</dd>
+					</dl>
 					<div class="bbs-table-write">
 						<fieldset>
 							<legend>일반게시판 쓰기</legend>

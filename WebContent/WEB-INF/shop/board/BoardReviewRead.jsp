@@ -317,15 +317,17 @@ a {
 						<a href="#"><img src=""></a>
 					</dt>
 					<dd>
+						<input type="hidden" name="no" value="${pro.prdNo} ">
 						<ul>
-							<li class="name"><span class="tit">상 품 명:</span><a href="#">타이니
-									크로스 바벨</a> <span class="MK-product-icons"></span> <!--/coupon_icon/--></li>
-							<li class="price"><span class="tit">상품가격:</span><strong>3,000원</strong></li>
+
+							<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
+								<span class="MK-product-icons"> <!--/coupon_icon/--></li>
+							<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
 						</ul>
 					</dd>
 				</dl>
 				<div class="bbs-table-view">
-				<input type="hidden" name="brdno" value="${readBoard.brdNo }">
+					<input type="hidden" name="brdno" value="${readBoard.brdNo }">
 					<table summary="게시글 보기">
 						<caption>게시글 보기</caption>
 						<thead>
@@ -367,7 +369,7 @@ a {
 					</table>
 					<div id="comment_list_0">
 						<table class="comment-box">
-						<thead>
+							<thead>
 								<tr>
 									<th><div class="tb-center">작성자</div></th>
 									<th><div class="tb-center">작성 내용</div></th>
@@ -387,8 +389,7 @@ a {
 							</tbody>
 						</table>
 					</div>
-					<form id="comment_form" action="BoardReplyinsert.do"
-						method="post">
+					<form id="comment_form" action="BoardReplyinsert.do" method="post">
 						<fieldset>
 							<legend>코멘트 쓰기</legend>
 							<table summary="코멘트 쓰기" class="comment-box">
@@ -416,9 +417,8 @@ a {
 														class="MS_input_txt input-style input-style2"
 														value="${readBoard.brdNo }">
 													</span> <input type="hidden" name="brdparent"
-														value="${readBoard.brdNo }">
-														<input type="hidden" name="brdcode"
-														value="${readBoard.brdcode}">
+														value="${readBoard.brdNo }"> <input type="hidden"
+														name="brdcode" value="${readBoard.brdcode}">
 												</div>
 												<div class="wrt">
 													<textarea name="brdcontent" placeholder="내용"></textarea>
@@ -438,8 +438,9 @@ a {
 								<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
 									class="none btn_light_border btn_box_01">수정</a> <a
 									href="BoardDel.do?brdno=${readBoard.brdNo }"
-									class="btn_light_border btn_box_01">삭제</a> 
-									<a href="Boardaskanswer.do?brdno=${readBoard.brdNo }" class="btn_light btn_box_01">답변</a>
+									class="btn_light_border btn_box_01">삭제</a> <a
+									href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
+									class="btn_light btn_box_01">답변</a>
 							</dd>
 						</dl>
 						<dl class="bbs-link">
