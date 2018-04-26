@@ -43,7 +43,7 @@ td {
 	padding: 0 0 50px;
 	clear: both;
 	text-align: center;
-	padding-top: 115px;
+	padding: 30px 30px;
 }
 </style>
 </head>
@@ -60,13 +60,13 @@ td {
 			<div>
 				<!--#top_box-->
 				<div class="top_box">
-					<ul>
-						<li><a href="#">Notice</a></li>
-						<li><span><a>/</a></span></li>
-						<li><a href="#">Q&amp;A</a></li>
-						<li><span><a>/</a></span></li>
-						<li><a href="#">Review(후기)</a></li>
-					</ul>
+						<ul>
+					<li><a href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
+					<li><span><a>/</a></span></li>
+					<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
+					<li><span><a>/</a></span></li>
+					<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
+				</ul>
 				</div>
 			</div>
 			<div class="bbsData">
@@ -111,7 +111,7 @@ td {
 						</table>
 
 
-
+					<input type="hidden" name="prdno" value="${pro.prdNo} ">
 					</div>
 
 					<!-- .bbs-sch -->

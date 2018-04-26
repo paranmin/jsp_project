@@ -157,7 +157,7 @@ th {
 	color: #222;
 }
 
-.com-wrt-box .input-style {
+.input-style {
 	margin: 0 10px 0 7px;
 	padding: 2px;
 	height: 20px;
@@ -181,6 +181,7 @@ textarea {
 	height: 47px;
 	padding: 2px;
 	border: 1px solid #dedede;
+	vertical-align: middle;
 }
 
 .btn_box_02 {
@@ -280,6 +281,28 @@ a {
 .readBoardcontent {
 	text-align: left;
 }
+
+.titleArea {
+	padding: 0 0 50px;
+	clear: both;
+	text-align: center;
+	padding-top: 115px;
+}
+
+.prd-tinfo {
+	zoom: 1;
+	overflow: hidden;
+	padding: 10px 0 10px 80px;
+	border: 1px solid #ddd;
+	margin-bottom: 40px;
+}
+
+.prd-tinfo>dd>ul {
+	padding: 15px 0 0 10px;
+	min-height: 45px;
+	_height: 45px;
+	border-left: 1px solid #ddd;
+}
 </style>
 
 </head>
@@ -291,35 +314,39 @@ a {
 	<div id="container">
 
 		<div class="titleArea">
-			<h1>REVIEW</h1>
+			<h1>Q&amp;A</h1>
 		</div>
 		<div>
 			<!--#top_box-->
 			<div class="top_box">
 				<ul>
-					<li><a href="#">Notice</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
 					<li><span><a>/</a></span></li>
-					<li><a href="#">Q&amp;A</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
 					<li><span><a>/</a></span></li>
-					<li><a href="#">Review(후기)</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
 				</ul>
 			</div>
 		</div>
+		<input type="hidden" name="prdno" value="${pro.prdNo} ">
 		<section>
 
 			<dl class="prd-tinfo">
-				<dt>
-					<a href="#"><img src=""></a>
-				</dt>
+
 				<dd>
 					<ul>
-						<li class="name"><span class="tit">상 품 명:</span><a href="#">타이니
-								크로스 바벨</a> <span class="MK-product-icons"></span> /coupon_icon/</li>
-						<li class="price"><span class="tit">상품가격:</span><strong>3,000원</strong></li>
+					
+						<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
+							<span class="MK-product-icons"> <!--/coupon_icon/--></li>
+						<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
 					</ul>
 				</dd>
 			</dl>
 			<div class="bbs-table-view">
+
 				<table summary="게시글 보기">
 					<caption>게시글 보기</caption>
 					<thead>
@@ -360,9 +387,7 @@ a {
 					</tbody>
 				</table>
 				<div id="comment_list_0"></div>
-				<form id="comment_form" name="comment"
-					action="#"
-					method="post">
+				<form id="comment_form" name="comment" action="#" method="post">
 					<fieldset>
 						<legend>코멘트 쓰기</legend>
 						<table summary="코멘트 쓰기" class="comment-box">
@@ -423,14 +448,10 @@ a {
 					</dl>
 				</div>
 				<ul class="list-link">
-					<li><span class="arrow prev">이전글 :</span> <a
-						href="#">[베이직 초승달 바벨]</a> <a
-						href="#">Re:
-							실버 오른쪽 아웃컨츠</a></li>
-					<li><span class="arrow next">다음글 :</span> <a
-						href="#">[타이니 크로스 바벨]</a> <a
-						href="#">Re:
-							왼쪽귓볼</a></li>
+					<li><span class="arrow prev">이전글 :</span> <a href="#">[베이직
+							초승달 바벨]</a> <a href="#">Re: 실버 오른쪽 아웃컨츠</a></li>
+					<li><span class="arrow next">다음글 :</span> <a href="#">[타이니
+							크로스 바벨]</a> <a href="#">Re: 왼쪽귓볼</a></li>
 				</ul>
 			</div>
 

@@ -22,7 +22,7 @@
 	<select id="selectByAllReviewBoard" parameterType="Board"
 		resultMap="BoardResult">
 		select brd_no , prd_no,
-		brd_code,brd_title,brd_writer,brd_ch,regdate
+		brd_code,brd_title,brd_writer,brd_ch,regdate,brd_content
 		from board
 		where brd_code =
 		"ReviewBoard"
@@ -42,7 +42,7 @@
 
 	<select id="selectNoticeBoardAll" parameterType="Board"
 		resultMap="BoardResult">
-		select brd_no , prd_no,
+		select brd_no ,
 		brd_code,brd_title,brd_writer,brd_ch,regdate
 		from board
 		where brd_code =
@@ -92,8 +92,8 @@
 
 	<insert id="insertBoard" parameterType="Board">
 		insert into board
-		(brd_writer,brd_password,brd_title,brd_content,brd_code,brd_parent,brd_depth,regdate,selected)
-		value(#{brdwriter},#{brdpassword},#{brdtitle},#{brdcontent},#{brdcode},#{brdparent},#{brddepth},#{brdregdate},#{selected})
+		(brd_writer,brd_password,brd_title,brd_content,brd_code,brd_parent,brd_depth,regdate,selected,prd_no)
+		value(#{brdwriter},#{brdpassword},#{brdtitle},#{brdcontent},#{brdcode},#{brdparent},#{brddepth},#{brdregdate},#{selected},#{prdno})
 	</insert>
 
 	<insert id="insertBoardReply" parameterType="board">
