@@ -91,40 +91,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$(".couponCan").click(function(){
-			window.close();
-		})
-		
-		var price1 = parseInt($(".oriPrice").text());
-		
-		$(".itemNo").click(function(){
-			var price1 = parseInt($(".oriPrice").text());
-			var salePrice =  parseInt($(this).parent().next().next().next().text());
-			$(".couponPrice").text(salePrice);
-			$(".finallyPrice").text(price1-salePrice);
-			
-			var itemno = $(this).text();
-			var finallyprice = $(".finallyPrice").text();
-			
-			$(".couponSub").click(function(){
-				 var returnValue = {
-						    "key1": itemno,//쿠폰번호
-						    "key2": finallyprice//쿠폰할인된 가격
-						  };
-				window.opener.getReturnValue(JSON.stringify(returnValue));
-			})
-		})
-			$(".couponSub").click(function(){
-				var result = confirm("쿠폰을 적용하시겠습니까?");
-				if(result){
-					window.close();
-				}
-			})
-		
-	})
-</script>
+<script src="${pageContext.request.contextPath}/js/coupon.js"></script>
 </head>
 <body>
 	<form action="coupon.do" method="post">
@@ -148,12 +115,14 @@
 			</c:if>
 			<c:if test="${list.size()>0 }">
 				<c:forEach var="items" items="${list }">
-					<tr>
-						<td><a class="itemNo">${items.cNo }</a></td>
-						<td>${items.cName }</td>
-						<td>${items.cuseMorePrice }</td>
-						<td class="findValue">${items.csalePrice }</td>
-						<td><fmt:formatDate value="${items.climitDate }" pattern="yyyy-MM-dd"/></td>
+					<tr class="repeat">
+						<td><a class="itemNo">${items.coupon.no }</a><input type="hidden" name="userno" value="${items.ucNo }">
+							<input type="hidden" name="useYN" value="${items.yn }">
+						</td>
+						<td>${items.coupon.name }</td>
+						<td><span class="moreprice">${items.coupon.cuseMorePrice }</span></td><!-- 사용가능 금액 -->
+						<td class="findValue">${items.coupon.csalePrice }</td><!-- 할인금액 -->
+						<td><fmt:formatDate value="${items.coupon.climitDate }" pattern="yyyy-MM-dd"/></td>
 					</tr>
 				</c:forEach>
 			</c:if>

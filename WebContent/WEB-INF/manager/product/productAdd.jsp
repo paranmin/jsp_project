@@ -58,14 +58,14 @@ div.img_main_plus{
 div.img_plus{
 	margin-left:170px;
 }
-table#proOption th{
+table#proOption th, table#stockTable th{
 	height: 40px;
 	background: gainsboro;
 }
-table#proOption td{
+table#proOption td, table#stockTable td{
 	padding:10px;
 }
-table#proOption input{
+table#proOption input, table#stockTable input{
 	text-align: center;
 }
 table#proOption input.op_name{
@@ -85,10 +85,19 @@ table#proOption button#op_nameadd{
 	width:100px;  
 	height: 25px;  
 }
-table#proOption{
+table#proOption, table#stockTable{
 	width:100%;
 	text-align: center;
 	display:none;   
+}
+table#stockTable th:first-child{
+	width:85%;
+}
+table#stockTable input[name='optionvalue']{
+	width:100%;
+}
+table#stockTable input[name='opstock']{
+	width:100%;
 }
 table#proOption th#opname{
 	width:20%;
@@ -102,7 +111,7 @@ table#proOption th#opprice{
 table#proOption th#opstock{
 	width:15%;    
 }
-table#proOption td{
+table#proOption td, table#stockTable td{
 	border-bottom:1px solid gainsboro;      
 }
 p.error{
@@ -123,6 +132,9 @@ div.img_plus button.img_del{
 <script>
 $(function(){
     $("table#proOption").css("display","none");    
+    /* $("input[name='use_optionStock']").attr('disabled', true);
+    $("input[name='optionvalue']").val("/");
+    $("table#stockTable").css("display","none");          //재고 */
     $(".error").css("display", "none");
 	$("button.img_main_plus").click(function(){
 		var $input = $("<input type='file' multiple='multiple' name='mainimg'>");
@@ -149,13 +161,38 @@ $(function(){
  		return false;
  	});
  	
- 	$("input[type='radio']").change(function(){
- 		if($("input[type='radio']:checked").val()==1){
+ 	$("input[name='use_option']").change(function(){
+ 		if($("input[name='use_option']:checked").val()==1){
  			$("table#proOption").css("display","block"); 
+ 			$("input[name='use_optionStock']").attr('disabled', false);    //재고
  		}else{
  			$("table#proOption").css("display","none");
+ 			$("input[name='use_optionStock']").attr('disabled', true);
  		}
- 	});       
+ 	});
+ 	
+ 	$/* ("table#proOption tr.parent").find("input").not(".op_cost").each(function(i, obj){           //재고
+ 		$(obj).keydown(function(){
+ 			var separate = $("table#stockTable").find("input").eq(0).val().split("/");
+ 			if(i==0){
+ 				separate[0] = $(this).val()+"/";
+ 			}else{
+ 				separate[i] = "/"+$(this).val();
+ 			}
+ 			console.log(separate);
+ 			var join = separate.join("");
+ 			console.log("join"+join);
+ 			$("table#stockTable").find("input").eq(0).val(join);
+ 		});
+ 	});
+ 	
+ 	$("input[name='use_optionStock']").change(function(){               //재고
+ 		if($("input[name='use_optionStock']:checked").val()==1){
+ 			$("table#stockTable").css("display","block"); 
+ 		}else{
+ 			$("table#stockTable").css("display","none");
+ 		}
+ 	});  */
 	
  	$("button#op_nameadd").click(function(){
 		var $tr = $("<tr class='parent'>");
@@ -182,8 +219,6 @@ $(function(){
 		$(td2error).text("*옵션내용을 입력하세요.");
 		$(td3error).text("*옵션가를 입력하세요.");
 		$(td3error2).text("*숫자만 입력하세요.");
-		/* $(td4error).text("*옵션재고를 입력하세요.");
-		$(td4error2).text("*숫자만 입력하세요."); */
 		$(td5in).text("+추가");
 		$(td1).append(td1in);
 		$(td1).append(td1error);
@@ -193,16 +228,35 @@ $(function(){
 		$(td3).append(td3in);
 		$(td3).append(td3error);
 		$(td3).append(td3error2);
-		/* $(td4).append(td4in);
-		$(td4).append(td4error);
-		$(td4).append(td4error2); */
 		$(td5).append(td5in);
 		$($tr).append(td1);
 		$($tr).append(td2);
 		$($tr).append(td3);
-		/* $($tr).append(td4); */
 		$($tr).append(td5);
-		$("table#proOption").append($tr);     
+		$("table#proOption").append($tr);  
+		
+	 /* 	var stockTr = $("<tr>");
+		var stockTd1 = $("<td>");
+		var stockTd1In1 = $("<input type='text' name='optionvalue' class='optionvalue'>");
+		var stockTd1In2 = $("<p class='error'>");
+		$(stockTd1In2).text("*옵션 내용을 입력하세요.");
+		
+		var stockTd2 = $("<td>");
+		var stockTd2In1 = $("<input type='text' name='opstock' class='opstock'>");
+		var stockTd2In2 = $("<p class='error'>");
+		$(stockTd2In2).text("*옵션별 재고를 입력하세요.");
+		
+		$(stockTd1).append(stockTd1In1);
+		$(stockTd1).append(stockTd1In2);
+		$(stockTd2).append(stockTd2In1);
+		$(stockTd2).append(stockTd2In2);
+		$(stockTr).append(stockTd1);
+		$(stockTr).append(stockTd2);
+		$("table#stockTable").append(stockTr); 
+		
+		var value = $("input[name='optionvalue']").val();
+		$("input[name='optionvalue']").val(value+"/"); */
+		
 		return false;
 	});
  	$(document).on("click","button.op_nameDel", function(){
@@ -224,34 +278,46 @@ $(function(){
 		var td3in = $("<input type='text' name='op_cost' class='op_cost'>");
 		var td3error = $("<p class='error'>");
 		var td3error2 = $("<p class='error'>");
-		var td4 = $("<td>");
-		var td4in = $("<input type='text' name='op_stock' class='op_stock'>");
-		var td4error = $("<p class='error'>");
-		var td4error2 = $("<p class='error'>");
 		var td5 = $("<td>");
 		var td5in = $("<button type='button' class='op_del'>");
 		$(td5in).text("-삭제");
 		$(td2error).text("*옵션내용을 입력하세요.");
 		$(td3error).text("*옵션가를 입력하세요.");
 		$(td3error2).text("*숫자만 입력하세요.");
-		$(td4error).text("*옵션재고를 입력하세요.");
-		$(td4error2).text("*숫자만 입력하세요.");
 		$(td2).append(td2in);
 		$(td2).append(td2error);
 		$(td3).append(td3in);
 		$(td3).append(td3error);
 		$(td3).append(td3error2);
-		/* $(td4).append(td4in); */
-		/* $(td4).append(td4error);
-		$(td4).append(td4error2); */
 		$(td5).append(td5in);
 		$($tr).append(td2);
 		$($tr).append(td3);
-		/* $($tr).append(td4); */
 		$($tr).append(td5);
 		$($tr).insertAfter($(this).parent().parent());
  		var rowspan = $(this).parent().siblings().eq(0).prop("rowspan");
- 		$(this).parent().siblings().eq(0).prop("rowspan",++rowspan);          
+ 		$(this).parent().siblings().eq(0).prop("rowspan",++rowspan);   
+ 		
+ 		/* var stockTr = $("<tr>");
+		var stockTd1 = $("<td>");
+		var stockTd1In1 = $("<input type='text' name='optionvalue' class='optionvalue'>");
+		var stockTd1In2 = $("<p class='error'>");
+		$(stockTd1In2).text("*옵션 내용을 입력하세요.");
+		
+		var stockTd2 = $("<td>");
+		var stockTd2In1 = $("<input type='text' name='opstock' class='opstock'>");
+		var stockTd2In2 = $("<p class='error'>");
+		$(stockTd2In2).text("*옵션별 재고를 입력하세요.");
+		
+		$(stockTd1).append(stockTd1In1);
+		$(stockTd1).append(stockTd1In2);
+		$(stockTd2).append(stockTd2In1);
+		$(stockTd2).append(stockTd2In2);
+		$(stockTr).append(stockTd1);
+		$(stockTr).append(stockTd2);
+		$("table#stockTable").append(stockTr); 
+		
+		var value = $("input[name='optionvalue']").val();
+		$("input[name='optionvalue']").val(value); */
  		return false;        
  	});
  	
@@ -495,27 +561,32 @@ $(function(){
 						<p class="error">*옵션가를 입력하세요.</p>
 						<p class="error">*숫자만 입력하세요.</p>
 					</td>
-					<!-- <td>
-						<input type="text" name="op_stock" class="op_stock">
-						<p class="error">*옵션재고를 입력하세요.</p>
-						<p class="error">*숫자만 입력하세요.</p>
-					</td> -->
 					<td>
 						<button class="op_add">+추가</button>    
 					</td>
 				</tr>
 			</table>	
-			<!-- <table id="stockTable">
+		<!-- 	<div>
+				<label>옵션별 재고관리</label>
+				<input type="radio" name="use_optionStock" value="1">사용 
+				<input type="radio" name="use_optionStock" value="0" checked="checked">사용안함
+			</div>
+			<table id="stockTable">
 				<tr>
-					<th id="opname">옵션명</th>
-					<th id="opvalue">옵션내용</th>
-					<th id="opprice">옵션가</th>
-					<th id="empty"></th>
+					<th id="optionvalue">옵션내용</th>
+					<th id="opstock">옵션별 재고</th>
 				</tr>
 				<tr>
-				
+					<td>
+						<input type="text" name="optionvalue" class="optionvalue">
+						<p class="error">*옵션명을 입력하세요.</p>
+					</td>
+					<td>
+						<input type="text" name="opstock" class="opstock">
+						<p class="error">*옵션별 재고를 입력하세요.</p>
+					</td>
 				</tr>
-			</table>	 -->
+			</table> -->
 			
 			<p class="submit">
 				<input type="submit" value="등록">

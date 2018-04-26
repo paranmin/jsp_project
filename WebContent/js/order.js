@@ -24,7 +24,7 @@ $(function(){
 	var price = $(".toalpriceorder").text(value1+value2);
 	
 	$(".btnCoupon").click(function(){
-		var price = $(".toalpriceorder").text();
+		var price = $("input:hidden[name='orderChargePrice']").val();
 		 window.open('coupon.do?price='+price, '쿠폰 적용', 'width=650, height=550');
 		 return false;
 	})
@@ -71,7 +71,7 @@ $(function(){
 	if(priceSum>35000){
 		$(".finalPrice").text(priceSum);
 	 }else if(priceSum<35000){
-		 $(".finalPrice").text(priceSum+delFee);
+		 $(".finalPrice").text(priceSum);
 
 	 }
 	 
@@ -108,6 +108,7 @@ $(function(){
 			on.val("N");
 		}
 	})
+	//쿠폰으로 가격 보내기
 	
 	
 	
@@ -169,7 +170,35 @@ $(function(){
 		return false;
 	})
 	
+	/*$(".btnCoupon").click(function(){
+		var a =  $("input:text[name='coupon']").val();
+		var b=  $(".finalPrice").text();
+		var c=  $("input:hidden[name='couponusePrice']").val();
+		var d=  $("input:hidden[name='userno']").val();
+		var e=  $("input:hidden[name='uesyn']").val();
+		console.log(a);
+		console.log(b);
+		console.log(c);
+		console.log(d);
+		console.log(e);
+	})*/
+	$(".allProPrice").each(function(i,obj){
+		var unuseCoupon = $(this).find("input:hidden[name='orderChargePrice']").val();
+		var useCouponPrice =  parseInt($(".finalPrice").text());
+		var deliverprice =parseInt($(".deliverprice").text());
+		if(unuseCoupon>35000){
+			$(".deluse").css("display","none");
+		}else if(unuseCoupon<35000){
+			$(".deluse").css("display","block");
+			$(".totalcouponPrice").text(useCouponPrice+deliverprice);
+		}
+	})
+	
+	
+	
 })
+
+
 function getPostCode(){
 	daumPostcode("input:text[name='post1']","input:text[name='basicaddr']","input:text[name='detailaddr']");
 }
