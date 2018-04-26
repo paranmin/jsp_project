@@ -30,7 +30,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 
 			String prdNo = request.getParameter("prdno");
 			if (prdNo != null && !prdNo.equals("")) {
-				
+
 				int no = Integer.parseInt(prdNo);
 				System.out.println(no);
 				ProductDao dao = sqlSession.getMapper(ProductDao.class);
@@ -43,9 +43,9 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String prdNo = request.getParameter("prdno");
-			System.out.println(prdNo+"1");
+			System.out.println(prdNo + "1");
 			if (prdNo != null && !prdNo.equals("")) {
-				
+
 				System.out.println(prdNo);
 				int no = Integer.parseInt(prdNo);
 				System.out.println(no);
@@ -90,7 +90,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 
 					Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, lastno, 0, null,
 							brdcontent, no, now, 0, 0);
-
+					System.out.println(board + "입니다");
 					request.setAttribute("brdNo", lastno);
 					request.setAttribute("brdcode", brdcode);
 					request.setAttribute("brdwriter", brdwriter);
@@ -113,13 +113,15 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				response.sendRedirect("ReviewBoard.do");
 
 			} else {
-				
 				String ReviewformPath = request.getRealPath("Reviewform");
+				if(prdNo==null||prdNo.equals("")){
+					prdNo="0";
+				}
 				File dir = new File(ReviewformPath);
 				if (dir.exists() == false) {
 					dir.mkdirs();
 				}
-			
+
 				int size = 1024 * 1024 * 10;// 10M
 
 				try {
@@ -140,7 +142,8 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 					String selected = multi.getParameter("selected");
 					// String brduseattachment
 					// =multi.getParameter("brduseattachment");
-
+					int pro = Integer.parseInt(prdNo);
+					
 					sqlSession = MySqlSessionFactory.openSession();
 					BoardDao Dao = sqlSession.getMapper(BoardDao.class);
 					Date now = new Date();
@@ -149,9 +152,12 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 					int lastno = Dao.selectBylastno();
 
 					Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, lastno, 0, null,
-							brdcontent,0, now, 0, 0);
-
+							brdcontent, pro, now, 0, 0);
+					System.out.println(board + "야다");
+					request.setAttribute("prdno", pro);
+					System.out.println(pro);
 					request.setAttribute("brdNo", lastno);
+					request.setAttribute("prdno", pro);
 					request.setAttribute("brdcode", brdcode);
 					request.setAttribute("brdwriter", brdwriter);
 					request.setAttribute("brdpassword", brdpassword);
