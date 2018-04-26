@@ -156,6 +156,14 @@ function getReturnValue(returnCpValue) {
 	 $("input:hidden[name='userno']").val(coupon.userno);
 	 $("input:hidden[name='uesyn']").val(coupon.uesyn);
 	
+	 
+	 var useCouponPr = parseInt($("input:hidden[name='couponusePrice']").val());
+	 var unuseCoupon = parseInt($("input:hidden[name='orderChargePrice']").val());
+	
+	 var deliverprice =parseInt($(".deliverprice").text());
+	 if(unuseCoupon<35000){
+		 $(".totalcouponPrice").text(useCouponPr+deliverprice);
+	 }
 }
 
 </script>

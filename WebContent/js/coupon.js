@@ -18,6 +18,7 @@ $(function(){
 				return false;
 			}
 			var salePrice =  parseInt($(this).parent().parent().find(".findValue").text());
+			
 			$(".couponPrice").text(salePrice);
 			$(".finallyPrice").text(price1-salePrice);
 			
