@@ -46,6 +46,11 @@ public class ShopOrderHandler extends ShopCommandHandler {
 				HttpSession session = request.getSession(false);
 				// ctNo 가 없이 order.do에 접근할 때 체크해서 cart로 보내든지 메인으로 보내든지 해야 함.
 				String[] ctno = (String[]) session.getAttribute("ctNo");
+				if(ctno == null || ctno.length==0){
+					response.sendRedirect(request.getContextPath());
+					return null;
+				}
+				
 				Member loginMember = (Member) session.getAttribute("auth");
 				Map<String, Object> map = new HashMap<>();
 				map.put("mNo", loginMember.getNo());
@@ -88,6 +93,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			
 			
 			HttpSession session = request.getSession(false);
+			session.removeAttribute("ctNo");
 			Member loginMember = (Member) session.getAttribute("auth");
 			Member member = MemberService.getInstance().selectByMemberNo(loginMember.getNo()); //멤버
 			

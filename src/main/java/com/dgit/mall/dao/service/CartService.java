@@ -34,7 +34,7 @@ public class CartService {
 	
 	public int deleteCartByNo(Map<String, Object> map) throws SQLException {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession()) {
-			return sqlSession.selectOne(namespace + "deleteCartByNo", map);
+			return sqlSession.delete(namespace + "deleteCartByNo", map);
 		}
 	}
 }

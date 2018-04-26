@@ -41,8 +41,8 @@ public class AdminCouponRegiHandler extends AdminCommandHandler {
 				sqlsl = MySqlSessionFactory.openSession();
 				CouponDao dao = sqlsl.getMapper(CouponDao.class);
 				Coupon coupon = new Coupon();
-				coupon.setcNo(num);
-				coupon.setcName(cName);
+				coupon.setNo(num);
+				coupon.setName(cName);
 				coupon.setCuseMorePrice(cMorePrice);
 				coupon.setCsalePrice(cSalePrice);
 				coupon.setClimitDate(sdft.parse(day));

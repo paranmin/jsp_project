@@ -47,19 +47,27 @@ public class ShopCartHandler extends ShopCommandHandler {
 			// 갯수 업데이트
 			SqlSession sql = null;
 			String[] cartNo = request.getParameterValues("chkAll");
-			String mno = request.getParameter("buyingMem");
 			String[] count = request.getParameterValues("cartnum");
-			int mNo = Integer.parseInt(mno);
+			HttpSession session = request.getSession(false);
+			Member loginMember = (Member) session.getAttribute("auth");
+			if(loginMember == null){
+				response.sendRedirect(request.getContextPath()+"/shop");
+				return null;
+			}
+			if(cartNo == null || cartNo.length==0){
+				response.sendRedirect(request.getContextPath());
+				return null;
+			}
 			try {
 				sql = MySqlSessionFactory.openSession();
 				CartDao dao = sql.getMapper(CartDao.class);
-				HttpSession session = request.getSession(false);
+				
 				for (int i = 0; i < cartNo.length; i++) {
 					for (int n = 0; n < count.length; n++) {
 						Map<String, Object> map = new HashMap<>();
 						map.put("prdCount", count[i]);
 						map.put("ctNo", Integer.parseInt(cartNo[i]));
-						map.put("no", mNo);
+						map.put("no", loginMember.getNo());
 						dao.updateCartPrdCount(map);
 						sql.commit();
 					}
