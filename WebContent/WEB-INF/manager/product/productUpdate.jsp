@@ -335,7 +335,7 @@ div input[name="files"]{
 			}
 
 			var count = 0;
-			if ($("input[type='radio']:checked").val() == 1) {
+			if ($("input[name='use_option']:checked").val() == 1) {
 				$("table#proOption").find("td").each(function(i, obj) {
 					var $op_name = $(this).find("input.op_name"),
 						$op_desc = $(this).find("input.op_desc"),
