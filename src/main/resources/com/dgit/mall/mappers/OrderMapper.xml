@@ -127,7 +127,10 @@
 	</sql>
 
 	<select id="countTotalOrderBySearch" parameterType="map" resultType="int">
-		select count(ord_no) from mall.`order`
+		select count(ord_no) 
+		from mall.`order` od
+		join mall.`member` mb on od.m_no = mb.m_no  
+		join mall.member_address ma on od.ma_no = ma.ma_no 
 		<include refid="whereBySearch" />
 	</select>
 	
