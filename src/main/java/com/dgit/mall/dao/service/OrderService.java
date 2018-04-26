@@ -56,4 +56,16 @@ public class OrderService {
 			return sqlSession.selectList(namespace + "selectOrderProduct", ordNo);
 		}
 	}
+	
+	public int countTotalOrderBySearch(Map<String, Object> map) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "countTotalOrderBySearch", map);
+		}
+	}
+	
+	public List<Order> selectOrderListBySearch(Map<String, Object> map) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectOrderListBySearch", map);
+		}
+	}
 }

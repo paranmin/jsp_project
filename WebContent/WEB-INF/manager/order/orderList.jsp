@@ -16,7 +16,7 @@
 				<tr>
 					<th>검색어</th>
 					<td>
-						<select name="key">
+						<select name="where">
 							<option value="all">통합검색</option>
 							<option value="orderNo">주문번호</option>
 							<option value="orderName">주문자명</option>
@@ -26,7 +26,7 @@
 							<option value="receiverPhone">수령자 휴대폰 번호</option>
 							<option value="id">아이디</option>
 						</select>
-						<input type="text" name="keyword" />
+						<input type="text" name="query" />
 					</td>
 				</tr>
 				<tr>
@@ -46,7 +46,6 @@
 	<table class="orderlist">
 		<colgroup>
 			<col width="30">
-			<col width="70">
 			<col width="110">
 			<col width="150">
 			<col width="120">
@@ -60,7 +59,6 @@
 		</colgroup>
 		<tr>
 			<th><input type="checkbox" id="chkAllOrder" /></th>
-			<th>번호</th>
 			<th>주문일시</th>
 			<th>주문번호</th>
 			<th>주문자</th>
@@ -72,51 +70,26 @@
 			<th>결제상태</th>
 			<th>처리상태</th>
 		</tr>
+	<c:if test="${orderList ne null && orderList.size() > 0}">
+		<c:forEach var="order" items="${orderList}">
+			<tr>
+				<td class="td-center"><input type="checkbox" name="chkOrder[]" /></td>
+				<td class="td-center"><fmt:formatDate value="${order.regdate}" pattern="yyyy-MM-dd"/></td>
+				<td class="td-center"><a href="viewOrder.do?no=${order.ordNo}">${order.ordNo}</a></td>
+				<td class="td-center">${order.member.name }<br>(${order.member.id})</td>
+				<td>파스텔 플라워 언발 귀걸이</td>
+				<td class="td-center"><fmt:formatNumber value="${order.ordPrice}" pattern="#,###"/> 원</td>
+				<td class="td-center"><fmt:formatNumber value="${order.deliveryFee}" pattern="#,###"/> 원</td>
+				<td class="td-center"><fmt:formatNumber value="${order.ordPrice + order.deliveryFee}" pattern="#,###"/> 원</td>
+				<td class="td-center">${order.type}</td>
+				<td class="td-center">미결제</td>
+				<td class="td-center">미배송</td>
+			</tr>
+		</c:forEach>
+	</c:if>
+	<c:if test="${orderList eq null || orderList.size() == 0}">
 		<tr>
-			<td class="td-center"><input type="checkbox" name="chkOrder[]" /></td>
-			<td class="td-center">3</td>
-			<td class="td-center">2018-02-11</td>
-			<td class="td-center"><a href="viewOrder.do?no=3">201802113452321</a></td>
-			<td class="td-center">테스터<br>(test)</td>
-			<td >파스텔 플라워 언발 귀걸이</td>
-			<td class="td-center">8,000원</td>
-			<td class="td-center">2,500원</td>
-			<td class="td-center">10,500원</td>
-			<td class="td-center">무통장</td>
-			<td class="td-center">미결제</td>
-			<td class="td-center">미배송</td>
-		</tr>
-		<tr>
-			<td class="td-center"><input type="checkbox" name="chkOrder[]" /></td>
-			<td class="td-center">3</td>
-			<td class="td-center">2018-02-11</td>
-			<td class="td-center"><a href="viewOrder.do?no=3">201802113452321</a></td>
-			<td class="td-center">테스터<br>(test)</td>
-			<td >파스텔 플라워 언발 귀걸이</td>
-			<td class="td-center">8,000원</td>
-			<td class="td-center">2,500원</td>
-			<td class="td-center">10,500원</td>
-			<td class="td-center">무통장</td>
-			<td class="td-center">미결제</td>
-			<td class="td-center">미배송</td>
-		</tr>
-		<tr>
-			<td class="td-center"><input type="checkbox" name="chkOrder[]" /></td>
-			<td class="td-center">3</td>
-			<td class="td-center">2018-02-11</td>
-			<td class="td-center"><a href="viewOrder.do?no=3">201802113452321</a></td>
-			<td class="td-center">테스터<br>(test)</td>
-			<td >파스텔 플라워 언발 귀걸이</td>
-			<td class="td-center">8,000원</td>
-			<td class="td-center">2,500원</td>
-			<td class="td-center">10,500원</td>
-			<td class="td-center">무통장</td>
-			<td class="td-center">미결제</td>
-			<td class="td-center">미배송</td>
-		</tr>
-	<c:if test="${orderList == null || orderList.size() == 0}">
-		<tr>
-			<td colspan="12" class="td-center">등록된 주문이 없습니다.</td>
+			<td colspan="11" class="td-center">등록된 주문이 없습니다.</td>
 		</tr>
 	</c:if>
 	</table>

@@ -17,4 +17,8 @@ public interface OrderDao {
 	public List<OrderProduct> selectOrderProduct(String ordNo) throws SQLException;
 
 	public List<Order> selectOrderByMember(Map<String, Object> map) throws SQLException;
+	
+	public int countTotalOrderBySearch(Map<String, Object> map) throws SQLException;
+	
+	public List<Order> selectOrderListBySearch(Map<String, Object> map) throws SQLException;
 }
