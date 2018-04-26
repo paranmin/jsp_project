@@ -8,7 +8,7 @@ $(function(){
 	$("input[type='radio']").change(function(){
 		$("form").submit();
 	});
-});
+});   
 </script>
 <div id="container">
 	<h1>상품 리스트 보기</h1>
