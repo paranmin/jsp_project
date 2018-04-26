@@ -1,11 +1,7 @@
 package com.dgit.mall.dao.service;
 
-import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 
-import com.dgit.mall.dto.Member;
 import com.dgit.mall.dto.Order;
 import com.dgit.mall.dto.OrderProduct;
 import com.dgit.mall.util.MySqlSessionFactory;
@@ -21,21 +17,21 @@ public class OrderService {
 	private OrderService() {
 	}
 
-	public int insertOrder(Order order){
-		int res=0;
-		try(SqlSession sqlSession = MySqlSessionFactory.openSession();) {
-			res = sqlSession.insert(namespace+"insertOrder",order);
+	public int insertOrder(Order order) {
+		int res = 0;
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "insertOrder", order);
 			sqlSession.commit();
-		} 
+		}
 		return res;
 	}
-	
-	public int insertOrderProduct(OrderProduct orderproduct){
-		int res=0;
-		try(SqlSession sqlSession = MySqlSessionFactory.openSession();) {
-			res = sqlSession.insert(namespace+"insertOrderProduct",orderproduct);
+
+	public int insertOrderProduct(OrderProduct orderproduct) {
+		int res = 0;
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "insertOrderProduct", orderproduct);
 			sqlSession.commit();
-		} 
+		}
 		return res;
 	}
 }

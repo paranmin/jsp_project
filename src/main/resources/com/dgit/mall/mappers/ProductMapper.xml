@@ -67,6 +67,11 @@
 		</if>
 		order by prd_no desc
 	</select>
+	
+	
+	
+	
+	
 	<select id="selectCateProduct" parameterType="Product" resultMap="productResult">
 		select * from product where prd_category=#{category}
 		<if test="use!=null">
@@ -226,4 +231,6 @@
 			</if>
 		</where>
 	</select>
+	
+
 </mapper>

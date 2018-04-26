@@ -34,8 +34,9 @@ public class ShopOrderCompleteHandler extends ShopCommandHandler {
 			OrderDao dao = sql.getMapper(OrderDao.class);
 			Order ord = dao.selectOrder(orderNum);
 			List<OrderProduct> ordpd = dao.selectOrderProduct(orderNum);
+			System.out.println(ord);
 			request.setAttribute("member", mem);
-			request.setAttribute("orderlist", ord);
+			request.setAttribute("order", ord);
 			request.setAttribute("ordpdlist", ordpd);
 		} catch (Exception e) {
 			e.printStackTrace();

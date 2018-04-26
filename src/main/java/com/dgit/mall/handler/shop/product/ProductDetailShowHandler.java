@@ -9,8 +9,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.dgit.mall.dao.BoardDao;
 import com.dgit.mall.dao.CartDao;
 import com.dgit.mall.dao.ProductDao;
+import com.dgit.mall.dto.Board;
 import com.dgit.mall.dao.service.CartService;
 import com.dgit.mall.dto.Cart;
 import com.dgit.mall.dto.Member;
@@ -31,10 +33,15 @@ public class ProductDetailShowHandler extends ShopCommandHandler {
 			try {
 				sqlsession = MySqlSessionFactory.openSession();
 				ProductDao dao = sqlsession.getMapper(ProductDao.class);
-
+				BoardDao Dao = sqlsession.getMapper(BoardDao.class);
+				
 				Product pro = dao.SelectProductByno(no);
 				List<Proimg> proimg = dao.SelectProimgByno(no);
 				List<Option> option = dao.SelectOptionByno(no);
+				List<Board> Blist = Dao.selectByAllReviewBoard();
+				List<Board> list = Dao.selectByAllQandABoard();
+				
+			
 				ArrayList<Integer> rownum = new ArrayList<>();
 				ArrayList<OptionDetail> result = new ArrayList<>();
 
@@ -44,6 +51,8 @@ public class ProductDetailShowHandler extends ShopCommandHandler {
 					result.addAll(detail);
 					rownum.add(detail.size());
 				}
+				request.setAttribute("list", list);
+				request.setAttribute("Blist", Blist);
 				request.setAttribute("rownum", rownum);
 				request.setAttribute("res", result);
 				request.setAttribute("opt", option);

@@ -6,8 +6,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-	Product pro = (Product)request.getAttribute("pro");
-	List<Option> opt = (List<Option>)request.getAttribute("opt");
+	Product pro = (Product) request.getAttribute("pro");
+	List<Option> opt = (List<Option>) request.getAttribute("opt");
 	int optSize = opt.size();
 %>
 <!DOCTYPE html>
@@ -15,60 +15,86 @@
 <head>
 <meta charset="UTF-8">
 <title>SJ JEWELRY</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css" media="all" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/productDetail.css" media="all" />
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/base.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/productDetail.css"
+	media="all" />
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
-$(function(){	
-	var size = <%=optSize%>;
-	var productCost = <%=pro.getSellingPrice()%>
-	for(var i=0; i<size; i++){
-		checkSelect(i);
-	}
-	
-	function checkSelect(i){
-		$("select#select"+i).change(function(){
-			if($(this).children("option:selected").val()!="==선택하세요=="){
-				var target = $(this).parents("tr").next().find("select");
-				if(target!=null){
-					target.removeAttr("disabled");
-					target.val("==선택하세요==");
-				}
-				target = target.parents("tr").next().find("select");
-				if(target != null){
-					target.attr("disabled", "disabled");
-					target.val("==선택하세요==");
-				}
-			}else if($(this).children("option:selected").val()=="==선택하세요=="){
-				var target = $(this).parents("tr").next().find("select");
-				if(target!=null){
-					target.val("==선택하세요==");
-					target.attr("disabled", "disabled");
-				}
-				target = target.parents("tr").next().find("select");
-				if(target!=null){
-					target.val("==선택하세요==");
-					target.attr("disabled", "disabled");
-				}
-			}	
-		});
-	}
-	
-	$("select#select"+(size-1)).change(function(){
-		if($(this).children("option:selected").val()!="==선택하세요=="){
-			createValue();
-			/* appendLi(); */
-			calPrice();
-			for(var i=0; i<size; i++){
-				$("select#select"+i).val("==선택하세요==");
-				$("select#select"+(i+1)).attr("disabled", "disabled");
-			}
+$(function() {
+	$(".brdReview").click(function() {
+		$(".review .hide").hide();
+		if ($(this).parent().next().css("display") != "none") {
+			$(this).parent().next().hide();
+		} else {
+			$(this).parent().next().show();
+		}
+	});
+	$(".brdqa").click(function() {
+		$(".review .hide").hide();
+		if ($(this).parent().next().css("display") != "none") {
+			$(this).parent().next().hide();
+		} else {
+			$(this).parent().next().show();
 		}
 	});
 	
+	var size = <%=optSize%>;
+	var productCost = <%=pro.getSellingPrice()%>
+	
+	for (var i = 0; i < size; i++) {
+		checkSelect(i);
+	}
+	function checkSelect(i) {
+		$("select#select" + i).change(function() {
+			if ($(this).children("option:selected").val() != "==선택하세요==") {
+				var target = $(this).parents("tr").next().find("select");
+				if (target != null) {
+					target.removeAttr("disabled");
+					target.val("==선택하세요==");
+				}
+				target = target.parents("tr").next().find(
+						"select");
+				if (target != null) {
+					target.attr("disabled", "disabled");
+					target.val("==선택하세요==");
+				}
+			} else if ($(this).children("option:selected")
+					.val() == "==선택하세요==") {
+				var target = $(this).parents("tr").next()
+						.find("select");
+				if (target != null) {
+					target.val("==선택하세요==");
+					target.attr("disabled", "disabled");
+				}
+				target = target.parents("tr").next().find(
+						"select");
+				if (target != null) {
+					target.val("==선택하세요==");
+					target.attr("disabled", "disabled");
+				}
+			}
+		});
+	}
+	
+	$("select#select" + (size - 1)).change(function() {
+		if ($(this).children("option:selected").val() != "==선택하세요==") {
+			createValue();
+			/* appendLi(); */
+			calPrice();
+			for (var i = 0; i < size; i++) {
+				$("select#select" + i).val("==선택하세요==");
+				$("select#select" + (i + 1)).attr("disabled", "disabled");
+			}
+		}
+	});
 	
 	var value = new Array();
 	var value2 = new Array();
@@ -76,56 +102,53 @@ $(function(){
 	var ocost = 0;
 	var flag = 0;
 	
-	
-	function createValue(){
+	function createValue() {
 		var duplicate = 0;
-		
-		$("option:selected").each(function(j,obj){
+		$("option:selected").each(function(j, obj) {
 			value[j] = $(obj).val();
 			value2[j] = $(obj).attr("data-cost");
-		});
-		str = "";
-		ocost = 0;
-		if(value.indexOf("==선택하세요==")==-1){
-			for(var i=0;i<value.length;i++){
-				if(i==value.length-1){
-					str += value[i];
-				}else{
-					str += value[i] +"/";
-				}
-				ocost += Number(value2[i]);
-			}
-			if(ocost==0){
-				ocost = "";
-			}else if(ocost>0){
-				ocost = " (+"+ocost+"원)";
-			}else if(ocost<0){
-				ocost = " ("+ocost+"원)";
-			}
-		}	
 		
-		if(flag == 0){
-			appendLi();
-			flag++;
-		}else{
-			$("div#selectedItem li").each(function(i,obj){
-				/* var $target = $(this).find("span.optionName").text(); */
-				var target = $(this).find("span.optionName").text();
-				console.log("target : "+target);
-				console.log("str : "+str);
-				if(target==str){
-					duplicate++;
+			str = "";
+			ocost = 0;
+			if(value.indexOf("==선택하세요==")==-1){
+				for(var i=0;i<value.length;i++){
+					if(i==value.length-1){
+						str += value[i];
+					}else{
+						str += value[i] +"/";
+					}
+					ocost += Number(value2[i]);
 				}
-			});
+				if(ocost==0){
+					ocost = "";
+				}else if(ocost>0){
+					ocost = " (+"+ocost+"원)";
+				}else if(ocost<0){
+					ocost = " ("+ocost+"원)";
+				}
+			}	
 			
-			
-			console.log(duplicate);
-			if(duplicate>0){
-				alert("이미 추가된 상품입니다.");
-			}else{
+			if(flag == 0){
 				appendLi();
+				flag++;
+			}else{
+				$("div#selectedItem li").each(function(i,obj){
+					/* var $target = $(this).find("span.optionName").text(); */
+					var target = $(this).find("span.optionName").text();
+					console.log("target : "+target);
+					console.log("str : "+str);
+					if(target==str){
+						duplicate++;
+					}
+				});
+				console.log(duplicate);
+				if (duplicate > 0) {
+					alert("이미 추가된 상품입니다.");
+				} else {
+					appendLi();
+				}
 			}
-		}
+		
 	}
 	
 	var Sumcost = 0;
@@ -192,7 +215,7 @@ $(function(){
 		
 		calPrice();
 		return false;
-	})
+	});
 	
 	$(document).on("click","button.minusNum", function(){
 		var $num = $(this).prev().val();   
@@ -207,7 +230,7 @@ $(function(){
 		
 		calPrice();
 		return false;
-	})
+	});
 	
 	$(document).on("click","button.closeli", function(){
 		$(this).parent().remove();
@@ -217,41 +240,44 @@ $(function(){
 			$("div#resultPrice").css("display","none");
 		}
 		return false;
-	})
+	});
 	
 	var sum = 0;
-	function calPrice(){
-		$("div#resultPrice").css("display","block");
+	function calPrice() {
+		$("div#resultPrice").css("display", "block");
 		sum = 0;
 		var price = new Array();
-		$("div#selectedItem li").each(function(i,obj){
+		$("div#selectedItem li").each(function(i, obj) {
 			var target = $(this).find("span.price").text();
 			price = target.split("원");
-			sum += Number(price[0]);      
+			sum += Number(price[0]);
 		});
 		$("div#resultPrice").find("span").text(sum);
 	}
-		
-	$(window).scroll(function(){
+	$(window).scroll(function() {
 		var left = $("div.detail_left").outerHeight();
 		var right = $("div.detail_right").outerHeight()
-		if($(this).scrollTop()>=(left-right)){
-			$("div.detail_right").css("display","none");
-		}else{
-			$("div.detail_right").css("display","block");
+		if ($(this).scrollTop() >= (left - right)) {
+			$("div.detail_right").css("display", "none");
+		} else {
+			$("div.detail_right").css("display", "block");
 		}
 	});
-	
-	$("input[type='submit']").click(function(){
-		if($("#selectedItem").find("li").length==0){
+	$("input[type='submit']").click(function() {
+		if ($("#selectedItem").find("li").length == 0) {
 			alert("옵션을 선택해주세요");
 			return false;
 		}
 		$("form").submit();
-	 	return false;
+		return false;
 	});
-});	
+});
 </script>
+<style type="text/css">
+.brdReview a {
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 	<div id="container">
@@ -300,63 +326,69 @@ $(function(){
 						<tr>
 							<td>${option.poName }</td>
 							<td>
-								<select id="select${status.index }" <c:if test="${!status.first }"> disabled="disabled" </c:if>>
-									<option>==선택하세요==</option>
-									<c:forEach var="result" items="${res }" begin="${fir}" end="${end}">
-										<option value="${result.podValue}" data-cost="${result.podCost}" data-podno="${result.podNo}">${result.podValue}
-										<c:if test="${result.podCost !=0}">
-										 / <fmt:formatNumber value="${result.podCost}" pattern="#,###원"/>
-										</c:if>
-										</option>
-									</c:forEach>
-								</select>
-							</td>
-						</tr>
-						<c:set value="${end+1 }" var="fir"/>
-					</c:forEach>
-				</table>
-				<hr>
-				<c:if test="${pro.useOption == 0 }">
-					<div id="selectedItem">
-						<ul>
-							<li>
-								${pro.name }
-								<button class="plusNum">+</button>
-								<input type="text" class="productNum" name="cartnum" value="1">
-								<button class="minusNum">-</button>
-								<span>${pro.sellingPrice }원</span>
-								<input type="hidden" name="optionName">
-								<input type="hidden" name="opPrice" value="${pro.sellingPrice }">
-							</li>
-						</ul>
-					</div>
+								<td><select id="select${status.index }"
+									<c:if test="${!status.first }"> disabled="disabled" </c:if>>
+										<option>==선택하세요==</option>
+										<c:forEach var="result" items="${res }" begin="${fir}"
+											end="${end}">
+											<option value="${result.podValue}"
+												data-cost="${result.podCost}" data-podno="${result.podNo}">${result.podValue}
+												<c:if test="${result.podCost !=0}">
+										 / <fmt:formatNumber value="${result.podCost}"
+														pattern="#,###원" />
+												</c:if>
+											</option>
+										</c:forEach>
+								</select></td>
+							</tr>
+							<c:set value="${end+1 }" var="fir" />
+						</c:forEach>
+					</table>
 					<hr>
-					<div id="resultPrice" style="display:block">
-					<p>총 상품 금액 <span>${pro.sellingPrice }</span>원</p>
+					<c:if test="${pro.useOption == 0 }">
+						<div id="selectedItem">
+							<ul>
+								<li>${pro.name }
+									<button class="plusNum">+</button> <input type="text"
+									class="productNum" name="cartnum" value="1">
+									<button class="minusNum">-</button> <span>${pro.sellingPrice }원</span>
+									<input type="hidden" name="optionName"> <input
+									type="hidden" name="opPrice" value="${pro.sellingPrice }">
+								</li>
+							</ul>
+						</div>
+						<hr>
+						<div id="resultPrice" style="display: block">
+							<p>
+								총 상품 금액 <span>${pro.sellingPrice }</span>원
+							</p>
+						</div>
+					</c:if>
+					<c:if test="${pro.useOption == 1 }">
+						<div id="selectedItem">
+							<ul></ul>
+						</div>
+						<hr>
+						<div id="resultPrice">
+							<p>
+								총 상품 금액 <span></span>원
+							</p>
+						</div>
+					</c:if>
+					<input type="submit" value="Add Cart"><br>
 				</div>
-				</c:if>
-				<c:if test="${pro.useOption == 1 }">
-					<div id="selectedItem">
-						<ul></ul>
-					</div>
-				<hr>
-				<div id="resultPrice">
-					<p>총 상품 금액 <span></span>원</p>
-				</div>
-				</c:if>	
-				<input type="submit" value="Add Cart"><br>
+		</form>
+		<div class="datail_board">
+			<div class="detail_menu" id="detail_menu_review">
+				<ul>
+					<li><a href="#detail">Detail</a></li>
+					<li><a href="#review" id="review">Review</a></li>
+					<li><a href="#qa">Q&amp;A</a></li>
+				</ul>
 			</div>
-			</form>
-			<div class="datail_board">
-				<div class="detail_menu" id="detail_menu_review">
-					<ul>
-						<li><a href="#detail">Detail</a></li>
-						<li><a href="#review" id="review">Review</a></li>
-						<li><a href="#qa">Q&amp;A</a></li>
-					</ul>
-				</div>
-				<div class="detail_menu">
-					<table class="review">
+			<div class="detail_menu">
+				<table class="review">
+					<thead>
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
@@ -364,29 +396,42 @@ $(function(){
 							<th>날짜</th>
 							<th>조회</th>
 						</tr>
-						<tr>
-							<td>1</td>
-							<td>예뻐요</td>
-							<td>eunae</td>
-							<td>2018/04/06</td>
-							<td>22</td>
-						</tr>
-					</table>
-					<div class="button">
-						<button id="reviewBtn">후기작성</button>
-						<button id="reviewListBtn">목록으로</button>
-					</div>	
-					<div>페이징</div>
+					<tbody>
+						<!-- .공지사항 리스트 시작 -->
+						<c:if test="${Blist.size()>0 }">
+							<c:forEach var="item" items="${Blist }">
+								<tr>
+									<td>${item.brdNo }</td>
+									<td class="brdReview"><a href="#">${item.brdtitle }</a></td>
+									<td>${item.brdwriter }</td>
+									<td>${item.brdregdate }</td>
+									<td>${item.brdch }</td>
+								</tr>
+								<tr class="hide">
+									<td>${itme.brdcontent}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+				<div class="button">
+					<a href="${pageContext.request.contextPath}/shop/ReviewForm.do?prdno=${pro.prdNo }"><button
+							id="reviewBtn">후기작성</button></a> <a
+						href="${pageContext.request.contextPath}/shop/ReviewBoard.do"><button
+							id="reviewListBtn">목록으로</button></a>
 				</div>
-				<div class="detail_menu" id="detail_menu_qa">
-					<ul>
-						<li><a href="#detail">Detail</a></li>
-						<li><a href="#review">Review</a></li>
-						<li><a href="#qa" id="qa">Q&amp;A</a></li>
-					</ul>
-				</div>
-				<div class="detail_menu">
-					<table class="qa">
+				<div>페이징</div>
+			</div>
+			<div class="detail_menu" id="detail_menu_qa">
+				<ul>
+					<li><a href="#detail">Detail</a></li>
+					<li><a href="#review">Review</a></li>
+					<li><a href="#qa" id="qa">Q&amp;A</a></li>
+				</ul>
+			</div>
+			<div class="detail_menu">
+				<table class="qa">
+					<thead>
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
@@ -394,21 +439,34 @@ $(function(){
 							<th>날짜</th>
 							<th>조회</th>
 						</tr>
-						<tr>
-							<td>1</td>
-							<td>문의합니다</td>
-							<td>eunae</td>
-							<td>2018/04/06</td>
-							<td>7</td>
-						</tr>
-					</table>
-					<div class="button">
-						<button id="qaBtn">문의하기</button>
-						<button id="qaListBtn">목록으로</button>
-					</div>
-					<div>페이징</div>
+					</thead>
+					<tbody>
+						<!-- .Q&A공지사항 리스트 시작 -->
+						<c:if test="${list.size()>0 }">
+							<c:forEach var="item" items="${list }">
+								<tr>
+									<td>${item.brdNo }</td>
+									<td class="brdqa"><a href="#">${item.brdtitle }</a></td>
+									<td>${item.brdwriter }</td>
+									<td>${item.brdregdate }</td>
+									<td>${item.brdch }</td>
+								</tr>
+								<tr class="hide">
+									<td>${itme.brdcontent }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+				<div class="button">
+					<a href="${pageContext.request.contextPath}/shop/BoardQandAForm.do?prdno=${pro.prdNo }"><button
+							id="qaBtn">문의하기</button></a> <a
+						href="${pageContext.request.contextPath}/shop/BoardQandA.do"><button
+							id="qaListBtn">목록으로</button></a>
 				</div>
+				<div>페이징</div>
 			</div>
+		</div>
 		</section>
 		<c:import url="../modules/footer.jsp" />
 	</div>
