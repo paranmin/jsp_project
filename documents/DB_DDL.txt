@@ -103,25 +103,24 @@ CREATE TABLE `option_detail` (
   CONSTRAINT `FK_pro_option_TO_product_option_detail` FOREIGN KEY (`po_no`) REFERENCES `pro_option` (`po_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `board` (
   `brd_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '글번호',
   `brd_code` varchar(20) NOT NULL COMMENT '게시판코드',
   `brd_title` varchar(50) NOT NULL COMMENT '글 제목',
-  `brd_writer` varchar(50) not null comment '글 작성자',
-  `brd_password` varchar(50) not null comment '글 작성자 비밀번호',
+  `brd_writer` varchar(50) NOT NULL COMMENT '글 작성자',
+  `brd_password` varchar(50) NOT NULL COMMENT '글 작성자 비밀번호',
   `brd_content` text NOT NULL COMMENT '글 내용',
   `brd_parent` int(11) NOT NULL COMMENT '글 부모',
   `brd_depth` int(11) NOT NULL COMMENT '글 깊이',
-  `regdate` datetime not null COMMENT '작성날짜' ,
   `brd_use_attachment` char(1) DEFAULT NULL COMMENT '첨부파일유무',
   `prd_no` int(11) DEFAULT NULL COMMENT '상품번호',
-  `brd_ch` int default 0 COMMENT '조회수',
-  `selected` int DEFAULT NULL COMMENT '글 종류 선택',
-  PRIMARY KEY (`brd_no`),
-  KEY `FK_product_TO_board` (`prd_no`),
-  CONSTRAINT `FK_product_TO_board` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='게시판';
+  `brd_ch` int(11) DEFAULT '0' COMMENT '조회수',
+  `selected` int(11) DEFAULT NULL COMMENT '글 종류 선택',
+  `m_no` int(11) DEFAULT NULL COMMENT '회원 번호',
+  `regdate` datetime NOT NULL COMMENT '작성날짜',
+  PRIMARY KEY (`brd_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='게시판';
+
 
 CREATE TABLE `board_attachment` (
   `baf_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '첨부파일번호',
