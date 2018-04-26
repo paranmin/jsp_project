@@ -39,14 +39,14 @@
 							<th class="purchaseSub">수량</th>
 							<th class="purchaseSub">가격</th>
 						</tr>
-						<c:if test="${ordpd }">
-						<c:forEach items="${ordpd }" var="items">
+						<c:if test="${ordpdlist }">
+						<c:forEach items="${ordpdlist }" var="items">
 							<tbody>
 							
 								<tr>
 									<td rowspan="2">
 										<div class="tb-centerImg">
-											${items.prdNo.mainImg}
+											<img src="${pageContext.request.contextPath}/upload/${items.prdNo.mainImg }" class="sizeImg">
 										</div>
 									</td>
 									<td>
@@ -77,17 +77,17 @@
 							</tbody>
 						</c:forEach>
 						</c:if>
-						<c:if test="${ord }">
-						<c:forEach items="${ord }" var="item">
+						<c:if test="${orderlist }">
+						<c:forEach items="${orderlist }" var="item">
 								<tfoot>
 									<tr>
 										<td colspan="5">
 											<div class="tb-productPrice">
-												<c:if test="${ord.deliveryFee == null} ">
-													<p>결제금액:${ord.ordPrice }</p>
+												<c:if test="${orderlist.deliveryFee == null} ">
+													<p>결제금액:${orderlist.ordPrice }</p>
 												</c:if>
-												<c:if test="${ord.deliveryFee != null} ">
-													<p>결제금액:${ord.ordPrice + ord.deliveryFee }</p>
+												<c:if test="${orderlist.deliveryFee != null} ">
+													<p>결제금액:${orderlist.ordPrice + ord.deliveryFee }</p>
 												</c:if>
 											</div>
 										</td>
@@ -97,7 +97,7 @@
 						</c:if>
 					</table>
 				</div>
-				<c:if test="${ord.type == 'BANK' }">
+				<c:if test="${orderlist.type == 'BANK' }">
 					<div class="payway">
 						<p>결제 방법</p>
 						<div class="payway-order-info">
@@ -109,24 +109,24 @@
 				<div class="shipping">
 					<p>배송지 정보</p>
 					<div class="address-info">
-					<c:if test="${ord }">
+					<c:if test="${orderlist }">
 						<table class="addresstable">
 							<tr>
 								<th>이름</th>
-								<td>${ord.receiver }</td>
+								<td>${orderlist.receiver }</td>
 								<th>연락처1</th>
-								<td>${ord.rcPhone1 }</td>
+								<td>${orderlist.rcPhone1 }</td>
 								<th>연락처2</th>
-								<td>${ord.rcPhone2 }</td>
+								<td>${orderlist.rcPhone2 }</td>
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td colspan="5">${ord.address.addr1 } <span>/</span>${ord.address.addr2 } </td>
+								<td colspan="5">${orderlist.address.addr1 } <span>/</span>${orderlist.address.addr2 } </td>
 							</tr>
 							<tr>
 								<th>주문메세지</th>
 								<td colspan="5">
-									${ord.ordMessage }
+									${orderlist.ordMessage }
 								</td>
 						</table>
 					</c:if>
@@ -137,7 +137,7 @@
 					<label id="ordername2">이소정</label>님의 주문이 완료되었습니다.
 					<br>
 					<br>
-					귀하의 주문확인 번호는 <span class="spanStyle">${ord.ordNo }</span>입니다.
+					귀하의 주문확인 번호는 <span class="spanStyle">${orderlist.ordNo }</span>입니다.
 					<br>
 					입금방법이 무통장 입금의 경우 계좌번호를 메모하세요.
 					<br>
