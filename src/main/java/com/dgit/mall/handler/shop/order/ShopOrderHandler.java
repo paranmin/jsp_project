@@ -111,14 +111,14 @@ public class ShopOrderHandler extends ShopCommandHandler {
 				int address = AddressService.getInstance().insertByMemberNomaName(regiAddr);
 				
 				addrNumber= AddressService.getInstance().selectLastInsert();
+				
 			}
+			
 			Address adr = new Address();
 			adr.setAddrNo(addrNumber);
 			
-			Address addr = new Address();
-			addr.setAddrNo(Integer.parseInt(addrNo));
 			Order order = new Order();
-			order.setAddress(addr);
+			order.setAddress(adr);
 			if(totalPrice>35000){
 				order.setDeliveryFee(0);
 			}else if(totalPrice<35000){
