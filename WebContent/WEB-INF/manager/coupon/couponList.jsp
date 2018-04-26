@@ -119,22 +119,22 @@
 					<c:forEach var="items" items="${list }">
 						<tr>
 							<td class="text3" id="nosize"><input type="checkbox"
-								name="chkbox" class="chkbox" value="${items.cNo }"></td>
-							<td class="text1">${items.cNo }</td>
-							<td class="text2">${items.cName }</td>
-							<td class="text1">${items.cuseMorePrice }원이상</td>
-							<td class="text1">${items.csalePrice }원</td>
+								name="chkbox" class="chkbox" value="${items.coupon.no }"></td>
+							<td class="text1">${items.coupon.no }</td>
+							<td class="text2">${items.coupon.name }</td>
+							<td class="text1">${items.coupon.cuseMorePrice }원이상</td>
+							<td class="text1">${items.coupon.csalePrice }원</td>
 							<td class="text3"><fmt:formatDate
-									value="${items.climitDate }" pattern="yyy-MM-dd" />까지</td>
+									value="${items.coupon.climitDate }" pattern="yyy-MM-dd" />까지</td>
 							<td class="text3">
 								<%
 									Date now = new Date();
 											pageContext.setAttribute("now", now);
 								%>
-								 <c:if test="${items.climitDate>=now }">
+								 <c:if test="${items.coupon.climitDate>=now }">
 									사용가능
 								</c:if> 
-								<c:if test="${items.climitDate<now }">
+								<c:if test="${items.coupon.climitDate<now }">
 									<p class="deaddate">기간만료</p>
 								</c:if>
 							</td>
