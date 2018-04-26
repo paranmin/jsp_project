@@ -188,8 +188,6 @@ div input[name="files"]{
 	margin-left:0px;
 }
 </style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <%
 	Product pro = (Product) request.getAttribute("pro");
 %>
@@ -427,8 +425,7 @@ div input[name="files"]{
 		} else {
 			$("table#proOption").css("display", "none");
 		}
-		;
-	}
+	};
 </script>
 </head>
 <body>
@@ -542,13 +539,13 @@ div input[name="files"]{
 				</div>
 			</div>
 			<div>
-				<label>옵션 유무</label> <input type="radio" id="option"
+				<label>옵션 유무</label>
+				<label><input type="radio" id="option"
 					name="use_option" value="1"
-					<c:if test="${pro.useOption=='1' }"> checked="checked" </c:if>>사용
-				<input type="radio" id="option" name="use_option" value="0"
-					<c:if test="${pro.useOption=='0' }"> checked="checked" </c:if>>사용안함
+					<c:if test="${pro.useOption=='1' }"> checked="checked" </c:if>>사용</label>
+				<label><input type="radio" id="option" name="use_option" value="0"
+					<c:if test="${pro.useOption=='0' }"> checked="checked" </c:if>>사용안함</label>
 			</div>
-
 			<table id="proOption">
 				<tr>
 					<td colspan="4" id="smallfont"><button id="op_nameadd">+옵션명추가</button>
@@ -560,7 +557,7 @@ div input[name="files"]{
 					<th id="opprice">옵션가</th>
 					<th id="empty"></th>
 				</tr>
-				<c:if test="${opt ne null || opt.length == 0}">       
+				<c:if test="${opt eq null || opt.size() == 0}">
 					<tr class="parent" id="first">
 						<td rowspan="1"><input type="text" name="op_name"
 							class="op_name">
@@ -571,7 +568,7 @@ div input[name="files"]{
 							<p class="error">*옵션가를 입력하세요.</p>
 							<p class="error">*숫자만 입력하세요.</p></td>
 						<td>
-							<button class="op_add">+추가</button>          
+							<button class="op_add">+추가</button>
 						</td>
 					</tr>
 				</c:if>
@@ -584,8 +581,7 @@ div input[name="files"]{
 							<p class="error">*옵션명을 입력하세요.</p> <c:if test="${!status.first }">
 								<button class='op_nameDel'>삭제</button>
 							</c:if></td>
-						<c:forEach var="result" items="${res }" begin="${fir}"
-							end="${end}" varStatus="sta">
+						<c:forEach var="result" items="${res }" begin="${fir}" end="${end}" varStatus="sta">
 							<td><input type="text" name="op_desc" class="op_desc"
 								value="${result.podValue}">
 								<p class="error">*옵션내용을 입력하세요.</p></td>

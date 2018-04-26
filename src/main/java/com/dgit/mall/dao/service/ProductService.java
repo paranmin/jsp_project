@@ -66,9 +66,9 @@ public class ProductService {
 		}
 	}
 
-	public int countTotalProductByCategory(Product product) throws SQLException {
+	public int countTotalProductByProduct(Product product) throws SQLException {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
-			return sqlSession.selectOne(namespace + "countTotalProductByCategory", product);
+			return sqlSession.selectOne(namespace + "countTotalProductByProduct", product);
 		}
 	}
 }

@@ -47,11 +47,10 @@
 	</select>
 	
 	<select id="selectMemberList" resultMap="memberResult">
-		select * from member order by m_regdate desc;
+		select * from member order by m_no desc
 	</select>
-	
-	<select id="selectMemberListBySearch" parameterType="map" resultMap="memberResult">
-		select * from member 
+
+	<sql id="whereBySearch">
 		<where>
 			<choose>
 				<when test="where != null and where == 'id'">
@@ -65,7 +64,26 @@
 				</when>
 			</choose>
 		</where>
-		order by m_regdate desc;
+	</sql>
+
+	<select id="countTotalMemberBySearch" parameterType="map" resultType="int">
+		select count(m_no) from member
+		<include refid="whereBySearch" />
+	</select>
+
+	<select id="selectMemberListBySearch" parameterType="map" resultMap="memberResult">
+		select * from member 
+		<include refid="whereBySearch" />
+		order by m_no desc
+		<if test="start != null or offset != null">
+			limit 
+			<if test="start > 0">
+				#{start},
+			</if>
+			<if test="offset > 0">
+				#{offset}
+			</if>
+		</if>
 	</select>
 	
 	<select id="checkDuplId" parameterType="String" resultType="int">

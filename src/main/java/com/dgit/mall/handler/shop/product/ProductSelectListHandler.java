@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.ProductDao;
+import com.dgit.mall.dao.service.ProductService;
 import com.dgit.mall.dto.Product;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
+import com.dgit.mall.util.Pagination;
 
 public class ProductSelectListHandler extends ShopCommandHandler {
 
@@ -20,36 +22,55 @@ public class ProductSelectListHandler extends ShopCommandHandler {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String select = request.getParameter("main_search");
 		String sort = request.getParameter("sort");
-			   
-		SqlSession session = null;
-		try{
-			session = MySqlSessionFactory.openSession();
-			ProductDao dao = session.getMapper(ProductDao.class);
-			
-			Map<String, Object> selectMap = new HashMap<>();
-			selectMap.put("name", select);
-			if (sort != null && !sort.equals("")) {
-				selectMap.put("sort", sort);
-				if (sort.equals("high") || sort.equals("rank")) {
-					selectMap.put("orderby", "desc");
-				}
-			}
-			List<Product> selectList = dao.selectProductByPagination(selectMap);
-			Product pro = new Product();
-			pro.setName(select);
-			int total = dao.selectNameProductCount(pro);
-			
-			request.setAttribute("name", select);
-			request.setAttribute("list", selectList);
-			request.setAttribute("sort", sort);
-			request.setAttribute("total", total);   
-			return VIEW_FRONT_PATH + "product/selectList.jsp";
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			session.close();
+		String sPage = request.getParameter("page");
+
+		int page = 1;
+		if (sPage != null && !sPage.isEmpty()) {
+			page = Integer.parseInt(sPage);
 		}
-		return null;
+
+		// 상품 리스트는 특이한 경우라 게시판 페이징이랑 조금 다름.
+		int item = 4; // 한줄에 아이템 몇개
+		int width = 5; // 페이징 숫자 몇개
+		int row = 3; // 보여질 줄수
+		int offset = row * item;
+		int start = (page - 1) * offset;
+
+		String params = "";
+
+		Map<String, Object> selectMap = new HashMap<>();
+		selectMap.put("start", start);
+		selectMap.put("offset", offset);
+		selectMap.put("name", select);
+		
+		params = String.format("main_search=%s", select);
+		if (sort != null && !sort.equals("")) {
+			selectMap.put("sort", sort);
+			if (sort.equals("high") || sort.equals("rank")) {
+				selectMap.put("orderby", "desc");
+			}
+			params = String.format("%s&sort=%s", params, sort);
+		}
+
+		Product pro = new Product();
+		pro.setName(select);
+		int total = ProductService.getInstance().countTotalProductByProduct(pro);
+		int cnt = (int) Math.ceil((double) total / offset);
+
+		String imgUrl = request.getHeader("host") + request.getContextPath() + "/images";
+		Pagination.getInstance().initPagination(imgUrl);
+
+		String paging = Pagination.getInstance().makePaging(cnt, page, width, row, "showSelectList.do", params);
+
+		List<Product> selectList = ProductService.getInstance().selectProductByPagination(selectMap);
+
+		request.setAttribute("name", select);
+		request.setAttribute("list", selectList);
+		request.setAttribute("sort", sort);
+		request.setAttribute("total", total);
+		request.setAttribute("paging", paging);
+		return VIEW_FRONT_PATH + "product/selectList.jsp";
+
 	}
 
 }

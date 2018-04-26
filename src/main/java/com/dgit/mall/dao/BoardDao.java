@@ -34,5 +34,7 @@ public interface BoardDao {
 
 	List<Board> selectbrdcode();
 
+	public int selectBybrddepth(int number);
+
 
 }

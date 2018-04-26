@@ -22,13 +22,13 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		SqlSession sqlSession = null;
-
+		System.out.println("1234");
 		if (request.getMethod().equalsIgnoreCase("get")) {
-
+			System.out.println("1235");
 			return VIEW_FRONT_PATH + "/board/Reviewform.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String ReviewformPath = request.getRealPath("Reviewform");
-
+			System.out.println("1236");
 			File dir = new File(ReviewformPath);
 			if (dir.exists() == false) {
 				dir.mkdirs();
@@ -64,10 +64,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				
 				Board board = new Board(lastno,brdcode,brdtitle,brdwriter, brdpassword,lastno,0 ,null, brdcontent,0,now,0,0);
 
-				System.out.println(brdwriter);
-				System.out.println(brdpassword);
-				System.out.println(brdtitle);
-				System.out.println(brdcontent);
+	
 
 				
 				request.setAttribute("brdNo",lastno);
@@ -77,7 +74,6 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				request.setAttribute("brdtitle", brdtitle);
 				request.setAttribute("brdcontent", brdcontent);
 				// request.setAttribute("brduseattachment", brduseattachment);
-				System.out.println(board);
 
 				Dao.insertBoard(board);
 				sqlSession.commit();
@@ -88,8 +84,8 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 			} finally {
 				sqlSession.close();
 			}
-
-			return "ReviewBoard.do";
+			System.out.println("123");
+			response.sendRedirect("ReviewBoard.do");
 
 		}
 		return null;

@@ -26,6 +26,7 @@
 		from board
 		where brd_code =
 		"ReviewBoard"
+			order by brd_parent asc; 
 	</select>
 
 	<select id="selectByAllQandABoard" parameterType="Board"
@@ -36,6 +37,7 @@
 		board
 		where brd_code =
 		"QandABoard"
+				order by brd_parent asc; 
 	</select>
 
 	<select id="selectNoticeBoardAll" parameterType="Board"
@@ -44,23 +46,27 @@
 		brd_code,brd_title,brd_writer,brd_ch,regdate
 		from board
 		where brd_code =
-		"NoticeBoard"
+		"NoticeBoard"	
+		order by brd_parent asc; 
 	</select>
 
 	<select id="selectByAllReply" parameterType="Board" resultMap="BoardResult">
-	select brd_password,brd_writer,brd_content,brd_parent,brd_depth,regdate,brd_no
-	from board
-	where brd_no=brd_parent and brd_no=#{brdNo};
+		select
+		brd_password,brd_writer,brd_content,brd_parent,brd_depth,regdate,brd_no
+		from board
+		where brd_parent=#{brdNo} and brd_title="답글" ;
 	</select>
 
 	<select id="selectlistBoardReviewByid" parameterType="int"
 		resultMap="BoardResult">
 		select brd_no,brd_writer, brd_title,
-		brd_content,brd_password, brd_parent,
-		brd_depth, brd_use_attachment,
+		brd_content,brd_password,brd_code, brd_parent,
+		brd_depth,
+		brd_use_attachment,
 		prd_no,brd_ch,regdate,selected
 		from board
-		where brd_no = #{number}
+		where
+		brd_no = #{number}
 	</select>
 
 
@@ -71,9 +77,18 @@
 	</select>
 
 	<select id="selectBylastno" resultType="int">
-		select max(brd_no)+1 from
+		select
+		IFNULL(max(brd_no)+1,0) from
 		board
 	</select>
+
+	<select id="selectBybrddepth" resultType="int">
+		select IFNULL(max(brd_depth)+1,0) from
+		board
+		where brd_parent=#{brdNo}
+	</select>
+
+
 
 	<insert id="insertBoard" parameterType="Board">
 		insert into board
@@ -83,9 +98,8 @@
 
 	<insert id="insertBoardReply" parameterType="board">
 		insert into board
-		(brd_writer,brd_password,brd_content,brd_parent,brd_depth,regdate)
-		value(#{brdwriter},#{brdpassword},#{brdcontent},#{brdparent},#{brddepth},#{brdregdate})
-		where
+		(brd_writer,brd_password,brd_content,brd_parent,brd_depth,regdate,brd_title,brd_code)
+		value(#{brdwriter},#{brdpassword},#{brdcontent},#{brdparent},#{brddepth},#{brdregdate},#{brdtitle},#{brdcode})
 	</insert>
 
 	<update id="updateBoardReview" parameterType="Board">

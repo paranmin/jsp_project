@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+h1{
+	text-align: center;
+	margin-top:20px;
+}
+form#cate{
+	margin:0 auto;   
+	width:80%;
+}
+table{
+	margin:10px auto;
+	width:80%;
+	text-align: center;
+}
+table td:nth-child(1){
+	width:10%;
+}
+table td:nth-child(2){
+	width:10%;
+}
+table td:nth-child(3){
+	text-align: left;
+	padding-left: 20px;
+	width:50%;
+}
+table td:nth-child(4){
+	width:10%;
+}
+table td:nth-child(5){
+	width:10%;
+}
+table td:nth-child(6){
+	width:10%;
+}
+table th{
+	background: gainsboro;
+}
+button.selectBtn{
+	border: none;
+	width: 50px;
+    height: 20px;
+}
+a{
+	color:black;
+	text-decoration: none;
+}
+span#radio{
+	float: right;
+}
+input[type='radio']{
+	margin-right:5px;
+}

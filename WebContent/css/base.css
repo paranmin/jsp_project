@@ -63,6 +63,7 @@ header div.main_header .btn_search>input {
 header div.main_header .btn_search>i {
 	font-size: 20px;
 	vertical-align: middle;
+	cursor: pointer;
 }
 
 nav {
@@ -264,10 +265,14 @@ section {
 	overflow: hidden;
 }
 
+div.pagingArea {
+	margin: 50px 0;
+	text-align: center;
+}
+
 ul.pagination {
 	overflow: hidden;
-	width: 350px;
-	margin: 50px auto;
+	display: inline-block;
 }
 ul.pagination li {
 	float: left;

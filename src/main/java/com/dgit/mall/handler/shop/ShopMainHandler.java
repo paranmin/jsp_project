@@ -33,7 +33,6 @@ public class ShopMainHandler extends ShopCommandHandler {
 			bestMap.put("orderby", "desc");
 		}
 		bestMap.put("offset", 4);
-		System.out.println(bestMap);
 		List<Product> prolist = ProductService.getInstance().selectProductByPagination(newMap);
 		List<Product> bestlist = ProductService.getInstance().selectProductByPagination(bestMap);
 		request.setAttribute("list", prolist);

@@ -75,14 +75,14 @@ td {
 
 
 					<div class="bbs-table-list">
-						<table summary="No, content,Name,Data,Hits">
+						<table>
 							<caption>일반게시판 게시글</caption>
 							<thead>
 								<tr>
 									<th><div class="tb-center">번호</div></th>
 									<th><div class="tb-center">&nbsp;</div></th>
 									<th class="hidden"><div>
-											<input type="hidden" name="brdcode" value="ReviewBoard">ReviewBoard
+											<input type="hidden" name="brdcode" value="ReviewBoard">
 										</div></th>
 									<!-- .상품정보가 있을 경우에만 나타남 -->
 									<th><div class="tb-center">상품</div></th>
@@ -104,11 +104,14 @@ td {
 											<td>${item.brdwriter }</td>
 											<td>${item.brdregdate }</td>
 											<td>${item.brdch }</td>
-										</tr>
+									</tr>
 									</c:forEach>
 								</c:if>
 							</tbody>
 						</table>
+
+
+
 					</div>
 
 					<!-- .bbs-sch -->
@@ -146,9 +149,9 @@ td {
 					<div class="paging">
 						<ol class="paging">
 							<li class="next"><a href="#"><img
-									src="BoardImg/next_btn.gif" alt="다음"></a></li>
+									src="" alt="다음"></a></li>
 							<li class="last"><a href="#"><img
-									src="BoardImg/last_btn.gif" alt="끝"></a></li>
+									src="" alt="끝"></a></li>
 						</ol>
 					</div>
 				</div>

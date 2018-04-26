@@ -179,6 +179,9 @@
 			<if test="category != null and category != ''">
 				and prd_category = #{category}
 			</if>
+			<if test="view != null">
+				and prd_use = #{view}
+			</if>
 		</where>
 		order by 
 		<if test="sort != null and sort != ''">
@@ -212,11 +215,14 @@
 		</if>
 	</select>
 	
-	<select id="countTotalProductByCategory" parameterType="Product" resultType="int">
+	<select id="countTotalProductByProduct" parameterType="Product" resultType="int">
 		select count(prd_no) from product
 		<where>
 			<if test="category != null and category != ''">
 				prd_category = #{category}
+			</if>
+			<if test="name != null and name != ''">
+				and prd_name like CONCAT("%",#{name},"%")
 			</if>
 		</where>
 	</select>

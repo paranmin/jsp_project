@@ -55,6 +55,7 @@ CREATE TABLE `member_address` (
   CONSTRAINT `FK_member_TO_member_address` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='회원배송주소';
 
+
 CREATE TABLE `product` (
   `prd_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '상품번호',
   `prd_name` varchar(50) NOT NULL COMMENT '상품명',
@@ -116,6 +117,7 @@ CREATE TABLE `board` (
   `brd_use_attachment` char(1) DEFAULT NULL COMMENT '첨부파일유무',
   `prd_no` int(11) DEFAULT NULL COMMENT '상품번호',
   `brd_ch` int default 0 COMMENT '조회수',
+  `selected` int DEFAULT NULL COMMENT '글 종류 선택',
   PRIMARY KEY (`brd_no`),
   KEY `FK_product_TO_board` (`prd_no`),
   CONSTRAINT `FK_product_TO_board` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)
@@ -140,7 +142,7 @@ CREATE TABLE `cart` (
   `m_no` int(11) NOT NULL COMMENT '회원번호',
   `prd_no` int(11) NOT NULL COMMENT '상품번호',
   `type` enum('ORDER','CART') DEFAULT 'CART' COMMENT '타입',
-  pod_no int(11) null COMMENT '옵션디테일번호',
+  `pod_no` int(11) DEFAULT NULL COMMENT '옵션디테일번호',
   PRIMARY KEY (`ct_no`),
   KEY `FK_member_TO_cart` (`m_no`),
   KEY `FK_product_TO_cart` (`prd_no`),

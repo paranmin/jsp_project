@@ -1,6 +1,5 @@
 package com.dgit.mall.handler.shop.board;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,8 +12,6 @@ import com.dgit.mall.dao.BoardDao;
 import com.dgit.mall.dto.Board;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class BoardReplyinsertHandler extends ShopCommandHandler {
 
@@ -26,34 +23,18 @@ public class BoardReplyinsertHandler extends ShopCommandHandler {
 		System.out.println(number);
 		SqlSession sqlSession = null;
 
-		String ReviewformPath = request.getRealPath("Reviewform");
-
-		File dir = new File(ReviewformPath);
-		if (dir.exists() == false) {
-			dir.mkdirs();
-
-			int size = 1024 * 1024 * 10;// 10M
-
 			try {
-				MultipartRequest multi = new MultipartRequest(request, // upload할
-
-						// 파일정보
-						ReviewformPath, // 서버경로
-						size, // 한번에 업로드할 사이즈
-						"utf-8", // 한글 파일명 깨짐 방지
-						new DefaultFileRenamePolicy());
-
-				String brdcode = multi.getParameter("brdcode");
-				System.out.println(brdcode);
-				String brdwriter = multi.getParameter("brdwriter");
-				System.out.println(brdwriter);
-				String brdpassword = multi.getParameter("brdpassword");
+				String brdcode = request.getParameter("brdcode");
+				System.out.println(brdcode+"2");
+				String brdwriter = request.getParameter("brdwriter");
+				System.out.println(brdwriter+"1");
+				String brdpassword = request.getParameter("brdpassword");
 				System.out.println(brdpassword);
-				String brdtitle = multi.getParameter("brdtitle");
+				String brdtitle = request.getParameter("brdtitle");
 				System.out.println(brdtitle);
-				String brdcontent = multi.getParameter("brdcontent");
+				String brdcontent = request.getParameter("brdcontent");
 				System.out.println(brdcontent);
-				String brdparent = multi.getParameter("brdparent");
+				String brdparent = request.getParameter("brdparent");
 				System.out.println(brdparent);
 				// String brduseattachment
 				// =multi.getParameter("brduseattachment");
@@ -65,9 +46,9 @@ public class BoardReplyinsertHandler extends ShopCommandHandler {
 				formatType.format(now);
 				int lastno = Dao.selectBylastno();
 
-				Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, lastno, 0, null, brdcontent,
+				Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, number, 0, null, brdcontent,
 						0, now, 0, 0);
-
+				System.out.println(board);		
 				request.setAttribute("brdno", lastno);
 				System.out.println(lastno);
 				request.setAttribute("brdwriter", brdwriter);
@@ -86,7 +67,6 @@ public class BoardReplyinsertHandler extends ShopCommandHandler {
 				sqlSession.close();
 			}
 
-		}
 		return "ReviewBoardRead.do";
 
 	}

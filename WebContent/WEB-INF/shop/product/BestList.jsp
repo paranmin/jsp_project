@@ -22,27 +22,31 @@
 		<section id="best_list">
 			<p class="list_title">JEWELRY BEST</p>
 			<c:forEach var="bestItem" items="${best }">
-						<div class="item">
-							<img src="${pageContext.request.contextPath}/upload/${bestItem.mainImg }">
-							<div class="category_best_white">
-								<a href="${pageContext.request.contextPath}/shop/detailProductShow.do?no=${bestItem.prdNo }">
-									<p>
-										<b>${bestItem.name }</b>
-										<br> ${bestItem.subDesc }
-										<c:if test="${bestItem.discountPer != '0%'}">
-										<br><span id="line"><fmt:formatNumber value="${bestItem.cost }" pattern="￦#,###"/></span>
-										</c:if>
-										<br><fmt:formatNumber value="${bestItem.sellingPrice }" pattern="￦#,###"/>
-										<c:if test="${bestItem.discountPer != '0%'}">
-										<br>(${bestItem.discountPer } 할인)
-										</c:if>
-									</p>
-								</a>
-							</div>
-						</div>
-				</c:forEach>
+				<div class="item">
+					<img src="${pageContext.request.contextPath}/upload/${bestItem.mainImg }">
+					<div class="category_best_white">
+						<a href="${pageContext.request.contextPath}/shop/detailProductShow.do?no=${bestItem.prdNo }">
+							<p>
+								<b>${bestItem.name }</b>
+								<br> ${bestItem.subDesc }
+								<c:if test="${bestItem.discountPer != '0%'}">
+								<br><span id="line"><fmt:formatNumber value="${bestItem.cost }" pattern="￦#,###"/></span>
+								</c:if>
+								<br><fmt:formatNumber value="${bestItem.sellingPrice }" pattern="￦#,###"/>
+								<c:if test="${bestItem.discountPer != '0%'}">
+								<br>(${bestItem.discountPer } 할인)
+								</c:if>
+							</p>
+						</a>
+					</div>
+				</div>
+			</c:forEach>
 		</section>
-		<p>페이징</p>
+		<div class="pagingArea">
+		<c:if test="${paging != null}">
+			${paging}
+		</c:if>
+		</div>
 		<c:import url="../modules/footer.jsp" />
 	</div>
 </body>

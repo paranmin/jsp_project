@@ -95,7 +95,7 @@ public class QandABoardInsertHandler extends ShopCommandHandler {
 				sqlSession.close();
 
 			}
-			return "BoardQandA.do";
+			response.sendRedirect("BoardQandA.do");
 
 		}
 		return null;
