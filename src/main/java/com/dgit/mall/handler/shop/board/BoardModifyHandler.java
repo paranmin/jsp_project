@@ -75,7 +75,7 @@ public class BoardModifyHandler extends ShopCommandHandler {
 				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
 
 				Board board = new Board(number, brdcode, brdtitle, brdwriter, brdpassword, 1, 0, null, brdcontent, 0,
-						now, selected, 0);
+						now, selected, 0, 0);
 
 				int readBoard = BoardREAD.updateBoardReview(board);
 

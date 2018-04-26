@@ -1,6 +1,5 @@
 package com.dgit.mall.dto;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Board {
@@ -8,7 +7,7 @@ public class Board {
 	private String brdcode;
 	private String brdtitle;
 	private String brdwriter;
-	private String brdpassword; 
+	private String brdpassword;
 	private int brdparent;
 	private int brddepth;
 	private String brduseattachment;
@@ -17,16 +16,14 @@ public class Board {
 	private Date brdregdate;
 	private int selected;
 	private int brdch;
+	private int memNo;
 
 	public Board() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Board(int brdNo, String brdcode, String brdtitle, String brdwriter, String brdpassword, int brdparent,
 			int brddepth, String brduseattachment, String brdcontent, int prdno, Date brdregdate, int selected,
-			int brdch) {
-		super();
+			int brdch, int memNo) {
 		this.brdNo = brdNo;
 		this.brdcode = brdcode;
 		this.brdtitle = brdtitle;
@@ -40,6 +37,7 @@ public class Board {
 		this.brdregdate = brdregdate;
 		this.selected = selected;
 		this.brdch = brdch;
+		this.memNo = memNo;
 	}
 
 	public int getBrdNo() {
@@ -146,16 +144,20 @@ public class Board {
 		this.brdch = brdch;
 	}
 
+	public int getMemNo() {
+		return memNo;
+	}
+
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+
 	@Override
 	public String toString() {
-		Date now = new Date();
-		SimpleDateFormat formatType = new SimpleDateFormat("yyyy-mm-dd");
-		formatType.format(now);
-
-		return "Board [brdNo=" + brdNo + ", brdcode=" + brdcode + ", brdtitle=" + brdtitle + ", brdwriter=" + brdwriter
-				+ ", brdpassword=" + brdpassword + ", brdparent=" + brdparent + ", brddepth=" + brddepth
-				+ ", brduseattachment=" + brduseattachment + ", brdcontent=" + brdcontent + ", prdno=" + prdno
-				+ ", brdregdate=" + brdregdate + ", selected=" + selected + ", brdch=" + brdch + "]";
+		return String.format(
+				"Board [brdNo=%s, brdcode=%s, brdtitle=%s, brdwriter=%s, brdpassword=%s, brdparent=%s, brddepth=%s, brduseattachment=%s, brdcontent=%s, prdno=%s, brdregdate=%s, selected=%s, brdch=%s, memNo=%s]",
+				brdNo, brdcode, brdtitle, brdwriter, brdpassword, brdparent, brddepth, brduseattachment, brdcontent,
+				prdno, brdregdate, selected, brdch, memNo);
 	}
 
 }

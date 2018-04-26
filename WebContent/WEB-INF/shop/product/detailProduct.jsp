@@ -1,5 +1,5 @@
-<%@page import="com.dgit.mall.dto.Option"%>
 <%@page import="java.util.List"%>
+<%@page import="com.dgit.mall.dto.Option"%>
 <%@page import="com.dgit.mall.dto.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

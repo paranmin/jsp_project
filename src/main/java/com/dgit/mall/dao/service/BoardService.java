@@ -11,6 +11,7 @@ import com.dgit.mall.util.MySqlSessionFactory;
 
 public class BoardService {
 	private static BoardService instance = new BoardService();
+	private final String namespace = "com.dgit.mall.dao.BoardDao.";
 
 	public static BoardService getInstance() {
 		return instance;
@@ -32,5 +33,10 @@ public class BoardService {
 			return dao.selectNoticeBoardAll();
 		}
 	}
-	
+
+	public List<Board> selectBoardByMember(int mNo) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectBoardByMember", mNo);
+		}
+	}
 }

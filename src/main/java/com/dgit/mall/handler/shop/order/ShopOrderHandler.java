@@ -140,6 +140,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			order.setRcPhone2("010-" + ordphone2_1 + "-" + ordphone2_2);
 			order.setReceiver(receiver);
 			order.setType(PayType.valueOf(payType));
+			order.setRegdate(new Date());
 
 			int result = OrderService.getInstance().insertOrder(order);
 

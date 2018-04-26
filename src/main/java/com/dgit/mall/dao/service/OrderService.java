@@ -1,7 +1,10 @@
 package com.dgit.mall.dao.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
+import com.dgit.mall.dto.Member;
 import com.dgit.mall.dto.Order;
 import com.dgit.mall.dto.OrderProduct;
 import com.dgit.mall.util.MySqlSessionFactory;
@@ -33,5 +36,11 @@ public class OrderService {
 			sqlSession.commit();
 		}
 		return res;
+	}
+
+	public List<Order> selectOrderByMember(Member member) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectOrderByMember", member);
+		}
 	}
 }

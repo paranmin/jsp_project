@@ -80,10 +80,7 @@
 					<input type="hidden" name="prdno" value="${pro.prdNo}">
 					<dl class="prd-tinfo">
 						<dt>
-							<c:forEach var="imglist" items="${img }">
-								<img
-									src="${pageContext.request.contextPath}/upload/${imglist.img }">
-							</c:forEach>
+							<img src="${pageContext.request.contextPath}/upload/${pro.mainImg }" width="64" height="64">
 						</dt>
 						<dd>
 							<ul>

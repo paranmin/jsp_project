@@ -85,7 +85,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				int lastno = Dao.selectBylastno();
 
 				Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, lastno, 0, null,
-						brdcontent, prdNo, now, 0, 0);
+						brdcontent, prdNo, now, 0, 0, 0);
 
 				Dao.insertBoard(board);
 				sqlSession.commit();

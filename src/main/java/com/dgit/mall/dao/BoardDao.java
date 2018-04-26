@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.dgit.mall.dto.Board;
 
-
-
 public interface BoardDao {
 	List<Board> selectByAllReviewBoard();
 
@@ -36,5 +34,5 @@ public interface BoardDao {
 
 	public int selectBybrddepth(int number);
 
-
+	List<Board> selectBoardByMember(int mNo);
 }

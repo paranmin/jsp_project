@@ -96,7 +96,7 @@ public class QandABoardInsertHandler extends ShopCommandHandler {
 					Date now = new Date();
 					int lastno = Dao.selectBylastno();
 					Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, lastno, 0, null,
-							brdcontent, 0, now, selected, 0);
+							brdcontent, 0, now, selected, 0, 0);
 
 					request.setAttribute("brdNo", lastno);
 					request.setAttribute("brdcode", brdcode);
@@ -157,7 +157,7 @@ public class QandABoardInsertHandler extends ShopCommandHandler {
 					int lastno = Dao.selectBylastno();
 
 					Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, lastno, 0, null,
-							brdcontent, 0, now, 0, 0);
+							brdcontent, 0, now, 0, 0, 0);
 
 					request.setAttribute("brdNo", lastno);
 					request.setAttribute("brdcode", brdcode);
