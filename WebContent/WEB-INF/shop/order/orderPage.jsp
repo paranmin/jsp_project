@@ -147,6 +147,7 @@ function getReturnValue(returnaddrValue) {
 	 $("input:text[name='basicaddr']").val(str[0]);
 	 $("input:text[name='detailaddr']").val(str[1]);
 	 $("input:text[name='post1']").val(p.zipcode);
+	 console.log(p);
 }
 function getReturnValue(returnCpValue) {
 	 var coupon = $.parseJSON(returnCpValue);
