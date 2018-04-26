@@ -140,7 +140,7 @@ $(function() {
 	});
 });
 
-function getReturnValue(returnaddrValue) {
+function getReturnValueaddr(returnaddrValue) {
 	 var p = $.parseJSON(returnaddrValue);
 	 $("input:hidden[name='addrNo']").val(p.addrNo);
 	 var str = p.addr.split(" / ");
@@ -148,7 +148,7 @@ function getReturnValue(returnaddrValue) {
 	 $("input:text[name='detailaddr']").val(str[1]);
 	 $("input:text[name='post1']").val(p.zipcode);
 }
-function getReturnValue(returnCpValue) {
+function getReturnValuecoupon(returnCpValue) {
 	 var coupon = $.parseJSON(returnCpValue);
 	 $("input:text[name='coupon']").val(coupon.couponNo);
 	 $(".finalPrice").text(coupon.couponusePrice);

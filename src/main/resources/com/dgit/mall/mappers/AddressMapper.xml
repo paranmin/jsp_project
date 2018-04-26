@@ -9,6 +9,7 @@
 		<result property="addr2" column="ma_addr2" />
 		<result property="addrType" column="ma_addr_type" />
 		<result property="regdate" column="ma_regdate" />
+		<result property="addrName" column="ma_name"/>
 	</resultMap>
 	
 	<select id="selectByMemberNo" parameterType="Member" resultMap="addressResult">

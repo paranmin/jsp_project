@@ -28,9 +28,9 @@
 	<div class="board_menu">
 		<h2>BOARD</h2>
 		<ul class="account_menu">
-			<li><a href="#">Q&amp;A</a></li>
-			<li><a href="#">REVIEW</a></li>
-			<li><a href="#">NOTICE</a></li>
+			<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
+			<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">REVIEW</a></li>
+			<li><a href="${pageContext.request.contextPath}/shop/NoticeBoard.do">NOTICE</a></li>
 		</ul>
 	</div>
 

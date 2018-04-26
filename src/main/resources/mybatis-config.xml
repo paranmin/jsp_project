@@ -9,6 +9,7 @@
 
 	<typeAliases>
 		<package name="com.dgit.mall.dto" />
+		<package name="com.dgit.mall.dto.type" />
 	</typeAliases>
 
 	<environments default="development">

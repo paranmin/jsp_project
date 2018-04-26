@@ -38,7 +38,7 @@ $(function(){
 							    "userno": userno, //유저쿠폰 번호
 							    "uesyn": uesyn //사용여부
 							  };
-					window.opener.getReturnValue(JSON.stringify(returnCpValue));
+					window.opener.getReturnValuecoupon(JSON.stringify(returnCpValue));
 					window.close();
 				}
 			

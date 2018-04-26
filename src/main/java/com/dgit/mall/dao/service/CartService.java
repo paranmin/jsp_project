@@ -1,6 +1,5 @@
 package com.dgit.mall.dao.service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +31,12 @@ public class CartService {
 		}
 	}
 	
-	public int deleteCartByNo(Map<String, Object> map) throws SQLException {
+	public int deleteCartByNo(Map<String, Object> map) {
+		int res = 0;
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession()) {
-			return sqlSession.delete(namespace + "deleteCartByNo", map);
+			res = sqlSession.delete(namespace + "deleteCartByNo", map);
+			sqlSession.commit();
 		}
+		return res;
 	}
 }

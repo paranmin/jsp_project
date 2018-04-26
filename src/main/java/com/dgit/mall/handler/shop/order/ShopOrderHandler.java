@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.CartDao;
-import com.dgit.mall.dao.MemberDao;
-import com.dgit.mall.dao.OrderDao;
+import com.dgit.mall.dao.CouponDao;
 import com.dgit.mall.dao.service.AddressService;
 import com.dgit.mall.dao.service.CartService;
 import com.dgit.mall.dao.service.MemberService;
@@ -30,8 +28,6 @@ import com.dgit.mall.dto.type.AddressType;
 import com.dgit.mall.dto.type.PayType;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
-
-import javafx.animation.PathTransition.OrientationType;
 
 
 public class ShopOrderHandler extends ShopCommandHandler {
@@ -75,7 +71,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			String[] proNo = request.getParameterValues("proNo");//각상품 번호
 			String payType = request.getParameter("selorderway");//결제 타입
 			String addrNo = request.getParameter("addrNo");//배송지 번호
-			
+			String couponPrice = request.getParameter("couponusePrice");//쿠폰적용가격
 			String post = request.getParameter("post1");//우편번호
 			String basicaddr = request.getParameter("basicaddr");//기본주소
 			String detailaddr= request.getParameter("detailaddr");//상세주소
@@ -86,9 +82,9 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			String ordphone2_2 = request.getParameter("lastNum");//수령자전번2-1 주문자 전번과 동일
 			String orderMsg = request.getParameter("orderMsg"); //주문메세지
 			String seladdress = request.getParameter("seladdress");//배송지 선택
-			
+			String userno = request.getParameter("userno");//유저쿠폰 번호
+			String uesyn = request.getParameter("uesyn");//쿠폰사용 여부
 			String[] cart = request.getParameterValues("chkAll");
-			
 			
 			
 			
@@ -101,7 +97,9 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			if(addrNo!=null&&!addrNo.equals("")){
 				addrNumber =Integer.parseInt(addrNo);
 			}
+			System.out.println(receiver);
 			if(seladdress.equals("newadr")){
+				System.out.println("vvv");
 				Address regiAddr = new Address();
 				regiAddr.setMemNo(loginMember.getNo());
 				regiAddr.setAddrName(receiver);
@@ -112,7 +110,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 				Date date = new Date();
 				regiAddr.setRegdate(date);
 				regiAddr.setZipcode(post);
-				
+				System.out.println(regiAddr);
 				int address = AddressService.getInstance().insertByMemberNomaName(regiAddr);
 				
 				addrNumber= AddressService.getInstance().selectLastInsert();
@@ -127,7 +125,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 				order.setDeliveryFee(Integer.parseInt(delfee));
 			}
 			order.setMember(member);
-			order.setOrdCouponPrice(totalPrice); //일단 쿠폰이랑 총가격이랑 같게 넣음..
+			order.setOrdCouponPrice(Integer.parseInt(couponPrice)); //일단 쿠폰이랑 총가격이랑 같게 넣음..
 			order.setOrdMessage(orderMsg);
 			Date date = new Date();
 			SimpleDateFormat sdft = new SimpleDateFormat("yyyyMMddhhmmss");
@@ -161,20 +159,31 @@ public class ShopOrderHandler extends ShopCommandHandler {
 					ordpd.setOrder(od);
 					int rel = OrderService.getInstance().insertOrderProduct(ordpd);
 				}
-				
+			try {
+				sql = MySqlSessionFactory.openSession();
+				CouponDao coupondao = sql.getMapper(CouponDao.class);
+				if(userno==null&&!userno.equals("")){
+					int res = coupondao.updateUserCoupon(Integer.parseInt(userno));
+				}
+				sql.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				sql.close();
+			}
 				
 				Map<String, Object> map = new HashMap<>();
 				map.put("mNo", member.getNo());
 				map.put("ctNo", cart);
-				System.out.println(map);
-				System.out.println(cart);
-				int a = CartService.getInstance().deleteCartByNo(map);
+				//int a = CartService.getInstance().deleteCartByNo(map);
 				
-				
-				
+				int cntCart = CartService.getInstance().countSelectAllCartByMember(loginMember.getNo());
+				session.setAttribute("cntCart", cntCart);
+
 			request.setAttribute("payType", payType);
 			request.setAttribute("ordernum", ordernum);
-			response.sendRedirect("orderComplete.do");
+			request.setAttribute("addrNo", addrNo);
+			response.sendRedirect("orderComplete.do?ordernum="+ordernum);
 
 			
 			

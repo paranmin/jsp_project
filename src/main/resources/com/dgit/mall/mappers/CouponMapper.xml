@@ -14,7 +14,9 @@
 		<result property="mNo.name" column="m_name"/>
 	</resultMap>
 	
-	
+	<update id="updateUserCoupon" parameterType="UserCoupon">
+		update user_coupon set uc_use_yn='Y' where uc_no=#{ucNo}
+	</update>
 	
 	<!-- 쿠폰 -->
 	<select id="selectByAll" resultMap="userCouponResult">
@@ -39,6 +41,6 @@
 	<!-- 회원쪽에서 쿠폰 불러오기 -->
 	<select id="selectByMem" parameterType="int" resultMap="userCouponResult">
 		select uc.uc_no,c.c_no,uc.uc_use_yn,c.c_name,c.c_use_more_price,c.c_sale_price,c.c_limit_date 
-		from user_coupon uc join coupon c on uc.c_no=c.c_no where uc.m_no=#{mNo}
+		from user_coupon uc join coupon c on uc.c_no=c.c_no where uc.m_no=#{mNo} and uc.uc_use_yn='N'
 	</select>
 </mapper>
