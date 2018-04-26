@@ -109,13 +109,16 @@ $(function(){
 			flag++;
 		}else{
 			$("div#selectedItem li").each(function(i,obj){
-				var $target = $(this).text().split("(");
-				var target = $target[0].trim();	
+				/* var $target = $(this).find("span.optionName").text(); */
+				var target = $(this).find("span.optionName").text();
+				console.log("target : "+target);
 				console.log("str : "+str);
 				if(target==str){
 					duplicate++;
 				}
 			});
+			
+			
 			console.log(duplicate);
 			if(duplicate>0){
 				alert("이미 추가된 상품입니다.");
@@ -128,14 +131,16 @@ $(function(){
 	var Sumcost = 0;
 	function appendLi(){
 		var li = $("<li>");
-		var $text = str+ocost;
+		var $text = ocost;
+		var namespan = $("<span class='optionName'>");
+		$(namespan).text(str);
 		var plusBtn = $("<button class='plusNum'>");
 		$(plusBtn).text("+");
 		var $input = $("<input type='text' class='productNum' name='cartnum'>");
 		$($input).val("1");
 		var minusBtn = $("<button class='minusNum'>");
 		$(minusBtn).text("-");
-		var span = $("<span>");
+		var span = $("<span class='price'>");
 		
 		var cost = new Array();
 		/* var podNo = new Array(); */
@@ -150,8 +155,11 @@ $(function(){
 		
 		var closeBtn=$("<button class='closeli'>");
 		$(closeBtn).text("×");
-		$(li).text($text);
+		
 		$(span).text(price);
+		
+		$(li).append(namespan);
+		$(li).append($text);
 		$(li).append(plusBtn);
 		$(li).append($input);
 		$(li).append(minusBtn);
@@ -217,7 +225,7 @@ $(function(){
 		sum = 0;
 		var price = new Array();
 		$("div#selectedItem li").each(function(i,obj){
-			var target = $(this).find("span").text();
+			var target = $(this).find("span.price").text();
 			price = target.split("원");
 			sum += Number(price[0]);      
 		});
@@ -250,8 +258,6 @@ $(function(){
 		<c:import url="../modules/header.jsp" />
 		<c:import url="../modules/leftSide.jsp" />
 		<c:import url="../modules/rightSide.jsp" />
-		<form action="detailProductShow.do" method="post">
-		<input type="hidden" name="chkAll" value="${pro.prdNo }">   
 		<section id="detail_product">
 			<div class="detail_left">    
 				<h2 class="catename">JEWELRY... ${pro.category }</h2>
@@ -266,6 +272,8 @@ $(function(){
 					<img src="${pageContext.request.contextPath}/upload/${imglist.img }">    
 				</c:forEach>
 			</div>
+			<form action="detailProductShow.do" method="post">
+			<input type="hidden" name="chkAll" value="${pro.prdNo }">   
 			<div class="detail_right">
 				<h3>${pro.name }</h3>
 				<hr>
@@ -338,6 +346,7 @@ $(function(){
 				</c:if>	
 				<input type="submit" value="Add Cart"><br>
 			</div>
+			</form>
 			<div class="datail_board">
 				<div class="detail_menu" id="detail_menu_review">
 					<ul>
@@ -401,7 +410,6 @@ $(function(){
 				</div>
 			</div>
 		</section>
-		</form>
 		<c:import url="../modules/footer.jsp" />
 	</div>
 </body>

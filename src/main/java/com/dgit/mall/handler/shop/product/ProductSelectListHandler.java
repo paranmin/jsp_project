@@ -42,6 +42,7 @@ public class ProductSelectListHandler extends ShopCommandHandler {
 		selectMap.put("start", start);
 		selectMap.put("offset", offset);
 		selectMap.put("name", select);
+		selectMap.put("view", 1);
 		
 		params = String.format("main_search=%s", select);
 		if (sort != null && !sort.equals("")) {
