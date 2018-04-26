@@ -183,8 +183,8 @@ div#selectedItem button.minusNum{
 	position: absolute;
     left: 350px; 
 }
-div#selectedItem span{
-	position: absolute;
+div#selectedItem span.price{
+	position: absolute;   
     left: 450px; 
     width:100px;
     text-align: right;
