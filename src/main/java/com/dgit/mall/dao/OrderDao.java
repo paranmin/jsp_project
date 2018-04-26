@@ -9,4 +9,5 @@ import com.dgit.mall.dto.OrderProduct;
 public interface OrderDao {
 	public int insertOrder(Order order) throws SQLException;
 	public int insertOrderProduct(OrderProduct product) throws SQLException;
+	public Order selectOrder(String ordNo) throws SQLException;
 }

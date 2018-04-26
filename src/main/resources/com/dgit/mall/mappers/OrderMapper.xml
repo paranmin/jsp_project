@@ -49,8 +49,8 @@
 	<insert id="insertOrderProduct" parameterType="OrderProduct">
 		insert into order_product values(#{opSellingPrice},#{opQuantity},#{opOption},#{order.ordNo},#{prdNo.prdNo});
 	</insert>
-	<select id="selectOrder" parameterType="Order" resultMap="orderwithorderproductResult">
-		select*from order
+	<select id="selectOrder" parameterType="String" resultMap="orderwithorderproductResult">
+		select*from order where ord_no=#{ordNo}
 	</select>
 	
 	

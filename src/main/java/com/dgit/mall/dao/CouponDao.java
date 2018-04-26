@@ -18,4 +18,6 @@ public interface CouponDao {
 	public int insertMemberCoupon(UserCoupon usercoupon) throws SQLException;
 	
 	public List<UserCoupon> selectByMem(int mNo) throws SQLException;
+	
+	public int updateUserCoupon(int ucNo) throws SQLException;
 }

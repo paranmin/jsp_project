@@ -44,7 +44,7 @@ CREATE TABLE `mall`.`member` (
 CREATE TABLE `member_address` (
   `ma_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '배송번호',
   `m_no` int(11) DEFAULT NULL COMMENT '회원번호',
-  `ma_zipcode` varchar(6) DEFAULT NULL COMMENT '우편번호',
+  `ma_zipcode` varchar(7) DEFAULT NULL COMMENT '우편번호',
   `ma_addr1` varchar(255) DEFAULT NULL COMMENT '도로명주소',
   `ma_addr2` varchar(255) DEFAULT NULL COMMENT '상세주소',
   `ma_addr_type` enum('HOME','OTHER') DEFAULT NULL COMMENT '주소 타입',
