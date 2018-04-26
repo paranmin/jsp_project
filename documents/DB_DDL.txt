@@ -173,7 +173,7 @@ CREATE TABLE `user_coupon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원 쿠폰';
 
 
-CREATE TABLE `mall`.`order` (
+CREATE TABLE `order` (
   `ord_no` varchar(50) NOT NULL COMMENT '주문번호',
   `ord_price` int(11) NOT NULL COMMENT '주문가격',
   `ord_coupon_price` int(11) NOT NULL COMMENT '쿠폰사용가격',
@@ -184,10 +184,12 @@ CREATE TABLE `mall`.`order` (
   `ord_receiver` varchar(50) DEFAULT NULL COMMENT '수령자 이름',
   `ord_rphone1` varchar(14) DEFAULT NULL COMMENT '수령자전번1',
   `ord_rphone2` varchar(14) DEFAULT NULL COMMENT '수령자전번2',
+  `ma_no` int(11) DEFAULT NULL COMMENT '배송지번호',
   PRIMARY KEY (`ord_no`),
   KEY `FK_member_TO_order` (`m_no`),
   CONSTRAINT `FK_member_TO_order` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='주문정보';
+
 
 CREATE TABLE `order_product` (
   `op_selling_price` int(11) NOT NULL COMMENT '판매가',
