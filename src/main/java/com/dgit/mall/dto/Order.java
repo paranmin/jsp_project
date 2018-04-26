@@ -14,6 +14,7 @@ public class Order {
 	private String receiver;
 	private String rcPhone1;
 	private String rcPhone2; //주문회원의 전화번호가 들어감
+	
 	public String getOrdNo() {
 		return ordNo;
 	}
@@ -103,6 +104,29 @@ public class Order {
 				+ ", deliveryFee=" + deliveryFee + ", ordMessage=" + ordMessage + ", type=" + type + ", member="
 				+ member + ", address=" + address + ", receiver=" + receiver + ", rcPhone1=" + rcPhone1 + ", rcPhone2="
 				+ rcPhone2 + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ordNo == null) ? 0 : ordNo.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		if (ordNo == null) {
+			if (other.ordNo != null)
+				return false;
+		} else if (!ordNo.equals(other.ordNo))
+			return false;
+		return true;
 	}
 	
 	

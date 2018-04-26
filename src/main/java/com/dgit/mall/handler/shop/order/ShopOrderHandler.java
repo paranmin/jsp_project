@@ -97,9 +97,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			if(addrNo!=null&&!addrNo.equals("")){
 				addrNumber =Integer.parseInt(addrNo);
 			}
-			System.out.println(receiver);
 			if(seladdress.equals("newadr")){
-				System.out.println("vvv");
 				Address regiAddr = new Address();
 				regiAddr.setMemNo(loginMember.getNo());
 				regiAddr.setAddrName(receiver);
@@ -110,15 +108,17 @@ public class ShopOrderHandler extends ShopCommandHandler {
 				Date date = new Date();
 				regiAddr.setRegdate(date);
 				regiAddr.setZipcode(post);
-				System.out.println(regiAddr);
 				int address = AddressService.getInstance().insertByMemberNomaName(regiAddr);
 				
 				addrNumber= AddressService.getInstance().selectLastInsert();
 			}
 			Address adr = new Address();
 			adr.setAddrNo(addrNumber);
+			
+			Address addr = new Address();
+			addr.setAddrNo(Integer.parseInt(addrNo));
 			Order order = new Order();
-			order.setAddress(adr);
+			order.setAddress(addr);
 			if(totalPrice>35000){
 				order.setDeliveryFee(0);
 			}else if(totalPrice<35000){

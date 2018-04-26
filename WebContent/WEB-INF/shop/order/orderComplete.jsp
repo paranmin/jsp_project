@@ -39,38 +39,44 @@
 							<th class="purchaseSub">수량</th>
 							<th class="purchaseSub">가격</th>
 						</tr>
-						<tbody>
-						<tr>
-							<td rowspan="2">
-								<div class="tb-centerImg">
-									
-								</div>
-							</td>
-							<td>
-								<div class="tb-centerContent">
-									<p><a href="#">베이직 스틸 큐빅 귀걸이</a></p>
-								</div>
-							</td>
-							<td rowspan="2">
-								<div class="tb-textalign">
-								<p>1개</p>
-								</div>
-							</td>
-							<td rowspan="2">
-								<div class="tb-textalign">
-								<p>5,000원</p>
-								</div>
-							</td>
-						</tr>
-						<tr>
+						<c:if test="${ordpd }">
+						<c:forEach items="${ordpd }" var="items">
+							<tbody>
 							
-							<td>
-								<div class="tb-centerContentDetail">
-									<p>색상어쩌구 저쩌구</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
+								<tr>
+									<td rowspan="2">
+										<div class="tb-centerImg">
+											${items.prdNo.mainImg}
+										</div>
+									</td>
+									<td>
+										<div class="tb-centerContent">
+											<p><a href="#">${items.prdNo.name }</a></p>
+										</div>
+									</td>
+									<td rowspan="2">
+										<div class="tb-textalign">
+										<p>${items.opQuantity }</p>
+										</div>
+									</td>
+									<td rowspan="2">
+										<div class="tb-textalign">
+										<p>${items.opSellingPrice }</p>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									
+									<td>
+										<div class="tb-centerContentDetail">
+											<p>${items.opOption }</p>
+										</div>
+									</td>
+								</tr>
+							
+							</tbody>
+						</c:forEach>
+						</c:if>
 						<tfoot>
 						<tr>
 							<td colspan="5">

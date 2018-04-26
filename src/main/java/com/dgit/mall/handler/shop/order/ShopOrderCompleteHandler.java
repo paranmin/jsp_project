@@ -1,5 +1,7 @@
 package com.dgit.mall.handler.shop.order;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import com.dgit.mall.dao.OrderDao;
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Member;
 import com.dgit.mall.dto.Order;
+import com.dgit.mall.dto.OrderProduct;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
 
@@ -26,8 +29,10 @@ public class ShopOrderCompleteHandler extends ShopCommandHandler {
 			Member mem = MemberService.getInstance().selectByMemberNo(loginMember.getNo());
 			OrderDao dao = sql.getMapper(OrderDao.class);
 			Order ord = dao.selectOrder(orderNum);
-			System.out.println(ord);
+			List<OrderProduct> ordpd = dao.selectOrderProduct(orderNum);
 			request.setAttribute("member", mem);
+			request.setAttribute("ord", ord);
+			request.setAttribute("ordpd", ordpd);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

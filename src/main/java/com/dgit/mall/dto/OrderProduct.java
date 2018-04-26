@@ -51,5 +51,28 @@ public class OrderProduct {
 		return "OrderProduct [opSellingPrice=" + opSellingPrice + ", opQuantity=" + opQuantity + ", opOption="
 				+ opOption + ", order=" + order + ", prdNo=" + prdNo + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((prdNo == null) ? 0 : prdNo.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderProduct other = (OrderProduct) obj;
+		if (prdNo == null) {
+			if (other.prdNo != null)
+				return false;
+		} else if (!prdNo.equals(other.prdNo))
+			return false;
+		return true;
+	}
 	
 }
