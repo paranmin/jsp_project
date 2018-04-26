@@ -41,7 +41,7 @@ CREATE TABLE `mall`.`member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원';
 
 
-CREATE TABLE `member_address` (
+CREATE TABLE `mall`.`member_address` (
   `ma_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '배송번호',
   `m_no` int(11) DEFAULT NULL COMMENT '회원번호',
   `ma_zipcode` varchar(7) DEFAULT NULL COMMENT '우편번호',
@@ -56,7 +56,7 @@ CREATE TABLE `member_address` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='회원배송주소';
 
 
-CREATE TABLE `product` (
+CREATE TABLE `mall`.`product` (
   `prd_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '상품번호',
   `prd_name` varchar(50) NOT NULL COMMENT '상품명',
   `prd_sub_desc` varchar(255) DEFAULT NULL COMMENT '상품부가설명',
@@ -74,7 +74,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `proimg` (
+CREATE TABLE `mall`.`proimg` (
   `img_no` int(11) NOT NULL AUTO_INCREMENT,
   `img` text NOT NULL,
   `prd_no` int(11) NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE `proimg` (
   CONSTRAINT `proimg` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `pro_option` (
+CREATE TABLE `mall`.`pro_option` (
   `po_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '옵션번호',
   `po_name` varchar(100) NOT NULL COMMENT '옵션명',
   `prd_no` int(11) NOT NULL COMMENT '상품번호',
@@ -92,7 +92,7 @@ CREATE TABLE `pro_option` (
   CONSTRAINT `FK_product_TO_product_option` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `option_detail` (
+CREATE TABLE `mall`.`option_detail` (
   `po_no` int(11) NOT NULL COMMENT '옵션번호',
   `pod_no` int(11) NOT NULL AUTO_INCREMENT,
   `pod_value` varchar(100) NOT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE `option_detail` (
   CONSTRAINT `FK_pro_option_TO_product_option_detail` FOREIGN KEY (`po_no`) REFERENCES `pro_option` (`po_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `board` (
+CREATE TABLE `mall`.`board` (
   `brd_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '글번호',
   `brd_code` varchar(20) NOT NULL COMMENT '게시판코드',
   `brd_title` varchar(50) NOT NULL COMMENT '글 제목',
@@ -122,7 +122,7 @@ CREATE TABLE `board` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='게시판';
 
 
-CREATE TABLE `board_attachment` (
+CREATE TABLE `mall`.`board_attachment` (
   `baf_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '첨부파일번호',
   `baf_name` varchar(50) NOT NULL COMMENT '파일이름',
   `baf_path` varchar(200) NOT NULL COMMENT '파일경로',
@@ -133,7 +133,7 @@ CREATE TABLE `board_attachment` (
   CONSTRAINT `FK_board_TO_board_attachment` FOREIGN KEY (`brd_no`) REFERENCES `board` (`brd_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='게시판 첨부파일';
 
-CREATE TABLE `cart` (
+CREATE TABLE `mall`.`cart` (
   `ct_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '장바구니번호',
   `ct_prd_quantity` int(11) NOT NULL COMMENT '상품수량',
   `ct_prd_op_name` varchar(100) DEFAULT NULL COMMENT '상품옵션명',
@@ -150,7 +150,7 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='장바구니';
 
 
-CREATE TABLE `coupon` (
+CREATE TABLE `mall`.`coupon` (
   `c_no` varchar(20) NOT NULL COMMENT '쿠폰번호',
   `c_name` varchar(50) NOT NULL COMMENT '쿠폰이름',
   `c_use_more_price` int(11) NOT NULL COMMENT '사용가능금액',
@@ -159,7 +159,7 @@ CREATE TABLE `coupon` (
   PRIMARY KEY (`c_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='쿠폰';
 
-CREATE TABLE `user_coupon` (
+CREATE TABLE `mall`.`user_coupon` (
   `uc_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원쿠폰번호',
   `c_no` varchar(20) DEFAULT NULL COMMENT '쿠폰번호',
   `m_no` int(11) DEFAULT NULL COMMENT '회원번호',
@@ -171,7 +171,7 @@ CREATE TABLE `user_coupon` (
   CONSTRAINT `FK_member_TO_user_coupon` FOREIGN KEY (`m_no`) REFERENCES `member` (`m_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='회원 쿠폰';
 
-CREATE TABLE `order` (
+CREATE TABLE `mall`.`order` (
   `ord_no` varchar(50) NOT NULL COMMENT '주문번호',
   `ord_price` int(11) NOT NULL COMMENT '주문가격',
   `ord_coupon_price` int(11) NOT NULL COMMENT '쿠폰사용가격',
@@ -190,7 +190,7 @@ CREATE TABLE `order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='주문정보';
 
 
-CREATE TABLE `order_product` (
+CREATE TABLE `mall`.`order_product` (
   `op_selling_price` int(11) NOT NULL COMMENT '판매가',
   `op_quantity` int(11) NOT NULL COMMENT '상품수량',
   `op_option` varchar(100) DEFAULT NULL COMMENT '상품옵션',
