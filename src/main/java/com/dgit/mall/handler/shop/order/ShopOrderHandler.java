@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.CartDao;
-import com.dgit.mall.dao.MemberDao;
-import com.dgit.mall.dao.OrderDao;
+import com.dgit.mall.dao.CouponDao;
 import com.dgit.mall.dao.service.AddressService;
 import com.dgit.mall.dao.service.CartService;
 import com.dgit.mall.dao.service.MemberService;
@@ -30,8 +28,6 @@ import com.dgit.mall.dto.type.AddressType;
 import com.dgit.mall.dto.type.PayType;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
-
-import javafx.animation.PathTransition.OrientationType;
 
 
 public class ShopOrderHandler extends ShopCommandHandler {
@@ -88,8 +84,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			String seladdress = request.getParameter("seladdress");//배송지 선택
 			String userno = request.getParameter("userno");//유저쿠폰 번호
 			String uesyn = request.getParameter("uesyn");//쿠폰사용 여부
-			System.out.println(userno+"+"+uesyn);
-			
+			System.out.println(userno);
 			String[] cart = request.getParameterValues("chkAll");
 			
 			
@@ -164,12 +159,21 @@ public class ShopOrderHandler extends ShopCommandHandler {
 					ordpd.setOrder(od);
 					int rel = OrderService.getInstance().insertOrderProduct(ordpd);
 				}
-				
+			try {
+				sql = MySqlSessionFactory.openSession();
+				CouponDao coupondao = sql.getMapper(CouponDao.class);
+				int res = coupondao.updateUserCoupon(Integer.parseInt(userno));
+				sql.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				sql.close();
+			}
 				
 				Map<String, Object> map = new HashMap<>();
 				map.put("mNo", member.getNo());
 				map.put("ctNo", cart);
-				int a = CartService.getInstance().deleteCartByNo(map);
+				//int a = CartService.getInstance().deleteCartByNo(map);
 				
 				int cntCart = CartService.getInstance().countSelectAllCartByMember(loginMember.getNo());
 				session.setAttribute("cntCart", cntCart);
