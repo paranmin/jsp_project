@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Boardcss/writeform.css"
 	media="all" />
@@ -77,7 +77,7 @@
 				<form action="ReviewForm.do" method="post"
 					enctype="multipart/form-data">
 
-					<input type="hidden" name="prdno" value="${pro.prdNo} ">
+					<input type="hidden" name="prdno" value="${pro.prdNo}">
 					<dl class="prd-tinfo">
 						<dt>
 							<c:forEach var="imglist" items="${img }">
