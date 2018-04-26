@@ -66,7 +66,7 @@ public class ProductListHandler extends ShopCommandHandler {
 			}
 		}
 		// 카테고리별 전체 상품 갯수 (카테고리 없으면 전체 상품 갯수)
-		int total = ProductService.getInstance().countTotalProductByCategory(new Product(cate));
+		int total = ProductService.getInstance().countTotalProductByProduct(new Product(cate));
 
 		int cnt = (int) Math.ceil((double) total / offset);
 

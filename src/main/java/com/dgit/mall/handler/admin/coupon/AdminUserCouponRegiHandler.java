@@ -1,6 +1,5 @@
 package com.dgit.mall.handler.admin.coupon;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.dgit.mall.dao.CouponDao;
 import com.dgit.mall.dao.service.MemberService;
 import com.dgit.mall.dto.Coupon;
-import com.dgit.mall.dto.Member;import com.dgit.mall.dto.UserCoupon;
+import com.dgit.mall.dto.Member;
+import com.dgit.mall.dto.UserCoupon;
 import com.dgit.mall.handler.admin.AdminCommandHandler;
 import com.dgit.mall.util.CommonUtil;
 import com.dgit.mall.util.MySqlSessionFactory;
@@ -32,7 +32,7 @@ public class AdminUserCouponRegiHandler extends AdminCommandHandler {
 			String valueSearch = request.getParameter("valueSearch");
 			List<Member> mlist = null;
 			if(valueSearch != null && !valueSearch.equals("")){
-				Map<String, String> map = new HashMap<>();
+				Map<String, Object> map = new HashMap<>();
 				map.put("where", search);
 				map.put("query", valueSearch);
 				mlist = MemberService.getInstance().selectMemberListBySearch(map);

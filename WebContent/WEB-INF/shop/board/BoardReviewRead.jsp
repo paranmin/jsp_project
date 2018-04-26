@@ -325,6 +325,7 @@ a {
 					</dd>
 				</dl>
 				<div class="bbs-table-view">
+				<input type="hidden" name="brdno" value="${readBoard.brdNo }">
 					<table summary="게시글 보기">
 						<caption>게시글 보기</caption>
 						<thead>
@@ -365,29 +366,29 @@ a {
 						</tbody>
 					</table>
 					<div id="comment_list_0">
-						<table summary="코멘트 목록" class="comment-box">
-							<caption>코멘트 목록</caption>
-							<colgroup>
-								<col width="120">
-								<col>
-								<col width="150">
-							</colgroup>
+						<table class="comment-box">
+						<thead>
+								<tr>
+									<th><div class="tb-center">작성자</div></th>
+									<th><div class="tb-center">작성 내용</div></th>
+									<th><div class="tb-center">작성일</div></th>
+								</tr>
+							</thead>
 							<tbody>
 								<c:if test="${list.size()>0 }">
 									<c:forEach var="item" items="${list }">
 										<tr>
-				
 											<td>${item.brdwriter }</td>
 											<td>${item.brdcontent }</td>
 											<td>${item.brdregdate }</td>
-											
 										</tr>
 									</c:forEach>
 								</c:if>
 							</tbody>
 						</table>
 					</div>
-					<form id="comment_form" name="comment" action="BoardReplyinsert.do" method="post">
+					<form id="comment_form" action="BoardReplyinsert.do"
+						method="post">
 						<fieldset>
 							<legend>코멘트 쓰기</legend>
 							<table summary="코멘트 쓰기" class="comment-box">
@@ -408,15 +409,20 @@ a {
 														value="${readBoard.brdwriter }"></span> <label>비밀번호</label><span>
 														<input type="password" name="brdpassword"
 														class="MS_input_txt input-style input-style2"
-														placeholder="패스워드">
-														<input type="hidden" name="brdno"
-														class="MS_input_txt input-style input-style2" value="${readBoard.brdNo }">
+														placeholder="패스워드"> <input type="hidden"
+														name="brdcode" value="ReviewBoard"> <input
+														type="hidden" name="brdtitle" value="답글"> <input
+														type="hidden" name="brdno"
+														class="MS_input_txt input-style input-style2"
+														value="${readBoard.brdNo }">
 													</span> <input type="hidden" name="brdparent"
 														value="${readBoard.brdNo }">
+														<input type="hidden" name="brdcode"
+														value="${readBoard.brdcode}">
 												</div>
 												<div class="wrt">
 													<textarea name="brdcontent" placeholder="내용"></textarea>
-												<input type="submit" value="확인">
+													<input type="submit" value="확인">
 												</div>
 											</div>
 										</td>
@@ -432,9 +438,8 @@ a {
 								<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
 									class="none btn_light_border btn_box_01">수정</a> <a
 									href="BoardDel.do?brdno=${readBoard.brdNo }"
-									class="btn_light_border btn_box_01">삭제</a> <a
-									href="/board/board.html?code=curiouswiz_board3&amp;page=2&amp;board_cate=&amp;num1=942911&amp;num2=00000&amp;type=r&amp;lock_re=N"
-									class="btn_light btn_box_01">답변</a>
+									class="btn_light_border btn_box_01">삭제</a> 
+									<a href="Boardaskanswer.do?brdno=${readBoard.brdNo }" class="btn_light btn_box_01">답변</a>
 							</dd>
 						</dl>
 						<dl class="bbs-link">

@@ -24,6 +24,7 @@ public class BoardReviewListHandler extends ShopCommandHandler {
 			BoardDao Dao = sqlSession.getMapper(BoardDao.class);
 
 			List<Board> list = Dao.selectByAllReviewBoard();
+			System.out.println(list);
 			request.setAttribute("list", list);
 
 		} catch (Exception e) {

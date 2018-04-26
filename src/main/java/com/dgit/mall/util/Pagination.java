@@ -51,8 +51,19 @@ public class Pagination {
 		}
 		sb.append(String.format("<li><a href=\"%s\"><img src=\"http://%s/prev_btn.gif\" alt=\"이전\" title=\"이전\" /></a></li>", prev, imgUrl));
 
-		for (int i = 0; i < cnt; i++) {
+		int start = 0;
+		int length = width;
+		if (page > width) {
+			int temp = (int) Math.floor((page-1)/width);
+			start = temp * width;
+			length = length + (temp * width);
+		}
+
+		for (int i = start; i < length; i++) {
 			int cur = i + 1;
+			if (cnt < cur) {
+				break;
+			}
 			if (cur == page) {
 				sb.append(String.format("<li class=\"page\">%s</li>", cur));
 			} else {

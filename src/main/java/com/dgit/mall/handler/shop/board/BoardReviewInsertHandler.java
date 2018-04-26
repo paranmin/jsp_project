@@ -64,10 +64,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				
 				Board board = new Board(lastno,brdcode,brdtitle,brdwriter, brdpassword,lastno,0 ,null, brdcontent,0,now,0,0);
 
-				System.out.println(brdwriter);
-				System.out.println(brdpassword);
-				System.out.println(brdtitle);
-				System.out.println(brdcontent);
+	
 
 				
 				request.setAttribute("brdNo",lastno);
@@ -77,7 +74,6 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				request.setAttribute("brdtitle", brdtitle);
 				request.setAttribute("brdcontent", brdcontent);
 				// request.setAttribute("brduseattachment", brduseattachment);
-				System.out.println(board);
 
 				Dao.insertBoard(board);
 				sqlSession.commit();

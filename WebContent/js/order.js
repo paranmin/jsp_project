@@ -101,6 +101,13 @@ $(function(){
 	})
 	
 	//각 상품 가격
+	//옵션빈거 집어넣기
+	$(".proNameTable").each(function(i,obj){
+		var on = $(obj).find("input:hidden[name='optionname']");
+		if(on.val()==""){
+			on.val("N");
+		}
+	})
 	
 	
 	
@@ -154,9 +161,13 @@ $(function(){
 	})
 	$("#recentaddr").click(function(){
 		shipList();
+	})
+	$(".adrlist").click(function(){
+		
+		$("#recentaddr").prop("checked",true);
+		shipList();
 		return false;
 	})
-	
 	
 })
 function getPostCode(){

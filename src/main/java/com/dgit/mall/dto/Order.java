@@ -3,32 +3,21 @@ package com.dgit.mall.dto;
 import com.dgit.mall.dto.type.PayType;
 
 public class Order {
-	private OrderProduct ordNo;
+	private String ordNo;
 	private int ordPrice;
 	private int ordCouponPrice;
-	private String ordOption;
 	private int deliveryFee;
 	private String ordMessage;
 	private PayType type;
 	private Member member;
-	public Order(OrderProduct ordNo, int ordPrice, int ordCouponPrice, String ordOption, int deliveryFee,
-			String ordMessage, PayType type, Member memberNo) {
-		super();
-		this.ordNo = ordNo;
-		this.ordPrice = ordPrice;
-		this.ordCouponPrice = ordCouponPrice;
-		this.ordOption = ordOption;
-		this.deliveryFee = deliveryFee;
-		this.ordMessage = ordMessage;
-		this.type = type;
-		this.member = memberNo;
-	}
-	public Order() {
-	}
-	public OrderProduct getOrdNo() {
+	private Address address; //배송지번호
+	private String receiver;
+	private String rcPhone1;
+	private String rcPhone2; //주문회원의 전화번호가 들어감
+	public String getOrdNo() {
 		return ordNo;
 	}
-	public void setOrdNo(OrderProduct ordNo) {
+	public void setOrdNo(String ordNo) {
 		this.ordNo = ordNo;
 	}
 	public int getOrdPrice() {
@@ -42,12 +31,6 @@ public class Order {
 	}
 	public void setOrdCouponPrice(int ordCouponPrice) {
 		this.ordCouponPrice = ordCouponPrice;
-	}
-	public String getOrdOption() {
-		return ordOption;
-	}
-	public void setOrdOption(String ordOption) {
-		this.ordOption = ordOption;
 	}
 	public int getDeliveryFee() {
 		return deliveryFee;
@@ -67,18 +50,64 @@ public class Order {
 	public void setType(PayType type) {
 		this.type = type;
 	}
-	public Member getMemberNo() {
+	public Member getMember() {
 		return member;
 	}
-	public void setMemberNo(Member memberNo) {
-		this.member = memberNo;
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	public String getReceiver() {
+		return receiver;
+	}
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+	public String getRcPhone1() {
+		return rcPhone1;
+	}
+	public void setRcPhone1(String rcPhone1) {
+		this.rcPhone1 = rcPhone1;
+	}
+	public String getRcPhone2() {
+		return rcPhone2;
+	}
+	public void setRcPhone2(String rcPhone2) {
+		this.rcPhone2 = rcPhone2;
+	}
+	public Order() {
+	}
+	public Order(String ordNo, int ordPrice, int ordCouponPrice, int deliveryFee, String ordMessage, PayType type,
+			Member member, Address address, String receiver, String rcPhone1, String rcPhone2) {
+		super();
+		this.ordNo = ordNo;
+		this.ordPrice = ordPrice;
+		this.ordCouponPrice = ordCouponPrice;
+		this.deliveryFee = deliveryFee;
+		this.ordMessage = ordMessage;
+		this.type = type;
+		this.member = member;
+		this.address = address;
+		this.receiver = receiver;
+		this.rcPhone1 = rcPhone1;
+		this.rcPhone2 = rcPhone2;
 	}
 	@Override
 	public String toString() {
 		return "Order [ordNo=" + ordNo + ", ordPrice=" + ordPrice + ", ordCouponPrice=" + ordCouponPrice
-				+ ", ordOption=" + ordOption + ", deliveryFee=" + deliveryFee + ", ordMessage=" + ordMessage + ", type="
-				+ type + ", memberNo=" + member + "]";
+				+ ", deliveryFee=" + deliveryFee + ", ordMessage=" + ordMessage + ", type=" + type + ", member="
+				+ member + ", address=" + address + ", receiver=" + receiver + ", rcPhone1=" + rcPhone1 + ", rcPhone2="
+				+ rcPhone2 + "]";
 	}
+	
+	
+	
+	
 	
 
 }

@@ -12,7 +12,7 @@
 					<option value="id"<c:if test="${where == 'id'}"> selected </c:if>>아이디</option>
 					<option value="phone"<c:if test="${where == 'phone'}"> selected </c:if>>연락처</option>
 				</select>
-				<input type="text" name="search_query" value="${query}" />
+				<input type="text" name="query" value="${query}" />
 				<input type="submit" value="검색" class="searchBtn" />
 			</p>
 		</form>
@@ -56,6 +56,11 @@
 		</tr>
 	</c:if>
 	</table>
+	<c:if test="${paging ne null || paging != ''}">
+	<div class="pagingArea">
+		${paging}
+	</div>
+	</c:if>
 </div>
 <script>
 $(function() {

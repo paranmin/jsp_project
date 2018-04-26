@@ -36,8 +36,22 @@ public class AddressService {
 			return sqlSession.selectOne(namespace + "selectHomeByMemberNo", member);
 		}
 	}
+	
+	public int selectLastInsert() {//자택
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectLastInsert");
+		}
+	}
 
 	public int insertByMemberNo(Address address) {//주소넣는거
+		int res = 0;
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "insertByMemberNo", address);
+			sqlSession.commit();
+		}
+		return res;
+	}
+	public int insertByMemberNomaName(Address address) {//주소넣는거
 		int res = 0;
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			res = sqlSession.insert(namespace + "insertByMemberNo", address);
@@ -54,4 +68,6 @@ public class AddressService {
 		}
 		return res;
 	}
+	
+	
 }
