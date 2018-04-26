@@ -75,7 +75,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			String[] proNo = request.getParameterValues("proNo");//각상품 번호
 			String payType = request.getParameter("selorderway");//결제 타입
 			String addrNo = request.getParameter("addrNo");//배송지 번호
-			
+			String couponPrice = request.getParameter("couponusePrice");//쿠폰적용가격
 			String post = request.getParameter("post1");//우편번호
 			String basicaddr = request.getParameter("basicaddr");//기본주소
 			String detailaddr= request.getParameter("detailaddr");//상세주소
@@ -86,6 +86,9 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			String ordphone2_2 = request.getParameter("lastNum");//수령자전번2-1 주문자 전번과 동일
 			String orderMsg = request.getParameter("orderMsg"); //주문메세지
 			String seladdress = request.getParameter("seladdress");//배송지 선택
+			String userno = request.getParameter("userno");//유저쿠폰 번호
+			String uesyn = request.getParameter("uesyn");//쿠폰사용 여부
+			System.out.println(userno+"+"+uesyn);
 			
 			String[] cart = request.getParameterValues("chkAll");
 			
@@ -127,7 +130,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 				order.setDeliveryFee(Integer.parseInt(delfee));
 			}
 			order.setMember(member);
-			order.setOrdCouponPrice(totalPrice); //일단 쿠폰이랑 총가격이랑 같게 넣음..
+			order.setOrdCouponPrice(Integer.parseInt(couponPrice)); //일단 쿠폰이랑 총가격이랑 같게 넣음..
 			order.setOrdMessage(orderMsg);
 			Date date = new Date();
 			SimpleDateFormat sdft = new SimpleDateFormat("yyyyMMddhhmmss");

@@ -199,7 +199,7 @@
 						<td class="text1">${items.coupon.cuseMorePrice }원이상</td>
 						<td class="text1">${items.coupon.csalePrice }원</td>
 						<td class="text3"><fmt:formatDate
-								value="${items.climitDate }" pattern="yyy-MM-dd" />까지</td>
+								value="${items.coupon.climitDate }" pattern="yyy-MM-dd" />까지</td>
 						<td class="text3"><c:if test="${items.coupon.climitDate>=now }">
 									사용가능
 								</c:if> <c:if test="${items.coupon.climitDate<now }">
