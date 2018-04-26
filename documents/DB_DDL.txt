@@ -116,6 +116,7 @@ CREATE TABLE `board` (
   `brd_use_attachment` char(1) DEFAULT NULL COMMENT '첨부파일유무',
   `prd_no` int(11) DEFAULT NULL COMMENT '상품번호',
   `brd_ch` int default 0 COMMENT '조회수',
+  `selected` int DEFAULT NULL COMMENT '글 종류 선택',
   PRIMARY KEY (`brd_no`),
   KEY `FK_product_TO_board` (`prd_no`),
   CONSTRAINT `FK_product_TO_board` FOREIGN KEY (`prd_no`) REFERENCES `product` (`prd_no`)

@@ -75,7 +75,7 @@ public class BoardNoticeInsertHandler extends ShopCommandHandler {
 
 				Dao.insertBoard(board);
 				sqlSession.commit();
-				return "NoticeBoard.do";
+				response.sendRedirect("NoticeBoard.do");
 
 			} catch (Exception e) {
 				sqlSession.rollback();

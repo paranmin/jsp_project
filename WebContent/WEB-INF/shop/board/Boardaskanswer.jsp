@@ -125,7 +125,7 @@
 						<dt></dt>
 						<dd>
 							<input type="submit" value="댓글등록" id="submit"> <a
-								href="${pageContext.request.contextPath}/shop/ReviewBoard.do"
+								href="/shop/ReviewBoard.do"
 								class="btn_light btn_box_01">목록</a>
 						</dd>
 					</dl>

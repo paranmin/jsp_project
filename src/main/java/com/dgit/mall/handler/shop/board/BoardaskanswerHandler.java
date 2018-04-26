@@ -44,22 +44,22 @@ public class BoardaskanswerHandler extends ShopCommandHandler {
 			String num = request.getParameter("brdno");
 			System.out.println(num);
 			int number = Integer.parseInt(num);
-			System.out.println(number+"z");
-			try {						
+			System.out.println(number + "z");
+			try {
 				String brddepth = request.getParameter("brddepth");
-				System.out.println(brddepth+"z");
+				System.out.println(brddepth + "z");
 				String brdcode = request.getParameter("brdcode");
-				System.out.println(brdcode+"z");
+				System.out.println(brdcode + "z");
 				String brdwriter = request.getParameter("brdwriter");
-				System.out.println(brdwriter+"z");
+				System.out.println(brdwriter + "z");
 				String brdpassword = request.getParameter("brdpassword");
-				System.out.println(brdpassword+"z");
+				System.out.println(brdpassword + "z");
 				String brdtitle = request.getParameter("brdtitle");
-				System.out.println(brdtitle+"z");
+				System.out.println(brdtitle + "z");
 				String brdcontent = request.getParameter("brdcontent");
-				System.out.println(brdcontent+"z");
+				System.out.println(brdcontent + "z");
 				String brdparent = request.getParameter("brdparent");
-				System.out.println(brdparent+"z");
+				System.out.println(brdparent + "z");
 				// String brduseattachment
 				// =multi.getParameter("brduseattachment");
 
@@ -68,16 +68,15 @@ public class BoardaskanswerHandler extends ShopCommandHandler {
 				Date now = new Date();
 				SimpleDateFormat formatType = new SimpleDateFormat("yyyy-mm-dd");
 				formatType.format(now);
-				System.out.println(now+"z");
+				System.out.println(now + "z");
 				int lastno = Dao.selectBylastno();
-				System.out.println(lastno+"z");
-				
-				
+				System.out.println(lastno + "z");
+
 				int lastdep = Dao.selectBybrddepth(number);
-				
-				System.out.println(lastdep+"z");
-				Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, number, lastdep, null, brdcontent,
-						0, now, 0, 0);
+
+				System.out.println(lastdep + "z");
+				Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, number, lastdep, null,
+						brdcontent, 0, now, 0, 0);
 
 				request.setAttribute("brdwriter", brdwriter);
 				request.setAttribute("brdpassword", brdpassword);
@@ -87,8 +86,14 @@ public class BoardaskanswerHandler extends ShopCommandHandler {
 
 				System.out.println(board);
 				Dao.insertBoard(board);
-				
+
 				sqlSession.commit();
+
+				if (board.getBrdcode().equals("ReviewBoard")) {
+					response.sendRedirect("ReviewBoard.do");
+				} else if (board.getBrdcode().equals("QandABoard")) {
+					response.sendRedirect("BoardQandA.do");
+				}
 
 			} catch (Exception e) {
 				sqlSession.rollback();
@@ -96,8 +101,6 @@ public class BoardaskanswerHandler extends ShopCommandHandler {
 			} finally {
 				sqlSession.close();
 			}
-
-			return "ReviewBoard.do";
 
 		}
 		return null;
