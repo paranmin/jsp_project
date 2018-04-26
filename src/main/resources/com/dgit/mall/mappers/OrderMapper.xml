@@ -19,7 +19,6 @@
 		<result property="member.phone" column="m_phone" />
 		<result property="member.regdate" column="m_regdate" />
 		<result property="address.addrNo" column="ma_no" />
-		<result property="address.memNo" column="m_no" />
 		<result property="address.zipcode" column="ma_zipcode" />
 		<result property="address.addr1" column="ma_addr1" />
 		<result property="address.addr2" column="ma_addr2" />
