@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dgit.mall.dao.CouponDao">
-	<resultMap type="Coupon" id="couponResult">
-		<id property="cNo" column="c_no"/> <!-- 쿠폰번호 -->
-		<result property="cName" column="c_name"/> <!-- 쿠폰이름 -->
-		<result property="cuseMorePrice" column="c_use_more_price"/> <!-- 쿠폰사용한도 -->
-		<result property="csalePrice" column="c_sale_price"/> <!-- 쿠폰할인금액 -->
-		<result property="climitDate" column="c_limit_date"/> <!-- 쿠폰사용기한 -->
-	</resultMap>
-	
-	<resultMap type="UserCoupon" id="userCouponResult" extends="couponResult">
+	<resultMap type="UserCoupon" id="userCouponResult">
 		<id property="ucNo" column="uc_no"/>
 		<result property="yn" column="uc_use_yn" />
+		<result property="coupon.no" column="c_no"/> <!-- 쿠폰번호 -->
+		<result property="coupon.name" column="c_name"/> <!-- 쿠폰이름 -->
+		<result property="coupon.cuseMorePrice" column="c_use_more_price"/> <!-- 쿠폰사용한도 -->
+		<result property="coupon.csalePrice" column="c_sale_price"/> <!-- 쿠폰할인금액 -->
+		<result property="coupon.climitDate" column="c_limit_date"/> <!-- 쿠폰사용기한 -->
+		<result property="mNo.no" column="m_no"/>
+		<result property="mNo.id" column="m_id"/>
+		<result property="mNo.name" column="m_name"/>
 	</resultMap>
 	
-	<resultMap type="Member" id="userCouponWithmemberResult" extends="userCouponResult">
-		<id property="no" column="m_no"/>
-		<result property="id" column="m_id"/>
-		<result property="name" column="m_name"/>
-		<result property="phone" column="m_phone"/>
-	</resultMap>
-	
+	<update id="updateUserCoupon" parameterType="UserCoupon">
+		update user_coupon set uc_use_yn='Y' where uc_no=#{ucNo}
+	</update>
 	
 	<!-- 쿠폰 -->
-	<select id="selectByAll" resultMap="couponResult">
+	<select id="selectByAll" resultMap="userCouponResult">
 		select*from coupon order by c_no desc
 	</select>
-	<select id="selectByNo" resultMap="couponResult">
-		select*from coupon where c_no=#{cNo}
+	<select id="selectByNo" parameterType="Coupon" resultMap="userCouponResult">
+		select*from coupon where c_no=#{no}
 	</select>
 	<insert id="insertCoupon" parameterType="Coupon">
-		insert into coupon values(#{cNo},#{cName},#{cuseMorePrice},#{csalePrice},#{climitDate})
+		insert into coupon values(#{no},#{name},#{cuseMorePrice},#{csalePrice},#{climitDate})
 	</insert>
 	<delete id="deleteCoupon" parameterType="String">
 		delete from coupon where c_no=#{cNo}
@@ -39,12 +35,12 @@
 	
 	<!-- 쿠폰 회원 등록 -->
 	<insert id="insertMemberCoupon" parameterType="UserCoupon">
-		insert into user_coupon(c_no,m_no) values (#{cNo.cNo},#{mNo.no});
+		insert into user_coupon(c_no,m_no) values (#{coupon.no},#{mNo.no});
 	</insert>
 	
 	<!-- 회원쪽에서 쿠폰 불러오기 -->
-	<select id="selectByMem" resultMap="userCouponResult">
-		select uc.c_no,uc.uc_use_yn,c.c_name,c.c_use_more_price,c.c_sale_price,c.c_limit_date 
-		from user_coupon uc join coupon c on uc.c_no=c.c_no where uc.m_no=#{mNo.no}
+	<select id="selectByMem" parameterType="int" resultMap="userCouponResult">
+		select uc.uc_no,c.c_no,uc.uc_use_yn,c.c_name,c.c_use_more_price,c.c_sale_price,c.c_limit_date 
+		from user_coupon uc join coupon c on uc.c_no=c.c_no where uc.m_no=#{mNo} and uc.uc_use_yn='N'
 	</select>
 </mapper>

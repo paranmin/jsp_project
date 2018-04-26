@@ -20,9 +20,8 @@ public class ShopCouponHandler extends ShopCommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if(request.getMethod().equalsIgnoreCase("get")){
-			String pr = request.getParameter("orderChargePrice");
+			String pr = request.getParameter("price");
 			int price = Integer.parseInt(pr);
-			System.out.println(pr);
 			
 			try (SqlSession se = MySqlSessionFactory.openSession()){
 				HttpSession session = request.getSession(false);

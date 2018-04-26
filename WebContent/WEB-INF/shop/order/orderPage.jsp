@@ -102,8 +102,7 @@
 		font-size: 15px;
 	}
 	span.finalPrice{
-	    font-size:  18px;
-	    color: red;
+	    font-size:  16px;
 	}
 	img.sizeImg{
 	    width:  100px;
@@ -115,12 +114,16 @@
 	.unusedelFee{
 		display: none;
 	}
+	.totalcouponPrice{
+	    color: red;
+	    font-size: 20px;
+	}
 	
 </style>   
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
-<script src="${pageContext.request.contextPath}/js/order.js?a=2"></script>
+<script src="${pageContext.request.contextPath}/js/order.js?a=4"></script>
 <script type="text/javascript">
 $(function() {
 	$('textarea[name="orderMsg"]').keyup(function() {
@@ -137,13 +140,30 @@ $(function() {
 	});
 });
 
-function getReturnValue(returnaddrValue) {
+function getReturnValueaddr(returnaddrValue) {
 	 var p = $.parseJSON(returnaddrValue);
 	 $("input:hidden[name='addrNo']").val(p.addrNo);
 	 var str = p.addr.split(" / ");
 	 $("input:text[name='basicaddr']").val(str[0]);
 	 $("input:text[name='detailaddr']").val(str[1]);
 	 $("input:text[name='post1']").val(p.zipcode);
+}
+function getReturnValuecoupon(returnCpValue) {
+	 var coupon = $.parseJSON(returnCpValue);
+	 $("input:text[name='coupon']").val(coupon.couponNo);
+	 $(".finalPrice").text(coupon.couponusePrice);
+	 $("input:hidden[name='couponusePrice']").val(coupon.couponusePrice);
+	 $("input:hidden[name='userno']").val(coupon.userno);
+	 $("input:hidden[name='uesyn']").val(coupon.uesyn);
+	
+	 
+	 var useCouponPr = parseInt($("input:hidden[name='couponusePrice']").val());
+	 var unuseCoupon = parseInt($("input:hidden[name='orderChargePrice']").val());
+	
+	 var deliverprice =parseInt($(".deliverprice").text());
+	 if(unuseCoupon<35000){
+		 $(".totalcouponPrice").text(useCouponPr+deliverprice);
+	 }
 }
 
 </script>
@@ -229,15 +249,17 @@ function getReturnValue(returnaddrValue) {
 													name="toalpriceorder"></span>원 
 												<!-- 결제금액  -->
 												<input type="hidden" value="2500" name="delfee">
+												<input type="hidden" name="orderChargePrice">
 												<!--배송비 -->
 											</p>
 										</td>
 										<td colspan="5" class="unusedelFee">
 											<p>
 												결제 금액 : <span class="orderChargePrice"></span>원
+												<input type="hidden" name="orderChargePrice">
 											</p>
 										</td>
-										<input type="hidden" name="orderChargePrice">
+										
 									</tr>
 								</c:if>
 
@@ -382,8 +404,10 @@ function getReturnValue(returnaddrValue) {
 								<p class="introCoupon">보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수
 									있습니다.</p>
 								<p class="final">
-									총 결제금액 : <span class="finalPrice"></span>원
-									<input type="hidden" name="finalPrice">
+									총 결제금액 : <span class="finalPrice"></span>원<span class="deluse">+<span class="deliverprice">2500</span>원=<span class="totalcouponPrice"></span>원</span>
+									<input type="hidden" name="couponusePrice" value="0"><!-- 쿠폰사용한 가격 -->
+									<input type="hidden" name="userno"><!-- 유저쿠폰번호 -->
+									<input type="hidden" name="uesyn"><!-- 쿠폰사용여부 -->
 								</p>
 							</div>
 						</div>

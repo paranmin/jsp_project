@@ -102,6 +102,7 @@
 				}
 			}
 		});
+<<<<<<< HEAD
 
 		var value = new Array();
 		var value2 = new Array();
@@ -115,7 +116,42 @@
 			$("option:selected").each(function(j, obj) {
 				value[j] = $(obj).val();
 				value2[j] = $(obj).attr("data-cost");
+=======
+		str = "";
+		ocost = 0;
+		if(value.indexOf("==선택하세요==")==-1){
+			for(var i=0;i<value.length;i++){
+				if(i==value.length-1){
+					str += value[i];
+				}else{
+					str += value[i] +"/";
+				}
+				ocost += Number(value2[i]);
+			}
+			if(ocost==0){
+				ocost = "";
+			}else if(ocost>0){
+				ocost = " (+"+ocost+"원)";
+			}else if(ocost<0){
+				ocost = " ("+ocost+"원)";
+			}
+		}	
+		
+		if(flag == 0){
+			appendLi();
+			flag++;
+		}else{
+			$("div#selectedItem li").each(function(i,obj){
+				/* var $target = $(this).find("span.optionName").text(); */
+				var target = $(this).find("span.optionName").text();
+				console.log("target : "+target);
+				console.log("str : "+str);
+				if(target==str){
+					duplicate++;
+				}
+>>>>>>> refs/remotes/origin/master
 			});
+<<<<<<< HEAD
 			str = "";
 			ocost = 0;
 			if (value.indexOf("==선택하세요==") == -1) {
@@ -137,6 +173,14 @@
 			}
 
 			if (flag == 0) {
+=======
+			
+			
+			console.log(duplicate);
+			if(duplicate>0){
+				alert("이미 추가된 상품입니다.");
+			}else{
+>>>>>>> refs/remotes/origin/master
 				appendLi();
 				flag++;
 			} else {
@@ -156,6 +200,7 @@
 				}
 			}
 		}
+<<<<<<< HEAD
 
 		var Sumcost = 0;
 		function appendLi() {
@@ -202,7 +247,83 @@
 			$(hidden3).val(podNo);
 			$(li).append(hidden3);   */
 			$("div#selectedItem").children("ul").append(li);
+=======
+	}
+	
+	var Sumcost = 0;
+	function appendLi(){
+		var li = $("<li>");
+		var $text = ocost;
+		var namespan = $("<span class='optionName'>");
+		$(namespan).text(str);
+		var plusBtn = $("<button class='plusNum'>");
+		$(plusBtn).text("+");
+		var $input = $("<input type='text' class='productNum' name='cartnum'>");
+		$($input).val("1");
+		var minusBtn = $("<button class='minusNum'>");
+		$(minusBtn).text("-");
+		var span = $("<span class='price'>");
+		
+		var cost = new Array();
+		/* var podNo = new Array(); */
+		Sumcost = 0;
+		$('option:selected').each(function(i, obj){
+			cost[i]= Number($(obj).attr("data-cost"));
+			/* podNo[i]= Number($(obj).attr("data-podno")); */
+			Sumcost += cost[i];
+		});
+		
+		var price = productCost+Sumcost+"원";
+		
+		var closeBtn=$("<button class='closeli'>");
+		$(closeBtn).text("×");
+		
+		$(span).text(price);
+		
+		$(li).append(namespan);
+		$(li).append($text);
+		$(li).append(plusBtn);
+		$(li).append($input);
+		$(li).append(minusBtn);
+		$(li).append(span);
+		$(li).append(closeBtn);
+		var hidden = $("<input type='hidden' name='opPrice'>");
+		var hidden2 = $("<input type='hidden' name='optionName'>");
+		$(hidden).val(productCost+Sumcost);
+		var $text = $(li).text();
+		var text = $text.split(")");
+		$(hidden2).val(text[0]+")");
+		$(li).append(hidden);
+		$(li).append(hidden2);  
+		
+		
+		/* var hidden3 = $("<input type='hidden' name='podNo'>");
+		$(hidden3).val(podNo);
+		$(li).append(hidden3);   */
+		$("div#selectedItem").children("ul").append(li);
+	}
+	
+	$(document).on("click","button.plusNum", function(){
+		var $num = $(this).next().val();
+		var num = Number($num);
+		$(this).next().val(num+1);
+		var stock = Number($(this).next().val()); //갯수
+		var target = $(this).next().next().next().next().next().val();
+		
+		$(this).next().next().next().text((stock*target)+"원");
+		
+		calPrice();
+		return false;
+	})
+	
+	$(document).on("click","button.minusNum", function(){
+		var $num = $(this).prev().val();   
+		var num = Number($num);
+		if(num>1){
+			$(this).prev().val(num-1);
+>>>>>>> refs/remotes/origin/master
 		}
+<<<<<<< HEAD
 
 		$(document).on("click", "button.plusNum", function() {
 			var $num = $(this).next().val();
@@ -214,6 +335,53 @@
 			$(this).next().next().next().text((stock * target) + "원");
 
 			calPrice();
+=======
+		var stock = Number($(this).prev().val()); //갯수
+		var target = $(this).next().next().next().val();
+		
+		$(this).next().text((stock*target)+"원");
+		
+		calPrice();
+		return false;
+	})
+	
+	$(document).on("click","button.closeli", function(){
+		$(this).parent().remove();
+		calPrice();
+		var next = $("div#selectedItem li");
+		if(next.length==0){
+			$("div#resultPrice").css("display","none");
+		}
+		return false;
+	})
+	
+	var sum = 0;
+	function calPrice(){
+		$("div#resultPrice").css("display","block");
+		sum = 0;
+		var price = new Array();
+		$("div#selectedItem li").each(function(i,obj){
+			var target = $(this).find("span.price").text();
+			price = target.split("원");
+			sum += Number(price[0]);      
+		});
+		$("div#resultPrice").find("span").text(sum);
+	}
+		
+	$(window).scroll(function(){
+		var left = $("div.detail_left").outerHeight();
+		var right = $("div.detail_right").outerHeight()
+		if($(this).scrollTop()>=(left-right)){
+			$("div.detail_right").css("display","none");
+		}else{
+			$("div.detail_right").css("display","block");
+		}
+	});
+	
+	$("input[type='submit']").click(function(){
+		if($("#selectedItem").find("li").length==0){
+			alert("옵션을 선택해주세요");
+>>>>>>> refs/remotes/origin/master
 			return false;
 		})
 
@@ -287,11 +455,74 @@
 		<c:import url="../modules/header.jsp" />
 		<c:import url="../modules/leftSide.jsp" />
 		<c:import url="../modules/rightSide.jsp" />
+<<<<<<< HEAD
 		
 			<section id="detail_product">
 				<div class="detail_left">
 					<h2 class="catename">JEWELRY... ${pro.category }</h2>
 					<div class="detail_menu" id="detail_menu_detail">
+=======
+		<section id="detail_product">
+			<div class="detail_left">    
+				<h2 class="catename">JEWELRY... ${pro.category }</h2>
+				<div class="detail_menu" id="detail_menu_detail">
+					<ul>
+						<li><a href="#detail" id="detail">Detail</a></li>
+						<li><a href="#review">Review</a></li>
+						<li><a href="#qa">Q&amp;A</a></li>
+					</ul>    
+				</div>
+				<c:forEach var="imglist" items="${img }">
+					<img src="${pageContext.request.contextPath}/upload/${imglist.img }">    
+				</c:forEach>
+			</div>
+			<form action="detailProductShow.do" method="post">
+			<input type="hidden" name="chkAll" value="${pro.prdNo }">   
+			<div class="detail_right">
+				<h3>${pro.name }</h3>
+				<hr>
+				<table>
+					<tr>
+						<td colspan="2">${pro.subDesc }</td>
+					</tr>
+					<tr>
+						<td>판매가격</td>
+						<c:if test="${pro.cost == pro.sellingPrice }">
+							<td><b><fmt:formatNumber value="${pro.sellingPrice }" pattern="￦#,###"/></b></td>
+						</c:if>
+						<c:if test="${pro.cost != pro.sellingPrice }">
+							<td>
+								<span id="line"><fmt:formatNumber value="${pro.cost }" pattern="￦#,###"/></span>
+								<b><fmt:formatNumber value="${pro.sellingPrice }" pattern="￦#,###"/></b>
+								(${pro.discountPer } 할인)
+							</td>
+						</c:if>
+					</tr>	
+					<c:set value="0" var="fir"/>
+					<c:forEach var="option" items="${opt }" varStatus="status">
+						<c:set value="${fir+rownum[status.index]-1 }" var="end"/>
+						<tr>
+							<td>${option.poName }</td>
+							<td>
+								<select id="select${status.index }" <c:if test="${!status.first }"> disabled="disabled" </c:if>>
+									<option>==선택하세요==</option>
+									<c:forEach var="result" items="${res }" begin="${fir}" end="${end}">
+										<option value="${result.podValue}" data-cost="${result.podCost}" data-podno="${result.podNo}">${result.podValue}
+										<c:if test="${result.podCost !=0}">
+										 / <fmt:formatNumber value="${result.podCost}" pattern="#,###원"/>
+										</c:if>
+										</option>
+									</c:forEach>
+								</select>
+							</td>
+						</tr>
+						<c:set value="${end+1 }" var="fir"/>
+					</c:forEach>
+				</table>
+				<hr>
+				<c:if test="${pro.useOption == 0 }">
+					<div id="selectedItem">
+>>>>>>> refs/remotes/origin/master
 						<ul>
 							<li><a href="#detail" id="detail">Detail</a></li>
 							<li><a href="#review">Review</a></li>
@@ -308,7 +539,36 @@
 				<div class="detail_right">
 					<h3>${pro.name }</h3>
 					<hr>
+<<<<<<< HEAD
 					<table>
+=======
+					<div id="resultPrice" style="display:block">
+					<p>총 상품 금액 <span>${pro.sellingPrice }</span>원</p>
+				</div>
+				</c:if>
+				<c:if test="${pro.useOption == 1 }">
+					<div id="selectedItem">
+						<ul></ul>
+					</div>
+				<hr>
+				<div id="resultPrice">
+					<p>총 상품 금액 <span></span>원</p>
+				</div>
+				</c:if>	
+				<input type="submit" value="Add Cart"><br>
+			</div>
+			</form>
+			<div class="datail_board">
+				<div class="detail_menu" id="detail_menu_review">
+					<ul>
+						<li><a href="#detail">Detail</a></li>
+						<li><a href="#review" id="review">Review</a></li>
+						<li><a href="#qa">Q&amp;A</a></li>
+					</ul>
+				</div>
+				<div class="detail_menu">
+					<table class="review">
+>>>>>>> refs/remotes/origin/master
 						<tr>
 							<td colspan="2">${pro.subDesc }</td>
 						</tr>
@@ -381,6 +641,7 @@
 					</c:if>
 					<input type="submit" value="Add Cart"><br>
 				</div>
+<<<<<<< HEAD
 		</form>
 		<div class="datail_board">
 			<div class="detail_menu" id="detail_menu_review">
@@ -472,6 +733,39 @@
 				<div>페이징</div>
 			</div>
 		</div>
+=======
+				<div class="detail_menu" id="detail_menu_qa">
+					<ul>
+						<li><a href="#detail">Detail</a></li>
+						<li><a href="#review">Review</a></li>
+						<li><a href="#qa" id="qa">Q&amp;A</a></li>
+					</ul>
+				</div>
+				<div class="detail_menu">
+					<table class="qa">
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>이름</th>
+							<th>날짜</th>
+							<th>조회</th>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>문의합니다</td>
+							<td>eunae</td>
+							<td>2018/04/06</td>
+							<td>7</td>
+						</tr>
+					</table>
+					<div class="button">
+						<button id="qaBtn">문의하기</button>
+						<button id="qaListBtn">목록으로</button>
+					</div>
+					<div>페이징</div>
+				</div>
+			</div>
+>>>>>>> refs/remotes/origin/master
 		</section>
 		<c:import url="../modules/footer.jsp" />
 	</div>

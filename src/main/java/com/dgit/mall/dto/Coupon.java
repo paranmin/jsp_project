@@ -3,22 +3,22 @@ package com.dgit.mall.dto;
 import java.util.Date;
 
 public class Coupon {
-	private String cNo;
-	private String cName;
+	private String no;
+	private String name;
 	private int cuseMorePrice;
 	private int csalePrice;
 	private Date climitDate;
-	public String getcNo() {
-		return cNo;
+	public String getNo() {
+		return no;
 	}
-	public void setcNo(String cNo) {
-		this.cNo = cNo;
+	public void setNo(String no) {
+		this.no = no;
 	}
-	public String getcName() {
-		return cName;
+	public String getName() {
+		return name;
 	}
-	public void setcName(String cName) {
-		this.cName = cName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getCuseMorePrice() {
 		return cuseMorePrice;
@@ -38,21 +38,21 @@ public class Coupon {
 	public void setClimitDate(Date climitDate) {
 		this.climitDate = climitDate;
 	}
-	public Coupon() {
-	}
-	public Coupon(String cNo, String cName, int cuseMorePrice, int csalePrice, Date climitDate) {
+	public Coupon(String no, String name, int cuseMorePrice, int csalePrice, Date climitDate) {
 		super();
-		this.cNo = cNo;
-		this.cName = cName;
+		this.no = no;
+		this.name = name;
 		this.cuseMorePrice = cuseMorePrice;
 		this.csalePrice = csalePrice;
 		this.climitDate = climitDate;
 	}
+	public Coupon() {
+	}
 	@Override
 	public String toString() {
-		return "Coupon [cNo=" + cNo + ", cName=" + cName + ", cuseMorePrice=" + cuseMorePrice + ", csalePrice="
-				+ csalePrice + ", climitDate=" + climitDate + "]";
+		return "Coupon [no=" + no + ", name=" + name + ", cuseMorePrice=" + cuseMorePrice + ", csalePrice=" + csalePrice
+				+ ", climitDate=" + climitDate + "]";
 	}
-
+	
 	
 }

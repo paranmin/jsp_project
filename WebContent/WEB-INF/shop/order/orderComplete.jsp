@@ -39,85 +39,105 @@
 							<th class="purchaseSub">수량</th>
 							<th class="purchaseSub">가격</th>
 						</tr>
-						<tbody>
-						<tr>
-							<td rowspan="2">
-								<div class="tb-centerImg">
+						<c:if test="${ordpdlist }">
+						
+							<tbody>
+							<c:forEach items="${ordpdlist }" var="items">
+								<tr>
+									<td rowspan="2">
+										<div class="tb-centerImg">
+											<img src="${pageContext.request.contextPath}/upload/${items.prdNo.mainImg }" class="sizeImg">
+										</div>
+									</td>
+									<td>
+										<div class="tb-centerContent">
+											<p>${items.prdNo.name }</p>
+										</div>
+									</td>
+									<td rowspan="2">
+										<div class="tb-textalign">
+										<p>${items.opQuantity }</p>
+										</div>
+									</td>
+									<td rowspan="2">
+										<div class="tb-textalign">
+										<p>${items.opSellingPrice }</p>
+										</div>
+									</td>
+								</tr>
+								<tr>
 									
-								</div>
-							</td>
-							<td>
-								<div class="tb-centerContent">
-									<p><a href="#">베이직 스틸 큐빅 귀걸이</a></p>
-								</div>
-							</td>
-							<td rowspan="2">
-								<div class="tb-textalign">
-								<p>1개</p>
-								</div>
-							</td>
-							<td rowspan="2">
-								<div class="tb-textalign">
-								<p>5,000원</p>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							
-							<td>
-								<div class="tb-centerContentDetail">
-									<p>색상어쩌구 저쩌구</p>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-						<tfoot>
-						<tr>
-							<td colspan="5">
-								<div class="tb-productPrice">
-									<p>결제금액:</p>
-								</div>
-							</td>
-						</tr>
-						</tfoot>
+									<td>
+										<div class="tb-centerContentDetail">
+											<p>${items.opOption }</p>
+										</div>
+									</td>
+								</tr>
+							</c:forEach>
+							</tbody>
+						
+						</c:if>
+						<c:if test="${orderlist }">
+						<c:forEach items="${orderlist }" var="item">
+								<tfoot>
+									<tr>
+										<td colspan="5">
+											<div class="tb-productPrice">
+												<c:if test="${orderlist.deliveryFee == null} ">
+													<p>결제금액:${orderlist.ordPrice }</p>
+												</c:if>
+												<c:if test="${orderlist.deliveryFee != null} ">
+													<p>결제금액:${orderlist.ordPrice + ord.deliveryFee }</p>
+												</c:if>
+											</div>
+										</td>
+									</tr>
+								</tfoot>
+							</c:forEach>
+						</c:if>
 					</table>
 				</div>
-				<div class="payway">
-					<p>결제 방법</p>
-					<div class="payway-order-info">
-						무통장 입금 : <span id="bank">국민은행978452<span id="bankername">이소정</span></span><br>
-						(입금 확인 후 배송 됩니다.)
+				<c:if test="${orderlist.type == 'BANK' }">
+					<div class="payway">
+						<p>결제 방법</p>
+						<div class="payway-order-info">
+							무통장 입금 : <span id="bank">국민은행978452<span id="bankername">이소정</span></span><br>
+							(입금 확인 후 배송 됩니다.)
+						</div>
 					</div>
-				</div>
+				</c:if>
 				<div class="shipping">
 					<p>배송지 정보</p>
 					<div class="address-info">
+					<c:if test="${orderlist }">
 						<table class="addresstable">
 							<tr>
 								<th>이름</th>
-								<td>이소정</td>
+								<td>${orderlist.receiver }</td>
 								<th>연락처1</th>
-								<td>0000</td>
+								<td>${orderlist.rcPhone1 }</td>
 								<th>연락처2</th>
-								<td>0000</td>
+								<td>${orderlist.rcPhone2 }</td>
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td colspan="5">ㅇㅁㄹㅇㄴㅁㄴㄹㅇㄹㅇㄴㅁㄹ</td>
+								<td colspan="5">${orderlist.address.addr1 } <span>/</span>${orderlist.address.addr2 } </td>
 							</tr>
 							<tr>
 								<th>주문메세지</th>
 								<td colspan="5">
-									주문메세지 넣는칸
+									${orderlist.ordMessage }
 								</td>
 						</table>
+					</c:if>
 					</div>
 				</div>
+				
 				<p class="order-footer">
 					<label id="ordername2">이소정</label>님의 주문이 완료되었습니다.
 					<br>
 					<br>
-					귀하의 주문확인 번호는 <span class="spanStyle">20180404171157</span>입니다.
+					귀하의 주문확인 번호는 <span class="spanStyle">${orderlist.ordNo }</span>입니다.
 					<br>
 					입금방법이 무통장 입금의 경우 계좌번호를 메모하세요.
 					<br>
@@ -125,9 +145,11 @@
 					<br>
 					<br>
 				</p>
+				
 				<div class="order-btns">
-				<p class="btn_dark_box"><a href="#" class="btn_dark_color">주문 확인</a></p> <!-- 메인으로 가기 or 마이페이지로 가기 -->
+				<p class="btn_dark_box"><a href="index.jsp" class="btn_dark_color">주문 확인</a></p> <!-- 메인으로 가기 or 마이페이지로 가기 -->
 			</div>
+			
 			</div>
 			</form>
 		</section>

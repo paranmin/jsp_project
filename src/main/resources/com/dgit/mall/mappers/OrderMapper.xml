@@ -11,48 +11,51 @@
 		<result property="receiver" column="ord_receuver"/><!-- 수령자 -->
 		<result property="rcPhone1" column="ord_rphone1"/><!-- 결제타입 -->
 		<result property="rcPhone2" column="ord_rphone2"/><!-- 결제타입 -->
+		<result property="member.no" column="m_no" />
+		<result property="member.id" column="m_id" />
+		<result property="member.name" column="m_name" />
+		<result property="member.pwd" column="m_pass" />
+		<result property="member.email" column="m_email" />
+		<result property="member.phone" column="m_phone" />
+		<result property="member.regdate" column="m_regdate" />
+		<result property="address.addrNo" column="ma_no" />
+		<result property="address.zipcode" column="ma_zipcode" />
+		<result property="address.addr1" column="ma_addr1" />
+		<result property="address.addr2" column="ma_addr2" />
+		<result property="address.addrType" column="ma_addr_type" />
+		<result property="address.regdate" column="ma_regdate" />
+		<result property="address.addrName" column="ma_name" />
 	</resultMap>
-	<resultMap type="Member" id="orderWithMemberResult" extends="orderResult">
-		<result property="no" column="m_no" />
-		<result property="id" column="m_id" />
-		<result property="name" column="m_name" />
-		<result property="pwd" column="m_pass" />
-		<result property="email" column="m_email" />
-		<result property="phone" column="m_phone" />
-		<result property="regdate" column="m_regdate" />
-	</resultMap>
-	<resultMap type="Address" id="memberwithaddressResult" extends="orderWithMemberResult">
-		<id property="addrNo" column="ma_no" />
-		<result property="memNo" column="m_no" />
-		<result property="zipcode" column="ma_zipcode" />
-		<result property="addr1" column="ma_addr1" />
-		<result property="addr2" column="ma_addr2" />
-		<result property="addrType" column="ma_addr_type" />
-		<result property="regdate" column="ma_regdate" />
-		<result property="addrName" column="ma_name" />
-	</resultMap>
-	<resultMap type="OrderProduct" id="orderwithorderproductResult" extends="memberwithaddressResult">
+	
+	<resultMap type="OrderProduct" id="orderProductResult">
 		<result property="opSellingPrice" column="op_selling_price"/>
 		<result property="opQuantity" column="op_quantity"/>
 		<result property="opOption" column="op_option"/>
-	</resultMap>
-	<resultMap type="Product" id="orderproductwidthproductResult" extends="orderwithorderproductResult">
-		<result property="prdNo" column="prd_no"/>
-		<result property="name" column="prd_name"/>
+		<result property="order.ordNo" column="ord_no"/>
+		<result property="prdNo.prdNo" column="prd_no"/>
+		<result property="prdNo.name" column="prd_name"/>
+		<result property="prdNo.mainImg" column="prd_main_img"/>
 	</resultMap>
 	
 
 	<!-- order 주문등록 -->
 	<insert id="insertOrder" parameterType="Order">
-		insert into `order` values(#{ordNo},#{ordPrice},#{ordCouponPrice},#{type},#{deliveryFee},#{ordMessage},#{member.no},#{receiver},#{rcPhone1},#{rcPhone2});
+		insert into `order` values(#{ordNo},#{ordPrice},#{ordCouponPrice},#{type},#{address.addrNo},#{deliveryFee},#{ordMessage},#{member.no},#{receiver},#{rcPhone1},#{rcPhone2});
 	</insert>
 	<insert id="insertOrderProduct" parameterType="OrderProduct">
 		insert into order_product values(#{opSellingPrice},#{opQuantity},#{opOption},#{order.ordNo},#{prdNo.prdNo});
 	</insert>
-	<select id="selectOrder" parameterType="Order" resultMap="orderwithorderproductResult">
-		select*from order
+	<select id="selectOrder" parameterType="String" resultMap="orderResult">
+		select od.m_no,od.ord_no,od.ord_coupon_price,od.ord_price,od.ord_pay_type,od.ord_delivery_fee,
+		od.ord_msg,od.ord_receiver,od.ord_rphone1,od.ord_rphone2,
+		ma.ma_no,ma.ma_zipcode,ma.ma_name,ma.ma_addr1,ma.ma_addr2
+		from`order` od join member_address ma on od.ma_no = ma.ma_no where od.ord_no=#{ordNo}
 	</select>
 	
+	<!-- 상품땡겨오는거 -->
+	<select id="selectOrderProduct" parameterType="String" resultMap="orderProductResult">
+		select op.op_selling_price, op.op_option,op.op_quantity,prd.prd_name,prd.prd_main_img,prd.prd_no from order_product op join product prd on op.prd_no = prd.prd_no where ord_no=#{ordNo}
+	</select>
 	
 	
 </mapper>

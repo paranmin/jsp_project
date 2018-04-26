@@ -131,9 +131,14 @@ public class Address {
 
 
 
+	
+
+
 	@Override
 	public String toString() {
-		return String.format("[%s] %s %s", zipcode, addr1, addr2);
+		return "Address [addrNo=" + addrNo + ", memNo=" + memNo + ", zipcode=" + zipcode + ", addr1=" + addr1
+				+ ", addr2=" + addr2 + ", addrType=" + addrType + ", regdate=" + regdate + ", addrName=" + addrName
+				+ "]";
 	}
 
 }

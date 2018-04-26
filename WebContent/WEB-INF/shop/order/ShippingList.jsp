@@ -92,13 +92,12 @@ $(function(){
 				"addrNo":addrNo,
 				"addr":addr,
 				"zipcode":zipcode
-		} ;
-		window.opener.getReturnValue(JSON.stringify(returnaddrValue));
+		};
 		var result = confirm(addrName+"/"+addr+"을 선택하시겠습니까?");
 		if(result){
 			window.close();
 		}
-		
+		window.opener.getReturnValueaddr(JSON.stringify(returnaddrValue));
 	})
 	
 })

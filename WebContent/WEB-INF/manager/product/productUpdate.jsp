@@ -335,7 +335,7 @@ div input[name="files"]{
 			}
 
 			var count = 0;
-			if ($("input[type='radio']:checked").val() == 1) {
+			if ($("input[name='use_option']:checked").val() == 1) {
 				$("table#proOption").find("td").each(function(i, obj) {
 					var $op_name = $(this).find("input.op_name"),
 						$op_desc = $(this).find("input.op_desc"),
@@ -540,11 +540,11 @@ div input[name="files"]{
 			</div>
 			<div>
 				<label>옵션 유무</label>
-				<label><input type="radio" id="option"
+				<input type="radio" id="option"
 					name="use_option" value="1"
-					<c:if test="${pro.useOption=='1' }"> checked="checked" </c:if>>사용</label>
-				<label><input type="radio" id="option" name="use_option" value="0"
-					<c:if test="${pro.useOption=='0' }"> checked="checked" </c:if>>사용안함</label>
+					<c:if test="${pro.useOption=='1' }"> checked="checked" </c:if>>사용
+				<input type="radio" id="option" name="use_option" value="0"
+					<c:if test="${pro.useOption=='0' }"> checked="checked" </c:if>>사용안함
 			</div>
 			<table id="proOption">
 				<tr>
