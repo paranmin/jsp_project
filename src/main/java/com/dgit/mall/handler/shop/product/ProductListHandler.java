@@ -42,10 +42,12 @@ public class ProductListHandler extends ShopCommandHandler {
 		bestMap.put("offset", item);
 		bestMap.put("sort", "rank"); // 팔린거 고정
 		bestMap.put("orderby", "desc"); // 팔린거 역순
+		bestMap.put("view", 1);
 
 		Map<String, Object> cateMap = new HashMap<>();
 		cateMap.put("start", start);
 		cateMap.put("offset", offset);
+		cateMap.put("view", 1);
 
 		if (cate != null && !cate.equals("")) {
 			cateMap.put("category", cate);
