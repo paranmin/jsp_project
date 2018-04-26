@@ -61,11 +61,11 @@ input[type='radio']{
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	$("input[type='radio']").select(function(){
+$(function(){
+	$("input[type='radio']").change(function(){
 		alert("dfsf"); 
 	});
-}); */
+});
 </script>
 </head>
 <body>
