@@ -24,6 +24,14 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/productDetail.css"
 	media="all" />
+<style type="text/css">
+.brdReview a {
+	cursor: pointer;
+}
+.detail_menu .hide {
+	display: none;
+}
+</style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -148,7 +156,7 @@ $(function() {
 					appendLi();
 				}
 			}
-		
+		});
 	}
 	
 	var Sumcost = 0;
@@ -273,11 +281,6 @@ $(function() {
 	});
 });
 </script>
-<style type="text/css">
-.brdReview a {
-	cursor: pointer;
-}
-</style>
 </head>
 <body>
 	<div id="container">
@@ -408,7 +411,7 @@ $(function() {
 									<td>${item.brdch }</td>
 								</tr>
 								<tr class="hide">
-									<td>${itme.brdcontent}</td>
+									<td>${item.brdcontent}</td>
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -452,7 +455,7 @@ $(function() {
 									<td>${item.brdch }</td>
 								</tr>
 								<tr class="hide">
-									<td>${itme.brdcontent }</td>
+									<td>${item.brdcontent }</td>
 								</tr>
 							</c:forEach>
 						</c:if>
