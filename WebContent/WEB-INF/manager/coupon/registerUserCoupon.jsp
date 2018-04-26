@@ -1,8 +1,8 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -198,8 +198,7 @@
 						<td class="text2">${items.coupon.name }</td>
 						<td class="text1">${items.coupon.cuseMorePrice }원이상</td>
 						<td class="text1">${items.coupon.csalePrice }원</td>
-						<td class="text3"><fmt:formatDate
-								value="${items.climitDate }" pattern="yyy-MM-dd" />까지</td>
+						<td class="text3"><fmt:formatDate value="${items.climitDate }" pattern="yyyy-MM-dd" />까지</td>
 						<td class="text3"><c:if test="${items.coupon.climitDate>=now }">
 									사용가능
 								</c:if> <c:if test="${items.coupon.climitDate<now }">
