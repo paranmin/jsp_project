@@ -40,9 +40,9 @@
 							<th class="purchaseSub">가격</th>
 						</tr>
 						<c:if test="${ordpdlist }">
-						<c:forEach items="${ordpdlist }" var="items">
+						
 							<tbody>
-							
+							<c:forEach items="${ordpdlist }" var="items">
 								<tr>
 									<td rowspan="2">
 										<div class="tb-centerImg">
@@ -73,9 +73,9 @@
 										</div>
 									</td>
 								</tr>
-							
+							</c:forEach>
 							</tbody>
-						</c:forEach>
+						
 						</c:if>
 						<c:if test="${orderlist }">
 						<c:forEach items="${orderlist }" var="item">
