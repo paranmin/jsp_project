@@ -58,9 +58,12 @@
 	<select id="selectOrderProduct" parameterType="String" resultMap="orderProductResult">
 		select op.op_selling_price, op.op_option,op.op_quantity,prd.prd_name,prd.prd_main_img,prd.prd_no from order_product op join product prd on op.prd_no = prd.prd_no where ord_no=#{ordNo}
 	</select>
-	
-	<select id="selectOrderByMember" parameterType="Member" resultMap="orderResult">
+
+	<select id="selectOrderByMember" parameterType="Map" resultMap="orderResult">
 		select ord_no, ord_price, ord_coupon_price, ord_pay_type, ma_no, ord_delivery_fee, ord_msg, m_no, ord_receiver, ord_rphone1, ord_rphone2, ord_regdate
 		from `order` where m_no = #{no}
+		<if test="limit != null and limit > 0">
+			 limit #{limit}
+		</if>
 	</select>
 </mapper>

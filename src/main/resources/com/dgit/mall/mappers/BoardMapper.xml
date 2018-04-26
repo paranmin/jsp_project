@@ -89,9 +89,12 @@
 		where brd_parent=#{brdNo}
 	</select>
 
-	<select id="selectBoardByMember" parameterType="int" resultMap="BoardResult">
+	<select id="selectBoardByMember" parameterType="Map" resultMap="BoardResult">
 		SELECT brd_no, brd_code, brd_title, brd_writer, brd_password, brd_content, brd_parent, brd_depth, brd_use_attachment, prd_no, brd_ch, selected, m_no, regdate
-		FROM board where m_no = #{mNo}
+		FROM board where m_no = #{no}
+		<if test="limit != null and limit > 0">
+			 limit #{limit}
+		</if>
 	</select>
 
 	<insert id="insertBoard" parameterType="Board">

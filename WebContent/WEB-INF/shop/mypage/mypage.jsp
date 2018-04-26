@@ -37,7 +37,7 @@
 					<p>주&nbsp;&nbsp;&nbsp;소 : ${loginMember.addr}</p>
 				</div>
 				<div class="orderInfo">
-					총 주문금액 : 10,010 원
+					총 주문금액 : <fmt:formatNumber value="${orderTotalPrice }" pattern="#,###" /> 원
 				</div>
 			</div>
 			<div class="board">
@@ -58,17 +58,17 @@
 						</tr>
 					</thead>
 					<tbody>
-				<c:if test="${orderList ne null && orderList.size() > 0}">
-					<c:forEach var="order" items="${orderList}">
+				<c:if test="${recentOrder ne null && recentOrder.size() > 0}">
+					<c:forEach var="order" items="${recentOrder}">
 						<tr>
-							<td><fmt:formatDate value="${order.regdate}" pattern="yyyy-MM-dd"/></td>
-							<td>상품명</td>
-							<td>${order.ordPrice}</td>
-							<td>주문상세</td>
+							<td><fmt:formatDate value="${order.ordDate}" pattern="yyyy-MM-dd"/></td>
+							<td>${order.ordPrdName}</td>
+							<td><fmt:formatNumber value="${order.ordPrice}" pattern="#,###" /> 원</td>
+							<td><a href="#" class="btn" onclick="viewOrder('${order.orderNo}');return false;">조회</a></td>
 						</tr>
 					</c:forEach>
 				</c:if>
-				<c:if test="${orderList eq null || orderList.size() == 0}">
+				<c:if test="${recentOrder eq null || recentOrder.size() == 0}">
 						<tr>
 							<td colspan="4">등록된 주문이 없습니다.</td>
 						</tr>
@@ -96,7 +96,7 @@
 					<c:forEach var="board" items="${boardList}">
 						<tr>
 							<td><fmt:formatDate value="${board.brdregdate}" pattern="yyyy-MM-dd" /></td>
-							<td>${board.brdtitle}</td>
+							<td><a href="${pageContext.request.contextPath}/shop/ReviewBoardRead.do?brdno=${board.brdNo}">${board.brdtitle}</a></td>
 							<td>
 								<c:choose>
 									<c:when test="${board.brdcode == 'ReviewBoard'}">리뷰</c:when>
@@ -118,5 +118,11 @@
 
 		<c:import url="../modules/footer.jsp" />
 	</div>
+<script>
+function viewOrder(orderNo) {
+	var url = "<%= request.getContextPath() + "/shop/mypage/vieworder.do?no=" %>";
+	window.open(url+orderNo, 'viewOrderPop', 'width=1200,height=1000,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes,top=100,left=100');
+}
+</script>
 </body>
 </html>

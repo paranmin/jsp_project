@@ -1,6 +1,7 @@
 package com.dgit.mall.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dgit.mall.dto.Board;
 
@@ -34,5 +35,5 @@ public interface BoardDao {
 
 	public int selectBybrddepth(int number);
 
-	List<Board> selectBoardByMember(int mNo);
+	List<Board> selectBoardByMember(Map<String, Object> map);
 }

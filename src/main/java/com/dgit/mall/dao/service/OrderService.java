@@ -1,10 +1,11 @@
 package com.dgit.mall.dao.service;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.dgit.mall.dto.Member;
 import com.dgit.mall.dto.Order;
 import com.dgit.mall.dto.OrderProduct;
 import com.dgit.mall.util.MySqlSessionFactory;
@@ -38,9 +39,21 @@ public class OrderService {
 		return res;
 	}
 
-	public List<Order> selectOrderByMember(Member member) {
+	public Order selectOrder(String ordNo) {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
-			return sqlSession.selectList(namespace + "selectOrderByMember", member);
+			return sqlSession.selectOne(namespace + "selectOrder", ordNo);
+		}
+	}
+
+	public List<Order> selectOrderByMember(Map<String, Object> map) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectOrderByMember", map);
+		}
+	}
+
+	public List<OrderProduct> selectOrderProduct(String ordNo) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectOrderProduct", ordNo);
 		}
 	}
 }
