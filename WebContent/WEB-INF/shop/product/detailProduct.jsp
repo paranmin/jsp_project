@@ -258,8 +258,6 @@ $(function(){
 		<c:import url="../modules/header.jsp" />
 		<c:import url="../modules/leftSide.jsp" />
 		<c:import url="../modules/rightSide.jsp" />
-		<form action="detailProductShow.do" method="post">
-		<input type="hidden" name="chkAll" value="${pro.prdNo }">   
 		<section id="detail_product">
 			<div class="detail_left">    
 				<h2 class="catename">JEWELRY... ${pro.category }</h2>
@@ -274,6 +272,8 @@ $(function(){
 					<img src="${pageContext.request.contextPath}/upload/${imglist.img }">    
 				</c:forEach>
 			</div>
+			<form action="detailProductShow.do" method="post">
+			<input type="hidden" name="chkAll" value="${pro.prdNo }">   
 			<div class="detail_right">
 				<h3>${pro.name }</h3>
 				<hr>
@@ -346,6 +346,7 @@ $(function(){
 				</c:if>	
 				<input type="submit" value="Add Cart"><br>
 			</div>
+			</form>
 			<div class="datail_board">
 				<div class="detail_menu" id="detail_menu_review">
 					<ul>
@@ -409,7 +410,6 @@ $(function(){
 				</div>
 			</div>
 		</section>
-		</form>
 		<c:import url="../modules/footer.jsp" />
 	</div>
 </body>
