@@ -26,12 +26,27 @@
 	media="all" />
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/base.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$(".brdReview>a").click(function() {
-			$(this).next("td").toggleClass("hide");
-
+		$(".brdReview").click(function() {
+			$(".review .hide").hide();
+			if ($(this).parent().next().css("display") != "none") {
+				$(this).parent().next().hide();
+			} else {
+				$(this).parent().next().show();
+			}
 		});
+
+		$(".brdqa").click(function() {
+			$(".review .hide").hide();
+			if ($(this).parent().next().css("display") != "none") {
+				$(this).parent().next().hide();
+			} else {
+				$(this).parent().next().show();
+			}
+		});
+
 		var size =
 <%=optSize%>
 	;
@@ -265,9 +280,6 @@
 	cursor: pointer;
 }
 
-.brdhide {
-	display: none;
-}
 </style>
 </head>
 <body>
@@ -275,8 +287,7 @@
 		<c:import url="../modules/header.jsp" />
 		<c:import url="../modules/leftSide.jsp" />
 		<c:import url="../modules/rightSide.jsp" />
-		<form action="detailProductShow.do" method="post">
-			<input type="hidden" name="chkAll" value="${pro.prdNo }">
+		
 			<section id="detail_product">
 				<div class="detail_left">
 					<h2 class="catename">JEWELRY... ${pro.category }</h2>
@@ -292,6 +303,8 @@
 							src="${pageContext.request.contextPath}/upload/${imglist.img }">
 					</c:forEach>
 				</div>
+				<form action="detailProductShow.do" method="post">
+				<input type="hidden" name="chkAll" value="${pro.prdNo }">
 				<div class="detail_right">
 					<h3>${pro.name }</h3>
 					<hr>
@@ -368,94 +381,98 @@
 					</c:if>
 					<input type="submit" value="Add Cart"><br>
 				</div>
-				<div class="datail_board">
-					<div class="detail_menu" id="detail_menu_review">
-
-						<ul>
-							<li><a href="#detail">Detail</a></li>
-							<li><a href="#review" id="review">Review</a></li>
-							<li><a href="#qa">Q&amp;A</a></li>
-						</ul>
-					</div>
-					<div class="detail_menu">
-						<table class="review">
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>제목</th>
-									<th>이름</th>
-									<th>날짜</th>
-									<th>조회</th>
-								</tr>
-							<tbody>
-								<!-- .공지사항 리스트 시작 -->
-								<c:if test="${Blist.size()>0 }">
-									<c:forEach var="item" items="${Blist }">
-										<tr>
-											<td>${item.brdNo }</td>
-											<td class="brdReview"><a href="#">${item.brdtitle }</a></td>
-											<td>${item.brdwriter }</td>
-											<td>${item.brdregdate }</td>
-											<td>${item.brdch }</td>
-										</tr>
-										<tr class="brdhide">
-											<td>${itme.brdcontent}</td>
-										</tr>
-									</c:forEach>
-								</c:if>
-							</tbody>
-						</table>
-						<div class="button">
-							<button id="reviewBtn"><a href="${pageContext.request.contextPath}/shop/ReviewForm.do">후기작성</a></button>
-							<button id="reviewListBtn"><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">목록으로</a></button>
-						</div>
-						<div>페이징</div>
-					</div>
-					<div class="detail_menu" id="detail_menu_qa">
-						<ul>
-							<li><a href="#detail">Detail</a></li>
-							<li><a href="#review">Review</a></li>
-							<li><a href="#qa" id="qa">Q&amp;A</a></li>
-						</ul>
-					</div>
-					<div class="detail_menu">
-						<table class="qa">
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>제목</th>
-									<th>이름</th>
-									<th>날짜</th>
-									<th>조회</th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- .Q&A공지사항 리스트 시작 -->
-								<c:if test="${list.size()>0 }">
-									<c:forEach var="item" items="${list }">
-										<tr>
-											<td>${item.brdNo }</td>
-											<td class="brdReview"><a href="#">${item.brdtitle }</a></td>
-											<td>${item.brdwriter }</td>
-											<td>${item.brdregdate }</td>
-											<td>${item.brdch }</td>
-										</tr>
-										<tr class="brdhide">
-											<td>${itme.brdcontent}</td>
-										</tr>
-									</c:forEach>
-								</c:if>
-							</tbody>
-						</table>
-						<div class="button">
-							<button id="qaBtn">문의하기</button>
-							<button id="qaListBtn">목록으로</button>
-						</div>
-						<div>페이징</div>
-					</div>
-				</div>
-			</section>
 		</form>
+		<div class="datail_board">
+			<div class="detail_menu" id="detail_menu_review">
+
+				<ul>
+					<li><a href="#detail">Detail</a></li>
+					<li><a href="#review" id="review">Review</a></li>
+					<li><a href="#qa">Q&amp;A</a></li>
+				</ul>
+			</div>
+			<div class="detail_menu">
+				<table class="review">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>이름</th>
+							<th>날짜</th>
+							<th>조회</th>
+						</tr>
+					<tbody>
+						<!-- .공지사항 리스트 시작 -->
+						<c:if test="${Blist.size()>0 }">
+							<c:forEach var="item" items="${Blist }">
+								<tr>
+									<td>${item.brdNo }</td>
+									<td class="brdReview"><a href="#">${item.brdtitle }</a></td>
+									<td>${item.brdwriter }</td>
+									<td>${item.brdregdate }</td>
+									<td>${item.brdch }</td>
+								</tr>
+								<tr class="hide">
+									<td>${itme.brdcontent}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+				<div class="button">
+					<a href="${pageContext.request.contextPath}/shop/ReviewForm.do?prdno=${pro.prdNo }"><button
+							id="reviewBtn">후기작성</button></a> <a
+						href="${pageContext.request.contextPath}/shop/ReviewBoard.do"><button
+							id="reviewListBtn">목록으로</button></a>
+				</div>
+				<div>페이징</div>
+			</div>
+			<div class="detail_menu" id="detail_menu_qa">
+				<ul>
+					<li><a href="#detail">Detail</a></li>
+					<li><a href="#review">Review</a></li>
+					<li><a href="#qa" id="qa">Q&amp;A</a></li>
+				</ul>
+			</div>
+			<div class="detail_menu">
+				<table class="qa">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>이름</th>
+							<th>날짜</th>
+							<th>조회</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- .Q&A공지사항 리스트 시작 -->
+						<c:if test="${list.size()>0 }">
+							<c:forEach var="item" items="${list }">
+								<tr>
+									<td>${item.brdNo }</td>
+									<td class="brdqa"><a href="#">${item.brdtitle }</a></td>
+									<td>${item.brdwriter }</td>
+									<td>${item.brdregdate }</td>
+									<td>${item.brdch }</td>
+								</tr>
+								<tr class="hide">
+									<td>${itme.brdcontent }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+				<div class="button">
+					<a href="${pageContext.request.contextPath}/shop/BoardQandAForm.do?prdno=${pro.prdNo }"><button
+							id="qaBtn">문의하기</button></a> <a
+						href="${pageContext.request.contextPath}/shop/BoardQandA.do"><button
+							id="qaListBtn">목록으로</button></a>
+				</div>
+				<div>페이징</div>
+			</div>
+		</div>
+		</section>
 		<c:import url="../modules/footer.jsp" />
 	</div>
 </body>

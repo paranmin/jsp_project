@@ -21,38 +21,59 @@ public class BoardReviewReadHandler extends ShopCommandHandler {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String num = request.getParameter("brdno");
 		int number = Integer.parseInt(num);
+
 		SqlSession sqlSession = null;
-		/*int no = Integer.parseInt(request.getParameter("no"));
-		System.out.println(no);
-		ProductDao dao = sqlSession.getMapper(ProductDao.class);
-		int pro = dao.allProduct(no);
-		System.out.println(pro);
-		request.setAttribute("pro", pro);*/
 
-		
-		try {
-			request.setAttribute("contentPage", "board/BoardReview.jsp");
+		String prdNo = request.getParameter("prdno");
+		if (prdNo != null && !prdNo.equals("")) {
+			int no = Integer.parseInt(prdNo);
+			System.out.println(no);
+			ProductDao dao = sqlSession.getMapper(ProductDao.class);
+			Product pro = dao.SelectProductByno(no);
+			System.out.println(pro);
+			request.setAttribute("pro", pro);
 
-			sqlSession = MySqlSessionFactory.openSession();
-			BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
+			try {
+				request.setAttribute("contentPage", "board/BoardReview.jsp");
 
-	
-			int ChBoard = BoardREAD.updatecheck(number);
-			sqlSession.commit();
+				sqlSession = MySqlSessionFactory.openSession();
+				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
 
-			Board readBoard = BoardREAD.selectlistBoardReviewByid(number);
-			System.out.println(readBoard);
-			request.setAttribute("readBoard", readBoard);
+				int ChBoard = BoardREAD.updatecheck(number);
+				sqlSession.commit();
 
+				Board readBoard = BoardREAD.selectlistBoardReviewByid(number);
+				System.out.println(readBoard);
+				request.setAttribute("readBoard", readBoard);
+
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
 			return VIEW_FRONT_PATH + "board/BoardReviewRead.jsp";
+		} else {
+			try {
+				request.setAttribute("contentPage", "board/BoardReview.jsp");
 
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		} finally {
-			sqlSession.close();
+				sqlSession = MySqlSessionFactory.openSession();
+				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
+
+				int ChBoard = BoardREAD.updatecheck(number);
+				sqlSession.commit();
+
+				Board readBoard = BoardREAD.selectlistBoardReviewByid(number);
+				System.out.println(readBoard);
+				request.setAttribute("readBoard", readBoard);
+
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
 		}
-
-		return null;
+		return VIEW_FRONT_PATH + "board/BoardReviewRead.jsp";
 	}
 }

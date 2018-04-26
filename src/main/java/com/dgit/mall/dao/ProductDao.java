@@ -43,6 +43,5 @@ public interface ProductDao {
 	public int countTotalProductByCategory(Product product) throws SQLException;
 	
 	public int selectNameProductCount(Product pro) throws SQLException;
-	public int allProduct(int no);
 
 } 

@@ -50,11 +50,14 @@
 		</div>
 		<div class="top_box">
 			<ul>
-				<li><a href="#">Notice</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
 				<li><span><a>/</a></span></li>
-				<li><a href="#">Q&amp;A</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
 				<li><span><a>/</a></span></li>
-				<li><a href="#">Review(후기)</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
 			</ul>
 		</div>
 
@@ -66,7 +69,7 @@
 					<input type="hidden" name="brdparent" value="${readBoard.brdNo }">
 					<input type="hidden" name="brddepth" value="${readBoard.brddepth }">
 					<div class="bbs-table-write">
-						<fieldset>  
+						<fieldset>
 							<legend>일반게시판 쓰기</legend>
 							<table summary="">
 								<caption>게시판 글쓰기</caption>
@@ -101,9 +104,9 @@
 										<td colspan="3">
 											<div class="title">
 												<input id="bw_input_subject"
-										   			class="MS_input_txt input_style2" type="text"
-												name="brdtitle" value="[${readBoard.brdtitle }]답변">
-										
+													class="MS_input_txt input_style2" type="text"
+													name="brdtitle" value="[${readBoard.brdtitle }]답변">
+
 												<br>
 											</div>
 										</td>
@@ -116,7 +119,7 @@
 											</div>
 										</td>
 									</tr>
-							</tbody>
+								</tbody>
 							</table>
 						</fieldset>
 					</div>
@@ -125,8 +128,7 @@
 						<dt></dt>
 						<dd>
 							<input type="submit" value="댓글등록" id="submit"> <a
-								href="/shop/ReviewBoard.do"
-								class="btn_light btn_box_01">목록</a>
+								href="/shop/ReviewBoard.do" class="btn_light btn_box_01">목록</a>
 						</dd>
 					</dl>
 				</form>

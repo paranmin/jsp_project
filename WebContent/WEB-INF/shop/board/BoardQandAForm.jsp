@@ -35,6 +35,20 @@ pageEncoding="UTF-8"%>
 	padding: 8px;
 	border: 0;
 }
+
+.prd-tinfo {
+	zoom: 1;
+	overflow: hidden;
+	padding: 10px 0 10px 80px;
+	border: 1px solid #ddd;
+	margin-bottom: 40px;
+}
+
+.prd-tinfo>dd>ul {
+	padding: 15px 0 0 10px;
+	min-height: 45px;
+	_height: 45px;
+	border-left: 1px solid #ddd;
 }
 </style>
 </head>
@@ -48,11 +62,14 @@ pageEncoding="UTF-8"%>
 		</div>
 		<div class="top_box">
 			<ul>
-				<li><a href="#">Notice</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
 				<li><span><a>/</a></span></li>
-				<li><a href="#">Q&amp;A</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
 				<li><span><a>/</a></span></li>
-				<li><a href="#">Review(후기)</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
 			</ul>
 		</div>
 
@@ -65,7 +82,18 @@ pageEncoding="UTF-8"%>
 				<form action="BoardQandAForm.do" method="post"
 					enctype="multipart/form-data" style="position: relative;"
 					autocomplete="off">
+					<input type="hidden" name="prdno" value="${pro.prdNo} ">
+					<dl class="prd-tinfo">
 
+						<dd>
+							<ul>
+
+								<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
+									<span class="MK-product-icons"> <!--/coupon_icon/--></li>
+								<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
+							</ul>
+						</dd>
+					</dl>
 					<div class="bbs-table-write">
 						<fieldset>
 							<legend>일반게시판 쓰기</legend>
@@ -108,9 +136,8 @@ pageEncoding="UTF-8"%>
 													<option value="기타">기타</option>
 												</select><br> <input id="bw_input_subject"
 													class="MS_input_txt input_style2" type="text"
-													name="brdtitle">
-													<input id="bw_input_file" type="hidden" name="brdch"
-													value="0">
+													name="brdtitle"> <input id="bw_input_file"
+													type="hidden" name="brdch" value="0">
 											</div>
 										</td>
 									</tr>
@@ -127,8 +154,8 @@ pageEncoding="UTF-8"%>
 										<td colspan="3">
 											<div>
 												<input id="bw_input_file" type="file"
-													name="brduseattachment" value="첨부"> 
-													
+													name="brduseattachment" value="첨부">
+
 											</div>
 										</td>
 									</tr>
@@ -140,8 +167,8 @@ pageEncoding="UTF-8"%>
 					<dl class="bbs-link bbs-link-btm">
 						<dt></dt>
 						<dd>
-							<input type="submit" value="글등록" id="submit"> 
-							<a href="${pageContext.request.contextPath}/shop/BoardQandA.do"
+							<input type="submit" value="글등록" id="submit"> <a
+								href="${pageContext.request.contextPath}/shop/BoardQandA.do"
 								class="btn_light btn_box_01">목록</a>
 						</dd>
 					</dl>

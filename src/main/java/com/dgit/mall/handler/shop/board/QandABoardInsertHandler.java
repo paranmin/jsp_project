@@ -25,7 +25,7 @@ public class QandABoardInsertHandler extends ShopCommandHandler {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		if (request.getMethod().equalsIgnoreCase("get")) {
-			/*int no = Integer.parseInt(request.getParameter("no"));
+			int no = Integer.parseInt(request.getParameter("prdno"));
 			SqlSession sqlSession = null;
 			ProductDao dao = sqlSession.getMapper(ProductDao.class);
 			Product pro = dao.SelectProductByno(no);
@@ -33,7 +33,7 @@ public class QandABoardInsertHandler extends ShopCommandHandler {
 			
 			request.setAttribute("pro", pro);
 			request.setAttribute("img", proimg);
-			*/
+			
 			
 			return VIEW_FRONT_PATH + "/board/BoardQandAForm.jsp";
 			

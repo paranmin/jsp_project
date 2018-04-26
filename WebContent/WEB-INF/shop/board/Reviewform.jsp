@@ -61,11 +61,14 @@
 		</div>
 		<div class="top_box">
 			<ul>
-				<li><a href="#">Notice</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
 				<li><span><a>/</a></span></li>
-				<li><a href="#">Q&amp;A</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
 				<li><span><a>/</a></span></li>
-				<li><a href="#">Review(후기)</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
 			</ul>
 		</div>
 
@@ -73,9 +76,15 @@
 			<div class="page-body">
 				<form action="ReviewForm.do" method="post"
 					enctype="multipart/form-data">
-					<input type="hidden" name="no" value="${pro.prdNo} ">
+
+					<input type="hidden" name="prdno" value="${pro.prdNo} ">
 					<dl class="prd-tinfo">
-						
+						<dt>
+							<c:forEach var="imglist" items="${img }">
+								<img
+									src="${pageContext.request.contextPath}/upload/${imglist.img }">
+							</c:forEach>
+						</dt>
 						<dd>
 							<ul>
 

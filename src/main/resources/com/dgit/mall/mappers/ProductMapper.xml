@@ -232,10 +232,5 @@
 		</where>
 	</select>
 	
-	
-	<!--게시판에 사용될 상품 번호,이름,이미지,가격-->
-	<select id="allProduct" resultMap="productResult">
-		select * from product where prd_no =#{prdNo};
-	</select>
-	
+
 </mapper>

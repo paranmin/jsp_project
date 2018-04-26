@@ -110,13 +110,13 @@ input, select, textarea {
 			<div>
 				<!--#top_box-->
 				<div class="top_box">
-					<ul>
-						<li><a href="#">Notice</a></li>
-						<li><span><a>/</a></span></li>
-						<li><a href="#">Q&amp;A</a></li>
-						<li><span><a>/</a></span></li>
-						<li><a href="#">Review(후기)</a></li>
-					</ul>
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
+					<li><span><a>/</a></span></li>
+					<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
+					<li><span><a>/</a></span></li>
+					<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
+				</ul>
 				</div>
 			</div>
 			<div id="bbsData">

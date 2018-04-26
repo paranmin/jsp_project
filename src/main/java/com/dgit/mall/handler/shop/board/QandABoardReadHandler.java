@@ -14,7 +14,6 @@ public class QandABoardReadHandler extends ShopCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("QandABoardReadHandler"+2);
 		String num = request.getParameter("brdno");
 		int number = Integer.parseInt(num);
 

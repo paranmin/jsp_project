@@ -285,6 +285,21 @@ a {
 	text-align: center;
 	padding-top: 115px;
 }
+
+.prd-tinfo {
+	zoom: 1;
+	overflow: hidden;
+	padding: 10px 0 10px 80px;
+	border: 1px solid #ddd;
+	margin-bottom: 40px;
+}
+
+.prd-tinfo>dd>ul {
+	padding: 15px 0 0 10px;
+	min-height: 45px;
+	_height: 45px;
+	border-left: 1px solid #ddd;
+}
 </style>
 
 </head>
@@ -302,11 +317,14 @@ a {
 			<!--#top_box-->
 			<div class="top_box">
 				<ul>
-					<li><a href="#">Notice</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
 					<li><span><a>/</a></span></li>
-					<li><a href="#">Q&amp;A</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
 					<li><span><a>/</a></span></li>
-					<li><a href="#">Review(후기)</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
 				</ul>
 			</div>
 		</div>
@@ -317,7 +335,7 @@ a {
 						<a href="#"><img src=""></a>
 					</dt>
 					<dd>
-						<input type="hidden" name="no" value="${pro.prdNo} ">
+						<input type="hidden" name="prdno" value="${pro.prdNo} ">
 						<ul>
 
 							<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
