@@ -25,6 +25,10 @@ public class ShopOrderCompleteHandler extends ShopCommandHandler {
 		try {
 			sql = MySqlSessionFactory.openSession();
 			HttpSession session = request.getSession(false);
+			if(orderNum == null){
+				response.sendRedirect(request.getContextPath());
+				return null;
+			}
 			Member loginMember = (Member) session.getAttribute("auth");
 			Member mem = MemberService.getInstance().selectByMemberNo(loginMember.getNo());
 			OrderDao dao = sql.getMapper(OrderDao.class);
