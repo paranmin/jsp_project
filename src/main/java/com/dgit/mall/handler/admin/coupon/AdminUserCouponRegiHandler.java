@@ -65,10 +65,10 @@ public class AdminUserCouponRegiHandler extends AdminCommandHandler {
 						mr.setNo(Integer.parseInt(memberNo[m]));
 						for(int i=0; i<couponNo.length; i++){
 							Coupon cp = new Coupon();
-							cp.setcNo(couponNo[i]);
+							cp.setNo(couponNo[i]);
 							UserCoupon uc = new UserCoupon();
 							uc.setmNo(mr);
-							uc.setcNo(cp);
+							uc.setCoupon(cp);
 							dao.insertMemberCoupon(uc);
 							//uclist.add(uc);
 						}	

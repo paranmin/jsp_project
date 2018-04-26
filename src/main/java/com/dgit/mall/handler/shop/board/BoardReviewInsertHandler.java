@@ -22,13 +22,13 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		SqlSession sqlSession = null;
-
+		System.out.println("1234");
 		if (request.getMethod().equalsIgnoreCase("get")) {
-
+			System.out.println("1235");
 			return VIEW_FRONT_PATH + "/board/Reviewform.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String ReviewformPath = request.getRealPath("Reviewform");
-
+			System.out.println("1236");
 			File dir = new File(ReviewformPath);
 			if (dir.exists() == false) {
 				dir.mkdirs();
@@ -84,8 +84,8 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 			} finally {
 				sqlSession.close();
 			}
-
-			return "ReviewBoard.do";
+			System.out.println("123");
+			response.sendRedirect("ReviewBoard.do");
 
 		}
 		return null;

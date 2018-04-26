@@ -26,6 +26,7 @@
 		from board
 		where brd_code =
 		"ReviewBoard"
+			order by brd_parent asc; 
 	</select>
 
 	<select id="selectByAllQandABoard" parameterType="Board"
@@ -36,6 +37,7 @@
 		board
 		where brd_code =
 		"QandABoard"
+				order by brd_parent asc; 
 	</select>
 
 	<select id="selectNoticeBoardAll" parameterType="Board"
@@ -44,7 +46,8 @@
 		brd_code,brd_title,brd_writer,brd_ch,regdate
 		from board
 		where brd_code =
-		"NoticeBoard"
+		"NoticeBoard"	
+		order by brd_parent asc; 
 	</select>
 
 	<select id="selectByAllReply" parameterType="Board" resultMap="BoardResult">
@@ -64,7 +67,6 @@
 		from board
 		where
 		brd_no = #{number}
-		order by brd_parent desc; 
 	</select>
 
 
