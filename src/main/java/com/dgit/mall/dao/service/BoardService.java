@@ -2,6 +2,7 @@ package com.dgit.mall.dao.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -11,6 +12,7 @@ import com.dgit.mall.util.MySqlSessionFactory;
 
 public class BoardService {
 	private static BoardService instance = new BoardService();
+	private final String namespace = "com.dgit.mall.dao.BoardDao.";
 
 	public static BoardService getInstance() {
 		return instance;
@@ -32,5 +34,10 @@ public class BoardService {
 			return dao.selectNoticeBoardAll();
 		}
 	}
-	
+
+	public List<Board> selectBoardByMember(Map<String, Object> map) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectBoardByMember", map);
+		}
+	}
 }

@@ -47,7 +47,7 @@ public class BoardReplyinsertHandler extends ShopCommandHandler {
 				int lastno = Dao.selectBylastno();
 
 				Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, number, 0, null, brdcontent,
-						0, now, 0, 0);
+						0, now, 0, 0, 0);
 				System.out.println(board);		
 				request.setAttribute("brdno", lastno);
 				System.out.println(lastno);

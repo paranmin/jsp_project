@@ -15,6 +15,7 @@
 		<result property="brdpassword" column="brd_password" /> <!--글 작성자 비밀번호 -->
 		<result property="brdch" column="brd_ch" /><!--조회수 -->
 		<result property="selected" column="selected" /><!--글 종류 선택 -->
+		<result property="memNo" column="m_no" /><!--회원 번호 -->
 	</resultMap>
 
 
@@ -88,7 +89,13 @@
 		where brd_parent=#{brdNo}
 	</select>
 
-
+	<select id="selectBoardByMember" parameterType="Map" resultMap="BoardResult">
+		SELECT brd_no, brd_code, brd_title, brd_writer, brd_password, brd_content, brd_parent, brd_depth, brd_use_attachment, prd_no, brd_ch, selected, m_no, regdate
+		FROM board where m_no = #{no}
+		<if test="limit != null and limit > 0">
+			 limit #{limit}
+		</if>
+	</select>
 
 	<insert id="insertBoard" parameterType="Board">
 		insert into board

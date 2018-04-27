@@ -76,7 +76,7 @@ public class BoardaskanswerHandler extends ShopCommandHandler {
 
 				System.out.println(lastdep + "z");
 				Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, number, lastdep, null,
-						brdcontent, 0, now, 0, 0);
+						brdcontent, 0, now, 0, 0, 0);
 
 				request.setAttribute("brdwriter", brdwriter);
 				request.setAttribute("brdpassword", brdpassword);

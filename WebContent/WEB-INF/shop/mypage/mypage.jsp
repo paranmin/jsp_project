@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,7 @@
 					<p>주&nbsp;&nbsp;&nbsp;소 : ${loginMember.addr}</p>
 				</div>
 				<div class="orderInfo">
-					총 주문금액 : 10,010 원
+					총 주문금액 : <fmt:formatNumber value="${orderTotalPrice }" pattern="#,###" /> 원
 				</div>
 			</div>
 			<div class="board">
@@ -57,18 +58,21 @@
 						</tr>
 					</thead>
 					<tbody>
+				<c:if test="${recentOrder ne null && recentOrder.size() > 0}">
+					<c:forEach var="order" items="${recentOrder}">
 						<tr>
-							<td>주문일자</td>
-							<td>상품명</td>
-							<td>결제금액</td>
-							<td>주문상세</td>
+							<td><fmt:formatDate value="${order.ordDate}" pattern="yyyy-MM-dd"/></td>
+							<td>${order.ordPrdName}</td>
+							<td><fmt:formatNumber value="${order.ordPrice}" pattern="#,###" /> 원</td>
+							<td><a href="#" class="btn" onclick="viewOrder('${order.orderNo}');return false;">조회</a></td>
 						</tr>
+					</c:forEach>
+				</c:if>
+				<c:if test="${recentOrder eq null || recentOrder.size() == 0}">
 						<tr>
-							<td>주문일자</td>
-							<td>상품명</td>
-							<td>결제금액</td>
-							<td>주문상세</td>
+							<td colspan="4">등록된 주문이 없습니다.</td>
 						</tr>
+				</c:if>
 					</tbody>
 				</table>
 			</div>
@@ -88,16 +92,25 @@
 						</tr>
 					</thead>
 					<tbody>
+				<c:if test="${boardList ne null && boardList.size() > 0}">
+					<c:forEach var="board" items="${boardList}">
 						<tr>
-							<td>등록일자</td>
-							<td>제목</td>
-							<td>게시판</td>
+							<td><fmt:formatDate value="${board.brdregdate}" pattern="yyyy-MM-dd" /></td>
+							<td><a href="${pageContext.request.contextPath}/shop/ReviewBoardRead.do?brdno=${board.brdNo}">${board.brdtitle}</a></td>
+							<td>
+								<c:choose>
+									<c:when test="${board.brdcode == 'ReviewBoard'}">리뷰</c:when>
+									<c:otherwise>Q&amp;A</c:otherwise>
+								</c:choose>
+							</td>
 						</tr>
+					</c:forEach>
+				</c:if>
+				<c:if test="${boardList eq null || boardList.size() == 0 }">
 						<tr>
-							<td>등록일자</td>
-							<td>제목</td>
-							<td>게시판</td>
+							<td colspan="3">등록된 글이 없습니다.</td>
 						</tr>
+				</c:if>
 					</tbody>
 				</table>
 			</div>
@@ -105,5 +118,11 @@
 
 		<c:import url="../modules/footer.jsp" />
 	</div>
+<script>
+function viewOrder(orderNo) {
+	var url = "<%= request.getContextPath() + "/shop/mypage/vieworder.do?no=" %>";
+	window.open(url+orderNo, 'viewOrderPop', 'width=1200,height=1000,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes,top=100,left=100');
+}
+</script>
 </body>
 </html>

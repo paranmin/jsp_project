@@ -6,11 +6,12 @@
 		<result property="ordPrice" column="ord_price"/> <!-- 주문가격 -->
 		<result property="ordCouponPrice" column="ord_coupon_price"/> <!-- 쿠폰사용가격 -->
 		<result property="deliveryFee" column="ord_delivery_fee"/> <!-- 배송비 -->
-		<result property="ordMessage" column="order_text"/> <!-- 주문메세지 -->
+		<result property="ordMessage" column="ord_msg"/> <!-- 주문메세지 -->
 		<result property="type" column="ord_pay_type"/><!-- 결제타입 -->
-		<result property="receiver" column="ord_receuver"/><!-- 수령자 -->
+		<result property="receiver" column="ord_receiver"/><!-- 수령자 -->
 		<result property="rcPhone1" column="ord_rphone1"/><!-- 결제타입 -->
 		<result property="rcPhone2" column="ord_rphone2"/><!-- 결제타입 -->
+		<result property="regdate" column="ord_regdate"/><!-- 주문일 -->
 		<result property="member.no" column="m_no" />
 		<result property="member.id" column="m_id" />
 		<result property="member.name" column="m_name" />
@@ -40,23 +41,111 @@
 
 	<!-- order 주문등록 -->
 	<insert id="insertOrder" parameterType="Order">
-		insert into `order`(ord_no, ord_price, ord_coupon_price, ord_pay_type, ma_no, ord_delivery_fee, ord_msg, m_no, ord_receiver, ord_rphone1, ord_rphone2) 
-		values(#{ordNo},#{ordPrice},#{ordCouponPrice},#{type},#{address.addrNo},#{deliveryFee},#{ordMessage},#{member.no},#{receiver},#{rcPhone1},#{rcPhone2})
+		insert into `order`(ord_no, ord_price, ord_coupon_price, ord_pay_type, ma_no, ord_delivery_fee, ord_msg, m_no, ord_receiver, ord_rphone1, ord_rphone2, ord_regdate) 
+		values(#{ordNo},#{ordPrice},#{ordCouponPrice},#{type},#{address.addrNo},#{deliveryFee},#{ordMessage},#{member.no},#{receiver},#{rcPhone1},#{rcPhone2}, #{regdate})
 	</insert>
 	<insert id="insertOrderProduct" parameterType="OrderProduct">
 		insert into order_product values(#{opSellingPrice},#{opQuantity},#{opOption},#{order.ordNo},#{prdNo.prdNo});
 	</insert>
 	<select id="selectOrder" parameterType="String" resultMap="orderResult">
 		select od.m_no,od.ord_no,od.ord_coupon_price,od.ord_price,od.ord_pay_type,od.ord_delivery_fee,
-		od.ord_msg,od.ord_receiver,od.ord_rphone1,od.ord_rphone2,
+		od.ord_msg,od.ord_receiver,od.ord_rphone1,od.ord_rphone2,od.ord_regdate, mb.m_name,
 		ma.ma_no,ma.ma_zipcode,ma.ma_name,ma.ma_addr1,ma.ma_addr2
-		from `order` od join member_address ma on od.ma_no = ma.ma_no where od.ord_no=#{ordNo}
+		from `order` od
+		join mall.`member` mb on od.m_no = mb.m_no  
+		join member_address ma on od.ma_no = ma.ma_no 
+		where od.ord_no=#{ordNo}
 	</select>
 	
 	<!-- 상품땡겨오는거 -->
 	<select id="selectOrderProduct" parameterType="String" resultMap="orderProductResult">
 		select op.op_selling_price, op.op_option,op.op_quantity,prd.prd_name,prd.prd_main_img,prd.prd_no from order_product op join product prd on op.prd_no = prd.prd_no where ord_no=#{ordNo}
 	</select>
+
+	<select id="selectOrderByMember" parameterType="Map" resultMap="orderResult">
+		select ord_no, ord_price, ord_coupon_price, ord_pay_type, ma_no, ord_delivery_fee, ord_msg, m_no, ord_receiver, ord_rphone1, ord_rphone2, ord_regdate
+		from `order` where m_no = #{no}
+		<if test="limit != null and limit > 0">
+			 limit #{limit}
+		</if>
+	</select>
 	
+	<!-- 
+	<option value="all">통합검색</option>
+	<option value="orderNo">주문번호</option>
+	<option value="orderName">주문자명</option>
+	<option value="orderPhone">주문자 휴대폰 번호</option>
+	<option value="orderEmail">주문자 이메일</option>
+	<option value="receiverName">수령자명</option>
+	<option value="receiverPhone">수령자 휴대폰 번호</option>
+	<option value="id">아이디</option>
+	 -->
 	
+	<sql id="selectSqlByPagination">
+		select od.m_no,od.ord_no,od.ord_coupon_price,od.ord_price,od.ord_pay_type,od.ord_delivery_fee,
+		od.ord_msg,od.ord_receiver,od.ord_rphone1,od.ord_rphone2,od.ord_regdate,
+		mb.m_name, mb.m_phone, mb.m_email, mb.m_id,
+		ma.ma_no,ma.ma_zipcode,ma.ma_name,ma.ma_addr1,ma.ma_addr2
+		from mall.`order` od
+		join mall.`member` mb on od.m_no = mb.m_no  
+		join mall.member_address ma on od.ma_no = ma.ma_no
+	</sql>
+
+	<sql id="whereBySearch">
+		<where>
+			<choose>
+				<when test="where != null and where == 'orderNo'">
+					od.ord_no = #{query}
+				</when>
+				<when test="where != null and where == 'orderName'">
+					mb.m_name like CONCAT("%", #{query}, "%")
+				</when>
+				<when test="where != null and where == 'orderPhone'">
+					mb.m_phone = #{query} or mb.m_tel = #{query}
+				</when>
+				<when test="where != null and where == 'receiverName'">
+					od.ord_receiver like CONCAT("%", #{query}, "%")
+				</when>
+				<when test="where != null and where == 'receiverPhone'">
+					od.ord_rphone1 = #{query} or od.ord_rphone2 = #{query}
+				</when>
+				<when test="where != null and where == 'id'">
+					mb.m_id = #{query}
+				</when>
+				<otherwise>
+					<if test="query != null and query != ''">
+						od.ord_no = #{query} or
+						mb.m_name like CONCAT("%", #{query}, "%") or
+						mb.m_phone = #{query} or mb.m_tel = #{query} or
+						od.ord_receiver like CONCAT("%", #{query}, "%") or
+						od.ord_rphone1 = #{query} or od.ord_rphone2 = #{query} or
+						mb.m_id = #{query}
+					</if>
+				</otherwise>
+			</choose>
+		</where>
+	</sql>
+
+	<select id="countTotalOrderBySearch" parameterType="map" resultType="int">
+		select count(ord_no) 
+		from mall.`order` od
+		join mall.`member` mb on od.m_no = mb.m_no  
+		join mall.member_address ma on od.ma_no = ma.ma_no 
+		<include refid="whereBySearch" />
+	</select>
+	
+	<select id="selectOrderListBySearch" parameterType="map" resultMap="orderResult">
+		<include refid="selectSqlByPagination" />
+		<include refid="whereBySearch" />
+		order by ord_no DESC
+		<if test="start != null or offset != null">
+			limit 
+			<if test="start > 0">
+				#{start},
+			</if>
+			<if test="offset > 0">
+				#{offset}
+			</if>
+		</if>
+	</select>
 </mapper>

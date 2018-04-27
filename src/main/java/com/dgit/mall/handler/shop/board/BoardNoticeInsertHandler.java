@@ -57,7 +57,7 @@ public class BoardNoticeInsertHandler extends ShopCommandHandler {
 				BoardDao Dao = sqlSession.getMapper(BoardDao.class);
 				Date now = new Date();
 				Board board = new Board(0, brdcode, brdtitle, brdwriter, brdpassword, 1, 0, null, brdcontent, 0, now,
-						0, 0);
+						0, 0, 0);
 
 				System.out.println(brdwriter);
 				System.out.println(brdpassword);

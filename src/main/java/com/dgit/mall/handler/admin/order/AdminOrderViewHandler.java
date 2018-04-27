@@ -1,17 +1,27 @@
 package com.dgit.mall.handler.admin.order;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dgit.mall.dao.service.OrderService;
+import com.dgit.mall.dto.Order;
+import com.dgit.mall.dto.OrderProduct;
 import com.dgit.mall.handler.admin.AdminCommandHandler;
 
 public class AdminOrderViewHandler extends AdminCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String orderNo = request.getParameter("no");
+		String no = request.getParameter("no");
 		if (request.getMethod().equalsIgnoreCase("get")) {
 
+			Order order = OrderService.getInstance().selectOrder(no);
+			List<OrderProduct> ordPrdList = OrderService.getInstance().selectOrderProduct(no);
+
+			request.setAttribute("order", order);
+			request.setAttribute("ordPrdList", ordPrdList);
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 
 		}
@@ -21,7 +31,7 @@ public class AdminOrderViewHandler extends AdminCommandHandler {
 		request.setAttribute("useAwesome", "use");
 		request.setAttribute("css", "order.css");
 
-		request.setAttribute("no", orderNo);
+		request.setAttribute("no", no);
 		return TEMPLATE_PAGE;
 	}
 

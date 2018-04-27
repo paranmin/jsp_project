@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,10 +30,9 @@
 				<li><a href="board.do" class="engText">Board List</a></li>
 			</ul>
 			<div class="board">
-				<p class="order_top_msg"><span class="bold">[이강대]</span>님이 쇼핑몰에서 주문한 내역입니다.</p>
+				<p class="order_top_msg"><span class="bold">[${member.name}]</span>님이 쇼핑몰에서 주문한 내역입니다.</p>
 				<table>
 					<colgroup>
-						<col width="5%"/>
 						<col width="10%"/>
 						<col />
 						<col width="8%"/>
@@ -40,7 +40,6 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th>번호</th>
 							<th>주문일자</th>
 							<th>상품명</th>
 							<th>주문상세</th>
@@ -48,20 +47,16 @@
 						</tr>
 					</thead>
 					<tbody>
+				<c:if test="${recentOrder ne null && recentOrder.size() > 0}">
+					<c:forEach var="order" items="${recentOrder}">
 						<tr>
-							<td>5</td>
-							<td>2018-02-11</td>
-							<td>아주 멋진 귀걸이</td>
-							<td><a href="#" class="btn" onclick="viewOrder('2222');return false;">조회</a></td>
+							<td><fmt:formatDate value="${order.ordDate}" pattern="yyyy-MM-dd"/></td>
+							<td>${order.ordPrdName}</td>
+							<td><a href="#" class="btn" onclick="viewOrder('${order.orderNo}');return false;">조회</a></td>
 							<td><a href="#">배송대기</a></td>
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>2018-02-25</td>
-							<td>아주 이쁜 반지 셋</td>
-							<td><a href="#" class="btn" onclick="viewOrder('11111');return false;">조회</a></td>
-							<td><a href="#">배송중</a></td>
-						</tr>
+					</c:forEach>
+				</c:if>
 					</tbody>
 				</table>
 			</div>
@@ -70,9 +65,6 @@
 		<c:import url="../modules/footer.jsp" />
 	</div>
 <script>
-$(function() {
-	
-});
 function viewOrder(orderNo) {
 	var url = "<%= request.getContextPath() + "/shop/mypage/vieworder.do?no=" %>";
 	window.open(url+orderNo, 'viewOrderPop', 'width=1200,height=1000,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes,top=100,left=100');

@@ -14,11 +14,24 @@
     padding: 20px;
 	
 	}
+	.sizeImg{
+	width: 90px;
+	}
 </style>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet" href="../../css/base.css" media="all" />
 <link rel="stylesheet" href="../../css/orderComplete.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var optionYN = $(".option").text();
+	if(optionYN == "N"){
+		 $(".option").text("");
+	}
+	console.log($(".aaa").text());
+})
+</script>
 </head>
 <body>
 	<div id="container">
@@ -32,69 +45,71 @@
 				<h2>ORDER</h2>
 				<div class="orderComTitle">
 					<p>주문 상품</p>
-					<table>
-						<tr class="firstline">
-							<th class="purchaseSub"> </th>
-							<th id="purchaseName">구입상품명</th>
-							<th class="purchaseSub">수량</th>
-							<th class="purchaseSub">가격</th>
-						</tr>
-						<c:if test="${ordpdlist.size() > 0}">
-						
-							<tbody>
-							<c:forEach items="${ordpdlist }" var="items">
-								<tr>
-									<td rowspan="2">
-										<div class="tb-centerImg">
-											<img src="${pageContext.request.contextPath}/upload/${items.prdNo.mainImg }" class="sizeImg">
-										</div>
-									</td>
-									<td>
-										<div class="tb-centerContent">
-											<p>${items.prdNo.name }</p>
-										</div>
-									</td>
-									<td rowspan="2">
-										<div class="tb-textalign">
-										<p>${items.opQuantity }</p>
-										</div>
-									</td>
-									<td rowspan="2">
-										<div class="tb-textalign">
-										<p>${items.opSellingPrice }</p>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									
-									<td>
-										<div class="tb-centerContentDetail">
-											<p>${items.opOption }</p>
-										</div>
-									</td>
-								</tr>
-							</c:forEach>
-							</tbody>
-						
-						</c:if>
-						<c:if test="${order ne null}">
+						<table>
+							<tr class="firstline">
+								<th class="purchaseSub"></th>
+								<th id="purchaseName">구입상품명</th>
+								<th class="purchaseSub">수량</th>
+								<th class="purchaseSub">가격</th>
+							</tr>
+							<c:if test="${ordpdlist.size() > 0}">
+
+								<tbody>
+									<c:forEach items="${ordpdlist }" var="items">
+										<tr>
+											<td rowspan="2">
+												<div class="tb-centerImg">
+													<img
+														src="${pageContext.request.contextPath}/upload/${items.prdNo.mainImg }"
+														class="sizeImg">
+												</div>
+											</td>
+											<td>
+												<div class="tb-centerContent">
+													<p>${items.prdNo.name }</p>
+												</div>
+											</td>
+											<td rowspan="2">
+												<div class="tb-textalign">
+													<p>${items.opQuantity }</p>
+												</div>
+											</td>
+											<td rowspan="2">
+												<div class="tb-textalign">
+													<p>${items.opSellingPrice }</p>
+												</div>
+											</td>
+										</tr>
+										<tr>
+
+											<td>
+												<div class="tb-centerContentDetail">
+													<p class="option">${items.opOption }</p>
+												</div>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+
+							</c:if>
+					
 							<tfoot>
-								<tr>
-									<td colspan="5">
-										<div class="tb-productPrice">
-											<c:if test="${order.deliveryFee eq null} ">
-												<p>결제금액:${order.ordPrice }</p>
-											</c:if>
-											<c:if test="${order.deliveryFee ne null} ">
-												<p>결제금액:${order.ordPrice + order.deliveryFee }</p>
-											</c:if>
-										</div>
-									</td>
-								</tr>
+							<p class="aaa">${order }</p>
+									<tr>
+										<td colspan="5">
+											<div class="tb-productPrice">
+												<c:if test="${order.deliveryFee == null} ">
+													<p>결제금액:${order.ordPrice }</p>
+												</c:if>
+												<c:if test="${order.deliveryFee != null} ">
+													<p>결제금액:${order.ordPrice + order.deliveryFee }</p>
+												</c:if>
+											</div>
+										</td>
+									</tr>
 							</tfoot>
-						</c:if>
-					</table>
-				</div>
+						</table>
+					</div>
 				<c:if test="${order.type == 'BANK' }">
 					<div class="payway">
 						<p>결제 방법</p>
@@ -132,7 +147,7 @@
 				</div>
 				
 				<p class="order-footer">
-					<label id="ordername2">이소정</label>님의 주문이 완료되었습니다.
+					<label id="ordername2">${member.name }</label>님의 주문이 완료되었습니다.
 					<br>
 					<br>
 					귀하의 주문확인 번호는 <span class="spanStyle">${order.ordNo }</span>입니다.
@@ -145,7 +160,7 @@
 				</p>
 				
 				<div class="order-btns">
-				<p class="btn_dark_box"><a href="index.jsp" class="btn_dark_color">주문 확인</a></p> <!-- 메인으로 가기 or 마이페이지로 가기 -->
+				<p class="btn_dark_box"><a href="${pageContext.request.contextPath}/sshop/mypage/order.do" class="btn_dark_color">주문 확인</a></p> <!-- 메인으로 가기 or 마이페이지로 가기 -->
 			</div>
 			
 			</div>
