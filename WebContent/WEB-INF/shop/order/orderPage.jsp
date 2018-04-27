@@ -26,8 +26,6 @@
 	
     margin-top:  40px;
     padding-left:  13px;
-    border-top: 1px solid #EAEAEA;
-    border-bottom: 1px solid #EAEAEA;
     padding: 10px 10px 13px;
     font-size:  13px;
     font-weight:  bold;
@@ -119,6 +117,9 @@
 	    font-size: 20px;
 	}
 	
+	/* span.deluse{
+		display: inline;
+	} */
 </style>   
 <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -126,6 +127,7 @@
 <script src="${pageContext.request.contextPath}/js/order.js?a=4"></script>
 <script type="text/javascript">
 $(function() {
+	$("span.deluse").css("display","inline");   
 	$('textarea[name="orderMsg"]').keyup(function() {
 		// 텍스트영역의 길이를 체크
 		var textLength = $(this).val().length,
@@ -390,8 +392,8 @@ function getReturnValuecoupon(returnCpValue) {
 							<div class="orderchoice">
 								<select name="selorderway">
 									<option value="CARD">신용카드</option>
-									<option value="BANK">계좌이체</option>
-									<option value="ONLINE">무통장입금</option>
+									<option value="ONLINE">계좌이체</option>
+									<option value="BANK">무통장입금</option>
 								</select>
 							</div>
 						</div>
@@ -405,7 +407,7 @@ function getReturnValuecoupon(returnCpValue) {
 									있습니다.</p>
 								<p class="final">
 									총 결제금액 : <span class="finalPrice"></span>원<span class="deluse">+<span class="deliverprice">2500</span>원=<span class="totalcouponPrice"></span>원</span>
-									<input type="hidden" name="couponusePrice" value="0"><!-- 쿠폰사용한 가격 -->
+									<input type="hidden" name="couponusePrice" value="0"><!-- 쿠폰사용한 가격 -->    
 									<input type="hidden" name="userno"><!-- 유저쿠폰번호 -->
 									<input type="hidden" name="uesyn"><!-- 쿠폰사용여부 -->
 								</p>

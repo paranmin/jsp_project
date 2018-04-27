@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -166,4 +167,22 @@ public class CommonUtil {
 			e.printStackTrace();
 		}
 	}
+	
+	public String createOrdersecondNumber() {
+		return OrdersecondNumber();
+	}
+	
+	public String OrdersecondNumber() {
+	    int certCharLength = 12;
+	    final char[] characterTable = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+	    Random random = new Random(System.currentTimeMillis());
+	    int tablelength = characterTable.length;
+	    StringBuffer buf = new StringBuffer();
+	        
+	    for(int i = 0; i < certCharLength; i++) {
+	    	buf.append(characterTable[random.nextInt(tablelength)]);
+	   }
+	    return buf.toString();
+	}
+
 }
