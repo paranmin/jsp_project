@@ -29,7 +29,17 @@ $(function(){
 	if(optionYN == "N"){
 		 $(".option").text("");
 	}
-	console.log($(".aaa").text());
+	
+	if($(".fee").text()==0){
+		$(".delivery").css("display","none");
+		$(".totalprice").css("display","none");
+	}else if($(".fee").text()!=0){
+		var total = parseInt($(".total").text());
+		var fee = parseInt($(".fee").text());
+		$(".totalwon").text(total+fee);
+		$(".delivery").css("display","inline-block");
+		$(".totalprice").css("display","inline-block");
+	}
 })
 </script>
 </head>
@@ -76,7 +86,7 @@ $(function(){
 											</td>
 											<td rowspan="2">
 												<div class="tb-textalign">
-													<p>${items.opSellingPrice }</p>
+													<p>${items.opSellingPrice * items.opQuantity}</p>
 												</div>
 											</td>
 										</tr>
@@ -94,19 +104,15 @@ $(function(){
 							</c:if>
 					
 							<tfoot>
-							<p class="aaa">${order }</p>
-									<tr>
-										<td colspan="5">
-											<div class="tb-productPrice">
-												<c:if test="${order.deliveryFee == null} ">
-													<p>결제금액:${order.ordPrice }</p>
-												</c:if>
-												<c:if test="${order.deliveryFee != null} ">
-													<p>결제금액:${order.ordPrice + order.deliveryFee }</p>
-												</c:if>
-											</div>
-										</td>
-									</tr>
+								<tr>
+									<td colspan="5">
+										<div class="tb-productPrice">
+											<p>결제금액:<span class="total">${order.ordPrice }</span>원<span class="delivery"> + 배송비:<span class="fee">${order.deliveryFee }</span>원</span>
+												<span class="totalprice">= 총 결제 금액 : <span class="totalwon"></span>원</span>
+											</p>
+										</div>
+									</td>
+								</tr>
 							</tfoot>
 						</table>
 					</div>

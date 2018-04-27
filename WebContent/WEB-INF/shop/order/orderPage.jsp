@@ -390,8 +390,8 @@ function getReturnValuecoupon(returnCpValue) {
 							<div class="orderchoice">
 								<select name="selorderway">
 									<option value="CARD">신용카드</option>
-									<option value="BANK">계좌이체</option>
-									<option value="ONLINE">무통장입금</option>
+									<option value="ONLINE">계좌이체</option>
+									<option value="BANK">무통장입금</option>
 								</select>
 							</div>
 						</div>
