@@ -377,8 +377,7 @@ a {
 							<td>
 								<div class="data-bd-cont">
 									<div class="attach">
-										<img width="999" src="">
-										<div class="readBoardcontent">
+									<div class="readBoardcontent">
 											<em>${readBoard.brdcontent }</em>
 										</div>
 									</div>

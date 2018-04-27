@@ -105,7 +105,7 @@
 											<div class="title">
 												<input id="bw_input_subject"
 													class="MS_input_txt input_style2" type="text"
-													name="brdtitle" value="[${readBoard.brdtitle }]답변">
+													name="brdtitle" value="[${readBoard.brdtitle }][${readBoard.brdNo }게시판번호]답변">
 
 												<br>
 											</div>

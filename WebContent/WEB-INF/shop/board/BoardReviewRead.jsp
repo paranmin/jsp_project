@@ -337,7 +337,6 @@ a {
 							width="64" height="64">
 					</dt>
 					<dd>
-						<input type="hidden" name="prdno" value="${readBoard.prdno}">
 						<ul>
 
 							<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
@@ -377,7 +376,6 @@ a {
 								<td>
 									<div class="data-bd-cont">
 										<div class="attach">
-											<img width="999" src="">
 											<div class="readBoardcontent">
 												<em>${readBoard.brdcontent }</em>
 											</div>
