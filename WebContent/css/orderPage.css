@@ -267,6 +267,8 @@ div.orderpayway p.orderway{
 }
 div.orderchoice{
 	margin-top: 20px;
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
 	padding:10px 10px 10px 13px;
 }
 div.orderchoice select{

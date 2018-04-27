@@ -26,8 +26,6 @@
 	
     margin-top:  40px;
     padding-left:  13px;
-    border-top: 1px solid #EAEAEA;
-    border-bottom: 1px solid #EAEAEA;
     padding: 10px 10px 13px;
     font-size:  13px;
     font-weight:  bold;
