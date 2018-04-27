@@ -25,10 +25,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	var optionYN = $(".option").text();
-	if(optionYN == "N"){
-		 $(".option").text("");
-	}
+	
+	$("tbody").each(function(i,obj){
+		var optionYN = $(".option").eq(i).text();
+		if(optionYN == "N"){
+			 $(".option").text("");
+		}
+	})
+	
 	
 	if($(".fee").text()==0){
 		$(".delivery").css("display","none");
