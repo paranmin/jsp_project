@@ -35,9 +35,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				System.out.println(no);
 				ProductDao dao = sqlSession.getMapper(ProductDao.class);
 				Product pro = dao.SelectProductByno(no);
-				List<Proimg> proimg = dao.SelectProimgByno(no);
 				request.setAttribute("pro", pro);
-				request.setAttribute("img", proimg);
 			}
 			return VIEW_FRONT_PATH + "/board/Reviewform.jsp";
 
