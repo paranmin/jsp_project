@@ -27,6 +27,7 @@ import com.dgit.mall.dto.Product;
 import com.dgit.mall.dto.type.AddressType;
 import com.dgit.mall.dto.type.PayType;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
+import com.dgit.mall.util.CommonUtil;
 import com.dgit.mall.util.MySqlSessionFactory;
 
 public class ShopOrderHandler extends ShopCommandHandler {
@@ -127,8 +128,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			Date date = new Date();
 			SimpleDateFormat sdft = new SimpleDateFormat("yyyyMMddhhmmss");
 			String orderNumfirst = sdft.format(date);
-			SimpleDateFormat dpft = new SimpleDateFormat("yyyyMMddhhmmss");
-			String orderNumSecond = dpft.format(member.getRegdate());
+			String orderNumSecond = CommonUtil.getInstance().OrdersecondNumber();
 			String ordernum = orderNumfirst + "-" + orderNumSecond;
 			order.setOrdNo(ordernum);
 			order.setOrdPrice(totalPrice);
