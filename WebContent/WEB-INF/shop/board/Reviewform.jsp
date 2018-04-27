@@ -77,6 +77,7 @@
 				<form action="ReviewForm.do" method="post"
 					enctype="multipart/form-data">
 
+					<input type="hidden" name="memno" value="${loginMember.no}">
 					<input type="hidden" name="prdno" value="${pro.prdNo}">
 					<dl class="prd-tinfo">
 						<dt>
@@ -106,7 +107,7 @@
 									<tr>
 										<th class=""><div class="title">작성자</div></th>
 										<td><div>
-												<input id="bw_input_writer" type="text" name="brdwriter"
+												<input id="bw_input_writer" type="text" name="brdwriter" value="${loginMember.id}" <c:if test="${loginMember.id ne null && loginMember.id != ''}">readOnly="readOnly"</c:if>
 													class="MS_input_txt input_style">
 											</div></td>
 										<th><div class="title">비밀번호</div></th>

@@ -420,7 +420,7 @@ $(function() {
 						href="${pageContext.request.contextPath}/shop/ReviewBoard.do"><button
 							id="reviewListBtn">목록으로</button></a>
 				</div>
-				<div>페이징</div>
+				<!-- div>페이징</div -->
 			</div>
 			<div class="detail_menu" id="detail_menu_qa">
 				<ul>
@@ -464,7 +464,7 @@ $(function() {
 						href="${pageContext.request.contextPath}/shop/BoardQandA.do"><button
 							id="qaListBtn">목록으로</button></a>
 				</div>
-				<div>페이징</div>
+				<!-- div>페이징</div -->
 			</div>
 		</div>
 		</section>

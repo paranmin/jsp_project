@@ -30,6 +30,13 @@
 			order by brd_parent asc; 
 	</select>
 
+	<select id="selectReviewBoardByProduct" parameterType="int" resultMap="BoardResult">
+		select brd_no , prd_no,
+		brd_code,brd_title,brd_writer,brd_ch,regdate,brd_content
+		from board
+		where brd_code = "ReviewBoard" and prd_no = #{prdNo} order by brd_parent asc; 
+	</select>
+
 	<select id="selectByAllQandABoard" parameterType="Board"
 		resultMap="BoardResult">
 		select brd_no, brd_code, brd_title, brd_content, brd_parent,
@@ -39,6 +46,13 @@
 		where brd_code =
 		"QandABoard"
 				order by brd_parent asc; 
+	</select>
+
+	<select id="selectQandABoardByProduct" parameterType="int" resultMap="BoardResult">
+		select brd_no, brd_code, brd_title, brd_content, brd_parent,
+		brd_depth, brd_use_attachment, prd_no,brd_ch,regdate,brd_writer
+		from board 
+		where brd_code = "QandABoard" and prd_no = #{prdNo} order by brd_parent asc; 
 	</select>
 
 	<select id="selectNoticeBoardAll" parameterType="Board"
@@ -99,8 +113,8 @@
 
 	<insert id="insertBoard" parameterType="Board">
 		insert into board
-		(brd_writer,brd_password,brd_title,brd_content,brd_code,brd_parent,brd_depth,regdate,selected,prd_no)
-		value(#{brdwriter},#{brdpassword},#{brdtitle},#{brdcontent},#{brdcode},#{brdparent},#{brddepth},#{brdregdate},#{selected},#{prdno})
+		(brd_writer,brd_password,brd_title,brd_content,brd_code,brd_parent,brd_depth,regdate,selected,prd_no, m_no)
+		value(#{brdwriter},#{brdpassword},#{brdtitle},#{brdcontent},#{brdcode},#{brdparent},#{brddepth},#{brdregdate},#{selected},#{prdno},#{memNo})
 	</insert>
 
 	<insert id="insertBoardReply" parameterType="board">

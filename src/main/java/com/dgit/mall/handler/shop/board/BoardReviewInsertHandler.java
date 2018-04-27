@@ -3,17 +3,18 @@ package com.dgit.mall.handler.shop.board;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.BoardDao;
 import com.dgit.mall.dao.ProductDao;
 import com.dgit.mall.dto.Board;
+import com.dgit.mall.dto.Member;
 import com.dgit.mall.dto.Product;
 import com.dgit.mall.dto.Proimg;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
@@ -28,6 +29,8 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 		SqlSession sqlSession = null;
 		sqlSession = MySqlSessionFactory.openSession();
 		if (request.getMethod().equalsIgnoreCase("get")) {
+			HttpSession session = request.getSession(false);
+			Member loginMember = (Member) session.getAttribute("auth");
 
 			String prdNo = request.getParameter("prdno");
 			if (prdNo != null && !prdNo.equals("")) {
@@ -36,10 +39,10 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				System.out.println(no);
 				ProductDao dao = sqlSession.getMapper(ProductDao.class);
 				Product pro = dao.SelectProductByno(no);
-				List<Proimg> proimg = dao.SelectProimgByno(no);
 				request.setAttribute("pro", pro);
-				request.setAttribute("img", proimg);
 			}
+
+			request.setAttribute("loginMember", loginMember);
 			return VIEW_FRONT_PATH + "/board/Reviewform.jsp";
 
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
@@ -62,6 +65,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 						"utf-8", // 한글 파일명 깨짐 방지
 						new DefaultFileRenamePolicy());
 
+				String sMemNo = multi.getParameter("memno");
 				String sPrdNo = multi.getParameter("prdno");
 				String brdcode = multi.getParameter("brdcode");
 				String brdwriter = multi.getParameter("brdwriter");
@@ -76,6 +80,10 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				if (sPrdNo != null && !sPrdNo.equals("")) {
 					prdNo = Integer.parseInt(sPrdNo);
 				}
+				int memNo = 0;
+				if (sMemNo != null && !sMemNo.equals("")) {
+					memNo = Integer.parseInt(sMemNo);
+				}
 
 				sqlSession = MySqlSessionFactory.openSession();
 				BoardDao Dao = sqlSession.getMapper(BoardDao.class);
@@ -85,7 +93,7 @@ public class BoardReviewInsertHandler extends ShopCommandHandler {
 				int lastno = Dao.selectBylastno();
 
 				Board board = new Board(lastno, brdcode, brdtitle, brdwriter, brdpassword, lastno, 0, null,
-						brdcontent, prdNo, now, 0, 0, 0);
+						brdcontent, prdNo, now, 0, 0, memNo);
 
 				Dao.insertBoard(board);
 				sqlSession.commit();

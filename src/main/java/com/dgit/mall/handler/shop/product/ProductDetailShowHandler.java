@@ -38,8 +38,8 @@ public class ProductDetailShowHandler extends ShopCommandHandler {
 				Product pro = dao.SelectProductByno(no);
 				List<Proimg> proimg = dao.SelectProimgByno(no);
 				List<Option> option = dao.SelectOptionByno(no);
-				List<Board> Blist = Dao.selectByAllReviewBoard();
-				List<Board> list = Dao.selectByAllQandABoard();
+				List<Board> Blist = Dao.selectReviewBoardByProduct(no);
+				List<Board> list = Dao.selectQandABoardByProduct(no);
 				
 			
 				ArrayList<Integer> rownum = new ArrayList<>();

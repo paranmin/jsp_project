@@ -34,7 +34,7 @@
 					<p>${loginMember.name}[${loginMember.id}]님 <a href="myinfo.do">수정</a></p>
 					<p>전&nbsp;&nbsp;&nbsp;화 : ${loginMember.phone}</p>
 					<p>이메일 : ${loginMember.email }</p>
-					<p>주&nbsp;&nbsp;&nbsp;소 : ${loginMember.addr}</p>
+					<p>주&nbsp;&nbsp;&nbsp;소 : <c:if test="${loginMember.addr.zipcode ne null && loginMember.addr.zipcode != ''}">[${loginMember.addr.zipcode}] ${loginMember.addr.addr1} ${loginMember.addr.addr2}</c:if></p>
 				</div>
 				<div class="orderInfo">
 					총 주문금액 : <fmt:formatNumber value="${orderTotalPrice }" pattern="#,###" /> 원
