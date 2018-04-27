@@ -105,7 +105,7 @@
 								</colgroup>
 								<tbody>
 									<tr>
-										<th class=""><div class="title">작성자</div></th>
+										<th><div class="title">작성자</div></th>
 										<td><div>
 												<input id="bw_input_writer" type="text" name="brdwriter" value="${loginMember.id}" <c:if test="${loginMember.id ne null && loginMember.id != ''}">readOnly="readOnly"</c:if>
 													class="MS_input_txt input_style">

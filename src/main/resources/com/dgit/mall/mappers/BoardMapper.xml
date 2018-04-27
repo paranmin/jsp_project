@@ -23,7 +23,7 @@
 	<select id="selectByAllReviewBoard" parameterType="Board"
 		resultMap="BoardResult">
 		select brd_no , prd_no,
-		brd_code,brd_title,brd_writer,brd_ch,regdate,brd_content
+		brd_code,brd_title,brd_writer,brd_ch,regdate,brd_content,m_no
 		from board
 		where brd_code =
 		"ReviewBoard"
@@ -40,7 +40,7 @@
 	<select id="selectByAllQandABoard" parameterType="Board"
 		resultMap="BoardResult">
 		select brd_no, brd_code, brd_title, brd_content, brd_parent,
-		brd_depth, brd_use_attachment, prd_no,brd_ch,regdate,brd_writer
+		brd_depth, brd_use_attachment, prd_no,brd_ch,regdate,brd_writer,m_no
 		from
 		board
 		where brd_code =
@@ -58,7 +58,7 @@
 	<select id="selectNoticeBoardAll" parameterType="Board"
 		resultMap="BoardResult">
 		select brd_no ,
-		brd_code,brd_title,brd_writer,brd_ch,regdate
+		brd_code,brd_title,brd_writer,brd_ch,regdate,m_no
 		from board
 		where brd_code =
 		"NoticeBoard"	
@@ -78,7 +78,7 @@
 		brd_content,brd_password,brd_code, brd_parent,
 		brd_depth,
 		brd_use_attachment,
-		prd_no,brd_ch,regdate,selected
+		prd_no,brd_ch,regdate,selected,m_no
 		from board
 		where
 		brd_no = #{number}

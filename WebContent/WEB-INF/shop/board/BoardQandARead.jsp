@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	System.out.println("BoardQandARead.jsp===========================");
-%>
 <html>
 <head>
 <meta charset=UTF-8">
@@ -335,10 +332,14 @@ a {
 		<section>
 
 			<dl class="prd-tinfo">
-
+				<dt>
+					<img
+						src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
+						width="64" height="64">
+				</dt>
 				<dd>
 					<ul>
-					
+
 						<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
 							<span class="MK-product-icons"> <!--/coupon_icon/--></li>
 						<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
@@ -376,8 +377,7 @@ a {
 							<td>
 								<div class="data-bd-cont">
 									<div class="attach">
-										<img width="999" src="">
-										<div class="readBoardcontent">
+									<div class="readBoardcontent">
 											<em>${readBoard.brdcontent }</em>
 										</div>
 									</div>

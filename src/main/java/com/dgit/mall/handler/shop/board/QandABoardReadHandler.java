@@ -21,56 +21,30 @@ public class QandABoardReadHandler extends ShopCommandHandler {
 
 		SqlSession sqlSession = null;
 
-		String prdNo = request.getParameter("prdno");
-		if (prdNo != null && !prdNo.equals("")) {
-			int no = Integer.parseInt(prdNo);
-			System.out.println(no);
+		try {
+
+			request.setAttribute("contentPage", "board/BoardReview.jsp");
+
+			sqlSession = MySqlSessionFactory.openSession();
+			BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
+
+			int ChBoard = BoardREAD.updatecheck(number);
+			sqlSession.commit();
+
+			Board readBoard = BoardREAD.selectlistBoardReviewByid(number);
+			System.out.println(readBoard);
+			request.setAttribute("readBoard", readBoard);
+			int prdNo = readBoard.getPrdno();
 			ProductDao dao = sqlSession.getMapper(ProductDao.class);
-			Product pro = dao.SelectProductByno(no);
-			System.out.println(pro);
+			Product pro = dao.SelectProductByno(prdNo);
 			request.setAttribute("pro", pro);
-
-			try {
-				request.setAttribute("contentPage", "board/BoardReview.jsp");
-
-				sqlSession = MySqlSessionFactory.openSession();
-				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
-
-				int ChBoard = BoardREAD.updatecheck(number);
-				sqlSession.commit();
-
-				Board readBoard = BoardREAD.selectlistBoardReviewByid(number);
-				System.out.println(readBoard);
-				request.setAttribute("readBoard", readBoard);
-
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			} finally {
-				sqlSession.close();
-			}
-			return VIEW_FRONT_PATH + "board/BoardReviewRead.jsp";
-		} else {
-			try {
-				request.setAttribute("contentPage", "board/BoardReview.jsp");
-
-				sqlSession = MySqlSessionFactory.openSession();
-				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
-
-				int ChBoard = BoardREAD.updatecheck(number);
-				sqlSession.commit();
-
-				Board readBoard = BoardREAD.selectlistBoardReviewByid(number);
-				System.out.println(readBoard);
-				request.setAttribute("readBoard", readBoard);
-
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			} finally {
-				sqlSession.close();
-			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
 		}
+
 		return VIEW_FRONT_PATH + "board/BoardQandARead.jsp";
 	}
 }

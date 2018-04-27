@@ -95,7 +95,7 @@ public class ShopJoinHandler extends ShopCommandHandler {
 			}
 			HttpSession session = request.getSession(false);
 			Member loginMember = MemberService.getInstance().selectByLogin(joinMember);
-			session.setAttribute("auth", loginMember);
+			session.setAttribute("joinMember", loginMember);
 			response.sendRedirect(request.getContextPath() + "/shop/joincomplate.do");
 		}
 		return null;

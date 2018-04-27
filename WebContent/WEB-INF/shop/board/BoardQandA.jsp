@@ -10,7 +10,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/base.css" media="all" /> 
+	href="${pageContext.request.contextPath}/css/base.css" media="all" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Boardcss/Board.css"
 	media="all" />
@@ -34,8 +34,9 @@ table {
 .bbs-table-list tbody td {
 	border-top: 1px solid rgb(232, 232, 232);
 }
-td{
-text-align: center;
+
+td {
+	text-align: center;
 }
 </style>
 </head>
@@ -53,12 +54,15 @@ text-align: center;
 				<!--#top_box-->
 				<div class="top_box">
 					<ul>
-					<li><a href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
-					<li><span><a>/</a></span></li>
-					<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
-					<li><span><a>/</a></span></li>
-					<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
-				</ul>
+						<li><a
+							href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
+						<li><span><a>/</a></span></li>
+						<li><a
+							href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
+						<li><span><a>/</a></span></li>
+						<li><a
+							href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
+					</ul>
 				</div>
 			</div>
 			<div class="bbsData">
@@ -103,7 +107,7 @@ text-align: center;
 						</table>
 					</div>
 
-
+					<input type="hidden" name="prdno" value="${pro.prdNo} ">
 					<!-- .bbs-sch -->
 					<div class="bbs-sch">
 						<form action="board.do" method="post"">

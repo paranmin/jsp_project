@@ -25,7 +25,7 @@
 			<h2>Join Complete</h2>
 			<div class="joinComplate">
 				<h3>회원가입 완료</h3>
-				<p>${auth.name}님의 회원가입이 성공적으로 완료되었습니다.</p>
+				<p>${joinMember.name}님의 회원가입이 성공적으로 완료되었습니다.</p>
 				<p>SJ JEWELRY 안에서 즐거운 쇼핑 되시길 바랍니다.</p>
 			</div>
 		</section>
