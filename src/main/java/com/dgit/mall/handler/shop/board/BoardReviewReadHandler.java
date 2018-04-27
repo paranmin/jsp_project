@@ -25,6 +25,7 @@ public class BoardReviewReadHandler extends ShopCommandHandler {
 		SqlSession sqlSession = null;
 
 		String prdNo = request.getParameter("prdno");
+		System.out.println(prdNo);
 		if (prdNo != null && !prdNo.equals("")) {
 			int no = Integer.parseInt(prdNo);
 			System.out.println(no);

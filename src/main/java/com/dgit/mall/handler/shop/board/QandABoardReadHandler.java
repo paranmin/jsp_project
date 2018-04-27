@@ -52,6 +52,7 @@ public class QandABoardReadHandler extends ShopCommandHandler {
 			return VIEW_FRONT_PATH + "board/BoardReviewRead.jsp";
 		} else {
 			try {
+				
 				request.setAttribute("contentPage", "board/BoardReview.jsp");
 
 				sqlSession = MySqlSessionFactory.openSession();

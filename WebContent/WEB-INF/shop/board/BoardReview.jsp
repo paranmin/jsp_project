@@ -109,9 +109,6 @@ td {
 								</c:if>
 							</tbody>
 						</table>
-
-
-					<input type="hidden" name="prdno" value="${pro.prdNo} ">
 					</div>
 
 					<!-- .bbs-sch -->

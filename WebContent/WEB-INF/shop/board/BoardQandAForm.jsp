@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Boardcss/writeform.css"
@@ -80,11 +79,14 @@ pageEncoding="UTF-8"%>
 
 
 				<form action="BoardQandAForm.do" method="post"
-					enctype="multipart/form-data" style="position: relative;"
-					autocomplete="off">
-					<input type="hidden" name="prdno" value="${pro.prdNo} ">
+					enctype="multipart/form-data">
+					<input type="hidden" name="prdno" value="${pro.prdNo}">
 					<dl class="prd-tinfo">
-
+						<dt>
+							<img
+								src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
+								width="64" height="64">
+						</dt>
 						<dd>
 							<ul>
 
@@ -107,17 +109,17 @@ pageEncoding="UTF-8"%>
 								</colgroup>
 								<tbody>
 									<tr>
-										<th class=""><div class="title">작성자</div></th>
+										<th><div class="title">작성자</div></th>
 										<td><div>
 												<input id="bw_input_writer" type="text" name="brdwriter"
-													class="MS_input_txt input_style"> <input
-													type="hidden" name="brdcode" value="QandABoard">
+													class="MS_input_txt input_style">
 											</div></td>
 										<th><div class="title">비밀번호</div></th>
 										<td>
 											<div>
 												<input id="bw_input_passwd" type="password"
 													name="brdpassword" class="MS_input_txt input_style">
+												<input type="hidden" name="brdcode" value="QandABoard">
 											</div>
 										</td>
 									</tr>
@@ -173,10 +175,9 @@ pageEncoding="UTF-8"%>
 						</dd>
 					</dl>
 				</form>
-
 			</div>
+		</div>
 	</section>
-	</div>
 	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

@@ -332,10 +332,12 @@ a {
 			<div class="page-body">
 				<dl class="prd-tinfo">
 					<dt>
-						<a href="#"><img src=""></a>
+						<img
+							src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
+							width="64" height="64">
 					</dt>
 					<dd>
-						<input type="hidden" name="prdno" value="${pro.prdNo} ">
+						<input type="hidden" name="prdno" value="${readBoard.prdno}">
 						<ul>
 
 							<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>

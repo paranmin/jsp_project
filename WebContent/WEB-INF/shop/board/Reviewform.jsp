@@ -104,7 +104,7 @@
 								</colgroup>
 								<tbody>
 									<tr>
-										<th class=""><div class="title">작성자</div></th>
+										<th><div class="title">작성자</div></th>
 										<td><div>
 												<input id="bw_input_writer" type="text" name="brdwriter"
 													class="MS_input_txt input_style">
