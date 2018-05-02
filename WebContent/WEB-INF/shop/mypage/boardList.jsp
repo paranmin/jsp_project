@@ -30,7 +30,7 @@
 				<li><a href="board.do" class="engText">Board List</a></li>
 			</ul>
 			<div class="board">
-				<p class="top_msg"><span>총 게시글 : 0건</span> <span class="page">PAGE 1/1</span></p>
+				<p class="top_msg"><span>총 게시글 : ${total}건</span> <span class="page">PAGE 1/1</span></p>
 				<table>
 					<colgroup>
 						<col width="5%"/>

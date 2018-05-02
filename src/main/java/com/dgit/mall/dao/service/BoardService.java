@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.BoardDao;
 import com.dgit.mall.dto.Board;
+import com.dgit.mall.dto.Member;
 import com.dgit.mall.util.MySqlSessionFactory;
 
 public class BoardService {
@@ -38,6 +39,12 @@ public class BoardService {
 	public List<Board> selectBoardByMember(Map<String, Object> map) {
 		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + "selectBoardByMember", map);
+		}
+	}
+	
+	public int countBoardByMember(Member member) {
+		try (SqlSession sqlSession = MySqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "countBoardByMember", member);
 		}
 	}
 }

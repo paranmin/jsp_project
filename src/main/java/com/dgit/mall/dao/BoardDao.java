@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.dgit.mall.dto.Board;
+import com.dgit.mall.dto.Member;
 
 public interface BoardDao {
 	List<Board> selectByAllReviewBoard();
@@ -16,6 +17,7 @@ public interface BoardDao {
 
 	Board selectlistBoardReviewByid(int number);
 
+	int countBoardByMember(Member member);
 
 	Board selectCheckPass(int number);
 
