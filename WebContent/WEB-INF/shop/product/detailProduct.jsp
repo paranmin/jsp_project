@@ -1,4 +1,5 @@
 <%@page import="java.util.List"%>
+<%@page import="java.util.Date"%>
 <%@page import="com.dgit.mall.dto.Option"%>
 <%@page import="com.dgit.mall.dto.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,6 +18,9 @@
 <title>SJ JEWELRY</title>
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
+	media="all" />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Nanum+Myeongjo|Playfair+Display">
 <link rel="stylesheet"
@@ -417,7 +421,8 @@
 										<td>${item.brdNo }</td>
 										<td class="brdReview"><a href="#">${item.brdtitle }</a></td>
 										<td>${item.brdwriter }</td>
-										<td>${item.brdregdate }</td>
+										<td><fmt:formatDate value="${item.brdregdate}"
+												pattern="yyyy-MM-dd" /></td>
 										<td>${item.brdch }</td>
 									</tr>
 									<tr class="hide">
@@ -462,7 +467,8 @@
 										<td>${item.brdNo }</td>
 										<td class="brdqa"><a href="#">${item.brdtitle }</a></td>
 										<td>${item.brdwriter }</td>
-										<td>${item.brdregdate }</td>
+										<td><fmt:formatDate value="${item.brdregdate}"
+												pattern="yyyy-MM-dd" /></td>
 										<td>${item.brdch }</td>
 									</tr>
 									<tr class="hide">

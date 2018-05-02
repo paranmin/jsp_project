@@ -1,6 +1,8 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +18,9 @@
 	media="all" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
+	media="all" />
 <title>Insert title here</title>
 <style type="text/css">
 table {
@@ -54,12 +59,15 @@ td {
 				<!--#top_box-->
 				<div class="top_box">
 					<ul>
-					<li><a href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
-					<li><span><a>/</a></span></li>
-					<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
-					<li><span><a>/</a></span></li>
-					<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
-				</ul>
+						<li><a
+							href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
+						<li><span><a>/</a></span></li>
+						<li><a
+							href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
+						<li><span><a>/</a></span></li>
+						<li><a
+							href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
+					</ul>
 				</div>
 			</div>
 			<div class="bbsData">
@@ -92,7 +100,8 @@ td {
 											<td></td>
 											<td><a href="NoticeBoardRead.do?brdNo=${item.brdNo }">${item.brdtitle }</a></td>
 											<td>${item.brdwriter }</td>
-											<td>${item.brdregdate }</td>
+											<td><fmt:formatDate value="${item.brdregdate}"
+													pattern="yyyy-MM-dd" /></td>
 											<td>${item.brdch }</td>
 										</tr>
 									</c:forEach>
@@ -101,37 +110,6 @@ td {
 						</table>
 					</div>
 
-
-					<!-- .bbs-sch -->
-					<div class="bbs-sch">
-						<form action="board.do" method="post"">
-							<!-- .검색 폼시작 -->
-							<fieldset>
-								<legend>게시판 검색 폼</legend>
-								<label> <input type="radio" name="check" value="ok"
-									onclick="change(1);" class="MS_input_checkbox"> 이름
-								</label> <label> <input type="radio" name="check" value="ok"
-									onclick="change(2);" checked="checked"
-									class="MS_input_checkbox">제목
-								</label> <label> <input type="radio" name="check" value="ok"
-									onclick="change(3);" class="MS_input_checkbox"> 내용
-								</label> <span class="key-wrap"> <input type="text" name="stext"
-									value="" class="MS_input_txt"> <a href="#"
-									class=" btn_light btn_box_01">검색</a>
-								</span>
-							</fieldset>
-						</form>
-						<!-- .검색 폼 끝 -->
-					</div>
-					<!-- .page-body -->
-					<div class="paging">
-						<ol class="paging">
-							<li class="next"><a href="#"><img
-									src="" alt="다음"></a></li>
-							<li class="last"><a href="#"><img
-									src="" alt="끝"></a></li>
-						</ol>
-					</div>
 				</div>
 			</div>
 		</div>

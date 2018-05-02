@@ -21,7 +21,9 @@ public class QandABoardListHandler extends ShopCommandHandler {
 			request.setAttribute("contentPage", "board/BoardQandA.jsp");
 			sqlSession = MySqlSessionFactory.openSession();
 			BoardDao Dao = sqlSession.getMapper(BoardDao.class);
+			
 			List<Board> list = Dao.selectByAllQandABoard();
+			
 			request.setAttribute("list", list);
 
 		} catch (Exception e) {

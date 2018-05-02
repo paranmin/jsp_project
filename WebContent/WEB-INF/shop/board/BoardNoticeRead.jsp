@@ -1,9 +1,14 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <meta charset=UTF-8">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
+	media="all" />
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet"
@@ -284,6 +289,10 @@ a {
 	text-align: center;
 	padding-top: 115px;
 }
+
+.con-link {
+	display: none;
+}
 </style>
 
 </head>
@@ -301,11 +310,14 @@ a {
 			<!--#top_box-->
 			<div class="top_box">
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
 					<li><span><a>/</a></span></li>
-					<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
 					<li><span><a>/</a></span></li>
-					<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
 				</ul>
 			</div>
 		</div>
@@ -325,7 +337,9 @@ a {
 								<td class="line">
 									<div class="cont-sub-des">
 										<div>
-											<span><em>작성일 :</em> ${readBoard.brdregdate }</span>
+
+											<span><em>작성일 :</em> <fmt:formatDate
+													value="${readBoard.brdregdate}" pattern="yyyy-MM-dd" /></span>
 										</div>
 										<div>
 											<span><em>작성자 :</em>${readBoard.brdwriter }</span> <span><em>파일
@@ -341,7 +355,6 @@ a {
 								<td>
 									<div class="data-bd-cont">
 										<div class="attach">
-											<img width="999" src="#">
 											<div class="readBoardcontent">
 												<em>${readBoard.brdcontent }</em>
 											</div>
@@ -352,6 +365,18 @@ a {
 						</tbody>
 					</table>
 					<div class="view-link">
+						<dl class="con-link">
+							<dt></dt>
+							<dd>
+								<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
+									class="none btn_light_border btn_box_01">수정</a> <a
+									href="BoardDel.do?brdno=${readBoard.brdNo }"
+									class="btn_light_border btn_box_01">삭제</a> <a
+									href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
+									class="btn_light btn_box_01">답변</a>
+							</dd>
+						</dl>
+
 						<dl class="bbs-link">
 							<dt></dt>
 							<dd>

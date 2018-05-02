@@ -1,10 +1,15 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
+	media="all" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Boardcss/writeform.css"
 	media="all" />
@@ -34,31 +39,42 @@
 	padding: 8px;
 	border: 0;
 }
+
+.prd-tinfo {
+	zoom: 1;
+	overflow: hidden;
+	padding: 10px 0 10px 80px;
+	border: 1px solid #ddd;
+	margin-bottom: 40px;
+}
+
+.prd-tinfo>dd>ul {
+	padding: 15px 0 0 10px;
+	min-height: 45px;
+	_height: 45px;
+	border-left: 1px solid #ddd;
+}
+
+#sidebar {
+	float: left;
+	min-width: 200px;
+	margin-top: 45px;
+}
+
+section {
+	width: 80%;
+}
 </style>
 </head>
 <body>
-	<c:import url="../modules/header.jsp" />
-	<c:import url="../modules/leftSide.jsp" />
-	<c:import url="../modules/rightSide.jsp" />
 	<section>
 		<div class="titleArea">
 			<h2>Notice</h2>
 		</div>
-		<div class="top_box">
-				<ul>
-					<li><a href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
-					<li><span><a>/</a></span></li>
-					<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
-					<li><span><a>/</a></span></li>
-					<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
-				</ul>
-		</div>
-
 		<div id="bbsData">
 			<div class="page-body">
 				<form action="BoardNoticeForm.do" method="post"
-					enctype="multipart/form-data" style="position: relative;"
-					autocomplete="off">
+					enctype="multipart/form-data">
 					<div class="bbs-table-write">
 						<fieldset>
 							<legend>일반게시판 쓰기</legend>
@@ -72,19 +88,22 @@
 								</colgroup>
 								<tbody>
 									<tr>
-										<th class=""><div class="title">작성자</div></th>
+										<th><div class="title">작성자</div></th>
 										<td><div>
 												<input id="bw_input_writer" type="text" name="brdwriter"
-													class="MS_input_txt input_style"> <input
-													type="hidden" name="brdcode" value="NoticeBoard">
+													value="${loginMember.id}"
+													<c:if test="${loginMember.id ne null && loginMember.id != ''}">readOnly="readOnly"</c:if>
+													class="MS_input_txt input_style">
 											</div></td>
 										<th><div class="title">비밀번호</div></th>
 										<td>
 											<div>
 												<input id="bw_input_passwd" type="password"
 													name="brdpassword" class="MS_input_txt input_style">
+												<input type="hidden" name="brdcode" value="NoticeBoard">
 											</div>
 										</td>
+
 									</tr>
 									<tr>
 										<th><div class="title">제목</div></th>
@@ -109,8 +128,8 @@
 										<th><div class="title">파일</div></th>
 										<td colspan="3">
 											<div>
-												<input id="bw_input_file" type="file" name="file_name1"
-													value="첨부">
+												<input id="bw_input_file" type="file"
+													name="brduseattachment" value="첨부">
 											</div>
 										</td>
 									</tr>
@@ -123,7 +142,7 @@
 						<dt></dt>
 						<dd>
 							<input type="submit" value="글등록" id="submit"> <a
-								href="${pageContext.request.contextPath}/shop/NoticeBoard.do"
+								href="${pageContext.request.contextPath}/manager/board/AdNoticeBoard.do"
 								class="btn_light btn_box_01">목록</a>
 						</dd>
 					</dl>
@@ -133,6 +152,5 @@
 			<!-- .page-body -->
 		</div>
 	</section>
-	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

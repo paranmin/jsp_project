@@ -54,14 +54,20 @@
 		from board 
 		where brd_code = "QandABoard" and prd_no = #{prdNo} order by brd_parent asc; 
 	</select>
-
 	<select id="selectNoticeBoardAll" parameterType="Board"
 		resultMap="BoardResult">
 		select brd_no ,
 		brd_code,brd_title,brd_writer,brd_ch,regdate,m_no
 		from board
-		where brd_code =
-		"NoticeBoard"	
+		where brd_code = "NoticeBoard"
+		order by brd_parent asc; 
+	</select>
+
+	<select id="selectBoardAll" parameterType="Board"
+		resultMap="BoardResult">
+		select brd_no ,
+		brd_code,brd_title,brd_writer,brd_ch,regdate,m_no
+		from board
 		order by brd_parent asc; 
 	</select>
 

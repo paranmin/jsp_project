@@ -1,7 +1,6 @@
-package com.dgit.mall.handler.shop.board;
+package com.dgit.mall.handler.admin.board;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,20 +10,25 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.BoardDao;
 import com.dgit.mall.dto.Board;
-import com.dgit.mall.handler.shop.ShopCommandHandler;
+import com.dgit.mall.handler.admin.AdminCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class BoardNoticeInsertHandler extends ShopCommandHandler {
+public class AdminBoardNoticeInsertHandler extends AdminCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		SqlSession sqlSession = null;
 
 		if (request.getMethod().equalsIgnoreCase("get")) {
+			request.setAttribute("contentPage", "board/BoardNoticeform.jsp");
 
-			return VIEW_FRONT_PATH + "/board/BoardNoticeForm.jsp";
+			request.setAttribute("sub_menu", "list");
+			request.setAttribute("menu", "board");
+			request.setAttribute("css", "board.css");
+
+			return TEMPLATE_PAGE;
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String ReviewformPath = request.getRealPath("Reviewform");
 
@@ -56,13 +60,8 @@ public class BoardNoticeInsertHandler extends ShopCommandHandler {
 				sqlSession = MySqlSessionFactory.openSession();
 				BoardDao Dao = sqlSession.getMapper(BoardDao.class);
 				Date now = new Date();
-				Board board = new Board(0, brdcode, brdtitle, brdwriter, brdpassword, 1, 0, null, brdcontent, 0, now,
-						0, 0, 0);
-
-				System.out.println(brdwriter);
-				System.out.println(brdpassword);
-				System.out.println(brdtitle);
-				System.out.println(brdcontent);
+				Board board = new Board(0, brdcode, brdtitle, brdwriter, brdpassword, 1, 0, null, brdcontent, 0, now, 0,
+						0, 0);
 
 				request.setAttribute("brdNo", 0);
 				request.setAttribute("brdcode", brdcode);
@@ -71,19 +70,17 @@ public class BoardNoticeInsertHandler extends ShopCommandHandler {
 				request.setAttribute("brdtitle", brdtitle);
 				request.setAttribute("brdcontent", brdcontent);
 				// request.setAttribute("brduseattachment", brduseattachment);
-				System.out.println(board);
 
 				Dao.insertBoard(board);
 				sqlSession.commit();
-				response.sendRedirect("NoticeBoard.do");
-
+				System.out.println(board);
 			} catch (Exception e) {
 				sqlSession.rollback();
 				e.printStackTrace();
 			} finally {
 				sqlSession.close();
 			}
-
+			response.sendRedirect("list.do");
 		}
 		return null;
 	}

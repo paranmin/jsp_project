@@ -8,12 +8,12 @@ import com.dgit.mall.dto.Member;
 
 public interface BoardDao {
 	List<Board> selectByAllReviewBoard();
+
 	List<Board> selectReviewBoardByProduct(int prdNo);
 
 	List<Board> selectByAllQandABoard();
-	List<Board> selectQandABoardByProduct(int prdNo);
 
-	List<Board> selectNoticeBoardAll();
+	List<Board> selectQandABoardByProduct(int prdNo);
 
 	Board selectlistBoardReviewByid(int number);
 
@@ -40,4 +40,8 @@ public interface BoardDao {
 	public int selectBybrddepth(int number);
 
 	List<Board> selectBoardByMember(Map<String, Object> map);
+
+	List<Board> selectBoardAll();
+
+	List<Board> selectNoticeBoardAll();
 }

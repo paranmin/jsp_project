@@ -1,9 +1,14 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <meta charset=UTF-8">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
+	media="all" />
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet"
@@ -360,7 +365,9 @@ a {
 								<td class="line">
 									<div class="cont-sub-des">
 										<div>
-											<span><em>작성일 :</em> ${readBoard.brdregdate }</span>
+
+											<span><em>작성일 :</em> <fmt:formatDate
+													value="${readBoard.brdregdate}" pattern="yyyy-MM-dd" /></span>
 										</div>
 										<div>
 											<span><em>작성자 :</em>${readBoard.brdwriter }</span> <span><em>파일
@@ -387,13 +394,13 @@ a {
 					</table>
 					<div id="comment_list_0">
 						<table class="comment-box">
-							<thead>
+						<!-- 	<thead>
 								<tr>
 									<th><div class="tb-center">작성자</div></th>
 									<th><div class="tb-center">작성 내용</div></th>
 									<th><div class="tb-center">작성일</div></th>
 								</tr>
-							</thead>
+							</thead> -->
 							<tbody>
 								<c:if test="${list.size()>0 }">
 									<c:forEach var="item" items="${list }">
@@ -407,7 +414,7 @@ a {
 							</tbody>
 						</table>
 					</div>
-					<form id="comment_form" action="BoardReplyinsert.do" method="post">
+			<%-- 		<form id="comment_form" action="BoardReplyinsert.do" method="post">
 						<fieldset>
 							<legend>코멘트 쓰기</legend>
 							<table summary="코멘트 쓰기" class="comment-box">
@@ -448,7 +455,7 @@ a {
 								</tbody>
 							</table>
 						</fieldset>
-					</form>
+					</form> --%>
 					<div class="view-link">
 						<dl class="bbs-link con-link">
 							<dt></dt>
@@ -471,19 +478,8 @@ a {
 							</dd>
 						</dl>
 					</div>
-					<ul class="list-link">
-						<li><span class="arrow prev">이전글 :</span> <a
-							href="/shop/shopdetail.html?branduid=979417">[베이직 초승달 바벨]</a> <a
-							href="/board/board.html?code=curiouswiz_board3&amp;board_cate=&amp;num1=942910&amp;num2=10000&amp;type=v&amp;&amp;s_id=&amp;stext=&amp;ssubject=&amp;shname=&amp;scontent=&amp;sbrand=&amp;sgid=&amp;datekey=&amp;branduid=&amp;lock=N">Re:
-								실버 오른쪽 아웃컨츠</a></li>
-						<li><span class="arrow next">다음글 :</span> <a
-							href="/shop/shopdetail.html?branduid=976526">[타이니 크로스 바벨]</a> <a
-							href="/board/board.html?code=curiouswiz_board3&amp;board_cate=&amp;num1=942911&amp;num2=10000&amp;type=v&amp;&amp;s_id=&amp;stext=&amp;ssubject=&amp;shname=&amp;scontent=&amp;sbrand=&amp;sgid=&amp;datekey=&amp;branduid=&amp;lock=N">Re:
-								왼쪽귓볼</a></li>
-					</ul>
 				</div>
 			</div>
 		</section>
-		<c:import url="../modules/footer.jsp" />
 </body>
 </html>
