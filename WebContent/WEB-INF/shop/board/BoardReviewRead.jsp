@@ -394,7 +394,7 @@ a {
 					</table>
 					<div id="comment_list_0">
 						<table class="comment-box">
-						<!-- 	<thead>
+							<!-- 	<thead>
 								<tr>
 									<th><div class="tb-center">작성자</div></th>
 									<th><div class="tb-center">작성 내용</div></th>
@@ -414,7 +414,7 @@ a {
 							</tbody>
 						</table>
 					</div>
-			<%-- 		<form id="comment_form" action="BoardReplyinsert.do" method="post">
+					<%-- 		<form id="comment_form" action="BoardReplyinsert.do" method="post">
 						<fieldset>
 							<legend>코멘트 쓰기</legend>
 							<table summary="코멘트 쓰기" class="comment-box">
@@ -463,9 +463,12 @@ a {
 								<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
 									class="none btn_light_border btn_box_01">수정</a> <a
 									href="BoardDel.do?brdno=${readBoard.brdNo }"
-									class="btn_light_border btn_box_01">삭제</a> <a
-									href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
-									class="btn_light btn_box_01">답변</a>
+									class="btn_light_border btn_box_01">삭제</a>
+								<c:if test="">
+
+									<a href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
+										class="btn_light btn_box_01">답변</a>
+								</c:if>
 							</dd>
 						</dl>
 						<dl class="bbs-link">

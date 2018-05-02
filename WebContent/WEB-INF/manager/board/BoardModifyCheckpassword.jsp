@@ -16,8 +16,8 @@
 	media="all" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
-<script src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
 <title>Insert title here</title>
+
 <style type="text/css">
 .bbs-table-pwd {
 	margin-top: 25px;
@@ -98,21 +98,20 @@ input, select, textarea {
 #sidebar {
 	float: left;
 	min-width: 200px;
-	margin-top: 45px;
+	margin-top: 40px;
 }
 
 section {
-	width: 85%;
+	width: 80%;
 }
 </style>
-
 </head>
 <body>
 	<section>
 		<div id="container">
 
 			<div class="titleArea">
-				<h1>REVIEWDEL(삭제)</h1>
+				<h1>Modify</h1>
 			</div>
 			<div>
 				<!--#top_box-->
@@ -133,9 +132,13 @@ section {
 				<div class="page-body">
 
 					<div class="bbs-table-pwd">
-						<form action="BoardD.do" method="post" autocomplete="off"
-							id="delform">
-							<input type="hidden" name="brdno" value="${number }">
+						<form action="BoardCheckPassword.do" method="post"
+							autocomplete="off">
+							<input type="hidden" name="brdno" value="${number }"> <input
+								type="hidden" name="brdwriter" value="${brdwriter }"> <input
+								type="hidden" name="brdtitle" value="${brdtitle }"> <input
+								type="hidden" name="brdcode" value="${brdcode}"> <input
+								type="hidden" name="brdcontent" value="${brdcontent}">
 							<fieldset>
 								<legend>비밀번호 찾기</legend>
 								<table summary="비밀번호찾기테이블">
@@ -160,8 +163,7 @@ section {
 								<dd>
 									<input type="submit" value="확인" id="submit"> <a
 										href="ReadBoard.do?brdno=${number }"
-										class="btn_light_border btn_box_01">취소</a> <a
-										href="list.do"
+										class="btn_light_border btn_box_01">취소</a> <a href="list.do"
 										class="btn_light_border btn_box_01">목록</a>
 								</dd>
 							</dl>
@@ -173,22 +175,6 @@ section {
 			<!-- #bbsData -->
 		</div>
 	</section>
-
-	<script type="text/javascript">
-		$(function() {
-
-			$("#submit").click(function() {
-				var con_test = confirm("삭제하실건가요?");
-				if (con_test == true) {
-
-					alert('삭제하겠습니다.');
-				} else if (con_test == false) {
-					alert('취소하셨습니다.');
-					return false;
-				}
-			})
-		})
-	</script>
 	<c:if test="${notsamepassword !=null }">
 
 		<script type="text/javascript">

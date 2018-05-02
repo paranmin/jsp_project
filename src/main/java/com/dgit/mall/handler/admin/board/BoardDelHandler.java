@@ -49,19 +49,19 @@ public class BoardDelHandler extends AdminCommandHandler {
 					if (readBoard.getBrdcode().equals("ReviewBoard")) {
 						BoardREAD.deleteReview(number);
 						sqlSession.commit();
-						return "ReviewBoard.do";
+						return "list.do";
 					} else if (readBoard.getBrdcode().equals("NoticeBoard")) {
 						BoardREAD.deleteReview(number);
 						sqlSession.commit();
-						return "NoticeBoard.do";
+						return "list.do";
 					} else {
 						BoardREAD.deleteReview(number);
 						sqlSession.commit();
-						return "QandABoardRead.do";
+						return "list.do";
 					}
 				} else if (readBoard.getBrdpassword().equals(pw) == false) {
 					request.setAttribute("notsamepassword", "비밀번호가 일치하지 않습니다.");
-					request.setAttribute("contentPage", "board/boardList.jsp");
+					request.setAttribute("contentPage", "board/BoardDel.jsp");
 
 					request.setAttribute("sub_menu", "list");
 					request.setAttribute("menu", "board");

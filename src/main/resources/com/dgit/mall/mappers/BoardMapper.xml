@@ -27,14 +27,14 @@
 		from board
 		where brd_code =
 		"ReviewBoard"
-			order by brd_parent asc; 
+			order by brd_parent desc; 
 	</select>
 
 	<select id="selectReviewBoardByProduct" parameterType="int" resultMap="BoardResult">
 		select brd_no , prd_no,
 		brd_code,brd_title,brd_writer,brd_ch,regdate,brd_content
 		from board
-		where brd_code = "ReviewBoard" and prd_no = #{prdNo} order by brd_parent asc; 
+		where brd_code = "ReviewBoard" and prd_no = #{prdNo} order by brd_parent desc; 
 	</select>
 
 	<select id="selectByAllQandABoard" parameterType="Board"
@@ -45,14 +45,14 @@
 		board
 		where brd_code =
 		"QandABoard"
-				order by brd_parent asc; 
+				order by brd_parent desc; 
 	</select>
 
 	<select id="selectQandABoardByProduct" parameterType="int" resultMap="BoardResult">
 		select brd_no, brd_code, brd_title, brd_content, brd_parent,
 		brd_depth, brd_use_attachment, prd_no,brd_ch,regdate,brd_writer
 		from board 
-		where brd_code = "QandABoard" and prd_no = #{prdNo} order by brd_parent asc; 
+		where brd_code = "QandABoard" and prd_no = #{prdNo} order by brd_parent desc; 
 	</select>
 	<select id="selectNoticeBoardAll" parameterType="Board"
 		resultMap="BoardResult">
@@ -60,7 +60,7 @@
 		brd_code,brd_title,brd_writer,brd_ch,regdate,m_no
 		from board
 		where brd_code = "NoticeBoard"
-		order by brd_parent asc; 
+		order by brd_parent desc; 
 	</select>
 
 	<select id="selectBoardAll" parameterType="Board"
@@ -68,7 +68,7 @@
 		select brd_no ,
 		brd_code,brd_title,brd_writer,brd_ch,regdate,m_no
 		from board
-		order by brd_parent asc; 
+		order by brd_parent desc; 
 	</select>
 
 	<select id="selectByAllReply" parameterType="Board" resultMap="BoardResult">

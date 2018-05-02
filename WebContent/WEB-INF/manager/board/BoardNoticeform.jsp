@@ -69,8 +69,10 @@ section {
 <body>
 	<section>
 		<div class="titleArea">
-			<h2>Notice</h2>
+			<h2>관리자 글작성</h2>  
 		</div>
+
+
 		<div id="bbsData">
 			<div class="page-body">
 				<form action="BoardNoticeForm.do" method="post"

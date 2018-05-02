@@ -425,8 +425,8 @@
 												pattern="yyyy-MM-dd" /></td>
 										<td>${item.brdch }</td>
 									</tr>
-									<tr class="hide">
-										<td>${item.brdcontent}</td>
+									<tr class="hide" >
+										<td colspan="5">${item.brdcontent}</td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -472,7 +472,7 @@
 										<td>${item.brdch }</td>
 									</tr>
 									<tr class="hide">
-										<td>${item.brdcontent }</td>
+										<td colspan="5">${item.brdcontent }</td>
 									</tr>
 								</c:forEach>
 							</c:if>

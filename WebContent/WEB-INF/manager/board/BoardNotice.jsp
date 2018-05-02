@@ -109,8 +109,7 @@ section {
 							<thead>
 								<tr>
 									<th><div class="tb-center">번호</div></th>
-									<th><div class="tb-center">&nbsp;</div></th>
-									<!-- .상품정보가 있을 경우에만 나타남 -->
+									<th><div class="tb-center">게시판 이름</div></th>
 									<th><div class="tb-center">상품</div></th>
 									<th><div class="tb-center">제목</div></th>
 									<th><div class="tb-center">작성자</div></th>
@@ -124,7 +123,7 @@ section {
 									<c:forEach var="item" items="${list }">
 										<tr>
 											<td>${item.brdNo }</td>
-											<td></td>
+											<td>${item.brdcode }</td>
 											<td>${item.prdno }</td>
 											<td><a href="ReadBoard.do?brdno=${item.brdNo }">${item.brdtitle }</a></td>
 											<td>${item.brdwriter }</td>

@@ -1,6 +1,5 @@
 package com.dgit.mall.handler.admin.board;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,23 +9,26 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.BoardDao;
 import com.dgit.mall.dto.Board;
-import com.dgit.mall.handler.shop.ShopCommandHandler;
+import com.dgit.mall.handler.admin.AdminCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class BoardModifyHandler extends ShopCommandHandler {
+public class BoardModifyHandler extends AdminCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (request.getMethod().equalsIgnoreCase("get")) {
+			String ReviewformPath = request.getRealPath("Reviewform");
 			String num = request.getParameter("brdno");
 			int number = Integer.parseInt(num);
 			SqlSession sqlSession = null;
 
 			try {
 				request.setAttribute("contentPage", "board/BoardModify.jsp");
-
+				request.setAttribute("sub_menu", "list");
+				request.setAttribute("menu", "board");
+				request.setAttribute("css", "board.css");
 				sqlSession = MySqlSessionFactory.openSession();
 				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
 
@@ -40,12 +42,12 @@ public class BoardModifyHandler extends ShopCommandHandler {
 			} finally {
 				sqlSession.close();
 			}
-			return VIEW_FRONT_PATH + "board/BoardModify.jsp";
+			return TEMPLATE_PAGE;
 
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String ReviewformPath = request.getRealPath("Reviewform");
 			Date now = new Date();
-
+			request.setAttribute("contentPage", "board/BoardModify.jsp");
 			SqlSession sqlSession = null;
 			int size = 1024 * 1024 * 10;// 10M
 
@@ -103,15 +105,15 @@ public class BoardModifyHandler extends ShopCommandHandler {
 				request.setAttribute("brdtitle", brdtitle);
 				request.setAttribute("brdcontent", brdcontent);
 				request.setAttribute("brdcontent", brdcontent);
-				request.setAttribute("selected",selected);
+				request.setAttribute("selected", selected);
 				// request.setAttribute("brduseattachment", brduseattachment);
 
 				if (board.getBrdcode().equals("ReviewBoard")) {
-					return "ReviewBoard.do";
+					return "list.do";
 				} else if (board.getBrdcode().equals("QandABoard")) {
-					return "BoardQandA.do";
+					return "list.do";
 				} else {
-					return "NoticeBoard.do";
+					return "list.do";
 				}
 
 			} catch (Exception e) {

@@ -385,9 +385,7 @@ a {
 							</dd>
 						</dl>
 					</div>
-					<ul class="list-link">
 
-					</ul>
 				</div>
 			</div>
 		</section>

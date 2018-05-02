@@ -47,19 +47,12 @@ public class BoardaskanswerHandler extends ShopCommandHandler {
 			System.out.println(number + "z");
 			try {
 				String brddepth = request.getParameter("brddepth");
-				System.out.println(brddepth + "z");
 				String brdcode = request.getParameter("brdcode");
-				System.out.println(brdcode + "z");
 				String brdwriter = request.getParameter("brdwriter");
-				System.out.println(brdwriter + "z");
 				String brdpassword = request.getParameter("brdpassword");
-				System.out.println(brdpassword + "z");
 				String brdtitle = request.getParameter("brdtitle");
-				System.out.println(brdtitle + "z");
 				String brdcontent = request.getParameter("brdcontent");
-				System.out.println(brdcontent + "z");
 				String brdparent = request.getParameter("brdparent");
-				System.out.println(brdparent + "z");
 				// String brduseattachment
 				// =multi.getParameter("brduseattachment");
 

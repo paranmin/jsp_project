@@ -1,9 +1,14 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <meta charset=UTF-8">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
+	media="all" />
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet"
@@ -304,13 +309,13 @@ a {
 #sidebar {
 	float: left;
 	min-width: 200px;
-	margin-top:45px;
+	margin-top: 45px;
 }
+
 section {
-    width: 85%;
+	width: 85%;
 }
 </style>
-
 </head>
 
 <body>
@@ -319,7 +324,7 @@ section {
 		<div class="titleArea">
 			<h1>게시판 상세보기</h1>
 		</div>
-		<div>
+		<%-- 		<div>
 			<!--#top_box-->
 			<div class="top_box">
 				<ul>
@@ -337,24 +342,26 @@ section {
 						<input type="hidden" name="brdcode" value="ReviewBoard"></li>
 				</ul>
 			</div>
-		</div>
+		</div> --%>
 		<section>
 			<div class="page-body">
-				<dl class="prd-tinfo">
-					<dt>
-						<img
-							src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
-							width="64" height="64">
-					</dt>
-					<dd>
-						<ul>
+				<c:if test="${pro.mainImg !=null}">
+					<dl class="prd-tinfo">
+						<dt>
+							<img
+								src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
+								width="64" height="64">
+						</dt>
+						<dd>
+							<ul>
 
-							<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
-								<span class="MK-product-icons"> <!--/coupon_icon/--></li>
-							<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
-						</ul>
-					</dd>
-				</dl>
+								<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
+									<span class="MK-product-icons"> <!--/coupon_icon/--></li>
+								<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
+							</ul>
+						</dd>
+					</dl>
+				</c:if>
 				<div class="bbs-table-view">
 					<input type="hidden" name="brdno" value="${readBoard.brdNo }">
 					<table summary="게시글 보기">
@@ -370,14 +377,15 @@ section {
 								<td class="line">
 									<div class="cont-sub-des">
 										<div>
-											<span><em>작성일 :</em> ${readBoard.brdregdate }</span>
+											<span><em>작성일 :</em>
+											 <fmt:formatDate value="${readBoard.brdregdate}" pattern="yyyy-MM-dd" /> </span>
 										</div>
 										<div>
 											<span><em>작성자 :</em>${readBoard.brdwriter }</span> <span><em>파일
 													:</em> <a href="#"></a></span>
 										</div>
 										<div class="hit">
-											<span><em>조회 :</em>${readBoard.brdch }</span>
+											<span><em>조회 :</em>${readBoard.brdch }</span> 
 										</div>
 									</div>
 								</td>
@@ -387,7 +395,7 @@ section {
 									<div class="data-bd-cont">
 										<div class="attach">
 											<div class="readBoardcontent">
-												<em>${readBoard.brdcontent }</em>
+												<em>${readBoard.brdcontent }</em> 
 											</div>
 										</div>
 									</div>
@@ -397,7 +405,7 @@ section {
 					</table>
 					<div id="comment_list_0">
 						<table class="comment-box">
-						<!-- 	<thead>
+							<!-- 	<thead>
 								<tr>
 									<th><div class="tb-center">작성자</div></th>
 									<th><div class="tb-center">작성 내용</div></th>
@@ -410,7 +418,7 @@ section {
 										<tr>
 											<td>${item.brdwriter }</td>
 											<td>${item.brdcontent }</td>
-											<td>${item.brdregdate }</td>
+											<td>${item.brdregdate}</td>    
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -463,19 +471,22 @@ section {
 						<dl class="bbs-link con-link">
 							<dt></dt>
 							<dd>
-								<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
-									class="none btn_light_border btn_box_01">수정</a> <a
-									href="BoardDel.do?brdno=${readBoard.brdNo }"
-									class="btn_light_border btn_box_01">삭제</a> <a
-									href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
-									class="btn_light btn_box_01">답변</a>
+								<c:if test="${readBoard.brdcode=='NoticeBoard' }">
+									<a href="BoardCheckPassword.do?brdno=${readBoard.brdNo }"
+										class="none btn_light_border btn_box_01">수정</a>
+								</c:if>
+								<a href="BoardD.do?brdno=${readBoard.brdNo }"
+									class="btn_light_border btn_box_01">삭제</a>
+								<c:if test="${readBoard.brdcode!='NoticeBoard' }">
+									<a href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
+										class="btn_light btn_box_01">답변</a>
+								</c:if>
 							</dd>
 						</dl>
 						<dl class="bbs-link">
 							<dt></dt>
 							<dd>
-								<a href="${pageContext.request.contextPath}/shop/ReviewBoard.do"
-									class="btn_light btn_box_01"> 목록</a>
+								<a href="list.do" class="btn_light btn_box_01"> 목록</a>
 							</dd>
 						</dl>
 					</div>

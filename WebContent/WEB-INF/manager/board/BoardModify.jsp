@@ -38,31 +38,40 @@
 .hidden {
 	display: hidden;
 }
+
+#sidebar {
+	float: left;
+	min-width: 200px;
+	margin-top: 45px;
+}
+
+section {
+	width: 85%;
+}
 </style>
 </head>
 <body>
-	<c:import url="../modules/header.jsp" />
-	<c:import url="../modules/leftSide.jsp" />
-	<c:import url="../modules/rightSide.jsp" />
 	<section>
 		<div class="titleArea">
 			<h2>Modify(수정)</h2>
 		</div>
 		<div class="top_box">
 			<ul>
-					<li><a href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
-					<li><span><a>/</a></span></li>
-					<li><a href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
-					<li><span><a>/</a></span></li>
-					<li><a href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
-				</ul>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
+				<li><span><a>/</a></span></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
+				<li><span><a>/</a></span></li>
+				<li><a
+					href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
+			</ul>
 		</div>
 
 		<div id="bbsData">
 			<div class="page-body">
 				<form action="BoardModify.do" method="post"
-					enctype="multipart/form-data" style="position: relative;"
-					autocomplete="off">
+					enctype="multipart/form-data">
 					<input type="hidden" name="brdNo" value="${readBoard.brdNo }">
 					<input type="hidden" name="brdcode" value="${readBoard.brdcode }">
 					<div class="bbs-table-write">
@@ -82,15 +91,14 @@
 										<th class=""><div class="title">작성자</div></th>
 										<td><div>
 												<input id="bw_input_writer" type="text" name="brdwriter"
-													value="${readBoard.brdwriter }"
+													readonly="readonly" value="${readBoard.brdwriter }"
 													class="MS_input_txt input_style">
 											</div></td>
 										<th><div class="title">비밀번호</div></th>
 										<td>
 											<div>
 												<input id="bw_input_passwd" type="password"
-													name="brdpassword" class="MS_input_txt input_style"
-													value="${readBoard.brdpassword }">
+													name="brdpassword" class="MS_input_txt input_style">
 											</div>
 										</td>
 
@@ -101,7 +109,7 @@
 										<td colspan="3">
 											<div class="title">
 												<input id="bw_input_subject"
-										   			class="MS_input_txt input_style2" type="text"
+													class="MS_input_txt input_style2" type="text"
 													name="brdtitle" value="${readBoard.brdtitle }">
 												<div class="hidden">
 													<select name=selected class="MS_select"><option
@@ -144,8 +152,7 @@
 						<dt></dt>
 						<dd>
 							<input type="submit" value="글수정" id="submit"> <a
-								href="${pageContext.request.contextPath}/shop/ReviewBoard.do"
-								class="btn_light btn_box_01">목록</a>
+								href="list.do" class="btn_light btn_box_01">목록</a>
 						</dd>
 					</dl>
 				</form>
@@ -154,6 +161,5 @@
 			<!-- .page-body -->
 		</div>
 	</section>
-	<c:import url="../modules/footer.jsp" />
 </body>
 </html>
