@@ -173,7 +173,7 @@ public class ShopOrderHandler extends ShopCommandHandler {
 			Map<String, Object> map = new HashMap<>();
 			map.put("mNo", member.getNo());
 			map.put("ctNo", cart);
-			// int a = CartService.getInstance().deleteCartByNo(map);
+			int a = CartService.getInstance().deleteCartByNo(map);
 
 			int cntCart = CartService.getInstance().countSelectAllCartByMember(loginMember.getNo());
 			session.setAttribute("cntCart", cntCart);

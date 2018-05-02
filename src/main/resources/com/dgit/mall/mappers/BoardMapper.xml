@@ -116,6 +116,10 @@
 			 limit #{limit}
 		</if>
 	</select>
+	
+	<select id="countBoardByMember" parameterType="Member" resultType="int">
+		select count(brd_no) from board where m_no = #{no}
+	</select>
 
 	<insert id="insertBoard" parameterType="Board">
 		insert into board

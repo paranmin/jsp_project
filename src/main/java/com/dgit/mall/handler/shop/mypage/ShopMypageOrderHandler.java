@@ -47,9 +47,7 @@ public class ShopMypageOrderHandler extends ShopCommandHandler {
 				map.put("ordPrdName", ordPrdName);
 				recentOrder.add(map);
 			}
-			List<Board> boardList = BoardService.getInstance().selectBoardByMember(memPageLimit);
 
-			request.setAttribute("boardList", boardList);
 			request.setAttribute("recentOrder", recentOrder);
 			request.setAttribute("member", loginMember);
 			return VIEW_FRONT_PATH + "mypage/orderList.jsp";

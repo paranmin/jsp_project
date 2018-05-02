@@ -103,6 +103,9 @@
 				<when test="where != null and where == 'orderPhone'">
 					mb.m_phone = #{query} or mb.m_tel = #{query}
 				</when>
+				<when test="where != null and where == 'orderEmail'">
+					mb.m_email = #{query}
+				</when>
 				<when test="where != null and where == 'receiverName'">
 					od.ord_receiver like CONCAT("%", #{query}, "%")
 				</when>
@@ -117,6 +120,7 @@
 						od.ord_no = #{query} or
 						mb.m_name like CONCAT("%", #{query}, "%") or
 						mb.m_phone = #{query} or mb.m_tel = #{query} or
+						mb.m_email = #{query} or
 						od.ord_receiver like CONCAT("%", #{query}, "%") or
 						od.ord_rphone1 = #{query} or od.ord_rphone2 = #{query} or
 						mb.m_id = #{query}

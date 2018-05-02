@@ -28,8 +28,10 @@ public class ShopMypageBoardHandler extends ShopCommandHandler {
 			memPageLimit.put("no", loginMember.getNo());
 			memPageLimit.put("limit", limit);
 
+			int total = BoardService.getInstance().countBoardByMember(loginMember);
 			List<Board> boardList = BoardService.getInstance().selectBoardByMember(memPageLimit);
 
+			request.setAttribute("total", total);
 			request.setAttribute("boardList", boardList);
 			return VIEW_FRONT_PATH + "mypage/boardList.jsp";
 		} else if (request.getMethod().equalsIgnoreCase("post")) {

@@ -7,13 +7,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.session.SqlSession;
-
-import com.dgit.mall.dao.ProductDao;
 import com.dgit.mall.dao.service.ProductService;
 import com.dgit.mall.dto.Product;
 import com.dgit.mall.handler.shop.ShopCommandHandler;
-import com.dgit.mall.util.MySqlSessionFactory;
 import com.dgit.mall.util.Pagination;
 
 public class ProductSelectListHandler extends ShopCommandHandler {
@@ -55,6 +51,7 @@ public class ProductSelectListHandler extends ShopCommandHandler {
 
 		Product pro = new Product();
 		pro.setName(select);
+		pro.setUse(String.valueOf(1));
 		int total = ProductService.getInstance().countTotalProductByProduct(pro);
 		int cnt = (int) Math.ceil((double) total / offset);
 

@@ -14,9 +14,9 @@ section#select_list div.select_item {
 	overflow: hidden;
 }
 
-section#select_list div.item:nth-child(1), section#product_list div.item:nth-child(5), section#product_list div.item:nth-child(9), section#product_list div.item:nth-child(13){
+section#select_list div.item:nth-child(1), section#select_list div.item:nth-child(5), section#select_list div.item:nth-child(9), section#select_list div.item:nth-child(13){
 	margin-left: 12%;
-}
+}    
 
 section#select_list div.item {
 	width: 356px;
