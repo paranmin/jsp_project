@@ -90,9 +90,9 @@ section {
 								<tbody>
 									<tr>
 										<th><div class="title">작성자</div></th>
-										<td><div>
-												<input id="bw_input_writer" type="text" name="brdwriter"
-													value="${readBoard.brdwriter }"
+									<td><div>
+												<input id="bw_input_writer" type="text" name="brdwriter" readonly="readonly"
+													value="관리자"
 													class="MS_input_txt input_style">
 											</div></td>
 										<th><div class="title">비밀번호</div></th>
@@ -100,7 +100,7 @@ section {
 											<div>
 												<input id="bw_input_passwd" type="password"
 													name="brdpassword" class="MS_input_txt input_style"
-													value="${readBoard.brdpassword }">
+													>
 											</div>
 										</td>
 
