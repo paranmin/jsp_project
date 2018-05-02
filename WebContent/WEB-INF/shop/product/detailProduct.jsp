@@ -425,13 +425,8 @@
 												pattern="yyyy-MM-dd" /></td>
 										<td>${item.brdch }</td>
 									</tr>
-<<<<<<< HEAD
-									<tr class="hide" >
-										<td colspan="5">${item.brdcontent}</td>
-=======
 									<tr class="hide">
 										<td colspan="5" class="content">${item.brdcontent}</td>
->>>>>>> refs/remotes/origin/master
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -477,11 +472,7 @@
 										<td>${item.brdch }</td>
 									</tr>
 									<tr class="hide">
-<<<<<<< HEAD
-										<td colspan="5">${item.brdcontent }</td>
-=======
 										<td colspan="5" class="content">${item.brdcontent }</td>
->>>>>>> refs/remotes/origin/master
 									</tr>
 								</c:forEach>
 							</c:if>
