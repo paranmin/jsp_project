@@ -229,6 +229,9 @@
 			<if test="name != null and name != ''">
 				and prd_name like CONCAT("%",#{name},"%")
 			</if>
+			<if test="use != null">
+				and prd_use = #{use}
+			</if>
 		</where>
 	</select>
 	

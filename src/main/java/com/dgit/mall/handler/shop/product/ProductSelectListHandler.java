@@ -55,6 +55,7 @@ public class ProductSelectListHandler extends ShopCommandHandler {
 
 		Product pro = new Product();
 		pro.setName(select);
+		pro.setUse(String.valueOf(1));
 		int total = ProductService.getInstance().countTotalProductByProduct(pro);
 		int cnt = (int) Math.ceil((double) total / offset);
 

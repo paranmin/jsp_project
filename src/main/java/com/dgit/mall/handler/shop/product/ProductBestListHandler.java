@@ -40,7 +40,9 @@ public class ProductBestListHandler extends ShopCommandHandler {
 		bestMap.put("view", 1);
 
 		// 카테고리별 전체 상품 갯수 (카테고리 없으면 전체 상품 갯수)
-		int total = ProductService.getInstance().countTotalProductByProduct(new Product());
+		Product totalPrd = new Product();
+		totalPrd.setUse(String.valueOf(1));
+		int total = ProductService.getInstance().countTotalProductByProduct(totalPrd);
 
 		int cnt = (int) Math.ceil((double) total / offset);
 
