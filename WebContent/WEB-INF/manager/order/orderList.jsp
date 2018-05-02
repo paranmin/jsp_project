@@ -18,18 +18,18 @@
 					<td>
 						<select name="where">
 							<option value="all">통합검색</option>
-							<option value="orderNo">주문번호</option>
-							<option value="orderName">주문자명</option>
-							<option value="orderPhone">주문자 휴대폰 번호</option>
-							<option value="orderEmail">주문자 이메일</option>
-							<option value="receiverName">수령자명</option>
-							<option value="receiverPhone">수령자 휴대폰 번호</option>
-							<option value="id">아이디</option>
+							<option value="orderNo"<c:if test="${where == 'orderNo'}"> selected="selected" </c:if>>주문번호</option>
+							<option value="orderName"<c:if test="${where == 'orderName'}"> selected="selected" </c:if>>주문자명</option>
+							<option value="orderPhone"<c:if test="${where == 'orderPhone'}"> selected="selected" </c:if>>주문자 휴대폰 번호</option>
+							<option value="orderEmail"<c:if test="${where == 'orderEmail'}"> selected="selected" </c:if>>주문자 이메일</option>
+							<option value="receiverName"<c:if test="${where == 'receiverName'}"> selected="selected" </c:if>>수령자명</option>
+							<option value="receiverPhone"<c:if test="${where == 'receiverPhone'}"> selected="selected" </c:if>>수령자 휴대폰 번호</option>
+							<option value="id"<c:if test="${where == 'id'}"> selected="selected" </c:if>>아이디</option>
 						</select>
-						<input type="text" name="query" />
+						<input type="text" name="query" value="${query }"/>
 					</td>
 				</tr>
-				<tr>
+				<!-- tr>
 					<th>기간검색</th>
 					<td>
 						<select name="targetDate">
@@ -38,7 +38,7 @@
 						</select>
 						<input type="text" name="startDate" id="startDate" /> <label for="startDate"><i class="far fa-calendar-alt"></i></label> ~ <input type="text" name="endDate" id="endDate" /> <label for="endDate"><i class="far fa-calendar-alt"></i></label>
 					</td>
-				</tr>
+				</tr -->
 			</table>
 			<p><input type="submit" value="검색" /></p>
 		</form>
@@ -93,6 +93,11 @@
 		</tr>
 	</c:if>
 	</table>
+	<c:if test="${paging ne null || paging != ''}">
+	<div class="pagingArea">
+		${paging}
+	</div>
+	</c:if>
 </div>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <script>

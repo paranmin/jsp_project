@@ -426,7 +426,7 @@
 										<td>${item.brdch }</td>
 									</tr>
 									<tr class="hide">
-										<td>${item.brdcontent}</td>
+										<td colspan="5" class="content">${item.brdcontent}</td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -472,7 +472,7 @@
 										<td>${item.brdch }</td>
 									</tr>
 									<tr class="hide">
-										<td>${item.brdcontent }</td>
+										<td colspan="5" class="content">${item.brdcontent }</td>
 									</tr>
 								</c:forEach>
 							</c:if>

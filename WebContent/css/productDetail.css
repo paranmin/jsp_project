@@ -142,6 +142,10 @@ div.detail_menu table th:nth-child(5), div.detail_menu table td:nth-child(5){
 	width:5%;
 	text-align: center;
 }
+div.detail_menu table td.content {
+	text-align: left;
+	padding-left: 20px;
+}
 div.detail_menu div.button{
 	float: right;
 	margin-right: 50px;
