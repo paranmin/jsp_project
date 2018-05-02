@@ -1,6 +1,9 @@
 package com.dgit.mall.handler.admin.order;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dgit.mall.dao.service.OrderService;
 
 import com.dgit.mall.dto.Order;
+import com.dgit.mall.dto.OrderProduct;
 import com.dgit.mall.handler.admin.AdminCommandHandler;
 import com.dgit.mall.util.CommonUtil;
 import com.dgit.mall.util.Pagination;
@@ -47,6 +51,16 @@ public class AdminOrderListHandler extends AdminCommandHandler {
 		}
 		int total = OrderService.getInstance().countTotalOrderBySearch(map);
 		List<Order> list = OrderService.getInstance().selectOrderListBySearch(map);
+		Map<String, Object> ordProductMap = new HashMap<>();
+		for (Order ord : list) {
+			List<OrderProduct> ordProductList = OrderService.getInstance().selectOrderProduct(ord.getOrdNo());
+
+			String ordPrdName = ordProductList.get(0).getPrdNo().getName();
+			if (ordProductList.size() > 1) {
+				ordPrdName = String.format("%s 외 %d 개", ordPrdName, (ordProductList.size() - 1));
+			}
+			ordProductMap.put(ord.getOrdNo(), ordPrdName);
+		}
 		
 		int cnt = (int) Math.ceil((double)total / row);
 
@@ -54,11 +68,13 @@ public class AdminOrderListHandler extends AdminCommandHandler {
 		Pagination.getInstance().initPagination(imgUrl);
 		String paging = Pagination.getInstance().makePaging(cnt, page, width, row, "list.do", params);
 
+
 		request.setAttribute("where", where);
 		request.setAttribute("query", query);
 		request.setAttribute("total", total);
 		request.setAttribute("paging", paging);
 		request.setAttribute("orderList", list);
+		request.setAttribute("orderProduct", ordProductMap);
 
 		request.setAttribute("contentPage", "order/orderList.jsp");
 		request.setAttribute("sub_menu", "list");

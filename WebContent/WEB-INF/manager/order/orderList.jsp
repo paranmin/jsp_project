@@ -77,7 +77,7 @@
 				<td class="td-center"><fmt:formatDate value="${order.regdate}" pattern="yyyy-MM-dd"/></td>
 				<td class="td-center"><a href="viewOrder.do?no=${order.ordNo}">${order.ordNo}</a></td>
 				<td class="td-center">${order.member.name }<br>(${order.member.id})</td>
-				<td>파스텔 플라워 언발 귀걸이</td>
+				<td>${orderProduct.get(order.ordNo)}</td>
 				<td class="td-center"><fmt:formatNumber value="${order.ordPrice}" pattern="#,###"/> 원</td>
 				<td class="td-center"><fmt:formatNumber value="${order.deliveryFee}" pattern="#,###"/> 원</td>
 				<td class="td-center"><fmt:formatNumber value="${order.ordPrice + order.deliveryFee}" pattern="#,###"/> 원</td>
