@@ -7,7 +7,9 @@
 <html>
 <head>
 <meta charset=UTF-8">
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
+	media="all" />
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet"
@@ -19,9 +21,6 @@
 	media="all" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
-	media="all" />
 <title>Insert title here</title>
 <style type="text/css">
 table {
@@ -51,30 +50,51 @@ td {
 	text-align: center;
 	padding: 30px 30px;
 }
+
+#content {
+	margin: 0;
+	overflow: hidden;
+	min-height: 900px;
+	border-left: 1px solid #ccc;
+	overflow: hidden;
+}
+
+#sidebar {
+	float: left;
+	min-width: 200px;
+	margin-top: 40px;
+}
+
+section {
+	width: 80%;
+}
 </style>
 </head>
 <body>
-	<c:import url="../modules/header.jsp" />
-	<c:import url="../modules/leftSide.jsp" />
-	<c:import url="../modules/rightSide.jsp" />
 	<section>
 		<div id="container">
 
 			<div class="titleArea">
-				<h1>REVIEW</h1>
+				<h1>게시판</h1>
 			</div>
 			<div>
 				<!--#top_box-->
 				<div class="top_box">
 					<ul>
 						<li><a
-							href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
+							href="${pageContext.request.contextPath}/manager/board/adminBoard.do?brdcode=NoticeBoard">Notice</a>
+							<input type="hidden" name="brdcode" value="NoticeBoard">
+						</li>
 						<li><span><a>/</a></span></li>
 						<li><a
-							href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
+							href="${pageContext.request.contextPath}/manager/board/adminBoard.do?brdcode=QandABoard">Q&amp;A</a>
+							<input type="hidden" name="brdcode" value="QandABoard"></li>
+
 						<li><span><a>/</a></span></li>
 						<li><a
-							href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
+							href="${pageContext.request.contextPath}/manager/board/adminBoard.do?brdcode=ReviewBoard">Review(후기)</a>
+							<input type="hidden" name="brdcode" value="ReviewBoard">
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -90,9 +110,6 @@ td {
 								<tr>
 									<th><div class="tb-center">번호</div></th>
 									<th><div class="tb-center">&nbsp;</div></th>
-									<th class="hidden"><div>
-											<input type="hidden" name="brdcode" value="ReviewBoard">
-										</div></th>
 									<!-- .상품정보가 있을 경우에만 나타남 -->
 									<th><div class="tb-center">상품</div></th>
 									<th><div class="tb-center">제목</div></th>
@@ -109,9 +126,9 @@ td {
 											<td>${item.brdNo }</td>
 											<td></td>
 											<td>${item.prdno }</td>
-											<td><a href="ReviewBoardRead.do?brdno=${item.brdNo }">${item.brdtitle }</a></td>
+											<td><a href="ReadBoard.do?brdno=${item.brdNo }">${item.brdtitle }</a></td>
 											<td>${item.brdwriter }</td>
-											<td><fmt:formatDate value="${item.brdregdate}"
+												<td><fmt:formatDate value="${item.brdregdate}"
 													pattern="yyyy-MM-dd" /></td>
 											<td>${item.brdch }</td>
 										</tr>
@@ -120,16 +137,10 @@ td {
 							</tbody>
 						</table>
 					</div>
-					<dl class="bbs-link bbs-link-btm">
-						<dd>
-							<a class="write  btn_dark btn_box_01"
-								href="${pageContext.request.contextPath}/shop/ReviewForm.do">글쓰기</a>
-						</dd>
-					</dl>
+
 				</div>
 			</div>
 		</div>
 	</section>
-	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

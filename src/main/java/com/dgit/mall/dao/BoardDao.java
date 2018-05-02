@@ -7,15 +7,14 @@ import com.dgit.mall.dto.Board;
 
 public interface BoardDao {
 	List<Board> selectByAllReviewBoard();
+
 	List<Board> selectReviewBoardByProduct(int prdNo);
 
 	List<Board> selectByAllQandABoard();
+
 	List<Board> selectQandABoardByProduct(int prdNo);
 
-	List<Board> selectNoticeBoardAll();
-
 	Board selectlistBoardReviewByid(int number);
-
 
 	Board selectCheckPass(int number);
 
@@ -38,4 +37,8 @@ public interface BoardDao {
 	public int selectBybrddepth(int number);
 
 	List<Board> selectBoardByMember(Map<String, Object> map);
+
+	List<Board> selectBoardAll();
+
+	List<Board> selectNoticeBoardAll();
 }

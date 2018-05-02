@@ -24,7 +24,8 @@
 	<c:when test="${menu == 'board'}">
 		<ul>
 			<li><a href="list.do">게시판 목록</a></li>
-			<li><a href="#">게시판 글 목록</a></li>
+			<li><a href="adminBoard.do?brdcode=NoticeBoard">글 목록</a></li>
+			<li><a href="BoardNoticeForm.do">공지 글 작성</a></li>
 		</ul>
 	</c:when>
 	<c:when test="${menu == 'coupon'}">

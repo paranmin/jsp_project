@@ -1,4 +1,4 @@
-package com.dgit.mall.handler.shop.board;
+package com.dgit.mall.handler.admin.board;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

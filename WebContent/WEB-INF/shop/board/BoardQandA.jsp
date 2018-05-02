@@ -1,6 +1,8 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +18,9 @@
 	media="all" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
+	media="all" />
 <title>Insert title here</title>
 <style type="text/css">
 table {
@@ -55,13 +60,13 @@ td {
 				<div class="top_box">
 					<ul>
 						<li><a
-							href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
+							href="${pageContext.request.contextPath}/manager/board/adminBoard.do">Notice</a></li>
 						<li><span><a>/</a></span></li>
 						<li><a
-							href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
+							href="${pageContext.request.contextPath}/manager/board/adminBoard.do">Q&amp;A</a></li>
 						<li><span><a>/</a></span></li>
 						<li><a
-							href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
+							href="${pageContext.request.contextPath}/manager/board/adminBoard.do">Review(후기)</a></li>
 					</ul>
 				</div>
 			</div>
@@ -98,7 +103,8 @@ td {
 											<td>${item.prdno }</td>
 											<td><a href="QandABoardRead.do?brdno=${item.brdNo }">${item.brdtitle }</a></td>
 											<td>${item.brdwriter }</td>
-											<td>${item.brdregdate }</td>
+											<td><fmt:formatDate value="${item.brdregdate}"
+													pattern="yyyy-MM-dd" /></td>
 											<td>${item.brdch }</td>
 										</tr>
 									</c:forEach>
@@ -109,45 +115,12 @@ td {
 
 					<input type="hidden" name="prdno" value="${pro.prdNo} ">
 					<!-- .bbs-sch -->
-					<div class="bbs-sch">
-						<form action="board.do" method="post"">
-							<!-- .검색 폼시작 -->
-							<fieldset>
-								<legend>게시판 검색 폼</legend>
-								<label> <input type="radio" name="check" value="ok"
-									onclick="change(1);" class="MS_input_checkbox"> 이름
-								</label> <label> <input type="radio" name="check" value="ok"
-									onclick="change(2);" checked="checked"
-									class="MS_input_checkbox">제목
-								</label> <label> <input type="radio" name="check" value="ok"
-									onclick="change(3);" class="MS_input_checkbox"> 내용
-								</label>
-								<!-- .상품정보가 있을 경우에만 나타남 -->
-								<label> <input type="radio" name="check" value="ok"
-									onclick="change(4);" class="MS_input_checkbox"> 상품
-								</label> <span class="key-wrap"> <input type="text" name="stext"
-									value="" class="MS_input_txt"> <a href="#"
-									class=" btn_light btn_box_01">검색</a>
-								</span>
-							</fieldset>
-						</form>
-						<!-- .검색 폼 끝 -->
-					</div>
 					<dl class="bbs-link bbs-link-btm">
 						<dd>
 							<a class="write  btn_dark btn_box_01"
 								href="${pageContext.request.contextPath}/shop/BoardQandAForm.do">글쓰기</a>
 						</dd>
 					</dl>
-					<!-- .page-body -->
-					<div class="paging">
-						<ol class="paging">
-							<li class="next"><a href="#"><img
-									src="BoardImg/next_btn.gif" alt="다음"></a></li>
-							<li class="last"><a href="#"><img
-									src="BoardImg/last_btn.gif" alt="끝"></a></li>
-						</ol>
-					</div>
 				</div>
 			</div>
 		</div>

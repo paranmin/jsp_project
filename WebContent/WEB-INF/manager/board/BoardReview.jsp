@@ -7,7 +7,9 @@
 <html>
 <head>
 <meta charset=UTF-8">
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
+	media="all" />
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 <link rel="stylesheet"
@@ -19,9 +21,6 @@
 	media="all" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/Board.css" media="all" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/mypage.css?v=<%= new Date().getTime() %>"
-	media="all" />
 <title>Insert title here</title>
 <style type="text/css">
 table {
@@ -54,27 +53,30 @@ td {
 </style>
 </head>
 <body>
-	<c:import url="../modules/header.jsp" />
-	<c:import url="../modules/leftSide.jsp" />
-	<c:import url="../modules/rightSide.jsp" />
 	<section>
 		<div id="container">
 
 			<div class="titleArea">
-				<h1>REVIEW</h1>
+				<h1>게시판 상세보기</h1>
 			</div>
 			<div>
 				<!--#top_box-->
 				<div class="top_box">
 					<ul>
 						<li><a
-							href="${pageContext.request.contextPath}/shop/NoticeBoard.do">Notice</a></li>
+							href="${pageContext.request.contextPath}/manager/board/adminBoard.do?brdcode=NoticeBoard">Notice</a>
+							<input type="hidden" name="brdcode" value="NoticeBoard">
+						</li>
 						<li><span><a>/</a></span></li>
 						<li><a
-							href="${pageContext.request.contextPath}/shop/BoardQandA.do">Q&amp;A</a></li>
+							href="${pageContext.request.contextPath}/manager/board/adminBoard.do?brdcode=QandABoard">Q&amp;A</a>
+							<input type="hidden" name="brdcode" value="QandABoard"></li>
+
 						<li><span><a>/</a></span></li>
 						<li><a
-							href="${pageContext.request.contextPath}/shop/ReviewBoard.do">Review(후기)</a></li>
+							href="${pageContext.request.contextPath}/manager/board/adminBoard.do?brdcode=ReviewBoard">Review(후기)</a>
+							<input type="hidden" name="brdcode" value="ReviewBoard">
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -130,6 +132,5 @@ td {
 			</div>
 		</div>
 	</section>
-	<c:import url="../modules/footer.jsp" />
 </body>
 </html>
