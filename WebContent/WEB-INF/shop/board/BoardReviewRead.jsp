@@ -336,19 +336,21 @@ a {
 		<section>
 			<div class="page-body">
 				<dl class="prd-tinfo">
-					<dt>
-						<img
-							src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
-							width="64" height="64">
-					</dt>
-					<dd>
-						<ul>
+					<c:if test="${pro.mainImg !=null}">
+						<dt>
+							<img
+								src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
+								width="64" height="64">
+						</dt>
+						<dd>
+							<ul>
 
-							<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
-								<span class="MK-product-icons"> <!--/coupon_icon/--></li>
-							<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
-						</ul>
-					</dd>
+								<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
+									<span class="MK-product-icons"> <!--/coupon_icon/--></li>
+								<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
+							</ul>
+						</dd>
+					</c:if>
 				</dl>
 				<div class="bbs-table-view">
 					<input type="hidden" name="brdno" value="${readBoard.brdNo }">
@@ -464,11 +466,10 @@ a {
 									class="none btn_light_border btn_box_01">수정</a> <a
 									href="BoardDel.do?brdno=${readBoard.brdNo }"
 									class="btn_light_border btn_box_01">삭제</a>
-								<c:if test="">
+								
 
-									<a href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
-										class="btn_light btn_box_01">답변</a>
-								</c:if>
+									<%-- <a href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
+										class="btn_light btn_box_01">답변</a> --%>
 							</dd>
 						</dl>
 						<dl class="bbs-link">
@@ -484,5 +485,6 @@ a {
 				</div>
 			</div>
 		</section>
+	</div>
 </body>
 </html>

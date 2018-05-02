@@ -1,6 +1,5 @@
 package com.dgit.mall.handler.admin.board;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,12 +10,10 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dgit.mall.dao.BoardDao;
 import com.dgit.mall.dto.Board;
-import com.dgit.mall.handler.shop.ShopCommandHandler;
+import com.dgit.mall.handler.admin.AdminCommandHandler;
 import com.dgit.mall.util.MySqlSessionFactory;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class BoardaskanswerHandler extends ShopCommandHandler {
+public class BoardaskanswerHandler extends AdminCommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -28,6 +25,11 @@ public class BoardaskanswerHandler extends ShopCommandHandler {
 			try {
 				sqlSession = MySqlSessionFactory.openSession();
 				BoardDao BoardREAD = sqlSession.getMapper(BoardDao.class);
+				request.setAttribute("contentPage", "board/Boardaskanswer.jsp");
+
+				request.setAttribute("sub_menu", "list");
+				request.setAttribute("menu", "board");
+				request.setAttribute("css", "board.css");
 
 				Board readBoard = BoardREAD.selectlistBoardReviewByid(number);
 
@@ -39,7 +41,7 @@ public class BoardaskanswerHandler extends ShopCommandHandler {
 			} finally {
 				sqlSession.close();
 			}
-			return VIEW_FRONT_PATH + "/board/Boardaskanswer.jsp";
+			return TEMPLATE_PAGE;
 		} else if (request.getMethod().equalsIgnoreCase("post")) {
 			String num = request.getParameter("brdno");
 			System.out.println(num);
@@ -83,9 +85,9 @@ public class BoardaskanswerHandler extends ShopCommandHandler {
 				sqlSession.commit();
 
 				if (board.getBrdcode().equals("ReviewBoard")) {
-					response.sendRedirect("ReviewBoard.do");
+					response.sendRedirect("list.do");
 				} else if (board.getBrdcode().equals("QandABoard")) {
-					response.sendRedirect("BoardQandA.do");
+					response.sendRedirect("list.do");
 				}
 
 			} catch (Exception e) {

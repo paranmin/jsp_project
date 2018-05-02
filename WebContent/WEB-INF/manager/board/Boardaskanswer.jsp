@@ -38,12 +38,19 @@
 .hidden {
 	display: hidden;
 }
+
+#sidebar {
+	float: left;
+	min-width: 200px;
+	margin-top: 45px;
+}
+
+section {
+	width: 85%;
+}
 </style>
 </head>
 <body>
-	<c:import url="../modules/header.jsp" />
-	<c:import url="../modules/leftSide.jsp" />
-	<c:import url="../modules/rightSide.jsp" />
 	<section>
 		<div class="titleArea">
 			<h2>댓글등록</h2>
@@ -105,7 +112,8 @@
 											<div class="title">
 												<input id="bw_input_subject"
 													class="MS_input_txt input_style2" type="text"
-													name="brdtitle" value="[${readBoard.brdtitle }][${readBoard.brdNo }게시판번호]답변">
+													name="brdtitle"
+													value="[${readBoard.brdtitle }][${readBoard.brdNo }게시판번호]답변">
 
 												<br>
 											</div>
@@ -137,6 +145,5 @@
 			<!-- .page-body -->
 		</div>
 	</section>
-	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

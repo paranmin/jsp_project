@@ -371,9 +371,9 @@ a {
 								<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
 									class="none btn_light_border btn_box_01">수정</a> <a
 									href="BoardDel.do?brdno=${readBoard.brdNo }"
-									class="btn_light_border btn_box_01">삭제</a> <a
+									class="btn_light_border btn_box_01">삭제</a> <%-- <a
 									href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
-									class="btn_light btn_box_01">답변</a>
+									class="btn_light btn_box_01">답변</a> --%>
 							</dd>
 						</dl>
 
@@ -389,6 +389,7 @@ a {
 				</div>
 			</div>
 		</section>
-		<c:import url="../modules/footer.jsp" />
+	</div>
+	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

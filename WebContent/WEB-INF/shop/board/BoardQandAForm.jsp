@@ -82,20 +82,24 @@
 					enctype="multipart/form-data">
 					<input type="hidden" name="prdno" value="${pro.prdNo}">
 					<dl class="prd-tinfo">
-						<dt>
-							<img
-								src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
-								width="64" height="64">
-						</dt>
-						<dd>
-							<ul>
+						<c:if test="${pro.mainImg !=null}">
+							<dt>
+								<img
+									src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
+									width="64" height="64">
+							</dt>
+							<dd>
+								<ul>
 
-								<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
-									<span class="MK-product-icons"> <!--/coupon_icon/--></li>
-								<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
-							</ul>
-						</dd>
+									<li class="name"><span class="tit">상 품 명:</span><a
+										href="#">${pro.name }</a> <span class="MK-product-icons">
+											<!--/coupon_icon/--></li>
+									<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
+								</ul>
+							</dd>
+						</c:if>
 					</dl>
+
 					<div class="bbs-table-write">
 						<fieldset>
 							<legend>일반게시판 쓰기</legend>

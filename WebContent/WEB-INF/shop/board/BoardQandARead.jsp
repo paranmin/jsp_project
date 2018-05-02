@@ -337,22 +337,23 @@ a {
 		<section>
 
 			<dl class="prd-tinfo">
-				<dt>
-					<img
-						src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
-						width="64" height="64">
-				</dt>
-				<dd>
-					<ul>
+				<c:if test="${pro.mainImg !=null}">
+					<dt>
+						<img
+							src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
+							width="64" height="64">
+					</dt>
+					<dd>
+						<ul>
 
-						<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
-							<span class="MK-product-icons"> <!--/coupon_icon/--></li>
-						<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
-					</ul>
-				</dd>
+							<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
+								<span class="MK-product-icons"> <!--/coupon_icon/--></li>
+							<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
+						</ul>
+					</dd>
+				</c:if>
 			</dl>
 			<div class="bbs-table-view">
-
 				<table summary="게시글 보기">
 					<caption>게시글 보기</caption>
 					<thead>
@@ -393,8 +394,9 @@ a {
 						</tr>
 					</tbody>
 				</table>
-				<div id="comment_list_0"></div>
-				<%-- 	<form id="comment_form" name="comment" action="#" method="post">
+			</div>
+			<div id="comment_list_0"></div>
+			<%-- 	<form id="comment_form" name="comment" action="#" method="post">
 					<fieldset>
 						<legend>코멘트 쓰기</legend>
 						<table summary="코멘트 쓰기" class="comment-box">
@@ -432,21 +434,23 @@ a {
 						</table>
 					</fieldset>
 				</form> --%>
-				<div class="view-link">
-					<dl class="bbs-link con-link">
-						<dt></dt>
-						<dd>
-							<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
-								class="none btn_light_border btn_box_01">수정</a> <a
-								href="BoardDel.do?brdno=${readBoard.brdNo }"
-								class="btn_light_border btn_box_01">삭제</a> <a
-								href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
-								class="btn_light btn_box_01">답변</a>
-						</dd>
-					</dl>
-				</div>
+			<div class="view-link">
+				<dl class="bbs-link con-link">
+					<dt></dt>
+					<dd>
+						<a href="BoardModifyCheckPassword.do?brdno=${readBoard.brdNo }"
+							class="none btn_light_border btn_box_01">수정</a> <a
+							href="BoardDel.do?brdno=${readBoard.brdNo }"
+							class="btn_light_border btn_box_01">삭제</a> <%-- <a
+							href="Boardaskanswer.do?brdno=${readBoard.brdNo }"
+							class="btn_light btn_box_01">답변</a> --%>
+					</dd>
+				</dl>
+			</div>
 		</section>
+
 	</div>
+
 	<c:import url="../modules/footer.jsp" />
 </body>
 </html>

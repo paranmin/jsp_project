@@ -76,21 +76,26 @@
 			<div class="page-body">
 				<form action="ReviewForm.do" method="post"
 					enctype="multipart/form-data">
-
+					<c:if test="${loginMember.id}"></c:if>
 					<input type="hidden" name="memno" value="${loginMember.no}">
 					<input type="hidden" name="prdno" value="${pro.prdNo}">
 					<dl class="prd-tinfo">
-						<dt>
-							<img src="${pageContext.request.contextPath}/upload/${pro.mainImg }" width="64" height="64">
-						</dt>
-						<dd>
-							<ul>
+						<c:if test="${pro.mainImg !=null}">
+							<dt>
+								<img
+									src="${pageContext.request.contextPath}/upload/${pro.mainImg }"
+									width="64" height="64">
+							</dt>
+							<dd>
+								<ul>
 
-								<li class="name"><span class="tit">상 품 명:</span><a href="#">${pro.name }</a>
-									<span class="MK-product-icons"> <!--/coupon_icon/--></li>
-								<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
-							</ul>
-						</dd>
+									<li class="name"><span class="tit">상 품 명:</span><a
+										href="#">${pro.name }</a> <span class="MK-product-icons">
+											<!--/coupon_icon/--></li>
+									<li class="price"><span class="tit">상품가격:</span><strong>${pro.sellingPrice }</strong></li>
+								</ul>
+							</dd>
+						</c:if>
 					</dl>
 					<div class="bbs-table-write">
 						<fieldset>
@@ -107,7 +112,9 @@
 									<tr>
 										<th><div class="title">작성자</div></th>
 										<td><div>
-												<input id="bw_input_writer" type="text" name="brdwriter" value="${loginMember.id}" <c:if test="${loginMember.id ne null && loginMember.id != ''}">readOnly="readOnly"</c:if>
+												<input id="bw_input_writer" type="text" name="brdwriter"
+													value="${loginMember.id}"
+													<c:if test="${loginMember.id ne null && loginMember.id != ''}">readOnly="readOnly"</c:if>
 													class="MS_input_txt input_style">
 											</div></td>
 										<th><div class="title">비밀번호</div></th>
